@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 820" width="700" height="820">
+  <defs>
+    <radialGradient id="plumGlow" cx="350" cy="300" r="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4A2F6E" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#2D1A48" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#1A0F2E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sparkBloom" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7FFFD4" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#7FFFD4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="700" height="820" fill="#0A0613"/>
+  <rect width="700" height="820" fill="url(#plumGlow)"/>
+
+  <circle cx="350" cy="300" r="140" fill="none" stroke="#F5F5F7" stroke-width="5"/>
+
+  <circle cx="420" cy="230" r="40" fill="url(#sparkBloom)"/>
+  <path d="M 410 216 L 434 230 L 410 244 Z" fill="#7FFFD4"/>
+
+  <text x="350" y="660" text-anchor="middle"
+        font-family="Nunito, 'Nunito Sans', Mulish, 'Avenir Next Rounded', system-ui, sans-serif"
+        font-weight="900" font-size="140" fill="#F5F5F7" letter-spacing="-4">Sonder</text>
+</svg>

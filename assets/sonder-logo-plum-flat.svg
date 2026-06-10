@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 820" width="700" height="820">
+  <rect width="700" height="820" fill="#0A0613"/>
+
+  <circle cx="350" cy="300" r="140" fill="none" stroke="#F5F5F7" stroke-width="5"/>
+
+  <path d="M 410 216 L 434 230 L 410 244 Z" fill="#7FFFD4"/>
+
+  <text x="350" y="660" text-anchor="middle"
+        font-family="Nunito, 'Nunito Sans', Mulish, 'Avenir Next Rounded', system-ui, sans-serif"
+        font-weight="900" font-size="140" fill="#F5F5F7" letter-spacing="-4">Sonder</text>
+</svg>

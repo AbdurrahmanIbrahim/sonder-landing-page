@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0A0613" />
+  <title>Sonder — Every book deserves its own studio.</title>
+  <meta name="description" content="Sonder turns your manuscript into TikTok, Reels, and YouTube Shorts. A full production crew, one click." />
+
+  <meta property="og:title" content="Sonder — Every book deserves its own studio." />
+  <meta property="og:description" content="Press one button. Your book becomes the video that millions watch." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yousonder.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/sonder-logo-plum-flat.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@900&display=swap" />
+
+  <link rel="preload" as="image" href="assets/frames/hero/frame_001.jpg" fetchpriority="high" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://fast.wistia.com/player.js" async></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav" data-nav>
+    <a href="#" class="wordmark" aria-label="Sonder home">
+      <span class="wordmark-text">Sonder</span>
+      <svg class="wordmark-dot" viewBox="0 0 12 12" aria-hidden="true">
+        <path d="M 2 1.5 L 10 6 L 2 10.5 Z" fill="#7FFFD4" />
+      </svg>
+    </a>
+    <nav class="nav-actions" aria-label="Primary">
+      <a href="#how" class="nav-link">How it works</a>
+      <a href="#proof" class="nav-link">Proof</a>
+      <a href="#showcase" class="nav-link">Showcase</a>
+      <a href="#about" class="nav-link">Who we are</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="https://app.yousonder.com/login" class="nav-link nav-link--quiet">Sign in</a>
+      <a href="https://app.yousonder.com/signup" class="nav-cta">Be seen <span aria-hidden="true">→</span></a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============== HERO — scroll-driven canvas video ============== -->
+    <section class="hero" aria-labelledby="hero-headline" data-hero>
+      <div class="hero-pin">
+        <canvas class="hero-canvas" data-hero-canvas aria-hidden="true"></canvas>
+
+        <div class="hero-vignette" aria-hidden="true"></div>
+        <div class="hero-tint" aria-hidden="true"></div>
+
+        <div class="hero-overlay">
+          <div class="hero-meta">
+            <span class="meta-spark" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><path d="M 2 1.5 L 10 6 L 2 10.5 Z" fill="#7FFFD4"/></svg>
+            </span>
+            <span>For publishers who want to be seen</span>
+          </div>
+
+          <h1 id="hero-headline" class="hero-headline">
+            <span class="line">Every book deserves</span>
+            <span class="line">its own <em>studio</em>.</span>
+          </h1>
+
+          <p class="hero-sub">A full production crew. One click.</p>
+
+          <p class="hero-body">
+            Sonder turns your manuscript into TikTok, Reels, and YouTube Shorts — for less than your morning coffee. The team you couldn't afford to hire, on-tap.
+          </p>
+
+          <div class="hero-ctas">
+            <a href="https://app.yousonder.com/signup" class="cta cta-primary">
+              <span>Be seen</span>
+              <span class="cta-arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="#how" class="cta cta-secondary">See how it works</a>
+          </div>
+        </div>
+
+        <p class="hero-caption" aria-hidden="true">Live demo — book in, video out</p>
+
+        <div class="hero-scroll-hint" aria-hidden="true">
+          <span>Scroll</span>
+          <i></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== STATS ============== -->
+    <section class="stats" aria-labelledby="stats-cap">
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-num" data-counter data-target="2.9" data-suffix="M" data-decimals="1">0.0M</span>
+          <span class="stat-label">views</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-counter data-target="11.7" data-suffix="K" data-decimals="1">0.0K</span>
+          <span class="stat-label">new followers</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-counter data-target="30" data-suffix="" data-decimals="0">0</span>
+          <span class="stat-label">days from upload</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num stat-num--word">One</span>
+          <span class="stat-label">Sonder account</span>
+        </div>
+      </div>
+      <p id="stats-cap" class="stats-caption">One author. One Sonder account. The numbers tell the story.</p>
+    </section>
+
+    <!-- ============== SHOWCASE ============== -->
+    <section id="showcase" class="showcase" aria-labelledby="showcase-headline">
+      <header class="section-head">
+        <span class="eyebrow">Showcase</span>
+        <h2 id="showcase-headline" class="section-title">
+          A selection of the videos<br><em>Sonder produces.</em>
+        </h2>
+        <p class="section-lede">
+          Every Sonder video is built on a script that's already been proven to work — then wrapped in imagery, animation, voiceover, and B-roll of your actual book.
+        </p>
+      </header>
+
+      <div class="showcase-rail" data-showcase-rail>
+        <div class="showcase-track">
+          <figure class="reel">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="le99g7qi7f" data-reel-title="The chapter that changed everything" aria-label="Play: The chapter that changed everything">
+              <img src="assets/stills/european-cartoon.jpg" alt="Sonder video &mdash; The chapter that changed everything" loading="lazy" />
+              <span class="reel-style">European Cartoon</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">The chapter that changed everything</span>
+              <span class="reel-genre">Memoir</span>
+            </figcaption>
+          </figure>
+          <figure class="reel">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="1ymppelyqm" data-reel-title="Why this ending wrecks people" aria-label="Play: Why this ending wrecks people">
+              <img src="assets/stills/expert-podcaster.jpg" alt="Sonder video &mdash; Why this ending wrecks people" loading="lazy" />
+              <span class="reel-style">Expert Podcaster</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">Why this ending wrecks people</span>
+              <span class="reel-genre">Fiction</span>
+            </figcaption>
+          </figure>
+          <figure class="reel">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="2tnccunxqx" data-reel-title="The hook that hit 1.7M" aria-label="Play: The hook that hit 1.7M">
+              <img src="assets/stills/neon-wireframe.jpg" alt="Sonder video &mdash; The hook that hit 1.7M" loading="lazy" />
+              <span class="reel-style">Neon Wireframe</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">The hook that hit 1.7M</span>
+              <span class="reel-genre">Relationship</span>
+            </figcaption>
+          </figure>
+          <figure class="reel">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="xqg4ugdw8z" data-reel-title="Why nobody talks about this" aria-label="Play: Why nobody talks about this">
+              <img src="assets/stills/expert-panelist.jpg" alt="Sonder video &mdash; Why nobody talks about this" loading="lazy" />
+              <span class="reel-style">Expert Panelist</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">Why nobody talks about this</span>
+              <span class="reel-genre">Self-improvement</span>
+            </figcaption>
+          </figure>
+          <figure class="reel">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="ebeee2cm3z" data-reel-title="Three rules every reader breaks" aria-label="Play: Three rules every reader breaks">
+              <img src="assets/stills/yellow-cartoon.jpg" alt="Sonder video &mdash; Three rules every reader breaks" loading="lazy" />
+              <span class="reel-style">Yellow Cartoon</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">Three rules every reader breaks</span>
+              <span class="reel-genre">Business</span>
+            </figcaption>
+          </figure>
+          <figure class="reel">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="ejw6zhrgpo" data-reel-title="One paragraph. One million views." aria-label="Play: One paragraph. One million views.">
+              <img src="assets/stills/expert-speaker.jpg" alt="Sonder video &mdash; One paragraph. One million views." loading="lazy" />
+              <span class="reel-style">Expert Speaker</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">One paragraph. One million views.</span>
+              <span class="reel-genre">History</span>
+            </figcaption>
+          </figure>
+          <figure class="reel">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="uvb7ppx8j5" data-reel-title="The fact nobody warned them about" aria-label="Play: The fact nobody warned them about">
+              <img src="assets/stills/skeleton.jpg" alt="Sonder video &mdash; The fact nobody warned them about" loading="lazy" />
+              <span class="reel-style">Skeleton</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">The fact nobody warned them about</span>
+              <span class="reel-genre">Psychology</span>
+            </figcaption>
+          </figure>
+          <figure class="reel">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="z4uq3rclqm" data-reel-title="What every parent has to hear" aria-label="Play: What every parent has to hear">
+              <img src="assets/stills/stick-figure.jpg" alt="Sonder video &mdash; What every parent has to hear" loading="lazy" />
+              <span class="reel-style">Stick Figure</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">What every parent has to hear</span>
+              <span class="reel-genre">Parenting</span>
+            </figcaption>
+          </figure>
+          <figure class="reel" aria-hidden="true">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="le99g7qi7f" data-reel-title="The chapter that changed everything" aria-label="Play: The chapter that changed everything">
+              <img src="assets/stills/european-cartoon.jpg" alt="" loading="lazy" />
+              <span class="reel-style">European Cartoon</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">The chapter that changed everything</span>
+              <span class="reel-genre">Memoir</span>
+            </figcaption>
+          </figure>
+          <figure class="reel" aria-hidden="true">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="1ymppelyqm" data-reel-title="Why this ending wrecks people" aria-label="Play: Why this ending wrecks people">
+              <img src="assets/stills/expert-podcaster.jpg" alt="" loading="lazy" />
+              <span class="reel-style">Expert Podcaster</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">Why this ending wrecks people</span>
+              <span class="reel-genre">Fiction</span>
+            </figcaption>
+          </figure>
+          <figure class="reel" aria-hidden="true">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="2tnccunxqx" data-reel-title="The hook that hit 1.7M" aria-label="Play: The hook that hit 1.7M">
+              <img src="assets/stills/neon-wireframe.jpg" alt="" loading="lazy" />
+              <span class="reel-style">Neon Wireframe</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">The hook that hit 1.7M</span>
+              <span class="reel-genre">Relationship</span>
+            </figcaption>
+          </figure>
+          <figure class="reel" aria-hidden="true">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="xqg4ugdw8z" data-reel-title="Why nobody talks about this" aria-label="Play: Why nobody talks about this">
+              <img src="assets/stills/expert-panelist.jpg" alt="" loading="lazy" />
+              <span class="reel-style">Expert Panelist</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">Why nobody talks about this</span>
+              <span class="reel-genre">Self-improvement</span>
+            </figcaption>
+          </figure>
+          <figure class="reel" aria-hidden="true">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="ebeee2cm3z" data-reel-title="Three rules every reader breaks" aria-label="Play: Three rules every reader breaks">
+              <img src="assets/stills/yellow-cartoon.jpg" alt="" loading="lazy" />
+              <span class="reel-style">Yellow Cartoon</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">Three rules every reader breaks</span>
+              <span class="reel-genre">Business</span>
+            </figcaption>
+          </figure>
+          <figure class="reel" aria-hidden="true">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="ejw6zhrgpo" data-reel-title="One paragraph. One million views." aria-label="Play: One paragraph. One million views.">
+              <img src="assets/stills/expert-speaker.jpg" alt="" loading="lazy" />
+              <span class="reel-style">Expert Speaker</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">One paragraph. One million views.</span>
+              <span class="reel-genre">History</span>
+            </figcaption>
+          </figure>
+          <figure class="reel" aria-hidden="true">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="uvb7ppx8j5" data-reel-title="The fact nobody warned them about" aria-label="Play: The fact nobody warned them about">
+              <img src="assets/stills/skeleton.jpg" alt="" loading="lazy" />
+              <span class="reel-style">Skeleton</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">The fact nobody warned them about</span>
+              <span class="reel-genre">Psychology</span>
+            </figcaption>
+          </figure>
+          <figure class="reel" aria-hidden="true">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="z4uq3rclqm" data-reel-title="What every parent has to hear" aria-label="Play: What every parent has to hear">
+              <img src="assets/stills/stick-figure.jpg" alt="" loading="lazy" />
+              <span class="reel-style">Stick Figure</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">What every parent has to hear</span>
+              <span class="reel-genre">Parenting</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <p class="showcase-note">These are some of the videos that are generating millions of views.</p>
+    </section>
+
+    <!-- ============== HOW IT WORKS ============== -->
+    <section id="how" class="how" aria-labelledby="how-headline">
+      <header class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2 id="how-headline" class="section-title">
+          Viral structure,<br><em>not luck.</em>
+        </h2>
+        <p class="section-lede">
+          We studied thousands of the videos that worked and reverse-engineered the pattern underneath — the hook, the tension, the reveal, the ending that earns the save. Sonder picks the proven script, then produces the imagery, animation, and voiceover around it — with B-roll of your actual book stitched through every cut.
+        </p>
+      </header>
+
+      <figure class="how-demo">
+        <button class="reel-frame reel-frame--demo" type="button" data-reel data-wistia-id="oenqanb3ej" data-reel-aspect="1.5434" data-reel-title="A five-minute walk-through" aria-label="Play the Sonder walkthrough video">
+          <img src="assets/stills/how-demo.jpg?v=2" alt="Sonder walkthrough preview" />
+          <span class="reel-play" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+          </span>
+        </button>
+        <figcaption class="how-demo-caption">A five-minute walk-through &mdash; from PDF in to video out.</figcaption>
+      </figure>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step-num">01</span>
+          <h3 class="step-title">Upload your book.</h3>
+          <p class="step-body">Drop in your manuscript and 30 seconds of B-roll of your book — the cover, a flick-through, a shot on your desk. PDF only. Sonder reads the whole thing, not a summary. No prompts. No briefs.</p>
+        </li>
+        <li class="step">
+          <span class="step-num">02</span>
+          <h3 class="step-title">Sonder finds a winning script.</h3>
+          <p class="step-body">We've studied thousands of the videos that actually worked, and reverse-engineered the structure underneath. Sonder applies that proven viral pattern — hook, tension, reveal — to <em>your</em> arguments, <em>your</em> stories, <em>your</em> voice. Not a template. A script built to be watched to the end.</p>
+        </li>
+        <li class="step">
+          <span class="step-num">03</span>
+          <h3 class="step-title">Sonder produces the video.</h3>
+          <p class="step-body">Voiceover, animation, motion graphics, captions — and your book woven through it. We stitch your B-roll into the cut so the thing readers are about to buy is on screen. A full production crew you don't have to hire, brief, or pay $2,500 a month for.</p>
+        </li>
+        <li class="step">
+          <span class="step-num">04</span>
+          <h3 class="step-title">Share, and be seen.</h3>
+          <p class="step-body">Post to TikTok, Reels, and YouTube Shorts in one tap. The readers your book was written for — the ones still scrolling past, not knowing — finally find their way to you.</p>
+        </li>
+      </ol>
+    </section>
+
+
+    <!-- ============== PROOF ============== -->
+    <section id="proof" class="proof" aria-labelledby="proof-headline">
+      <header class="section-head section-head--left">
+        <span class="eyebrow">Proof</span>
+        <h2 id="proof-headline" class="section-title">
+          You didn't write a book<br>to watch it go <em>quiet.</em>
+        </h2>
+      </header>
+
+      <div class="quotes">
+        <figure class="quote">
+          <blockquote>"I started 5 days ago and made 10 sales."</blockquote>
+          <figcaption>
+            <span class="quote-name">Lynn</span>
+            <span class="quote-role">Children's-book author</span>
+          </figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>"I'd posted for months and got crickets. One Sonder video did more in a week than my year of trying."</blockquote>
+          <figcaption>
+            <span class="quote-name">Marcus</span>
+            <span class="quote-role">Self-improvement author</span>
+          </figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>"I was about to pay an agency $2,500 a month. Sonder does what they promised, without the calls."</blockquote>
+          <figcaption>
+            <span class="quote-name">Priya</span>
+            <span class="quote-role">Business author</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- Real receipts grid -->
+      <div class="receipts">
+        <p class="receipts-eyebrow">Real authors · Real screens · Real receipts</p>
+        <div class="receipts-grid">
+          <figure class="receipt">
+            <div class="receipt-frame">
+              <img src="assets/receipts/forty-four-sales.jpg" alt="WhatsApp message: I'm up to 44 sales from Sonder" loading="lazy" class="receipt-shot receipt-shot--banner" />
+              <span class="receipt-chip">Message</span>
+            </div>
+            <figcaption class="receipt-cap">"I'm up to 44 sales from Sonder."</figcaption>
+          </figure>
+          <figure class="receipt">
+            <div class="receipt-frame">
+              <img src="assets/receipts/ten-sales-happy-dance.jpg" alt="Customer message: I started Sonder videos 5 days ago and have made 10 sales" loading="lazy" class="receipt-shot receipt-shot--message" />
+              <span class="receipt-chip">Message</span>
+            </div>
+            <figcaption class="receipt-cap">"I started 5 days ago and made 10 sales — beyond doing the happy dance."</figcaption>
+          </figure>
+          <figure class="receipt">
+            <div class="receipt-frame">
+              <img src="assets/receipts/lynn-dashboard.jpg" alt="Lynn's author dashboard showing 3 more sales today" loading="lazy" class="receipt-shot receipt-shot--message" />
+              <span class="receipt-chip">Dashboard</span>
+            </div>
+            <figcaption class="receipt-cap">"3 more sales today." <span class="receipt-cap-meta">— Gold Ink Press</span></figcaption>
+          </figure>
+          <figure class="receipt">
+            <div class="receipt-frame">
+              <img src="assets/receipts/lexi-profile.jpg" alt="Lexi's Instagram profile showing 2.9M views in last 30 days" loading="lazy" class="receipt-shot receipt-shot--phone" />
+              <span class="receipt-chip">Profile</span>
+            </div>
+            <figcaption class="receipt-cap"><span class="receipt-cap-num">2.9M</span> views · 30 days · one Sonder account</figcaption>
+          </figure>
+          <figure class="receipt">
+            <div class="receipt-frame">
+              <img src="assets/receipts/lexi-insights.jpg" alt="Instagram Insights showing 474.5K interactions, 11.7K new followers" loading="lazy" class="receipt-shot receipt-shot--phone" />
+              <span class="receipt-chip">Insights</span>
+            </div>
+            <figcaption class="receipt-cap"><span class="receipt-cap-num">474.5K</span> interactions · 11.7K new followers</figcaption>
+          </figure>
+          <figure class="receipt">
+            <div class="receipt-frame">
+              <img src="assets/receipts/headline-numbers.png" alt="Headline numbers: +24% book sales, $778 in royalties from one video in 4 days" loading="lazy" class="receipt-shot receipt-shot--phone" />
+              <span class="receipt-chip">Royalties</span>
+            </div>
+            <figcaption class="receipt-cap"><span class="receipt-cap-num">+24%</span> book sales · $778 royalties · 4 days</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== 97% CHEAPER ============== -->
+    <section class="cheaper" aria-labelledby="cheaper-headline">
+      <div class="cheaper-halo" aria-hidden="true"></div>
+
+      <div class="cheaper-inner">
+        <span class="eyebrow">The agency math</span>
+        <h2 id="cheaper-headline" class="cheaper-headline">
+          <span class="cheaper-pct" aria-label="ninety-seven percent">97<sup>%</sup></span>
+          <span class="cheaper-rest">cheaper than<br>a freelancer.</span>
+        </h2>
+        <p class="cheaper-lede">
+          30 cinematic book videos every month. Studio quality. Same output that an agency or freelancer charges <strong>$4,500+</strong> for.
+          With Sonder, it's <strong>$209</strong>.
+        </p>
+
+        <div class="vs" role="group" aria-label="Price comparison">
+          <div class="vs-col vs-col--them">
+            <div class="vs-head">
+              <span class="vs-label">Freelancer / Agency</span>
+              <div class="vs-price-row">
+                <span class="vs-price">$4,500</span>
+                <span class="vs-cycle">+ /mo</span>
+              </div>
+            </div>
+            <div class="vs-bar" aria-hidden="true">
+              <span class="vs-bar-fill vs-bar-fill--them"></span>
+            </div>
+            <ul class="vs-list">
+              <li>3–5 days per video</li>
+              <li>Briefings, revisions, chasing</li>
+              <li>Calls to schedule</li>
+            </ul>
+          </div>
+
+          <div class="vs-divider" aria-hidden="true"><span>vs</span></div>
+
+          <div class="vs-col vs-col--us">
+            <div class="vs-head">
+              <span class="vs-label">Sonder Studio plan</span>
+              <div class="vs-price-row">
+                <span class="vs-price">$209</span>
+                <span class="vs-cycle">/mo</span>
+              </div>
+            </div>
+            <div class="vs-bar" aria-hidden="true">
+              <span class="vs-bar-fill vs-bar-fill--us"></span>
+            </div>
+            <ul class="vs-list">
+              <li>Ready in minutes</li>
+              <li>No briefs. No chasing.</li>
+              <li>Same studio quality</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cheaper-ctas">
+          <a href="https://app.yousonder.com/signup" class="cta cta-primary">
+            <span>See pricing</span>
+            <span class="cta-arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="#how" class="cta cta-secondary">How is this possible?</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== ABOUT SONDER (founders) ============== -->
+    <section id="about" class="founders" aria-labelledby="about-headline">
+      <header class="section-head section-head--right">
+        <span class="eyebrow">About Sonder</span>
+        <h2 id="about-headline" class="section-title">
+          Built by two publishers<br><em>who help others get seen.</em>
+        </h2>
+        <p class="section-lede">
+          Sonder was built by two publishers who've spent their careers helping others get seen — on screen, online, and on the shelf. We know what it takes to cut through, because we've done it. Now we're putting that firepower into the hands of every creator, founder, and personal brand who's tired of shouting into the void.
+        </p>
+      </header>
+
+      <div class="founder-grid">
+        <article class="founder">
+          <div class="founder-avatar">
+            <img src="assets/founders/lexi.jpg" alt="Lexi Kaz, co-founder of Sonder" />
+            <span class="founder-spark" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><path d="M 2 1.5 L 10 6 L 2 10.5 Z" fill="#7FFFD4"/></svg>
+            </span>
+          </div>
+          <h3 class="founder-name">Lexi Kaz</h3>
+          <p class="founder-role">Co-founder</p>
+          <p class="founder-bio">Lexi is a seven-figure book publisher and the creative force behind the TikTok sensation "You Will Rock As a Dad" — a series that's amassed tens of millions of views and turned a children's book into a cultural moment. She started young. At five, she was flipping Lego figures on eBay. At fourteen, she was being recruited to play Division 1 soccer, and went on to play at the University of San Diego as the first in her family to compete at that level. When injuries and the pandemic forced a rethink, she bet on herself instead — dropping out at 19 to launch AK Infinite, a digital marketing agency that's worked with clients from Europe to Asia. Lexi has spent her career turning attention into outcomes.</p>
+          <blockquote class="founder-quote">
+            "I built my whole career on figuring out what makes people click follow. Sonder gives that superpower to everyone."
+          </blockquote>
+        </article>
+
+        <article class="founder">
+          <div class="founder-avatar">
+            <img src="assets/founders/mike.jpg" alt="Mike Langdon, co-founder of Sonder" />
+            <span class="founder-spark" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><path d="M 2 1.5 L 10 6 L 2 10.5 Z" fill="#7FFFD4"/></svg>
+            </span>
+          </div>
+          <h3 class="founder-name">Mike Langdon</h3>
+          <p class="founder-role">Co-founder</p>
+          <p class="founder-bio">Mike has been making video for over 20 years, and it shows. He's an award-winning video producer and the founder of one of Australia's biggest e-commerce video agencies, with a client roster that includes TikTok, Speedo, and Ring. When the BBC in the UK or the morning shows in Australia need someone to make sense of what's happening in media, they call Mike. He's also a seven-figure publisher with over 50 books to his name — but video is in his DNA. Sonder is what happens when two decades of "what actually works on camera" gets packaged into a tool anyone can use.</p>
+          <blockquote class="founder-quote">
+            "I've spent 20 years being asked how to go viral. Sonder is a shortcut I wish I had on day one."
+          </blockquote>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============== PRICING ============== -->
+    <section id="pricing" class="pricing" aria-labelledby="pricing-headline" data-cycle="monthly">
+      <div class="pricing-toggle-row">
+        <div class="pricing-toggle" role="group" aria-label="Billing cycle" data-pricing-toggle>
+          <button type="button" class="pricing-toggle-btn is-active" data-cycle="monthly" aria-pressed="true">Monthly</button>
+          <button type="button" class="pricing-toggle-btn" data-cycle="annual" aria-pressed="false">Annual</button>
+          <span class="pricing-toggle-thumb" aria-hidden="true"></span>
+        </div>
+        <span class="pricing-toggle-bonus">
+          <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M 2 1.5 L 10 6 L 2 10.5 Z" fill="#7FFFD4"/></svg>
+          2 months free with annual
+        </span>
+      </div>
+
+      <header class="pricing-head">
+        <div class="pricing-head-copy">
+          <span class="eyebrow">Sonder · Pricing</span>
+          <h2 id="pricing-headline" class="section-title">
+            Professional book videos<br>from <em><span data-price data-monthly="$6.97" data-annual="$5.81">$6.97</span> each.</em>
+          </h2>
+          <p class="pricing-sub">14 cinematic scenes · Professional voiceover · Animated captions · Your book woven in.</p>
+          <p class="pricing-sub pricing-sub--quiet">Ready in minutes — not days.</p>
+        </div>
+
+        <aside class="compare" aria-label="Compared to alternatives">
+          <div class="compare-card">
+            <span class="compare-label">Freelancer</span>
+            <span class="compare-price">$150+</span>
+            <span class="compare-note">3–5 days</span>
+          </div>
+          <div class="compare-card">
+            <span class="compare-label">Agency</span>
+            <span class="compare-price">$500+</span>
+            <span class="compare-note">1–2 weeks</span>
+          </div>
+          <div class="compare-card compare-card--hero">
+            <span class="compare-label">Sonder</span>
+            <span class="compare-price">From $6.97</span>
+            <span class="compare-note">Ready in minutes</span>
+          </div>
+        </aside>
+      </header>
+
+      <div class="tiers">
+        <article class="tier">
+          <span class="tier-label">Starter</span>
+          <div class="tier-price">
+            <span class="tier-num" data-price data-monthly="$49" data-annual="$41">$49</span>
+            <span class="tier-per" data-price data-monthly="/month" data-annual="/mo">/month</span>
+          </div>
+          <p class="tier-pervideo" data-price data-monthly="$9.80 per video" data-annual="$8.17 per video">$9.80 per video</p>
+          <p class="tier-billed">Billed annually · save $98/year</p>
+          <p class="tier-volume">5 videos / month</p>
+          <ul class="tier-feats">
+            <li>1 book upload</li>
+            <li>3 visual styles</li>
+            <li>1 video per day max</li>
+            <li>14 animated scenes per video</li>
+            <li>AI voiceover &amp; captions</li>
+          </ul>
+          <a href="https://app.yousonder.com/signup" class="tier-cta">Be seen <span aria-hidden="true">→</span></a>
+          <p class="tier-foot">Need more? Just $9 per extra video.</p>
+        </article>
+
+        <article class="tier tier--popular">
+          <span class="tier-badge">Most popular</span>
+          <span class="tier-label">Author</span>
+          <div class="tier-price">
+            <span class="tier-num" data-price data-monthly="$99" data-annual="$83">$99</span>
+            <span class="tier-per" data-price data-monthly="/month" data-annual="/mo">/month</span>
+          </div>
+          <p class="tier-pervideo" data-price data-monthly="$8.25 per video" data-annual="$6.88 per video">$8.25 per video</p>
+          <p class="tier-billed">Billed annually · save $198/year</p>
+          <p class="tier-volume">12 videos / month</p>
+          <ul class="tier-feats">
+            <li>2 book uploads</li>
+            <li>6 visual styles</li>
+            <li>3 videos per day max</li>
+            <li>Priority rendering</li>
+            <li>Roll-over extras (12 months)</li>
+          </ul>
+          <a href="https://app.yousonder.com/signup" class="tier-cta tier-cta--primary">Be seen <span aria-hidden="true">→</span></a>
+          <p class="tier-foot">Need more? Just $7 per extra video.</p>
+        </article>
+
+        <article class="tier">
+          <span class="tier-label">Studio</span>
+          <div class="tier-price">
+            <span class="tier-num" data-price data-monthly="$209" data-annual="$174">$209</span>
+            <span class="tier-per" data-price data-monthly="/month" data-annual="/mo">/month</span>
+          </div>
+          <p class="tier-pervideo" data-price data-monthly="$6.97 per video" data-annual="$5.81 per video">$6.97 per video</p>
+          <p class="tier-billed">Billed annually · save $418/year</p>
+          <p class="tier-volume">30 videos / month</p>
+          <ul class="tier-feats">
+            <li>3 book uploads</li>
+            <li>9 visual styles</li>
+            <li>5 videos per day max</li>
+            <li>Custom voice option</li>
+            <li>Daily-posting ready</li>
+          </ul>
+          <a href="https://app.yousonder.com/signup" class="tier-cta">Be seen <span aria-hidden="true">→</span></a>
+          <p class="tier-foot">Need more? Just $5 per extra video.</p>
+        </article>
+
+        <article class="tier tier--premium">
+          <span class="tier-badge tier-badge--premium">White glove</span>
+          <span class="tier-label">Agency</span>
+          <div class="tier-price">
+            <span class="tier-num" data-price data-monthly="$599" data-annual="$499">$599</span>
+            <span class="tier-per" data-price data-monthly="/month" data-annual="/mo">/month</span>
+          </div>
+          <p class="tier-pervideo" data-price data-monthly="$13.31 per video" data-annual="$11.09 per video">$13.31 per video</p>
+          <p class="tier-billed">Billed annually · save $1,198/year</p>
+          <p class="tier-volume">45 videos / month</p>
+          <ul class="tier-feats">
+            <li>4 book uploads · all visual styles</li>
+            <li>7 videos per day max</li>
+            <li><strong>Dedicated human editor</strong></li>
+            <li>1 round of polish — change any scene</li>
+            <li>Monthly strategy call with a founder</li>
+          </ul>
+          <a href="https://app.yousonder.com/signup" class="tier-cta">Be seen <span aria-hidden="true">→</span></a>
+          <p class="tier-foot">Need more? Just $5 per extra video.</p>
+        </article>
+      </div>
+
+      <div class="extras">
+        <div class="extras-copy">
+          <span class="eyebrow eyebrow--small">Need a burst? Buy extras anytime.</span>
+          <p>Top up your account on any plan. Extras never expire — use them whenever you need.</p>
+        </div>
+        <div class="extras-cards">
+          <div class="extras-card">
+            <span class="extras-name">5-pack</span>
+            <span class="extras-total">$35</span>
+            <span class="extras-per">$7.00 / video</span>
+          </div>
+          <div class="extras-card extras-card--best">
+            <span class="extras-tag">Best value</span>
+            <span class="extras-name">15-pack</span>
+            <span class="extras-total">$89</span>
+            <span class="extras-per">$5.93 / video</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="trust-row trust-row--three">
+        <div class="trust">
+          <span class="trust-icon" aria-hidden="true">⏱</span>
+          <h3>Ready in minutes</h3>
+          <p>Not 3–5 days. No briefing, no revisions, no chasing freelancers.</p>
+        </div>
+        <div class="trust">
+          <span class="trust-icon" aria-hidden="true">✺</span>
+          <h3>Built for authors</h3>
+          <p>Your book cover and story woven naturally into every video. Not a generic template.</p>
+        </div>
+        <div class="trust">
+          <span class="trust-icon" aria-hidden="true">◐</span>
+          <h3>Studio quality</h3>
+          <p>14 cinematic scenes, professional voiceover, trend-ready captions. Every video.</p>
+        </div>
+      </div>
+
+      <p class="pricing-close">
+        <em>"Professional video marketing that used to cost hundreds now costs less than your morning coffee. And it's ready before you finish drinking it."</em>
+      </p>
+    </section>
+
+    <!-- ============== FINAL CTA ============== -->
+    <section class="final-cta" aria-labelledby="final-headline">
+      <div class="final-halo" aria-hidden="true"></div>
+      <div class="final-inner">
+        <span class="eyebrow">yousonder.com</span>
+        <h2 id="final-headline" class="section-title section-title--center">
+          Every book deserves<br><em>to be seen.</em>
+        </h2>
+        <a href="https://app.yousonder.com/signup" class="cta cta-primary cta-primary--large">
+          <span>Be seen</span>
+          <span class="cta-arrow" aria-hidden="true">→</span>
+        </a>
+        <p class="final-note">yousonder.com</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="foot">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="wordmark wordmark--small">
+          <span class="wordmark-text">Sonder</span>
+          <svg class="wordmark-dot" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="M 2 1.5 L 10 6 L 2 10.5 Z" fill="#7FFFD4" />
+          </svg>
+        </a>
+        <p class="foot-tag">Every book deserves to be seen.</p>
+      </div>
+
+      <nav class="foot-col" aria-label="Product">
+        <h4>Product</h4>
+        <a href="#how">How it works</a>
+        <a href="#showcase">Showcase</a>
+        <a href="#pricing">Pricing</a>
+        <a href="https://app.yousonder.com/login">Sign in</a>
+      </nav>
+
+      <nav class="foot-col" aria-label="Company">
+        <h4>Company</h4>
+        <a href="#about">About</a>
+        <a href="#proof">Proof</a>
+        <a href="mailto:hello@yousonder.com">Contact</a>
+      </nav>
+
+      <nav class="foot-col" aria-label="Legal">
+        <h4>Legal</h4>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+      </nav>
+    </div>
+
+    <div class="foot-base">
+      <span>© 2026 Sonder</span>
+      <span>Built quietly in the UK.</span>
+    </div>
+  </footer>
+
+  <!-- Exit-intent modal -->
+  <div class="exit-modal" data-exit-modal aria-modal="true" role="dialog" aria-labelledby="exit-title" hidden>
+    <div class="exit-modal-inner">
+      <button class="exit-modal-close" data-exit-close type="button" aria-label="Close">×</button>
+
+      <span class="exit-modal-eyebrow">Before you go</span>
+      <h3 class="exit-modal-title" id="exit-title">
+        Your first video.<br><em>On us.</em>
+      </h3>
+      <p class="exit-modal-body">
+        Try Sonder with one free video credit. No card. No commitment.<br>
+        Drop your details and we&#39;ll send you the way in.
+      </p>
+
+      <form class="exit-modal-form" data-exit-form novalidate>
+        <div class="exit-field">
+          <label for="exit-name">First name</label>
+          <input id="exit-name" type="text" name="firstname" required autocomplete="given-name" placeholder="Lynn" />
+        </div>
+        <div class="exit-field">
+          <label for="exit-email">Email</label>
+          <input id="exit-email" type="email" name="email" required autocomplete="email" placeholder="you@yourbook.com" />
+        </div>
+        <button class="exit-modal-submit" type="submit">
+          <span>Claim your free video</span>
+          <span class="cta-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+        <p class="exit-modal-trust">No spam. One email. The link to your free credit.</p>
+      </form>
+
+      <div class="exit-modal-success" data-exit-success hidden>
+        <h3>Welcome.</h3>
+        <p>Check your inbox &mdash; your free video credit is on the way.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox modal for showcase reels -->
+  <div class="lightbox" data-lightbox aria-modal="true" role="dialog" aria-labelledby="lightbox-meta" hidden>
+    <div class="lightbox-inner" data-lightbox-inner>
+      <button class="lightbox-close" data-lightbox-close type="button" aria-label="Close video">×</button>
+      <div class="lightbox-meta" id="lightbox-meta" data-lightbox-meta></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

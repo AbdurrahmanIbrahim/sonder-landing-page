@@ -1,0 +1,20 @@
+{
+  "redirects": [
+    { "source": "/login", "destination": "https://app.yousonder.com/login", "permanent": true },
+    { "source": "/signup", "destination": "https://app.yousonder.com/signup", "permanent": true },
+    { "source": "/forgot-password", "destination": "https://app.yousonder.com/forgot-password", "permanent": true },
+    { "source": "/reset-password", "destination": "https://app.yousonder.com/reset-password", "permanent": true },
+    { "source": "/pricing", "destination": "https://app.yousonder.com/pricing", "permanent": true },
+    { "source": "/unsubscribe", "destination": "https://app.yousonder.com/unsubscribe", "permanent": true },
+    { "source": "/dashboard", "destination": "https://app.yousonder.com/", "permanent": true },
+    { "source": "/onboarding", "destination": "https://app.yousonder.com/onboarding", "permanent": true },
+    { "source": "/books", "destination": "https://app.yousonder.com/books", "permanent": true },
+    { "source": "/books/:path*", "destination": "https://app.yousonder.com/books/:path*", "permanent": true },
+    { "source": "/generate", "destination": "https://app.yousonder.com/generate", "permanent": true },
+    { "source": "/history", "destination": "https://app.yousonder.com/history", "permanent": true },
+    { "source": "/videos/:path*", "destination": "https://app.yousonder.com/videos/:path*", "permanent": true },
+    { "source": "/academy", "destination": "https://app.yousonder.com/academy", "permanent": true },
+    { "source": "/academy/:path*", "destination": "https://app.yousonder.com/academy/:path*", "permanent": true },
+    { "source": "/settings", "destination": "https://app.yousonder.com/settings", "permanent": true }
+  ]
+}
