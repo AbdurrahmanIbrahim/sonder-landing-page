@@ -409,7 +409,11 @@
       if (e.key === 'Escape' && !exitModal.hidden) closeExit();
     });
 
-    // Form submit (placeholder — wire to backend later)
+    // Free-video trial lead capture → sonder-server /api/trial/request.
+    // The server stores the lead and emails a single-use claim link to
+    // app.yousonder.com/signup?trial=<token>. Best-effort: we always show the
+    // success state so the UX stays smooth even if the network hiccups.
+    var SONDER_API_BASE = 'https://sonder-server-production.up.railway.app';
     if (exitForm) {
       exitForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -418,13 +422,16 @@
         if (!email.value || !email.checkValidity()) { email.focus(); return; }
         if (!name.value) { name.focus(); return; }
 
-        const payload = {
-          firstname: name.value,
-          email: email.value,
-          source: 'exit-intent',
-          ts: new Date().toISOString()
-        };
-        console.log('[Sonder free-video claim]', payload);
+        // Fire-and-forget the lead capture; don't block the success animation.
+        fetch(SONDER_API_BASE + '/api/trial/request', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            firstName: name.value,
+            email: email.value,
+            source: 'exit_modal'
+          })
+        }).catch((err) => console.warn('[Sonder] trial request failed', err));
 
         // Fade form out, fade success in
         exitForm.style.transition = 'opacity 250ms ease, transform 250ms ease';
