@@ -1659,7 +1659,7 @@ button { font: inherit; cursor: pointer; }
   .reveal, .reveal-stagger > * { opacity: 1; transform: none; }
 }
 
-/* ====== 97% CHEAPER section ====== */
+/* ====== 93% CHEAPER section ====== */
 .cheaper {
   position: relative;
   padding: clamp(100px, 14vh, 180px) var(--gutter);
@@ -1819,7 +1819,7 @@ button { font: inherit; cursor: pointer; }
   background: linear-gradient(90deg, var(--quiet) 0%, var(--paper-25) 100%);
 }
 .vs-bar-fill--us {
-  width: 4.6%;
+  width: 6.5%;
   background: var(--aurora);
   box-shadow: 0 0 12px var(--aurora-50);
 }
