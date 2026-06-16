@@ -1331,6 +1331,16 @@ button { font: inherit; cursor: pointer; }
   padding-bottom: 22px;
   border-bottom: 1px solid var(--paper-08);
 }
+.tier-volume .cadence {
+  color: var(--aurora);
+  font-weight: 600;
+}
+.tier-inherit {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--paper-60);
+}
 .tier-feats {
   list-style: none; padding: 0; margin: 0 0 26px;
   display: grid; gap: 10px;
@@ -1357,6 +1367,16 @@ button { font: inherit; cursor: pointer; }
   font-weight: 700;
   background: linear-gradient(180deg, transparent 60%, rgba(127, 255, 212, 0.15) 60%);
   padding: 0 2px;
+}
+.tier-feats li .beta {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--aurora);
+  opacity: 0.75;
+  white-space: nowrap;
 }
 .tier-cta {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
