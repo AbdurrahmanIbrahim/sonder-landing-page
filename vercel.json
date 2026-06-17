@@ -4,7 +4,7 @@
     { "source": "/signup", "destination": "https://app.yousonder.com/signup", "permanent": true },
     { "source": "/forgot-password", "destination": "https://app.yousonder.com/forgot-password", "permanent": true },
     { "source": "/reset-password", "destination": "https://app.yousonder.com/reset-password", "permanent": true },
-    { "source": "/pricing", "destination": "https://app.yousonder.com/pricing", "permanent": true },
+    { "source": "/pricing", "destination": "/#pricing", "permanent": false },
     { "source": "/unsubscribe", "destination": "https://app.yousonder.com/unsubscribe", "permanent": true },
     { "source": "/dashboard", "destination": "https://app.yousonder.com/", "permanent": true },
     { "source": "/onboarding", "destination": "https://app.yousonder.com/onboarding", "permanent": true },
