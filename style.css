@@ -1294,6 +1294,13 @@ button { font: inherit; cursor: pointer; }
 .tier-badge--premium {
   background: linear-gradient(90deg, var(--aurora) 0%, var(--violet) 100%);
 }
+.tier-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
 .tier-label {
   font-size: 11px;
   letter-spacing: 0.22em;
@@ -1301,6 +1308,50 @@ button { font: inherit; cursor: pointer; }
   font-weight: 600;
   color: var(--quiet);
   margin-bottom: 14px;
+}
+.tier-head .tier-label {
+  margin-bottom: 0;
+}
+
+/* Compact per-card billing toggle (top-right of each tier).
+   Unlike the section toggle, the Annual button carries a "-17%" pill, so the
+   two buttons are unequal width — we colour the active button directly instead
+   of using the 50/50 sliding thumb. */
+.pricing-toggle--card {
+  padding: 3px;
+  flex-shrink: 0;
+}
+.pricing-toggle--card .pricing-toggle-btn {
+  padding: 5px 11px;
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.pricing-toggle--card .pricing-toggle-thumb {
+  display: none;
+}
+.pricing-toggle--card .pricing-toggle-btn.is-active {
+  background: var(--aurora);
+  box-shadow: 0 0 14px rgba(127, 255, 212, 0.35);
+}
+
+/* "-17%" annual-saving pill inside the card toggle */
+.toggle-pct {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.4;
+  background: rgba(127, 255, 212, 0.15);
+  color: var(--aurora);
+}
+.pricing-toggle-btn.is-active .toggle-pct {
+  background: var(--plum-black);
+  color: var(--aurora);
 }
 .tier-price {
   display: flex; align-items: baseline; gap: 4px;
