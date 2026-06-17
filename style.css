@@ -1294,6 +1294,13 @@ button { font: inherit; cursor: pointer; }
 .tier-badge--premium {
   background: linear-gradient(90deg, var(--aurora) 0%, var(--violet) 100%);
 }
+.tier-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
 .tier-label {
   font-size: 11px;
   letter-spacing: 0.22em;
@@ -1301,6 +1308,26 @@ button { font: inherit; cursor: pointer; }
   font-weight: 600;
   color: var(--quiet);
   margin-bottom: 14px;
+}
+.tier-head .tier-label {
+  margin-bottom: 0;
+}
+
+/* Compact per-card billing toggle (top-right of each tier) */
+.pricing-toggle--card {
+  padding: 3px;
+  flex-shrink: 0;
+}
+.pricing-toggle--card .pricing-toggle-btn {
+  padding: 5px 11px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.pricing-toggle--card .pricing-toggle-thumb {
+  top: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  height: calc(100% - 6px);
 }
 .tier-price {
   display: flex; align-items: baseline; gap: 4px;

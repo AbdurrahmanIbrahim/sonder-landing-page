@@ -227,25 +227,31 @@
   }
 
   // -------- Pricing monthly/annual toggle --------
-  const pricingToggle = document.querySelector('[data-pricing-toggle]');
+  // One section-level toggle plus a compact toggle in each tier card. They all
+  // drive a single billing cycle and stay in lockstep.
+  const pricingToggles = document.querySelectorAll('[data-pricing-toggle]');
   const pricingSection = document.querySelector('#pricing');
-  if (pricingToggle && pricingSection) {
-    const toggleButtons = pricingToggle.querySelectorAll('.pricing-toggle-btn');
-    toggleButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const cycle = btn.dataset.cycle;
-        toggleButtons.forEach(b => {
-          const active = b === btn;
+  if (pricingToggles.length && pricingSection) {
+    const setCycle = (cycle) => {
+      pricingSection.setAttribute('data-cycle', cycle);
+      pricingToggles.forEach(group => {
+        group.setAttribute('data-cycle', cycle);
+        group.querySelectorAll('.pricing-toggle-btn').forEach(b => {
+          const active = b.dataset.cycle === cycle;
           b.classList.toggle('is-active', active);
           b.setAttribute('aria-pressed', String(active));
         });
-        pricingSection.setAttribute('data-cycle', cycle);
-        pricingToggle.setAttribute('data-cycle', cycle);
+      });
 
-        document.querySelectorAll('[data-price]').forEach(el => {
-          const val = cycle === 'annual' ? el.dataset.annual : el.dataset.monthly;
-          if (val !== undefined) el.textContent = val;
-        });
+      document.querySelectorAll('[data-price]').forEach(el => {
+        const val = cycle === 'annual' ? el.dataset.annual : el.dataset.monthly;
+        if (val !== undefined) el.textContent = val;
+      });
+    };
+
+    pricingToggles.forEach(group => {
+      group.querySelectorAll('.pricing-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', () => setCycle(btn.dataset.cycle));
       });
     });
   }
