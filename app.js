@@ -256,6 +256,43 @@
     });
   }
 
+  // -------- Pricing tier carousel (4 visible, arrow reveals the 5th) --------
+  const tierCarousel = document.querySelector('[data-tiers-carousel]');
+  if (tierCarousel) {
+    const track = tierCarousel.querySelector('[data-tiers-track]');
+    const prevBtn = tierCarousel.querySelector('[data-tiers-prev]');
+    const nextBtn = tierCarousel.querySelector('[data-tiers-next]');
+
+    const cardStep = () => {
+      const card = track.querySelector('.tier');
+      if (!card) return track.clientWidth;
+      const styles = getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap || styles.gap || '16') || 16;
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    const update = () => {
+      const overflow = track.scrollWidth - track.clientWidth;
+      // Everything already fits (very wide viewport) → no arrows needed.
+      if (overflow <= 4) {
+        prevBtn.hidden = true;
+        nextBtn.hidden = true;
+        return;
+      }
+      const x = track.scrollLeft;
+      prevBtn.hidden = false;
+      nextBtn.hidden = false;
+      prevBtn.disabled = x <= 2;              // start → can't go back
+      nextBtn.disabled = x >= overflow - 2;   // end → can't go further
+    };
+
+    prevBtn.addEventListener('click', () => track.scrollBy({ left: -cardStep(), behavior: 'smooth' }));
+    nextBtn.addEventListener('click', () => track.scrollBy({ left: cardStep(), behavior: 'smooth' }));
+    track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+
   // -------- Lightbox for showcase reels --------
   const lightbox = document.querySelector('[data-lightbox]');
   const lightboxInner = document.querySelector('[data-lightbox-inner]');
