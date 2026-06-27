@@ -1239,16 +1239,67 @@ button { font: inherit; cursor: pointer; }
   color: var(--quiet);
 }
 
+/* Tiers carousel — 4 cards visible; the 5th (Agency) reveals via the right
+   arrow. A scroll-snap flex track keeps it swipeable on touch too. */
+.tiers-carousel {
+  position: relative;
+}
 .tiers {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
   gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  /* Extra top room so the -12px tier badges and the hover lift aren't clipped
+     by the scroll container's overflow. */
+  padding: 22px 2px 14px;
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* old Edge */
+}
+.tiers::-webkit-scrollbar { display: none; }
+.tier {
+  scroll-snap-align: start;
+  flex: 0 0 calc((100% - 3 * 16px) / 4);   /* exactly 4 per view */
 }
 @media (max-width: 1080px) {
-  .tiers { grid-template-columns: repeat(2, 1fr); }
+  .tier { flex-basis: calc((100% - 16px) / 2); }   /* 2 per view */
 }
 @media (max-width: 560px) {
-  .tiers { grid-template-columns: 1fr; }
+  .tier { flex-basis: 86%; }                        /* ~1 per view, peek next */
+}
+
+/* Carousel arrows */
+.tiers-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 46px; height: 46px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--aurora-30);
+  background: rgba(10, 6, 19, 0.82);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--aurora);
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(127, 255, 212, 0.12);
+  transition: opacity var(--t-med) var(--ease),
+              transform var(--t-fast) var(--ease),
+              background var(--t-fast) var(--ease);
+}
+.tiers-nav:hover {
+  background: rgba(26, 15, 46, 0.92);
+  transform: translateY(-50%) scale(1.06);
+}
+.tiers-nav svg { width: 20px; height: 20px; }
+.tiers-nav--prev { left: -10px; }
+.tiers-nav--next { right: -10px; }
+.tiers-nav[hidden] { display: none; }
+.tiers-nav:disabled { opacity: 0; pointer-events: none; }
+@media (max-width: 560px) {
+  /* On touch, swiping replaces the arrows. */
+  .tiers-nav { display: none; }
 }
 
 .tier {

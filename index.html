@@ -608,7 +608,7 @@
         <div class="pricing-head-copy">
           <span class="eyebrow">Sonder · Pricing</span>
           <h2 id="pricing-headline" class="section-title">
-            Professional book videos<br>from <em><span data-price data-monthly="$6.97" data-annual="$5.81">$6.97</span> each.</em>
+            Professional book videos<br>from <em><span data-price data-monthly="$1.80" data-annual="$1.65">$1.80</span> each.</em>
           </h2>
           <p class="pricing-sub">14 cinematic scenes · Professional voiceover · Animated captions · Your book woven in.</p>
           <p class="pricing-sub pricing-sub--quiet">Ready in minutes — not days.</p>
@@ -627,13 +627,47 @@
           </div>
           <div class="compare-card compare-card--hero">
             <span class="compare-label">Sonder</span>
-            <span class="compare-price">From $6.97</span>
+            <span class="compare-price">From $1.80</span>
             <span class="compare-note">Ready in minutes</span>
           </div>
         </aside>
       </header>
 
-      <div class="tiers">
+      <div class="tiers-carousel" data-tiers-carousel>
+        <button type="button" class="tiers-nav tiers-nav--prev" data-tiers-prev aria-label="Previous plans" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+      <div class="tiers" data-tiers-track>
+        <article class="tier">
+          <div class="tier-head">
+            <span class="tier-label">Light</span>
+            <div class="pricing-toggle pricing-toggle--card" role="group" aria-label="Billing cycle" data-pricing-toggle data-cycle="monthly">
+              <button type="button" class="pricing-toggle-btn is-active" data-cycle="monthly" aria-pressed="true">Monthly</button>
+              <button type="button" class="pricing-toggle-btn" data-cycle="annual" aria-pressed="false">Annual <span class="toggle-pct">-17%</span></button>
+              <span class="pricing-toggle-thumb" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="tier-price">
+            <span class="tier-num" data-price data-monthly="$9" data-annual="$8">$9</span>
+            <span class="tier-per" data-price data-monthly="/month" data-annual="/mo">/month</span>
+          </div>
+          <p class="tier-pervideo" data-price data-monthly="$1.80 per video" data-annual="$1.65 per video">$1.80 per video</p>
+          <p class="tier-billed">Billed annually · save $9/year</p>
+          <p class="tier-volume">5 videos / month</p>
+          <ul class="tier-feats">
+            <li>5 Quick Reaction Hooks a month</li>
+            <li>35-second 9:16 UGC reaction clips</li>
+            <li>Your book&rsquo;s B-roll woven in</li>
+            <li>AI presenter + captions + music</li>
+            <li>1 book upload</li>
+            <li>2 videos per day</li>
+            <li>Upgrade any time for Amazon Ads + 90s Viral Scripts</li>
+          </ul>
+          <a href="https://app.yousonder.com/signup" class="tier-cta">Go viral <span aria-hidden="true">→</span></a>
+          <p class="tier-foot">Need more? Just $5 per extra video.</p>
+        </article>
+
         <article class="tier">
           <div class="tier-head">
             <span class="tier-label">Starter</span>
@@ -746,6 +780,11 @@
           <a href="https://app.yousonder.com/signup" class="tier-cta">Go viral <span aria-hidden="true">→</span></a>
           <p class="tier-foot">Need more? Just $5 per extra video.</p>
         </article>
+      </div>
+
+        <button type="button" class="tiers-nav tiers-nav--next" data-tiers-next aria-label="More plans">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
 
       <div class="extras">
