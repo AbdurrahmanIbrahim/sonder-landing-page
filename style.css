@@ -1239,19 +1239,16 @@ button { font: inherit; cursor: pointer; }
   color: var(--quiet);
 }
 
-/* Tiers carousel — 4 cards visible; the 5th (Agency) reveals via the right
-   arrow. A scroll-snap flex track keeps it swipeable on touch too. */
-.tiers-carousel {
-  position: relative;
-}
+/* Tiers carousel — 5 plans, 4 shown; White Glove (Agency) sits off-screen
+   right and is revealed by the → arrow. Scroll-snap keeps it swipeable. */
+.tiers-carousel { position: relative; }
 .tiers {
   display: flex;
   gap: 16px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  /* Extra top room so the -12px tier badges and the hover lift aren't clipped
-     by the scroll container's overflow. */
+  /* Top room so the -12px tier badges + hover lift aren't clipped. */
   padding: 22px 2px 14px;
   scrollbar-width: none;        /* Firefox */
   -ms-overflow-style: none;     /* old Edge */
@@ -1259,6 +1256,10 @@ button { font: inherit; cursor: pointer; }
 .tiers::-webkit-scrollbar { display: none; }
 .tier {
   scroll-snap-align: start;
+  /* border-box + min-width:0 so each card is exactly 1/4 (otherwise flexbox
+     sizes them by content, they overflow, and the 4th card gets clipped). */
+  box-sizing: border-box;
+  min-width: 0;
   flex: 0 0 calc((100% - 3 * 16px) / 4);   /* exactly 4 per view */
 }
 @media (max-width: 1080px) {
@@ -1300,6 +1301,144 @@ button { font: inherit; cursor: pointer; }
 @media (max-width: 560px) {
   /* On touch, swiping replaces the arrows. */
   .tiers-nav { display: none; }
+}
+
+/* ---- "What you can make" format explainer ---- */
+.formats {
+  margin: 0 0 44px;
+}
+.formats-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--aurora);
+  margin: 0 0 16px;
+}
+.formats-eyebrow span {
+  color: var(--quiet);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+.formats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 860px) {
+  .formats-grid { grid-template-columns: 1fr; }
+}
+.format-card {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 20px 18px;
+  border: 1px solid var(--paper-08);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(127, 255, 212, 0.04) 0%, rgba(26, 15, 46, 0.25) 100%);
+  cursor: pointer;
+  color: var(--paper);
+  font: inherit;
+  transition: transform var(--t-med) var(--ease),
+              border-color var(--t-med) var(--ease),
+              box-shadow var(--t-med) var(--ease);
+}
+.format-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--aurora-30);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 18px rgba(127, 255, 212, 0.1);
+}
+.format-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.format-play {
+  flex-shrink: 0;
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 999px;
+  background: var(--aurora);
+  color: var(--plum-black);
+  box-shadow: 0 0 14px var(--aurora-30);
+}
+.format-play svg { width: 16px; height: 16px; margin-left: 1px; }
+.format-len {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  text-transform: capitalize;
+}
+.format-desc {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--paper-60);
+  flex: 1;
+}
+.format-watch {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--aurora);
+}
+.formats-note {
+  margin: 16px 0 0;
+  font-size: 13px;
+  color: var(--paper-60);
+  text-align: center;
+}
+.formats-note strong { color: var(--paper); font-weight: 600; }
+
+/* ---- Light feeder banner (entry product, set apart from the plans) ---- */
+.light-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin: 18px 0 0;
+  padding: 22px 26px;
+  border: 1px dashed var(--aurora-30);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(127, 255, 212, 0.05) 0%, rgba(10, 6, 19, 0.4) 100%);
+}
+.light-banner-main { max-width: 62ch; }
+.light-banner-tag {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--aurora);
+  margin-bottom: 6px;
+}
+.light-banner-text {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--paper-60);
+}
+.light-banner-text strong { color: var(--paper); font-weight: 600; }
+.light-banner-cta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+}
+.light-banner-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--paper);
+  white-space: nowrap;
+}
+.light-banner-per { font-size: 13px; color: var(--quiet); font-weight: 500; }
+.light-banner .tier-cta { margin: 0; width: auto; white-space: nowrap; }
+@media (max-width: 560px) {
+  .light-banner-cta { width: 100%; justify-content: space-between; }
 }
 
 .tier {
@@ -1429,7 +1568,11 @@ button { font: inherit; cursor: pointer; }
 .tier-volume {
   margin: 0 0 22px;
   font-size: 13px;
+  line-height: 1.45;
   color: var(--paper-60);
+  /* Reserve two lines so the divider (and everything below it) lines up across
+     all cards, whether the volume text wraps to one line or two. */
+  min-height: 38px;
   padding-bottom: 22px;
   border-bottom: 1px solid var(--paper-08);
 }

@@ -319,20 +319,11 @@
       const player = document.createElement('wistia-player');
       player.setAttribute('media-id', wistiaId);
       player.setAttribute('aspect', String(aspectNum));
-      // Dark internal play button so it recedes behind the custom mint trigger.
       player.setAttribute('player-color', '0A0613');
-      player.setAttribute('autoplay', 'true');
+      // No autoplay on purpose: browsers (especially Safari) force autoplaying
+      // video to be MUTED. Opening on the poster means the visitor's tap on the
+      // play button counts as a direct gesture, so the example plays WITH sound.
       lightboxInner.appendChild(player);
-
-      // Robust autoplay: try multiple hooks since Wistia's web component
-      // sometimes fires its ready event before listeners attach.
-      const tryPlay = () => {
-        try { if (typeof player.play === 'function') player.play(); } catch (_) {}
-      };
-      player.addEventListener('wistia-player-api-ready', tryPlay);
-      player.addEventListener('player-ready', tryPlay);
-      setTimeout(tryPlay, 300);
-      setTimeout(tryPlay, 900);
     } else {
       const ph = document.createElement('div');
       ph.className = 'lightbox-placeholder';
