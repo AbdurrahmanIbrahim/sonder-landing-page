@@ -921,7 +921,6 @@
   <!-- Exit-intent modal -->
   <div class="exit-modal" data-exit-modal aria-modal="true" role="dialog" aria-labelledby="exit-title" hidden>
     <div class="exit-modal-inner">
-      <button class="exit-modal-close" data-exit-close type="button" aria-label="Close">×</button>
 
       <span class="exit-modal-eyebrow">Before you go</span>
       <h3 class="exit-modal-title" id="exit-title">
@@ -942,10 +941,11 @@
           <input id="exit-email" type="email" name="email" required autocomplete="email" placeholder="you@yourbook.com" />
         </div>
         <button class="exit-modal-submit" type="submit">
-          <span>Claim my free video</span>
+          <span>I want my free video!</span>
           <span class="cta-arrow" aria-hidden="true">&rarr;</span>
         </button>
         <p class="exit-modal-trust">One email. The link to your free credit.</p>
+        <button class="exit-modal-decline" data-exit-close type="button">no thanks, I don't want a free video</button>
       </form>
 
       <div class="exit-modal-success" data-exit-success hidden>
