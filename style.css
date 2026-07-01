@@ -266,6 +266,21 @@ button { font: inherit; cursor: pointer; }
   left: 0; right: 0;
 }
 
+.hero-trust-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 400;
+  color: rgba(255,255,255,0.75);
+  padding: 9px 18px 9px 14px;
+  border: 1px solid rgba(127, 255, 212, 0.25);
+  border-radius: 999px;
+  background: rgba(127, 255, 212, 0.07);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  margin-bottom: 8px;
+}
+.hero-trust-icon { font-size: 16px; }
+.hero-trust-num { color: #7FFFD4; font-weight: 700; }
+
 .hero-meta {
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 12px; font-weight: 500;

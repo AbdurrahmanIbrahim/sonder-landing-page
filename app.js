@@ -2,6 +2,36 @@
    Sonder — landing page motion engine
    ===================================================== */
 
+// -------- Hours saved trust badge --------
+// Shows live video count × 4 hours saved.
+// Falls back to hardcoded numbers if the API isn't available.
+// TO MAKE LIVE: Mike needs to add GET /api/public/video-count to sonder-server.
+(function () {
+  var HOURS_PER_VIDEO = 4;
+  var FALLBACK_VIDEOS = 1012;
+
+  function updateHoursBadge(videoCount) {
+    var hoursSaved = Math.floor(videoCount * HOURS_PER_VIDEO);
+    var hoursFormatted = hoursSaved >= 1000
+      ? (Math.floor(hoursSaved / 100) * 100).toLocaleString() + '+'
+      : hoursSaved + '+';
+    var videosFormatted = videoCount >= 1000
+      ? (Math.floor(videoCount / 100) * 100).toLocaleString() + '+'
+      : videoCount + '+';
+
+    var hoursEl = document.getElementById('hours-saved-num');
+    var videosEl = document.getElementById('videos-made-num');
+    if (hoursEl) hoursEl.textContent = hoursFormatted;
+    if (videosEl) videosEl.textContent = videosFormatted;
+  }
+
+  // Try to fetch live count; fall back silently.
+  fetch('https://sonder-server-production.up.railway.app/api/public/video-count')
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+    .then(function (d) { if (d && d.count) updateHoursBadge(d.count); })
+    .catch(function () { updateHoursBadge(FALLBACK_VIDEOS); });
+})();
+
 (function () {
   'use strict';
 
