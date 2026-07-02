@@ -10,19 +10,25 @@
   var HOURS_PER_VIDEO = 4;
   var FALLBACK_VIDEOS = 1012;
 
-  function updateHoursBadge(videoCount) {
-    var hoursSaved = Math.floor(videoCount * HOURS_PER_VIDEO);
-    var hoursFormatted = hoursSaved >= 1000
-      ? (Math.floor(hoursSaved / 100) * 100).toLocaleString() + '+'
-      : hoursSaved + '+';
-    var videosFormatted = videoCount >= 1000
-      ? (Math.floor(videoCount / 100) * 100).toLocaleString() + '+'
-      : videoCount + '+';
+  function animateCount(el, target, duration) {
+    var startTime = null;
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target).toLocaleString() + '+';
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
 
+  function updateHoursBadge(videoCount) {
+    var hoursSaved = Math.floor(Math.floor(videoCount * HOURS_PER_VIDEO) / 100) * 100;
+    var videosBase = Math.floor(videoCount / 100) * 100;
     var hoursEl = document.getElementById('hours-saved-num');
     var videosEl = document.getElementById('videos-made-num');
-    if (hoursEl) hoursEl.textContent = hoursFormatted;
-    if (videosEl) videosEl.textContent = videosFormatted;
+    if (hoursEl) animateCount(hoursEl, hoursSaved, 1800);
+    if (videosEl) animateCount(videosEl, videosBase, 1800);
   }
 
   // Try to fetch live count; fall back silently.
