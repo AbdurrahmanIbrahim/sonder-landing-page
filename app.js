@@ -229,7 +229,7 @@
   const revealTargets = document.querySelectorAll(
     '.section-head, .stats-grid, .stats-caption, .steps, .quotes, .receipts, ' +
     '.founder-grid, .pricing-head, .tiers, .extras, .trust-row, .pricing-close, ' +
-    '.final-inner, .marquee, .showcase-rail, .adfilm-frame, .adfilm-note'
+    '.final-inner, .marquee, .showcase-rail, .adcarousel, .adfilm-note'
   );
 
   if ('IntersectionObserver' in window) {
@@ -399,6 +399,52 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && lightbox && !lightbox.hidden) closeLightbox();
   });
+
+  // -------- Amazon Ads Z-space carousel --------
+  // The active card sits forward; neighbours recede left/right. Clicking a
+  // side card brings it to the front (capture phase, so it beats the card's
+  // own data-reel lightbox listener); clicking the front card plays it.
+  const adCar = document.querySelector('[data-adcarousel]');
+  if (adCar) {
+    const cards = Array.from(adCar.querySelectorAll('[data-adcar-card]'));
+    const n = cards.length;
+    let adIdx = 0;
+
+    const renderAdCar = () => {
+      cards.forEach((card, i) => {
+        const off = (i - adIdx + n) % n;
+        card.classList.toggle('is-active', off === 0);
+        card.classList.toggle('is-next', off === 1);
+        card.classList.toggle('is-prev', off === n - 1);
+        card.classList.toggle('is-hidden', off !== 0 && off !== 1 && off !== n - 1);
+        card.tabIndex = off === 0 ? 0 : -1;
+      });
+    };
+    renderAdCar();
+
+    const stepAdCar = (d) => {
+      adIdx = (adIdx + d + n) % n;
+      renderAdCar();
+    };
+    const adPrev = adCar.querySelector('[data-adcar-prev]');
+    const adNext = adCar.querySelector('[data-adcar-next]');
+    if (adPrev) adPrev.addEventListener('click', () => stepAdCar(-1));
+    if (adNext) adNext.addEventListener('click', () => stepAdCar(1));
+
+    adCar.addEventListener('click', (e) => {
+      const card = e.target.closest('[data-adcar-card]');
+      if (!card || card.classList.contains('is-active')) return; // front card → lightbox
+      e.stopPropagation();
+      e.preventDefault();
+      adIdx = cards.indexOf(card);
+      renderAdCar();
+    }, true);
+
+    adCar.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); stepAdCar(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); stepAdCar(1); }
+    });
+  }
 
   // -------- Exit-intent modal --------
   // Safety-net restatement of the free-video offer for leavers. One direct

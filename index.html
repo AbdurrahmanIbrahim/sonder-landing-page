@@ -435,13 +435,51 @@
         </p>
       </header>
 
-      <div class="adfilm-frame">
-        <button class="adfilm-poster" type="button" data-reel data-wistia-id="" data-reel-title="Amazon Ad — watch the example" data-reel-aspect="1.78" aria-label="Play: Amazon Ad example">
-          <span class="reel-style">Amazon Ad &middot; 0:43</span>
-          <span class="reel-play" aria-hidden="true">
-            <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
-          </span>
-          <span class="adfilm-ph-note">Example on the way</span>
+      <!-- Z-space carousel: the active ad sits forward, neighbours recede.
+           Clicking a side card brings it to the front; clicking the front
+           card opens it in the lightbox (data-reel). -->
+      <div class="adcarousel" data-adcarousel>
+        <div class="adcarousel-stage">
+          <button class="adcar-card" type="button" data-adcar-card data-reel data-wistia-id="" data-reel-title="The unlikely escape that made history" data-reel-aspect="1.78" aria-label="Play Amazon Ad: The unlikely escape that made history">
+            <span class="reel-style">Amazon Ad &middot; 0:43</span>
+            <span class="reel-play" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+            </span>
+            <span class="adcar-meta">
+              <span class="adcar-meta-title">The unlikely escape that made history</span>
+              <span class="adcar-meta-genre">WWII History</span>
+            </span>
+            <span class="adcar-ph-note">Example on the way</span>
+          </button>
+          <button class="adcar-card" type="button" data-adcar-card data-reel data-wistia-id="" data-reel-title="You'll trust no one by chapter three" data-reel-aspect="1.78" aria-label="Play Amazon Ad: You'll trust no one by chapter three">
+            <span class="reel-style">Amazon Ad &middot; 0:43</span>
+            <span class="reel-play" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+            </span>
+            <span class="adcar-meta">
+              <span class="adcar-meta-title">You'll trust no one by chapter three</span>
+              <span class="adcar-meta-genre">Thriller</span>
+            </span>
+            <span class="adcar-ph-note">Example on the way</span>
+          </button>
+          <button class="adcar-card" type="button" data-adcar-card data-reel data-wistia-id="" data-reel-title="Bedtime will never be the same" data-reel-aspect="1.78" aria-label="Play Amazon Ad: Bedtime will never be the same">
+            <span class="reel-style">Amazon Ad &middot; 0:43</span>
+            <span class="reel-play" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+            </span>
+            <span class="adcar-meta">
+              <span class="adcar-meta-title">Bedtime will never be the same</span>
+              <span class="adcar-meta-genre">Children's</span>
+            </span>
+            <span class="adcar-ph-note">Example on the way</span>
+          </button>
+        </div>
+
+        <button class="adcar-nav adcar-nav--prev" type="button" data-adcar-prev aria-label="Previous Amazon Ad">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M 15 5 L 8 12 L 15 19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="adcar-nav adcar-nav--next" type="button" data-adcar-next aria-label="Next Amazon Ad">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M 9 5 L 16 12 L 9 19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
 
