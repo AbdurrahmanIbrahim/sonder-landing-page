@@ -401,10 +401,12 @@
   });
 
   // -------- Exit-intent modal --------
+  // Safety-net restatement of the free-video offer for leavers. One direct
+  // claim link (signup?offer=freevideo grants the trial at account creation) —
+  // no email capture: the offer is already all over the page, so the shortest
+  // path wins.
   const exitModal = document.querySelector('[data-exit-modal]');
   const exitClose = document.querySelector('[data-exit-close]');
-  const exitForm = document.querySelector('[data-exit-form]');
-  const exitSuccess = document.querySelector('[data-exit-success]');
 
   if (exitModal) {
     const STORAGE_KEY = 'sonder-exit-modal-shown';
@@ -431,10 +433,10 @@
       exitModal.hidden = false;
       document.body.style.overflow = 'hidden';
       requestAnimationFrame(() => exitModal.classList.add('is-open'));
-      // Focus the first field for keyboard users
+      // Focus the claim CTA for keyboard users
       setTimeout(() => {
-        const firstInput = exitModal.querySelector('input');
-        if (firstInput) firstInput.focus();
+        const claim = exitModal.querySelector('[data-exit-claim]');
+        if (claim) claim.focus();
       }, 400);
     };
 
@@ -472,50 +474,6 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !exitModal.hidden) closeExit();
     });
-
-    // Free-video trial lead capture → sonder-server /api/trial/request.
-    // The server stores the lead and emails a single-use claim link to
-    // app.yousonder.com/signup?trial=<token>. Best-effort: we always show the
-    // success state so the UX stays smooth even if the network hiccups.
-    var SONDER_API_BASE = 'https://sonder-server-production.up.railway.app';
-    if (exitForm) {
-      exitForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = exitForm.querySelector('#exit-name');
-        const email = exitForm.querySelector('#exit-email');
-        if (!email.value || !email.checkValidity()) { email.focus(); return; }
-        if (!name.value) { name.focus(); return; }
-
-        // Fire-and-forget the lead capture; don't block the success animation.
-        fetch(SONDER_API_BASE + '/api/trial/request', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            firstName: name.value,
-            email: email.value,
-            source: 'exit_modal'
-          })
-        }).catch((err) => console.warn('[Sonder] trial request failed', err));
-
-        // Fade form out, fade success in
-        exitForm.style.transition = 'opacity 250ms ease, transform 250ms ease';
-        exitForm.style.opacity = '0';
-        exitForm.style.transform = 'translateY(-6px)';
-        setTimeout(() => {
-          exitForm.style.display = 'none';
-          if (exitSuccess) {
-            exitSuccess.hidden = false;
-            exitSuccess.style.opacity = '0';
-            exitSuccess.style.transform = 'translateY(8px)';
-            requestAnimationFrame(() => {
-              exitSuccess.style.transition = 'opacity 400ms ease, transform 400ms ease';
-              exitSuccess.style.opacity = '1';
-              exitSuccess.style.transform = 'translateY(0)';
-            });
-          }
-        }, 260);
-      });
-    }
   }
 
   // -------- Smooth scroll for anchor links (respect reduced motion) --------
