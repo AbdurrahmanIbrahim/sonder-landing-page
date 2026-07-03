@@ -482,12 +482,14 @@ button { font: inherit; cursor: pointer; }
 }
 .cta-primary:hover .cta-arrow { transform: translateX(3px); }
 
+/* A <button>: opens the tutorial video in the Wistia lightbox (data-reel). */
 .hero-caption {
   position: absolute;
   right: var(--gutter);
   bottom: 110px;
   z-index: 4;
   font-size: 11px;
+  font-family: var(--font-sans);
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--paper-60);
@@ -498,6 +500,18 @@ button { font: inherit; cursor: pointer; }
   background: rgba(10, 6, 19, 0.55);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+.hero-caption::before {
+  content: "▶";
+  margin-right: 8px;
+  font-size: 8px;
+  color: var(--aurora);
+}
+.hero-caption:hover {
+  color: var(--paper);
+  border-color: var(--aurora-30);
 }
 @media (max-width: 880px) {
   .hero-caption { display: none; }
