@@ -25,7 +25,7 @@
 
   <link rel="preload" as="image" href="assets/frames/hero/frame_001.jpg" fetchpriority="high" />
 
-  <link rel="stylesheet" href="style.css?v=2" />
+  <link rel="stylesheet" href="style.css?v=3" />
 
   <script src="https://fast.wistia.com/player.js" async></script>
 </head>
@@ -33,6 +33,15 @@
   <a class="skip-link" href="#main">Skip to content</a>
 
   <div class="grain" aria-hidden="true"></div>
+
+  <!-- Free-video announcement bar — the offer, visible before anything else. -->
+  <div class="announce" role="note">
+    <a href="https://app.yousonder.com/signup?offer=freevideo">
+      <span class="announce-spark" aria-hidden="true">✦</span>
+      <span class="announce-copy">Your first video is free — no card needed.</span>
+      <span class="announce-cta">Claim it →</span>
+    </a>
+  </div>
 
   <header class="nav" data-nav>
     <a href="#" class="wordmark" aria-label="Sonder home">
@@ -48,7 +57,7 @@
       <a href="#about" class="nav-link">Who we are</a>
       <a href="#pricing" class="nav-link">Pricing</a>
       <a href="https://app.yousonder.com/login" class="nav-link nav-link--quiet">Sign in</a>
-      <a href="https://app.yousonder.com/signup" class="nav-cta">Go viral <span aria-hidden="true">→</span></a>
+      <a href="https://app.yousonder.com/signup?offer=freevideo" class="nav-cta">Go viral <span aria-hidden="true">→</span></a>
     </nav>
   </header>
 
@@ -82,20 +91,27 @@
 
           <p class="hero-sub">A full production crew. One click.</p>
 
+          <p class="hero-offer-badge">
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M 2 1.5 L 10 6 L 2 10.5 Z" fill="currentColor"/></svg>
+            <span>First video free &middot; No card required</span>
+          </p>
+
           <p class="hero-body">
             Sonder turns your manuscript into TikTok, Reels, and YouTube Shorts — for less than your morning coffee. The team you couldn't afford to hire, on-tap.
           </p>
 
           <div class="hero-ctas">
-            <a href="https://app.yousonder.com/signup" class="cta cta-primary">
-              <span>Go viral</span>
+            <a href="https://app.yousonder.com/signup?offer=freevideo" class="cta cta-primary">
+              <span>Get your first video free</span>
               <span class="cta-arrow" aria-hidden="true">→</span>
             </a>
             <a href="#how" class="cta cta-secondary">See how it works</a>
           </div>
+
+          <p class="hero-cta-note">No card, no commitment, no catch.</p>
         </div>
 
-        <p class="hero-caption" aria-hidden="true">Live demo — book in, video out</p>
+        <button class="hero-caption" type="button" data-reel data-wistia-id="oenqanb3ej" data-reel-title="Live demo — book in, video out" data-reel-aspect="1.78" aria-label="Play the live demo: book in, video out">Live demo — book in, video out</button>
 
         <div class="hero-scroll-hint" aria-hidden="true">
           <span>Scroll</span>
@@ -181,6 +197,19 @@
             </figcaption>
           </figure>
           <figure class="reel">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="zr4jayv2lv" data-reel-title="Power gone, towers down, phone useless" aria-label="Play: Power gone, towers down, phone useless">
+              <img src="assets/stills/hook-gmrs.jpg" alt="Sonder Reaction Hook &mdash; GMRS Radio Field Manual" loading="lazy" />
+              <span class="reel-type">Reaction Hook</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">Power gone, towers down, phone useless</span>
+              <span class="reel-genre">Survival</span>
+            </figcaption>
+          </figure>
+          <figure class="reel">
             <button class="reel-frame" type="button" data-reel data-wistia-id="xqg4ugdw8z" data-reel-title="Why nobody talks about this" aria-label="Play: Why nobody talks about this">
               <img src="assets/stills/expert-panelist.jpg" alt="Sonder video &mdash; Why nobody talks about this" loading="lazy" />
               <span class="reel-style">Expert Panelist</span>
@@ -217,6 +246,19 @@
             <figcaption>
               <span class="reel-title">One paragraph. One million views.</span>
               <span class="reel-genre">History</span>
+            </figcaption>
+          </figure>
+          <figure class="reel">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="oyk3v7e4jp" data-reel-title="One nerve controls 80% of your panic??" aria-label="Play: One nerve controls 80% of your panic??">
+              <img src="assets/stills/hook-vagus.jpg" alt="Sonder Reaction Hook &mdash; vagus nerve book" loading="lazy" />
+              <span class="reel-type">Reaction Hook</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">One nerve controls 80% of your panic??</span>
+              <span class="reel-genre">Health</span>
             </figcaption>
           </figure>
           <figure class="reel">
@@ -285,6 +327,19 @@
             </figcaption>
           </figure>
           <figure class="reel" aria-hidden="true">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="zr4jayv2lv" data-reel-title="Power gone, towers down, phone useless" aria-label="Play: Power gone, towers down, phone useless">
+              <img src="assets/stills/hook-gmrs.jpg" alt="Sonder Reaction Hook &mdash; GMRS Radio Field Manual" loading="lazy" />
+              <span class="reel-type">Reaction Hook</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">Power gone, towers down, phone useless</span>
+              <span class="reel-genre">Survival</span>
+            </figcaption>
+          </figure>
+          <figure class="reel" aria-hidden="true">
             <button class="reel-frame" type="button" data-reel data-wistia-id="xqg4ugdw8z" data-reel-title="Why nobody talks about this" aria-label="Play: Why nobody talks about this">
               <img src="assets/stills/expert-panelist.jpg" alt="" loading="lazy" />
               <span class="reel-style">Expert Panelist</span>
@@ -324,6 +379,19 @@
             </figcaption>
           </figure>
           <figure class="reel" aria-hidden="true">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="oyk3v7e4jp" data-reel-title="One nerve controls 80% of your panic??" aria-label="Play: One nerve controls 80% of your panic??">
+              <img src="assets/stills/hook-vagus.jpg" alt="Sonder Reaction Hook &mdash; vagus nerve book" loading="lazy" />
+              <span class="reel-type">Reaction Hook</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">One nerve controls 80% of your panic??</span>
+              <span class="reel-genre">Health</span>
+            </figcaption>
+          </figure>
+          <figure class="reel" aria-hidden="true">
             <button class="reel-frame" type="button" data-reel data-wistia-id="uvb7ppx8j5" data-reel-title="The fact nobody warned them about" aria-label="Play: The fact nobody warned them about">
               <img src="assets/stills/skeleton.jpg" alt="" loading="lazy" />
               <span class="reel-style">Skeleton</span>
@@ -353,6 +421,69 @@
       </div>
 
       <p class="showcase-note">These are some of the videos that are generating millions of views.</p>
+    </section>
+
+    <!-- ============== AMAZON ADS — the premium 16:9 showpiece ============== -->
+    <section id="amazon-ads" class="adfilm" aria-labelledby="adfilm-headline">
+      <header class="section-head">
+        <span class="eyebrow">Amazon Ads</span>
+        <h2 id="adfilm-headline" class="section-title">
+          The ad your book page<br><em>deserves.</em>
+        </h2>
+        <p class="section-lede">
+          Shorts earn you the audience. This one closes the sale — 43 seconds, made for the page where readers actually buy, working for your book every single day.
+        </p>
+      </header>
+
+      <!-- Z-space carousel: the active ad sits forward, neighbours recede.
+           Clicking a side card brings it to the front; clicking the front
+           card opens it in the lightbox (data-reel). -->
+      <div class="adcarousel" data-adcarousel>
+        <div class="adcarousel-stage">
+          <button class="adcar-card" type="button" data-adcar-card data-reel data-wistia-id="umgj5jk7d3" data-reel-title="You Will Rock As A Dad" data-reel-aspect="1.78" aria-label="Play Amazon Ad: You Will Rock As A Dad">
+            <img src="assets/stills/amazon-ywraa.jpg" alt="Amazon Ad &mdash; You Will Rock As A Dad" loading="lazy" />
+            <span class="reel-style">Amazon Ad &middot; 0:43</span>
+            <span class="reel-play" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+            </span>
+            <span class="adcar-meta">
+              <span class="adcar-meta-title">You Will Rock As A Dad</span>
+              <span class="adcar-meta-genre">Fatherhood</span>
+            </span>
+          </button>
+          <button class="adcar-card" type="button" data-adcar-card data-reel data-wistia-id="sjgjuc76xo" data-reel-title="Hope in the Haze" data-reel-aspect="1.78" aria-label="Play Amazon Ad: Hope in the Haze">
+            <img src="assets/stills/amazon-hith.jpg" alt="Amazon Ad &mdash; Hope in the Haze" loading="lazy" />
+            <span class="reel-style">Amazon Ad &middot; 0:43</span>
+            <span class="reel-play" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+            </span>
+            <span class="adcar-meta">
+              <span class="adcar-meta-title">Hope in the Haze</span>
+              <span class="adcar-meta-genre">Memoir</span>
+            </span>
+          </button>
+          <button class="adcar-card" type="button" data-adcar-card data-reel data-wistia-id="ry7ffqgoz8" data-reel-title="Living in the Vibration of Love" data-reel-aspect="1.78" aria-label="Play Amazon Ad: Living in the Vibration of Love">
+            <img src="assets/stills/amazon-example.jpg" alt="Amazon Ad &mdash; Living in the Vibration of Love" loading="lazy" />
+            <span class="reel-style">Amazon Ad &middot; 0:43</span>
+            <span class="reel-play" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+            </span>
+            <span class="adcar-meta">
+              <span class="adcar-meta-title">Living in the Vibration of Love</span>
+              <span class="adcar-meta-genre">Spirituality</span>
+            </span>
+          </button>
+        </div>
+
+        <button class="adcar-nav adcar-nav--prev" type="button" data-adcar-prev aria-label="Previous Amazon Ad">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M 15 5 L 8 12 L 15 19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="adcar-nav adcar-nav--next" type="button" data-adcar-next aria-label="Next Amazon Ad">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M 9 5 L 16 12 L 9 19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <p class="adfilm-note">One book. One ad. Included on paid plans.</p>
     </section>
 
     <!-- ============== HOW IT WORKS ============== -->
@@ -541,7 +672,7 @@
         </div>
 
         <div class="cheaper-ctas">
-          <a href="https://app.yousonder.com/signup" class="cta cta-primary">
+          <a href="https://app.yousonder.com/signup?offer=freevideo" class="cta cta-primary">
             <span>See pricing</span>
             <span class="cta-arrow" aria-hidden="true">→</span>
           </a>
@@ -700,7 +831,7 @@
             <li>2 shorts per day</li>
             <li>Upgrade any time for Amazon ads &amp; 90s viral videos</li>
           </ul>
-          <a href="https://app.yousonder.com/signup" class="tier-cta">Start for $9 <span aria-hidden="true">→</span></a>
+          <a href="https://app.yousonder.com/signup?offer=freevideo" class="tier-cta">Start for $9 <span aria-hidden="true">→</span></a>
           <p class="tier-foot">Need more? Just $5 per extra short.</p>
         </article>
 
@@ -728,7 +859,7 @@
             <li>1 video per day</li>
             <li>Auto-post to social media</li>
           </ul>
-          <a href="https://app.yousonder.com/signup" class="tier-cta">Go viral <span aria-hidden="true">→</span></a>
+          <a href="https://app.yousonder.com/signup?offer=freevideo" class="tier-cta">Go viral <span aria-hidden="true">→</span></a>
           <p class="tier-foot">Need more? Just $9 per extra video.</p>
         </article>
 
@@ -756,7 +887,7 @@
             <li>Priority rendering</li>
             <li>Social Media Stats: track views, likes &amp; comments to see what&rsquo;s working</li>
           </ul>
-          <a href="https://app.yousonder.com/signup" class="tier-cta tier-cta--primary">Go viral <span aria-hidden="true">→</span></a>
+          <a href="https://app.yousonder.com/signup?offer=freevideo" class="tier-cta tier-cta--primary">Go viral <span aria-hidden="true">→</span></a>
           <p class="tier-foot">Need more? Just $7 per extra video.</p>
         </article>
 
@@ -783,7 +914,7 @@
             <li>Custom voice option</li>
             <li>Social Media Winners Vault: Advanced Analytics to know what to post, when to post &amp; what wins</li>
           </ul>
-          <a href="https://app.yousonder.com/signup" class="tier-cta">Go viral <span aria-hidden="true">→</span></a>
+          <a href="https://app.yousonder.com/signup?offer=freevideo" class="tier-cta">Go viral <span aria-hidden="true">→</span></a>
           <p class="tier-foot">Need more? Just $5 per extra video.</p>
         </article>
 
@@ -812,7 +943,7 @@
             <li>Unlimited changes to your videos</li>
             <li>Monthly strategy call with a founder</li>
           </ul>
-          <a href="https://app.yousonder.com/signup" class="tier-cta">Go viral <span aria-hidden="true">→</span></a>
+          <a href="https://app.yousonder.com/signup?offer=freevideo" class="tier-cta">Go viral <span aria-hidden="true">→</span></a>
           <p class="tier-foot">Need more? Just $5 per extra video.</p>
         </article>
       </div>
@@ -873,8 +1004,8 @@
         <h2 id="final-headline" class="section-title section-title--center">
           Every book deserves<br><em>to go viral.</em>
         </h2>
-        <a href="https://app.yousonder.com/signup" class="cta cta-primary cta-primary--large">
-          <span>Go viral</span>
+        <a href="https://app.yousonder.com/signup?offer=freevideo" class="cta cta-primary cta-primary--large">
+          <span>Get your first video free</span>
           <span class="cta-arrow" aria-hidden="true">→</span>
         </a>
         <p class="final-note">yousonder.com</p>
@@ -929,34 +1060,19 @@
 
       <span class="exit-modal-eyebrow">Before you go</span>
       <h3 class="exit-modal-title" id="exit-title">
-        Your first video free<br><em>for 24 hours only</em>
+        One more thing —<br><em>your first video is free.</em>
       </h3>
       <p class="exit-modal-body">
-        Sign up now and your first video is on us.<br>
+        Sign up and we&#39;ll make your first video on us.<br>
         No card, no commitment, no catch.
       </p>
 
-      <form class="exit-modal-form" data-exit-form novalidate>
-        <div class="exit-field">
-          <label for="exit-name">First name</label>
-          <input id="exit-name" type="text" name="firstname" required autocomplete="given-name" placeholder="Lynn" />
-        </div>
-        <div class="exit-field">
-          <label for="exit-email">Email</label>
-          <input id="exit-email" type="email" name="email" required autocomplete="email" placeholder="you@yourbook.com" />
-        </div>
-        <button class="exit-modal-submit" type="submit">
-          <span>I want my free video!</span>
-          <span class="cta-arrow" aria-hidden="true">&rarr;</span>
-        </button>
-        <p class="exit-modal-trust">One email. The link to your free credit.</p>
-        <button class="exit-modal-decline" data-exit-close type="button">no thanks, I don't want a free video</button>
-      </form>
-
-      <div class="exit-modal-success" data-exit-success hidden>
-        <h3>You&#39;re in.</h3>
-        <p>Your free credit is on its way. Open it and make your first video today.</p>
-      </div>
+      <a class="exit-modal-submit" data-exit-claim href="https://app.yousonder.com/signup?offer=freevideo">
+        <span>Claim my free video</span>
+        <span class="cta-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <p class="exit-modal-trust">Every style and voice unlocked for it.</p>
+      <button class="exit-modal-decline" data-exit-close type="button">no thanks, I don't want a free video</button>
     </div>
   </div>
 

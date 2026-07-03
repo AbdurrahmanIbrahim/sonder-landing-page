@@ -229,7 +229,7 @@
   const revealTargets = document.querySelectorAll(
     '.section-head, .stats-grid, .stats-caption, .steps, .quotes, .receipts, ' +
     '.founder-grid, .pricing-head, .tiers, .extras, .trust-row, .pricing-close, ' +
-    '.final-inner, .marquee, .showcase-rail'
+    '.final-inner, .marquee, .showcase-rail, .adcarousel, .adfilm-note'
   );
 
   if ('IntersectionObserver' in window) {
@@ -400,11 +400,59 @@
     if (e.key === 'Escape' && lightbox && !lightbox.hidden) closeLightbox();
   });
 
+  // -------- Amazon Ads Z-space carousel --------
+  // The active card sits forward; neighbours recede left/right. Clicking a
+  // side card brings it to the front (capture phase, so it beats the card's
+  // own data-reel lightbox listener); clicking the front card plays it.
+  const adCar = document.querySelector('[data-adcarousel]');
+  if (adCar) {
+    const cards = Array.from(adCar.querySelectorAll('[data-adcar-card]'));
+    const n = cards.length;
+    let adIdx = 0;
+
+    const renderAdCar = () => {
+      cards.forEach((card, i) => {
+        const off = (i - adIdx + n) % n;
+        card.classList.toggle('is-active', off === 0);
+        card.classList.toggle('is-next', off === 1);
+        card.classList.toggle('is-prev', off === n - 1);
+        card.classList.toggle('is-hidden', off !== 0 && off !== 1 && off !== n - 1);
+        card.tabIndex = off === 0 ? 0 : -1;
+      });
+    };
+    renderAdCar();
+
+    const stepAdCar = (d) => {
+      adIdx = (adIdx + d + n) % n;
+      renderAdCar();
+    };
+    const adPrev = adCar.querySelector('[data-adcar-prev]');
+    const adNext = adCar.querySelector('[data-adcar-next]');
+    if (adPrev) adPrev.addEventListener('click', () => stepAdCar(-1));
+    if (adNext) adNext.addEventListener('click', () => stepAdCar(1));
+
+    adCar.addEventListener('click', (e) => {
+      const card = e.target.closest('[data-adcar-card]');
+      if (!card || card.classList.contains('is-active')) return; // front card → lightbox
+      e.stopPropagation();
+      e.preventDefault();
+      adIdx = cards.indexOf(card);
+      renderAdCar();
+    }, true);
+
+    adCar.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); stepAdCar(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); stepAdCar(1); }
+    });
+  }
+
   // -------- Exit-intent modal --------
+  // Safety-net restatement of the free-video offer for leavers. One direct
+  // claim link (signup?offer=freevideo grants the trial at account creation) —
+  // no email capture: the offer is already all over the page, so the shortest
+  // path wins.
   const exitModal = document.querySelector('[data-exit-modal]');
   const exitClose = document.querySelector('[data-exit-close]');
-  const exitForm = document.querySelector('[data-exit-form]');
-  const exitSuccess = document.querySelector('[data-exit-success]');
 
   if (exitModal) {
     const STORAGE_KEY = 'sonder-exit-modal-shown';
@@ -431,10 +479,10 @@
       exitModal.hidden = false;
       document.body.style.overflow = 'hidden';
       requestAnimationFrame(() => exitModal.classList.add('is-open'));
-      // Focus the first field for keyboard users
+      // Focus the claim CTA for keyboard users
       setTimeout(() => {
-        const firstInput = exitModal.querySelector('input');
-        if (firstInput) firstInput.focus();
+        const claim = exitModal.querySelector('[data-exit-claim]');
+        if (claim) claim.focus();
       }, 400);
     };
 
@@ -472,50 +520,6 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !exitModal.hidden) closeExit();
     });
-
-    // Free-video trial lead capture → sonder-server /api/trial/request.
-    // The server stores the lead and emails a single-use claim link to
-    // app.yousonder.com/signup?trial=<token>. Best-effort: we always show the
-    // success state so the UX stays smooth even if the network hiccups.
-    var SONDER_API_BASE = 'https://sonder-server-production.up.railway.app';
-    if (exitForm) {
-      exitForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = exitForm.querySelector('#exit-name');
-        const email = exitForm.querySelector('#exit-email');
-        if (!email.value || !email.checkValidity()) { email.focus(); return; }
-        if (!name.value) { name.focus(); return; }
-
-        // Fire-and-forget the lead capture; don't block the success animation.
-        fetch(SONDER_API_BASE + '/api/trial/request', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            firstName: name.value,
-            email: email.value,
-            source: 'exit_modal'
-          })
-        }).catch((err) => console.warn('[Sonder] trial request failed', err));
-
-        // Fade form out, fade success in
-        exitForm.style.transition = 'opacity 250ms ease, transform 250ms ease';
-        exitForm.style.opacity = '0';
-        exitForm.style.transform = 'translateY(-6px)';
-        setTimeout(() => {
-          exitForm.style.display = 'none';
-          if (exitSuccess) {
-            exitSuccess.hidden = false;
-            exitSuccess.style.opacity = '0';
-            exitSuccess.style.transform = 'translateY(8px)';
-            requestAnimationFrame(() => {
-              exitSuccess.style.transition = 'opacity 400ms ease, transform 400ms ease';
-              exitSuccess.style.opacity = '1';
-              exitSuccess.style.transform = 'translateY(0)';
-            });
-          }
-        }, 260);
-      });
-    }
   }
 
   // -------- Smooth scroll for anchor links (respect reduced motion) --------
