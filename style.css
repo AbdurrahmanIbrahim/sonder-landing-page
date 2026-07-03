@@ -544,12 +544,14 @@ button { font: inherit; cursor: pointer; }
 
 @media (max-width: 720px) {
   .hero { height: 260vh; }
-  /* The offer badge + CTA note make the overlay taller — anchor lower and drop
-     the note (the announcement bar already carries it) so the headline clears
-     the nav. */
+  /* The offer badge + trust pill + CTA note make the overlay taller — anchor
+     lower, drop the note (the announcement bar already carries it) and the
+     audience eyebrow (wraps to two lines here; the trust pill's numbers and
+     the offer badge earn the space instead) so the headline clears the nav. */
   .hero-overlay { justify-content: flex-end; padding-bottom: 8vh; }
   .hero-headline { max-width: 12ch; }
   .hero-cta-note { display: none; }
+  .hero-meta { display: none; }
   .hero-sub { margin: 14px 0 12px; }
   .hero-offer-badge { margin-bottom: 12px; }
 }
