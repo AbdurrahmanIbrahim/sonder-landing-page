@@ -229,7 +229,7 @@
   const revealTargets = document.querySelectorAll(
     '.section-head, .stats-grid, .stats-caption, .steps, .quotes, .receipts, ' +
     '.founder-grid, .pricing-head, .tiers, .extras, .trust-row, .pricing-close, ' +
-    '.final-inner, .marquee, .showcase-rail'
+    '.final-inner, .marquee, .showcase-rail, .adfilm-frame, .adfilm-note'
   );
 
   if ('IntersectionObserver' in window) {

@@ -1069,6 +1069,110 @@ button { font: inherit; cursor: pointer; }
   font-weight: 500;
 }
 
+/* Placeholder tile (awaiting a Wistia id + still): branded gradient stand-in.
+   Swap in by replacing .reel-frame--ph contents with the usual <img> + chip. */
+.reel-frame--ph {
+  background:
+    radial-gradient(90% 70% at 50% 20%, rgba(183, 148, 244, 0.16), transparent 65%),
+    linear-gradient(165deg, var(--plum-mid) 0%, var(--plum-deep) 55%, var(--plum-black) 100%);
+}
+.reel-type {
+  position: absolute;
+  top: 14px; left: 14px;
+  z-index: 2;
+  display: inline-flex; align-items: center;
+  padding: 5px 10px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--violet);
+  background: rgba(10, 6, 19, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 999px;
+  border: 1px solid rgba(183, 148, 244, 0.3);
+}
+.reel-ph-note {
+  position: absolute;
+  left: 0; right: 0; bottom: 20px;
+  z-index: 2;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--quiet);
+  text-align: center;
+}
+
+/* ====== AMAZON ADS — single 16:9 showpiece ====== */
+.adfilm {
+  position: relative;
+  padding: clamp(80px, 12vh, 140px) var(--gutter);
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.adfilm-frame {
+  max-width: 920px;
+  margin: 48px auto 0;
+}
+.adfilm-poster {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid var(--paper-08);
+  background:
+    radial-gradient(80% 90% at 70% 15%, rgba(183, 148, 244, 0.14), transparent 60%),
+    radial-gradient(70% 80% at 20% 90%, rgba(127, 255, 212, 0.08), transparent 55%),
+    linear-gradient(160deg, var(--plum-mid) 0%, var(--plum-deep) 50%, var(--plum-black) 100%);
+  box-shadow:
+    0 30px 70px -25px rgba(0,0,0,0.7),
+    0 0 60px -12px rgba(74, 47, 110, 0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: transform var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease);
+}
+.adfilm-poster:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 38px 80px -25px rgba(0,0,0,0.8),
+    0 0 80px -12px rgba(127, 255, 212, 0.25),
+    inset 0 0 0 1px rgba(127, 255, 212, 0.15);
+}
+.adfilm-poster img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.adfilm-poster .reel-play {
+  width: 72px; height: 72px;
+}
+.adfilm-poster .reel-play svg { width: 28px; height: 28px; margin-left: 4px; }
+.adfilm-poster:hover .reel-play { transform: translate(-50%, -50%) scale(1.08); }
+.adfilm-ph-note {
+  position: absolute;
+  left: 0; right: 0; bottom: 24px;
+  z-index: 2;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--quiet);
+  text-align: center;
+}
+.adfilm-note {
+  text-align: center;
+  margin: 32px var(--gutter) 0;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--quiet);
+}
+
 .showcase-note {
   text-align: center;
   margin: 36px var(--gutter) 0;
