@@ -552,4 +552,20 @@
       resizeTO = setTimeout(() => ScrollTrigger.refresh(), 200);
     });
   }
+
+  // -------- FAQ accordion --------
+  document.querySelectorAll('.faq-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      var answerId = btn.getAttribute('aria-controls');
+      var answer = document.getElementById(answerId);
+      if (expanded) {
+        btn.setAttribute('aria-expanded', 'false');
+        answer.hidden = true;
+      } else {
+        btn.setAttribute('aria-expanded', 'true');
+        answer.hidden = false;
+      }
+    });
+  });
 })();
