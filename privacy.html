@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <!-- Rewardful affiliate tracking (must load on every page, both sites) -->
+  <script>(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');</script>
+  <script async src="https://r.wdfl.co/rw.js" data-rewardful="f9c7cd"></script>
+  <meta name="theme-color" content="#0A0613" />
+  <title>Privacy Policy — Sonder</title>
+  <meta name="description" content="How Sonder collects, uses, protects, and lets you control your data — including your uploaded book content." />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/sonder-logo-plum-flat.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@900&display=swap" />
+
+  <link rel="stylesheet" href="style.css?v=3" />
+
+  <!--
+    This page is a static port of the canonical policy in the app
+    (sonder-app/src/pages/Privacy.tsx), which stays the source of truth
+    (it is registered as the Login-with-Amazon consent notice). Keep the
+    two copies in sync whenever the data flow or subprocessor list changes.
+  -->
+  <style>
+    .legal-page {
+      position: relative;
+      min-height: 100vh;
+      background: var(--plum-black);
+    }
+    /* soft plum halo, echoing the app's privacy page */
+    .legal-halo {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(60% 40% at 50% -5%, rgba(74, 47, 110, 0.45), transparent 70%),
+        radial-gradient(40% 30% at 85% 10%, rgba(127, 255, 212, 0.06), transparent 70%);
+      z-index: 0;
+    }
+    .legal {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: clamp(84px, 11vw, 148px) var(--gutter) clamp(72px, 9vw, 120px);
+    }
+    .legal-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: clamp(40px, 6vw, 64px);
+      text-decoration: none;
+    }
+    .legal h1 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      font-size: clamp(32px, 5vw, 44px);
+      line-height: 1.05;
+      color: var(--paper);
+      margin: 0 0 10px;
+    }
+    .legal .legal-eff {
+      font-size: 13px;
+      color: var(--paper-25);
+      margin: 0 0 clamp(40px, 6vw, 64px);
+    }
+    .legal .legal-intro {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--paper-60);
+      margin: 0 0 clamp(40px, 6vw, 64px);
+      padding-bottom: clamp(32px, 5vw, 48px);
+      border-bottom: 1px solid var(--paper-08);
+    }
+    .legal section { margin-bottom: clamp(32px, 4.5vw, 44px); }
+    .legal h2 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      font-size: 18px;
+      color: var(--paper);
+      margin: 0 0 12px;
+    }
+    .legal p {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--quiet);
+      margin: 0 0 12px;
+    }
+    .legal ul {
+      list-style: disc;
+      padding-left: 22px;
+      margin: 0 0 12px;
+    }
+    .legal li {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--quiet);
+      margin-bottom: 7px;
+    }
+    .legal strong.hl { color: var(--paper); font-weight: 600; }
+    .legal a {
+      color: var(--aurora);
+      text-decoration: none;
+      transition: opacity var(--t-fast) var(--ease);
+    }
+    .legal a:hover { text-decoration: underline; }
+    .legal-back {
+      margin-top: clamp(40px, 6vw, 56px);
+      padding-top: clamp(24px, 4vw, 32px);
+      border-top: 1px solid var(--paper-08);
+    }
+    .legal-back a {
+      font-size: 14px;
+      color: var(--quiet);
+      text-decoration: none;
+      transition: color var(--t-fast) var(--ease);
+    }
+    .legal-back a:hover { color: var(--aurora); }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav" data-nav>
+    <a href="/" class="wordmark" aria-label="Sonder home">
+      <span class="wordmark-text">Sonder</span>
+      <svg class="wordmark-dot" viewBox="0 0 12 12" aria-hidden="true">
+        <path d="M 2 1.5 L 10 6 L 2 10.5 Z" fill="#7FFFD4" />
+      </svg>
+    </a>
+    <nav class="nav-actions" aria-label="Primary">
+      <a href="/#how" class="nav-link">How it works</a>
+      <a href="/#proof" class="nav-link">Proof</a>
+      <a href="/#showcase" class="nav-link">Showcase</a>
+      <a href="/#about" class="nav-link">Who we are</a>
+      <a href="/#pricing" class="nav-link">Pricing</a>
+      <a href="https://app.yousonder.com/login" class="nav-link nav-link--quiet">Sign in</a>
+      <a href="https://app.yousonder.com/signup?offer=freevideo" class="nav-cta">Go viral <span aria-hidden="true">→</span></a>
+    </nav>
+  </header>
+
+  <main id="main" class="legal-page">
+    <div class="legal-halo" aria-hidden="true"></div>
+
+    <article class="legal">
+      <a href="/" class="legal-lockup wordmark wordmark--small" aria-label="Sonder home">
+        <span class="wordmark-text">Sonder</span>
+        <svg class="wordmark-dot" viewBox="0 0 12 12" aria-hidden="true">
+          <path d="M 2 1.5 L 10 6 L 2 10.5 Z" fill="#7FFFD4" />
+        </svg>
+      </a>
+
+      <h1>Privacy Policy</h1>
+      <p class="legal-eff">Effective July 1, 2026</p>
+
+      <p class="legal-intro">
+        Your book is your life's work, and we treat it that way. This policy explains, in plain terms,
+        what we collect, how your uploaded manuscript is used and protected, and the control you keep
+        over it. The short version: your book is used only to make the videos you ask for, it is never
+        sold, and it is never used to train AI models.
+      </p>
+
+      <section>
+        <h2>1. Who we are</h2>
+        <p>
+          Sonder (&ldquo;Sonder,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;)
+          provides software that turns a non-fiction book into short-form marketing videos and helps
+          authors promote and sell their books. This policy explains what personal information we
+          collect, how we use it, and the rights you have over it.
+        </p>
+        <p>
+          Sonder is operated by Levity Pty Ltd. Levity Pty Ltd is the data controller for the
+          information described here, with a registered business address at 12/40 Flood Street,
+          Bondi NSW 2026, Australia. If you have any questions about this policy or your data, contact
+          us at <a href="mailto:hello@yousonder.com">hello@yousonder.com</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>2. Information we collect</h2>
+        <p>We collect the following categories of information:</p>
+        <ul>
+          <li><strong class="hl">Account information</strong> — your name and email address, created when you sign up (managed through our authentication provider).</li>
+          <li><strong class="hl">Billing information</strong> — your subscription plan and payment status. Card details are entered and stored by our payment processor; we never see or store your full card number.</li>
+          <li><strong class="hl">Book and content you upload</strong> — the book text, cover, and any details you provide so we can generate your videos. See the dedicated section below.</li>
+          <li><strong class="hl">Generated media</strong> — the videos, scripts, voiceovers, and images we produce for you.</li>
+          <li><strong class="hl">Advertising data</strong> — if you connect your Amazon Advertising account, the campaign, performance, and sales data we retrieve on your behalf (see section 6).</li>
+          <li><strong class="hl">Usage and device data</strong> — basic technical information (such as log data and how you interact with the app) used to operate and improve the service.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>3. Your book content</h2>
+        <p>
+          When you upload a book or manuscript, we use it
+          <strong class="hl">solely to generate the videos, scripts, and marketing assets you ask for</strong>.
+          Your book remains yours.
+        </p>
+        <ul>
+          <li>We do not claim ownership of your book or the content you upload.</li>
+          <li>We do not sell your book content or share it except with the service providers needed to produce your videos (see section 5).</li>
+          <li>We do not use your uploaded book to train our own or any third-party AI models.</li>
+          <li>We process your text through established third-party AI providers' commercial <strong class="hl">APIs</strong>. Under those commercial API terms, content submitted via the API is <strong class="hl">not</strong> used to train AI models — this is a core reason we build on commercial APIs rather than consumer AI tools.</li>
+          <li>Your uploaded manuscript is stored privately, scoped to your account, and protected by encryption in transit and at rest. It is not placed in any public location.</li>
+          <li>You can delete your book content, and request that we delete our copies, at any time (see section 13).</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>4. How we use your information</h2>
+        <p>We use your information to:</p>
+        <ul>
+          <li>generate your videos and related marketing assets;</li>
+          <li>operate, maintain, and improve the service;</li>
+          <li>process payments and manage your subscription;</li>
+          <li>provide support and respond to your requests;</li>
+          <li>send you transactional messages (for example, when a video is ready, password resets, and billing notices);</li>
+          <li>with your consent or as permitted by law, send you marketing emails (see section 7);</li>
+          <li>where you connect it, retrieve and analyze your advertising performance to help you improve your campaigns (see section 6);</li>
+          <li>detect, prevent, and address fraud, abuse, and security issues.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>5. Service providers we share data with</h2>
+        <p>
+          We share personal information only with service providers who process it on our behalf to run
+          Sonder, under contract and only for the purposes described in this policy. These fall into a
+          few categories of function:
+        </p>
+        <ul>
+          <li>cloud hosting, databases, and authentication;</li>
+          <li>payment processing;</li>
+          <li>AI text, voice, image, and video generation used to produce your videos;</li>
+          <li>video processing, captioning, and delivery.</li>
+        </ul>
+        <p>
+          Each provider acts under contract and only for the purposes above. We choose established
+          providers whose terms protect your content — including, for the AI providers, commitments
+          <strong class="hl">not</strong> to use content submitted through their commercial APIs to
+          train AI models. We may change the specific providers we use as our service evolves, and we
+          do not sell your personal information.
+        </p>
+      </section>
+
+      <section>
+        <h2>6. Connecting your Amazon Advertising account</h2>
+        <p>
+          If you choose to connect your Amazon Advertising account, you authorize us through Amazon's
+          secure sign-in (Login with Amazon / OAuth). We never see your Amazon password.
+        </p>
+        <ul>
+          <li>We access your advertising data through the Amazon Ads API — such as your campaigns, keywords, spend, and attributed sales — to show you performance and provide optimization recommendations.</li>
+          <li>We store the access credentials (tokens) securely and use them only to provide these features to you.</li>
+          <li>We handle data obtained from Amazon in accordance with Amazon's applicable data-protection and acceptable-use requirements, and we do not use it for any purpose other than serving you.</li>
+          <li>You can disconnect your Amazon account at any time, which revokes our access going forward. You may also ask us to delete the advertising data we hold.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>7. Marketing emails</h2>
+        <p>
+          With your consent or where otherwise permitted, we send marketing emails from
+          hello@yousonder.com. Every marketing email includes an unsubscribe link, and you can opt out
+          at any time — this does not affect transactional emails you need to use the service
+          (video-ready notifications, password resets, and billing). You can also opt out by emailing
+          us.
+        </p>
+      </section>
+
+      <section>
+        <h2>8. Cookies and advertising</h2>
+        <p>
+          We use cookies and similar technologies that are necessary to run the app (for example,
+          keeping you signed in). We do not currently run third-party analytics.
+        </p>
+        <p>
+          We expect to begin advertising Sonder on third-party platforms such as Meta (Facebook and
+          Instagram). When we do, we may use their advertising and measurement technologies (such as
+          the Meta Pixel) to understand the performance of our ads. We will update this policy before
+          those technologies are active, and where required we will ask for your consent.
+        </p>
+      </section>
+
+      <section>
+        <h2>9. International data transfers</h2>
+        <p>
+          We and our service providers may process your information in countries other than the one you
+          live in, including the United States. Where we transfer personal data internationally, we
+          rely on appropriate safeguards (such as standard contractual clauses) as required by
+          applicable law.
+        </p>
+      </section>
+
+      <section>
+        <h2>10. Data retention</h2>
+        <p>
+          We keep your information for as long as your account is active or as needed to provide the
+          service, comply with our legal obligations, resolve disputes, and enforce our agreements.
+          When information is no longer needed, we delete or anonymize it. You can request deletion at
+          any time (see section 13).
+        </p>
+      </section>
+
+      <section>
+        <h2>11. Security</h2>
+        <p>
+          We use technical and organizational measures designed to protect your information, including
+          encryption in transit and at rest, access controls that scope your content to your own
+          account, and reputable infrastructure providers. No method of transmission or storage is
+          completely secure, but we work to protect your data and to respond promptly to any incident.
+        </p>
+      </section>
+
+      <section>
+        <h2>12. Children</h2>
+        <p>
+          Sonder is not directed to children, and we do not knowingly collect personal information from
+          anyone under the age of 16. If you believe a child has provided us with personal information,
+          contact us and we will delete it.
+        </p>
+      </section>
+
+      <section>
+        <h2>13. Your rights</h2>
+        <p>
+          Depending on where you live, you may have rights over your personal information, including the
+          right to access, correct, delete, export, or restrict the use of your data, and to object to
+          certain processing. If you are in the EEA or UK, our legal bases for processing are performing
+          our contract with you, your consent, our legitimate interests in operating and improving
+          Sonder, and compliance with legal obligations.
+        </p>
+        <p>
+          If you are a California resident, you have rights under the CCPA/CPRA, including the right to
+          know, delete, and correct your information, and to opt out of the &ldquo;sale&rdquo; or
+          &ldquo;sharing&rdquo; of personal information — which we do not do.
+        </p>
+        <p>
+          To exercise any of these rights, email us at
+          <a href="mailto:hello@yousonder.com">hello@yousonder.com</a>. You also have the right to
+          complain to your local data protection authority.
+        </p>
+      </section>
+
+      <section>
+        <h2>14. Changes to this policy</h2>
+        <p>
+          We may update this policy from time to time. When we make material changes, we will update the
+          effective date above and, where appropriate, notify you. Your continued use of Sonder after an
+          update means you accept the revised policy.
+        </p>
+      </section>
+
+      <section>
+        <h2>15. Contact us</h2>
+        <p>
+          Questions, requests, or concerns? Email
+          <a href="mailto:hello@yousonder.com">hello@yousonder.com</a>.
+        </p>
+      </section>
+
+      <div class="legal-back">
+        <a href="/">← Back to Sonder</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="foot" aria-label="Footer">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="/" class="wordmark wordmark--small">
+          <span class="wordmark-text">Sonder</span>
+          <svg class="wordmark-dot" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="M 2 1.5 L 10 6 L 2 10.5 Z" fill="#7FFFD4" />
+          </svg>
+        </a>
+        <p class="foot-tag">Every book deserves to go viral.</p>
+      </div>
+
+      <nav class="foot-col" aria-label="Product">
+        <h4>Product</h4>
+        <a href="/#how">How it works</a>
+        <a href="/#showcase">Showcase</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="https://app.yousonder.com/login">Sign in</a>
+      </nav>
+
+      <nav class="foot-col" aria-label="Company">
+        <h4>Company</h4>
+        <a href="/#about">About</a>
+        <a href="/#proof">Proof</a>
+        <a href="mailto:hello@yousonder.com">Contact</a>
+      </nav>
+
+      <nav class="foot-col" aria-label="Legal">
+        <h4>Legal</h4>
+        <a href="#">Terms</a>
+        <a href="/privacy.html">Privacy</a>
+      </nav>
+    </div>
+
+    <div class="foot-base">
+      <span>© 2026 Sonder</span>
+      <span>Built quietly in the UK.</span>
+    </div>
+  </footer>
+</body>
+</html>
