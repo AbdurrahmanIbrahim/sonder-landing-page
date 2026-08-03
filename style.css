@@ -1648,10 +1648,13 @@ button { font: inherit; cursor: pointer; }
 }
 .formats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 14px;
 }
-@media (max-width: 860px) {
+@media (max-width: 1080px) {
+  .formats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
   .formats-grid { grid-template-columns: 1fr; }
 }
 .format-card {
@@ -2556,6 +2559,13 @@ button { font: inherit; cursor: pointer; }
   max-width: 1080px;
   aspect-ratio: 1.5434 / 1;
 }
+/* TikTok's embed pins itself to a 325px column and renders ~725px tall (header,
+   picture, control bar, caption). Measured, not guessed: any wider and the post
+   sits in white gutters, any taller and there's dead white space under it. */
+.lightbox-inner.is-tall {
+  max-width: 325px;
+  aspect-ratio: 325 / 725;
+}
 .lightbox.is-open .lightbox-inner {
   transform: translateY(0) scale(1);
 }
@@ -2589,9 +2599,35 @@ button { font: inherit; cursor: pointer; }
   text-transform: uppercase;
   color: var(--paper-60);
 }
+/* Escape hatch for the embedded example: some browsers and privacy extensions
+   block third-party iframes, and then the frame is just a blank box. Lives on
+   the overlay, NOT on .lightbox-inner — that box is overflow:hidden, so a child
+   positioned outside it gets clipped (which is why .lightbox-meta above never
+   actually shows on desktop). */
+.lightbox-link {
+  position: absolute;
+  left: 50%; bottom: 26px;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: rgba(10, 6, 19, 0.82);
+  border: 1px solid var(--paper-14);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--aurora);
+  text-decoration: none;
+  transition: border-color var(--t-fast) var(--ease);
+}
+.lightbox-link:hover { border-color: var(--aurora-30); }
 @media (max-width: 720px) {
   .lightbox-close { top: 14px; right: 14px; background: rgba(10, 6, 19, 0.7); }
   .lightbox-meta { display: none; }
+  .lightbox-link { bottom: 16px; letter-spacing: 0.1em; }
 }
 
 /* ====== EXIT-INTENT MODAL ====== */
