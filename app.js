@@ -339,9 +339,11 @@
     if (!lightboxInner) return;
     const players = lightboxInner.querySelectorAll('wistia-player, video, iframe, .lightbox-placeholder');
     players.forEach(p => p.remove());
+    // The "View on TikTok" fallback hangs off the overlay, not the inner box.
+    if (lightbox) lightbox.querySelectorAll('.lightbox-link').forEach(l => l.remove());
   };
 
-  const openLightbox = (wistiaId, title, aspect) => {
+  const openLightbox = (wistiaId, title, aspect, embedUrl, linkUrl) => {
     if (!lightbox || !lightboxInner) return;
 
     clearLightboxPlayer();
@@ -350,8 +352,27 @@
     const aspectNum = parseFloat(aspect) || 0.5625;
     const isLandscape = aspectNum > 1;
     lightboxInner.classList.toggle('is-landscape', isLandscape);
+    // The slideshow example is a TikTok embed, which needs a taller box than a
+    // reel. Toggled (not just added) so a Wistia card opened afterwards resets.
+    lightboxInner.classList.toggle('is-tall', !!embedUrl);
 
-    if (wistiaId) {
+    if (embedUrl) {
+      const frame = document.createElement('iframe');
+      frame.src = embedUrl;
+      frame.title = title || 'Example';
+      frame.setAttribute('allow', 'encrypted-media; clipboard-write; fullscreen');
+      frame.setAttribute('allowfullscreen', '');
+      lightboxInner.appendChild(frame);
+      if (linkUrl) {
+        const link = document.createElement('a');
+        link.className = 'lightbox-link';
+        link.href = linkUrl;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.innerHTML = 'View on TikTok <span aria-hidden="true">↗</span>';
+        lightbox.appendChild(link);
+      }
+    } else if (wistiaId) {
       const player = document.createElement('wistia-player');
       player.setAttribute('media-id', wistiaId);
       player.setAttribute('aspect', String(aspectNum));
@@ -392,7 +413,9 @@
       const wistiaId = btn.dataset.wistiaId || '';
       const title = btn.dataset.reelTitle || '';
       const aspect = btn.dataset.reelAspect || '';
-      openLightbox(wistiaId, title, aspect);
+      const embedUrl = btn.dataset.embedUrl || '';
+      const linkUrl = btn.dataset.reelLink || '';
+      openLightbox(wistiaId, title, aspect, embedUrl, linkUrl);
     });
   });
 
