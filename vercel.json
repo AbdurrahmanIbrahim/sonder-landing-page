@@ -16,6 +16,7 @@
     { "source": "/videos/:path*", "destination": "https://app.yousonder.com/videos/:path*", "permanent": true },
     { "source": "/academy", "destination": "https://app.yousonder.com/academy", "permanent": true },
     { "source": "/academy/:path*", "destination": "https://app.yousonder.com/academy/:path*", "permanent": true },
-    { "source": "/settings", "destination": "https://app.yousonder.com/settings", "permanent": true }
+    { "source": "/settings", "destination": "https://app.yousonder.com/settings", "permanent": true },
+    { "source": "/enterprise-packages", "destination": "https://app.yousonder.com/enterprise-packages", "permanent": false }
   ]
 }
