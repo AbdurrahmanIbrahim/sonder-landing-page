@@ -1434,9 +1434,18 @@ button { font: inherit; cursor: pointer; }
   border: 1px solid var(--paper-14);
   isolation: isolate;
 }
+/* flex + nowrap so both halves are ALWAYS equal width whatever the pill says.
+   .pricing-toggle-thumb is `width: calc(50% - 4px)` and slides with
+   translateX(100%), i.e. it assumes a perfect 50/50 split. Without this the
+   buttons size to their content, so "Annual -17%" is already wider than
+   "Monthly" and the thumb sits slightly off under one of them. It gets
+   visibly wrong the moment a pill carries longer copy — which the Light card
+   now does ("1 month free", because Light annual saves 1 month, not 2). */
 .pricing-toggle-btn {
   position: relative;
   z-index: 1;
+  flex: 1 1 0;
+  white-space: nowrap;
   padding: 9px 22px;
   border: none;
   background: transparent;
