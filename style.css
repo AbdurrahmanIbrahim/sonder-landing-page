@@ -2021,29 +2021,33 @@ button { font: inherit; cursor: pointer; }
 .extras-cards {
   display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
 }
+/* Deliberately NOT button-like. These carried a hard border, a filled panel
+   and a "Best value" badge, which together read as a set of options you pick
+   between — a customer clicked them and reported them as "a non-clickable
+   link". They are a price list, and credits cannot be bought without an
+   account anyway, so the affordance is dialled down to match: no panel fill,
+   a hairline left rule instead of a full border, and the real action moved to
+   .extras-link in the copy column. */
 .extras-card {
-  position: relative;
-  padding: 16px 18px;
-  border: 1px solid var(--paper-08);
-  border-radius: 14px;
-  background: rgba(10, 6, 19, 0.6);
+  padding: 4px 0 4px 16px;
+  border-left: 1px solid var(--paper-08);
+  background: none;
   display: flex; flex-direction: column; gap: 4px;
 }
 .extras-card--best {
-  border-color: var(--aurora-30);
-  background: linear-gradient(180deg, rgba(127, 255, 212, 0.06) 0%, rgba(10, 6, 19, 0.6) 100%);
+  border-left-color: var(--aurora-30);
+  background: none;
 }
-.extras-tag {
-  position: absolute;
-  top: -10px; right: 12px;
-  padding: 3px 9px;
-  font-size: 9px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--plum-black);
-  background: var(--aurora);
-  border-radius: 999px;
+/* "Best value" is inline text on the per-credit line, not a floating pill.
+   The pill was absolutely positioned over the old card's top border; once the
+   border went, putting it in flow pushed the 15-pack's price onto a different
+   baseline from the 5-pack's, and at mobile widths the cards are ~150px so the
+   badge and the pack name wrapped against each other. The app's pricing page
+   already renders it this way ("$6.60 per credit · best value"), so the two
+   pricing surfaces now agree. */
+.extras-best {
+  color: var(--aurora);
+  font-weight: 600;
 }
 .extras-name {
   font-size: 10px;
@@ -2062,6 +2066,27 @@ button { font: inherit; cursor: pointer; }
 .extras-per {
   font-size: 12px;
   color: var(--aurora);
+}
+.extras-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--aurora);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 160ms ease, gap 160ms ease;
+}
+.extras-link:hover {
+  border-bottom-color: var(--aurora-30);
+  gap: 9px;
+}
+.extras-link:focus-visible {
+  outline: 2px solid var(--aurora);
+  outline-offset: 3px;
+  border-radius: 3px;
 }
 
 /* trust row */

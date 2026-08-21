@@ -973,6 +973,16 @@
         <div class="extras-copy">
           <span class="eyebrow eyebrow--small">Need a burst? Buy extras anytime.</span>
           <p>Top up your account on any plan. Extras never expire — use them whenever you need.</p>
+          <!-- These price cards are reference, not a checkout: credits attach to
+               an account, so a visitor without one cannot buy a pack. A customer
+               did read the cards as buttons and reported them as "a non-clickable
+               link", so the intent is real and needs somewhere to go. It goes here,
+               to the one place that can actually sell a pack, rather than into a
+               login wall on the cards themselves. -->
+          <a class="extras-link" href="https://app.yousonder.com/settings?tab=billing&amp;credits=open">
+            Already a member? Top up in your account
+            <span aria-hidden="true">&rarr;</span>
+          </a>
         </div>
         <div class="extras-cards">
           <div class="extras-card">
@@ -981,10 +991,9 @@
             <span class="extras-per">$7.00 / credit</span>
           </div>
           <div class="extras-card extras-card--best">
-            <span class="extras-tag">Best value</span>
             <span class="extras-name">15-pack</span>
             <span class="extras-total">$99</span>
-            <span class="extras-per">$6.60 / credit</span>
+            <span class="extras-per">$6.60 / credit<span class="extras-best"> · best value</span></span>
           </div>
         </div>
       </div>
