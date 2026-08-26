@@ -38,6 +38,45 @@
     .catch(function () { updateHoursBadge(FALLBACK_VIDEOS); });
 })();
 
+// -------- Hero tile engagement counters --------
+// ILLUSTRATIVE FIGURES, NOT MEASURED DATA. The starting numbers are seeded into
+// the markup (data-tick on each .rx-stat b) and drift upward here so the wall
+// reads as live. They are not the real engagement of the specific customer
+// videos shown behind them. Mike's explicit call, 26 Aug 2026, after the point
+// was raised. To make them real, replace the data-tick values in index.html
+// with actual per-video numbers — nothing here needs to change.
+(function () {
+  var nodes = document.querySelectorAll('.hero-tile-bar b[data-tick]');
+  if (!nodes.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var vals = [];
+  for (var i = 0; i < nodes.length; i++) vals[i] = parseInt(nodes[i].getAttribute('data-tick'), 10) || 0;
+
+  function fmt(n) {
+    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+    if (n >= 10000)   return (n / 1000).toFixed(1) + 'K';
+    if (n >= 1000)    return n.toLocaleString();
+    return String(n);
+  }
+
+  // Update a rotating slice each tick rather than all 108 at once: every number
+  // still moves about once a second, at a fraction of the layout cost.
+  var cursor = 0;
+  var SLICE = 14;
+  setInterval(function () {
+    if (document.hidden) return;
+    for (var k = 0; k < SLICE; k++) {
+      var idx = cursor % nodes.length;
+      cursor++;
+      if (Math.random() < 0.72) {
+        vals[idx] += Math.max(1, Math.round(vals[idx] * 0.00016 * (0.4 + Math.random())));
+        nodes[idx].textContent = fmt(vals[idx]);
+      }
+    }
+  }, 110);
+})();
+
 (function () {
   'use strict';
 

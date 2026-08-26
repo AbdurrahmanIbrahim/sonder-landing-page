@@ -302,6 +302,10 @@ button { font: inherit; cursor: pointer; }
    of drift on every cycle and the seam would creep. */
 .hero-tile {
   position: relative;
+  /* Tile width doesn't track viewport width — columns drop at 900px and 640px,
+     so a 640px phone has WIDER tiles than an 1100px laptop. Query the tile
+     itself and the numbers hide exactly when they stop fitting. */
+  container-type: inline-size;
   margin: 0 0 var(--wall-gap);
   aspect-ratio: 9 / 16;
   border-radius: 12px;
@@ -321,10 +325,36 @@ button { font: inherit; cursor: pointer; }
 .hero-tile-bar {
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  display: flex; align-items: center;
-  gap: clamp(8px, 1vw, 14px);
-  padding: clamp(20px, 3vw, 34px) clamp(9px, 1vw, 14px) clamp(8px, 0.9vw, 12px);
-  background: linear-gradient(180deg, transparent, rgba(10, 6, 19, 0.88));
+  display: flex; align-items: center; justify-content: space-between;
+  gap: clamp(4px, 0.5vw, 9px);
+  padding: clamp(20px, 3vw, 34px) clamp(7px, 0.8vw, 12px) clamp(8px, 0.9vw, 12px);
+  background: linear-gradient(180deg, transparent, rgba(10, 6, 19, 0.9));
+}
+.rx-stat {
+  display: inline-flex; align-items: center;
+  gap: clamp(3px, 0.35vw, 6px);
+  min-width: 0;
+}
+.rx-stat b {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: clamp(9px, 0.76vw, 12px);
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.74);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(10, 6, 19, 0.95);
+}
+/* The number flashes with the glyph the reaction lands on. */
+.rx-stat.is-live b {
+  animation: num-flash 4.2s ease-in-out infinite;
+  animation-delay: var(--tile-d, 0s);
+}
+@keyframes num-flash {
+  0%, 72%, 100% { color: rgba(255, 255, 255, 0.74); }
+  78%           { color: var(--aurora); }
+  86%           { color: rgba(255, 255, 255, 0.98); }
 }
 .hero-tile-bar .ic {
   width: clamp(12px, 1.2vw, 17px);
@@ -692,9 +722,23 @@ button { font: inherit; cursor: pointer; }
   .hero-stream .rx { --rise: 17vh; }
 }
 
+@container (max-width: 205px) {
+  .rx-stat:nth-child(3) b { display: none; }
+}
+@container (max-width: 148px) {
+  .rx-stat b { display: none; }
+}
+
 @media (max-width: 900px) {
-  .hero-wall { --wall-gap: 10px; opacity: 0.32; }
+  .hero-wall { --wall-gap: 10px; opacity: 0.58; }
   .hero-col--5, .hero-col--6 { display: none; }
+}
+
+@media (max-width: 520px) {
+  /* Two columns rather than three: ~187px tiles instead of ~129px, which is
+     the difference between the counts being legible and being mush. */
+  .hero-col--3 { display: none; }
+  .hero-tile-bar { justify-content: flex-start; gap: clamp(8px, 2.4vw, 14px); }
 }
 
 @media (max-width: 640px) {
