@@ -176,6 +176,49 @@
     document.querySelectorAll('.receipts-grid').forEach(el => revealObs.observe(el));
   }
 
+
+  // -------- Slideshow deck switcher --------
+  // The three cards under the deck swap which carousel is showing. Only one
+  // deck is in the DOM; its five <img> sources are rewritten from the JSON
+  // block. Rendering all three and hiding two fetched all 15 images on load —
+  // `hidden` does not stop a lazy image loading.
+  const deckPicks = document.querySelectorAll('[data-deck-pick]');
+  const deckDataEl = document.querySelector('[data-deck-data]');
+  if (deckPicks.length && deckDataEl) {
+    let decks = null;
+    try { decks = JSON.parse(deckDataEl.textContent); } catch (e) { decks = null; }
+    const imgs = document.querySelectorAll('[data-deck-track] .deck-slide img');
+    const credEl = document.querySelector('[data-deck-cred]');
+
+    // Warm the other decks once the page is idle, so the first tap is instant
+    // without costing anything on the critical path.
+    const warm = () => {
+      if (!decks) return;
+      Object.keys(decks).forEach((k) => decks[k].slides.forEach((sl) => { new Image().src = sl.src; }));
+    };
+    if ('requestIdleCallback' in window) requestIdleCallback(warm, { timeout: 4000 });
+    else window.addEventListener('load', () => setTimeout(warm, 2000));
+
+    deckPicks.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.getAttribute('data-deck-pick');
+        const deck = decks && decks[key];
+        if (!deck) return;
+        deck.slides.forEach((sl, i) => {
+          if (!imgs[i]) return;
+          imgs[i].src = sl.src;
+          imgs[i].alt = sl.alt;
+        });
+        if (credEl) credEl.textContent = deck.title;
+        deckPicks.forEach((other) => {
+          const on = other === btn;
+          other.classList.toggle('is-active', on);
+          other.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+      });
+    });
+  }
+
   // -------- Pricing monthly/annual toggle --------
   // One section-level toggle plus a compact toggle in each tier card. They all
   // drive a single billing cycle and stay in lockstep.
