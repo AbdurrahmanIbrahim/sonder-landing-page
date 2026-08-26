@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@900&display=swap" />
 
-  <link rel="stylesheet" href="style.css?v=18" />
+  <link rel="stylesheet" href="style.css?v=19" />
 
   <script src="https://fast.wistia.com/player.js" async></script>
 </head>
@@ -63,6 +63,7 @@
       <a href="#how" class="nav-link">How it works</a>
       <a href="#proof" class="nav-link">Proof</a>
       <a href="#showcase" class="nav-link">Showcase</a>
+      <a href="#slideshows" class="nav-link">Slideshows</a>
       <a href="#about" class="nav-link">Who we are</a>
       <a href="#pricing" class="nav-link">Pricing</a>
       <a href="https://app.yousonder.com/login" class="nav-link nav-link--quiet">Sign in</a>
@@ -259,6 +260,17 @@
 
       <div class="showcase-rail" data-showcase-rail>
         <div class="showcase-track">
+          <figure class="reel">
+            <div class="reel-frame reel-frame--static">
+              <img src="assets/stills/toybox.jpg" alt="Sonder video &mdash; Toy Box style" loading="lazy" />
+              <span class="reel-style">Toy Box</span>
+              <span class="reel-new">New</span>
+            </div>
+            <figcaption>
+              <span class="reel-title">Toy Box</span>
+              <span class="reel-genre">Newest style</span>
+            </figcaption>
+          </figure>
           <figure class="reel">
             <button class="reel-frame" type="button" data-reel data-wistia-id="le99g7qi7f" data-reel-title="The chapter that changed everything" aria-label="Play: The chapter that changed everything">
               <img src="assets/stills/european-cartoon.jpg" alt="Sonder video &mdash; The chapter that changed everything" loading="lazy" />
@@ -523,6 +535,64 @@
       </div>
 
       <p class="showcase-note">These are some of the videos that are generating millions of views.</p>
+    </section>
+
+    <!-- ============== SLIDESHOWS — the swipe format ============== -->
+    <section id="slideshows" class="slides" aria-labelledby="slides-headline">
+      <header class="section-head">
+        <span class="eyebrow">Slideshows</span>
+        <h2 id="slides-headline" class="section-title">
+          The format eating<br><em>the feed right now.</em>
+        </h2>
+        <p class="section-lede">
+          Four or five pictures your reader swipes through &mdash; with your book as the reveal at the end.
+          Native to TikTok and Instagram, and it costs the same as a Quick Reaction Hook Video.
+        </p>
+      </header>
+
+      <!-- The swipe deck. Real slides from a real Sonder slideshow; the last
+           card is the mechanic that sells it — their story pulls the reader
+           through, and the book is the payoff. -->
+      <div class="deck">
+        <ol class="deck-track">
+          <li class="deck-slide" style="--i:0">
+            <span class="deck-num">1</span>
+            <img src="assets/slides/slide-1.jpg" alt="Slideshow slide 1 &mdash; she kept paying for a house she never went back to" loading="lazy" width="440" height="550" />
+          </li>
+          <li class="deck-slide" style="--i:1">
+            <span class="deck-num">2</span>
+            <img src="assets/slides/slide-2.jpg" alt="Slideshow slide 2 &mdash; everything inside was left exactly as it was" loading="lazy" width="440" height="550" />
+          </li>
+          <li class="deck-slide" style="--i:2">
+            <span class="deck-num">3</span>
+            <img src="assets/slides/slide-3.jpg" alt="Slideshow slide 3 &mdash; and one envelope was never opened" loading="lazy" width="440" height="550" />
+          </li>
+          <li class="deck-slide" style="--i:3">
+            <span class="deck-num">4</span>
+            <img src="assets/slides/slide-4.jpg" alt="Slideshow slide 4 &mdash; she had written it to herself, forty years earlier" loading="lazy" width="440" height="550" />
+          </li>
+          <li class="deck-slide deck-slide--reveal" style="--i:4">
+            <span class="deck-num">5</span>
+            <span class="deck-reveal">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h11a3 3 0 0 1 3 3v15a1 1 0 0 1-1 1H6a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v11.17A2.98 2.98 0 0 1 6 16h12V5a1 1 0 0 0-1-1H6zm0 14a1 1 0 1 0 0 2h12v-2H6z"/></svg>
+              <strong>Your book</strong>
+              <em>The reveal</em>
+            </span>
+          </li>
+        </ol>
+        <p class="deck-hint">
+          <span>Swipe through</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </p>
+      </div>
+
+      <div class="slides-actions">
+        <a href="https://app.yousonder.com/signup?offer=freevideo" class="cta cta-primary">
+          <span>Make one free</span>
+          <span class="cta-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <button type="button" class="cta cta-secondary" data-reel data-embed-url="https://www.tiktok.com/embed/v2/7668614791489015062" data-reel-link="https://www.tiktok.com/@bloomlit_press/photo/7668614791489015062" data-reel-title="Swipeable slideshow — a real one" data-reel-aspect="0.44">Watch a real one</button>
+      </div>
     </section>
 
     <!-- ============== AMAZON ADS — the premium 16:9 showpiece ============== -->

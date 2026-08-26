@@ -1314,6 +1314,164 @@ button { font: inherit; cursor: pointer; }
   text-align: center;
 }
 
+
+/* ====== SLIDESHOWS — the swipe deck ======
+   Its own section rather than a card in the pricing formats grid: the format
+   is the thing people are chasing right now, and it was buried 900 lines down.
+   Sits between Showcase and Amazon Ads deliberately — the Amazon lede reads
+   "Social videos earn you the audience. This one closes the sale", which only
+   works if the social formats come first. */
+.slides {
+  position: relative;
+  padding: clamp(90px, 13vh, 150px) 0 clamp(72px, 10vh, 120px);
+  overflow: hidden;
+}
+.slides .section-head { padding-inline: var(--gutter); }
+
+.slides::before {
+  content: "";
+  position: absolute;
+  top: 12%; left: 50%;
+  width: min(1100px, 92vw); height: 460px;
+  transform: translateX(-50%);
+  background: radial-gradient(50% 50% at 50% 50%, rgba(74, 47, 110, 0.30) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.deck { margin-top: clamp(38px, 6vh, 62px); }
+
+.deck-track {
+  list-style: none;
+  margin: 0;
+  padding-inline: var(--gutter);
+  display: flex;
+  gap: clamp(11px, 1.3vw, 20px);
+  /* Scrollable so the deck is genuinely swipeable on a phone — the same
+     gesture the format itself is built around. "safe center" so the first
+     card stays reachable once the row overflows. */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  justify-content: safe center;
+}
+.deck-track::-webkit-scrollbar { display: none; }
+
+.deck-slide {
+  position: relative;
+  flex: 0 0 clamp(148px, 15.4vw, 222px);
+  aspect-ratio: 4 / 5;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--paper-08);
+  background: var(--plum-deep);
+  scroll-snap-align: center;
+  box-shadow: 0 22px 52px -24px rgba(0, 0, 0, 0.75),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  transition: transform var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease);
+}
+.deck-slide:hover { transform: translateY(-6px); }
+.deck-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.deck-num {
+  position: absolute; top: 10px; left: 10px; z-index: 2;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 21px; height: 21px; padding: 0 6px;
+  border-radius: 999px;
+  background: rgba(10, 6, 19, 0.68);
+  border: 1px solid var(--paper-14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 11px; font-weight: 700; color: var(--paper);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The last card is the pitch: their story pulls the reader through, the book
+   is the payoff. Deliberately not a fake cover — it is the customer's slot. */
+.deck-slide--reveal {
+  display: grid; place-items: center;
+  border-color: var(--aurora-30);
+  background: linear-gradient(180deg, rgba(127, 255, 212, 0.09) 0%, rgba(26, 15, 46, 0.55) 100%);
+  box-shadow: 0 0 44px rgba(127, 255, 212, 0.15),
+              inset 0 0 0 1px rgba(127, 255, 212, 0.12);
+}
+.deck-reveal {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center; padding: 18px;
+}
+.deck-reveal svg {
+  width: 32px; height: 32px;
+  fill: var(--aurora);
+  filter: drop-shadow(0 0 12px var(--aurora-50));
+}
+.deck-reveal strong {
+  font-family: var(--font-display);
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 700; letter-spacing: -0.02em;
+  color: var(--paper);
+}
+.deck-reveal em {
+  font-style: normal;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--aurora);
+}
+
+.deck-hint {
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  margin: 22px 0 0;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--paper-60);
+}
+.deck-hint svg {
+  width: 16px; height: 16px;
+  color: var(--aurora);
+  animation: deck-nudge 2.6s ease-in-out infinite;
+}
+@keyframes deck-nudge {
+  0%, 100% { transform: translateX(0); opacity: 0.55; }
+  50%      { transform: translateX(5px); opacity: 1; }
+}
+
+.slides-actions {
+  display: flex; align-items: center; justify-content: center;
+  gap: 18px; flex-wrap: wrap;
+  margin-top: clamp(34px, 5vh, 52px);
+  padding-inline: var(--gutter);
+}
+.slides-actions .cta-secondary {
+  border: none; background: none; cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+@media (max-width: 640px) {
+  .deck-track { justify-content: flex-start; }
+  .slides-actions { flex-direction: column; gap: 12px; }
+  .slides-actions .cta-primary { width: 100%; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck-hint svg { animation: none; }
+}
+
+/* "New" flag on a showcase card — Toy Box for now. */
+.reel-new {
+  position: absolute;
+  top: 14px; right: 14px;
+  z-index: 2;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--plum-black);
+  background: var(--aurora);
+  box-shadow: 0 0 16px var(--aurora-30);
+}
+/* A reel card with no video behind it yet: keep the frame, drop the pointer. */
+.reel-frame--static { cursor: default; }
+
 /* ====== AMAZON ADS — single 16:9 showpiece ====== */
 .adfilm {
   position: relative;

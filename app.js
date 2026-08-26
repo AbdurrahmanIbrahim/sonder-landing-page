@@ -149,7 +149,7 @@
   const revealTargets = document.querySelectorAll(
     '.section-head, .stats-grid, .stats-caption, .steps, .quotes, .receipts, ' +
     '.founder-grid, .pricing-head, .tiers, .extras, .trust-row, .pricing-close, ' +
-    '.final-inner, .marquee, .showcase-rail, .adcarousel, .adfilm-note'
+    '.final-inner, .marquee, .showcase-rail, .adcarousel, .adfilm-note, .deck, .slides-actions'
   );
 
   if ('IntersectionObserver' in window) {
