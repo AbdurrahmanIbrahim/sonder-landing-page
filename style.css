@@ -245,68 +245,166 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* ====== HERO — scroll-driven canvas video ====== */
+/* ====== HERO — the wall of proof ======
+   A drifting mosaic of real Sonder videos behind a centred claim.
+   Pure CSS transforms — no canvas, no scroll listener, no frame sequence. */
+
 .hero {
   position: relative;
-  height: 320vh; /* scroll real-estate that drives the canvas */
-}
-.hero-pin {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  min-height: 700px;
-  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
+  isolation: isolate;
   background: var(--plum-black);
+  padding: calc(var(--announce-h) + 96px) var(--gutter) 104px;
 }
 
-.hero-canvas {
+/* ---- the wall ---- */
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.hero-wall {
+  --wall-gap: clamp(10px, 1.2vw, 18px);
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0 -2%;
+  z-index: 0;
+  display: flex;
+  gap: var(--wall-gap);
+  overflow: hidden;
+  opacity: 0.85;
+  pointer-events: none;
+  -webkit-mask: linear-gradient(180deg, transparent 0%, #000 15%, #000 74%, transparent 100%) center / 100% 100% no-repeat;
+          mask: linear-gradient(180deg, transparent 0%, #000 15%, #000 74%, transparent 100%) center / 100% 100% no-repeat;
+}
+.hero-col { flex: 1 1 0; min-width: 0; }
+
+.hero-track {
+  will-change: transform;
+  animation-name: wall-up;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.hero-track--down { animation-name: wall-down; }
+
+/* Stagger the columns so no two tiles line up across the wall. */
+.hero-col--2 .hero-track { margin-top: -60px; }
+.hero-col--3 .hero-track { margin-top: -142px; }
+.hero-col--4 .hero-track { margin-top: -28px; }
+.hero-col--5 .hero-track { margin-top: -104px; }
+.hero-col--6 .hero-track { margin-top: -186px; }
+
+@keyframes wall-up   { from { transform: translate3d(0, 0, 0);    } to { transform: translate3d(0, -50%, 0); } }
+@keyframes wall-down { from { transform: translate3d(0, -50%, 0); } to { transform: translate3d(0, 0, 0);    } }
+
+/* Margin — not flex gap — sets the rhythm. Each track holds its tiles twice,
+   so it loops seamlessly at exactly -50%; a flex gap would leave half a gap
+   of drift on every cycle and the seam would creep. */
+.hero-tile {
+  position: relative;
+  margin: 0 0 var(--wall-gap);
+  aspect-ratio: 9 / 16;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--paper-08);
+  background: var(--plum-deep);
+}
+.hero-tile img {
+  width: 100%; height: 100%;
   object-fit: cover;
   display: block;
-  z-index: 1;
+  /* Enough blur that on-screen captions read as texture, not as competing
+     copy — you can still tell these are real vertical videos of real people. */
+  opacity: 0.72;
+  filter: blur(3px) saturate(0.9);
+}
+.hero-tile-bar {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center;
+  gap: clamp(8px, 1vw, 14px);
+  padding: clamp(20px, 3vw, 34px) clamp(9px, 1vw, 14px) clamp(8px, 0.9vw, 12px);
+  background: linear-gradient(180deg, transparent, rgba(10, 6, 19, 0.88));
+}
+.hero-tile-bar .ic {
+  width: clamp(10px, 1.05vw, 15px);
+  height: clamp(10px, 1.05vw, 15px);
+  flex: none;
+  fill: rgba(255, 255, 255, 0.6);
+  filter: drop-shadow(0 1px 3px rgba(10, 6, 19, 0.9));
 }
 
-.hero-tint {
-  position: absolute;
-  inset: 0;
+/* ---- readability layers ---- */
+.hero-scrim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
-    radial-gradient(80% 100% at 20% 50%, rgba(10, 6, 19, 0.72) 0%, rgba(10, 6, 19, 0.25) 60%, transparent 100%),
-    linear-gradient(180deg, rgba(10, 6, 19, 0.4) 0%, transparent 30%, transparent 65%, rgba(10, 6, 19, 0.9) 100%);
-  z-index: 2;
-  pointer-events: none;
+    radial-gradient(ellipse clamp(420px, 60vw, 860px) clamp(260px, 40vh, 470px) at 50% 50%,
+      rgba(10, 6, 19, 0.93) 0%, rgba(10, 6, 19, 0.66) 54%, rgba(10, 6, 19, 0.18) 85%, transparent 100%),
+    linear-gradient(180deg, rgba(10, 6, 19, 0.92) 0%, rgba(10, 6, 19, 0.44) 20%, rgba(10, 6, 19, 0.44) 64%, rgba(10, 6, 19, 0.95) 100%);
 }
 .hero-vignette {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(140% 100% at 50% 50%, transparent 40%, rgba(10, 6, 19, 0.55) 90%);
-  z-index: 3;
-  pointer-events: none;
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: radial-gradient(140% 100% at 50% 50%, transparent 34%, rgba(10, 6, 19, 0.6) 92%);
   mix-blend-mode: multiply;
 }
 
-.hero-overlay {
+/* ---- floating engagement badges (real numbers — see #proof receipts) ---- */
+.hero-signals { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.hero-badge {
   position: absolute;
-  inset: 0;
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 11px 19px;
+  border-radius: 999px;
+  border: 1px solid var(--aurora-30);
+  background: rgba(10, 6, 19, 0.62);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: 0 12px 44px rgba(10, 6, 19, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  font-size: 13px;
+  color: var(--paper-60);
+  white-space: nowrap;
+  animation: badge-float 7s ease-in-out infinite;
+}
+.hero-badge .ic {
+  width: 14px; height: 14px; flex: none;
+  fill: var(--aurora);
+  filter: drop-shadow(0 0 6px var(--aurora-50));
+}
+.hero-badge-num {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  font-variant-numeric: tabular-nums;
+}
+.hero-badge--views   { top: calc(var(--announce-h) + 104px); left:  clamp(20px, 6vw, 120px); }
+.hero-badge--likes   { top: calc(var(--announce-h) + 132px); right: clamp(20px, 5vw, 96px);  animation-delay: -2.4s; }
+.hero-badge--follows { bottom: 104px;                        left:  clamp(28px, 7vw, 150px); animation-delay: -4.8s; }
+
+@keyframes badge-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-9px); }
+}
+
+/* ---- the claim ---- */
+.hero-inner {
+  position: relative;
   z-index: 4;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0 var(--gutter);
-  max-width: var(--max);
-  margin: 0 auto;
-  left: 0; right: 0;
+  align-items: center;
+  text-align: center;
 }
 
 .hero-trust-chips {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
-  margin-bottom: 8px;
+  margin-top: 28px;
 }
 .hero-trust-chip {
   display: inline-flex; align-items: center; gap: 8px;
@@ -334,51 +432,15 @@ button { font: inherit; cursor: pointer; }
   50%       { text-shadow: 0 0 18px rgba(127,255,212,0.9), 0 0 32px rgba(127,255,212,0.4); }
 }
 
-.hero-meta {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 12px; font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--paper);
-  padding: 7px 14px 7px 12px;
-  border: 1px solid var(--paper-14);
-  border-radius: 999px;
-  background: rgba(10, 6, 19, 0.55);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.meta-dot {
-  display: inline-block; width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--aurora);
-  box-shadow: 0 0 10px var(--aurora-50);
-  animation: pulse 4s ease-in-out infinite;
-}
-.meta-spark {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  background: rgba(127, 255, 212, 0.10);
-  border: 1px solid var(--aurora-30);
-  filter: drop-shadow(0 0 8px var(--aurora-50));
-  animation: pulse 4s ease-in-out infinite;
-}
-.meta-spark svg { width: 8px; height: 8px; }
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.55; }
-}
-
 .hero-headline {
-  margin: 22px 0 0;
+  margin: 0;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(56px, 8vw, 124px);
-  line-height: 0.94;
-  letter-spacing: -0.045em;
+  font-size: clamp(42px, 6.6vw, 96px);
+  line-height: 0.98;
+  letter-spacing: -0.042em;
   color: var(--paper);
-  max-width: 14ch;
-  text-shadow: 0 4px 40px rgba(10, 6, 19, 0.7);
+  text-shadow: 0 6px 48px rgba(10, 6, 19, 0.85);
 }
 .hero-headline .line { display: block; }
 .hero-headline em {
@@ -399,53 +461,28 @@ button { font: inherit; cursor: pointer; }
 }
 
 .hero-sub {
-  margin: 22px 0 14px;
+  margin: 22px 0 0;
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(20px, 1.8vw, 24px);
-  letter-spacing: -0.02em;
-  color: var(--paper);
-  max-width: 42ch;
-  text-shadow: 0 2px 20px rgba(10, 6, 19, 0.6);
-}
-.hero-offer-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  margin: 0 0 18px;
-  padding: 7px 16px;
-  border-radius: 999px;
-  background: var(--aurora-15);
-  border: 1px solid var(--aurora-30);
-  color: var(--aurora);
-  font-size: 13px; font-weight: 600;
-  letter-spacing: 0.01em;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-.hero-offer-badge svg {
-  width: 9px; height: 9px;
-  filter: drop-shadow(0 0 4px var(--aurora-50));
-}
-
-.hero-body {
-  margin: 0;
-  font-size: clamp(15px, 1.2vw, 17px);
-  line-height: 1.55;
+  font-weight: 400;
+  font-size: clamp(16px, 1.5vw, 21px);
+  line-height: 1.5;
+  letter-spacing: -0.012em;
   color: var(--paper-60);
-  max-width: 48ch;
-  text-shadow: 0 2px 16px rgba(10, 6, 19, 0.5);
+  max-width: 46ch;
+  text-shadow: 0 2px 22px rgba(10, 6, 19, 0.7);
 }
 
 .hero-ctas {
-  display: flex; gap: 18px; align-items: center;
-  margin-top: 36px;
+  display: flex; gap: 20px; align-items: center; justify-content: center;
+  margin-top: 34px;
   flex-wrap: wrap;
 }
 
 .hero-cta-note {
-  margin: 14px 0 0;
+  margin: 16px 0 0;
   font-size: 13px;
   color: var(--quiet);
-  text-shadow: 0 2px 16px rgba(10, 6, 19, 0.5);
+  text-shadow: 0 2px 16px rgba(10, 6, 19, 0.6);
 }
 
 .cta {
@@ -498,7 +535,7 @@ button { font: inherit; cursor: pointer; }
 .hero-caption {
   position: absolute;
   right: var(--gutter);
-  bottom: 110px;
+  bottom: 96px;
   z-index: 4;
   font-size: 11px;
   font-family: var(--font-sans);
@@ -516,7 +553,7 @@ button { font: inherit; cursor: pointer; }
   transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
 }
 .hero-caption::before {
-  content: "▶";
+  content: "\25B6";
   margin-right: 8px;
   font-size: 8px;
   color: var(--aurora);
@@ -531,7 +568,7 @@ button { font: inherit; cursor: pointer; }
 
 .hero-scroll-hint {
   position: absolute;
-  left: 50%; bottom: 36px;
+  left: 50%; bottom: 30px;
   transform: translateX(-50%);
   z-index: 4;
   display: flex; flex-direction: column; align-items: center; gap: 12px;
@@ -554,18 +591,34 @@ button { font: inherit; cursor: pointer; }
   50%      { transform: scaleY(1);   opacity: 1; }
 }
 
-@media (max-width: 720px) {
-  .hero { height: 260vh; }
-  /* The offer badge + trust pill + CTA note make the overlay taller — anchor
-     lower, drop the note (the announcement bar already carries it) and the
-     audience eyebrow (wraps to two lines here; the trust pill's numbers and
-     the offer badge earn the space instead) so the headline clears the nav. */
-  .hero-overlay { justify-content: flex-end; padding-bottom: 8vh; }
-  .hero-headline { max-width: 12ch; }
+/* The badges live in the margins either side of the claim. Below this width
+   there are no margins left, so they'd cross the copy — drop them and let the
+   trust chips carry the numbers. */
+@media (max-width: 1024px) {
+  .hero-signals { display: none; }
+}
+
+@media (max-width: 900px) {
+  .hero-wall { --wall-gap: 10px; opacity: 0.32; }
+  .hero-col--5, .hero-col--6 { display: none; }
+}
+
+@media (max-width: 640px) {
+  .hero { padding: calc(var(--announce-h) + 84px) var(--gutter) 88px; }
+  .hero-col--4 { display: none; }
+  .hero-headline { font-size: clamp(34px, 9.4vw, 54px); letter-spacing: -0.035em; }
+  .hero-sub { font-size: 15.5px; margin-top: 16px; }
+  .hero-ctas { margin-top: 26px; gap: 12px; width: 100%; flex-direction: column; }
+  .hero-ctas .cta-primary { width: 100%; justify-content: center; }
+  /* The announcement bar already carries the no-card promise. */
   .hero-cta-note { display: none; }
-  .hero-meta { display: none; }
-  .hero-sub { margin: 14px 0 12px; }
-  .hero-offer-badge { margin-bottom: 12px; }
+  .hero-trust-chips { margin-top: 20px; }
+}
+
+/* The wall and the badges are decoration; hold them still when asked. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-track { animation: none; transform: translate3d(0, -25%, 0); }
+  .hero-badge { animation: none; }
 }
 
 /* ====== STATS ====== */
@@ -2286,7 +2339,8 @@ button { font: inherit; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   .marquee-track, .showcase-track { animation: none; }
   .final-halo { animation: none; }
-  .meta-dot { animation: none; }
+  .hero-track, .hero-badge { animation: none; }
+  .hero-trust-num { animation: none; }
   .hero-scroll-hint i { animation: none; }
   .reveal, .reveal-stagger > * { opacity: 1; transform: none; }
 }
