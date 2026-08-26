@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0A0613" />
-<title>Sonder — the video studio that has already read your book</title>
+<title>Sonder — turn your book into the videos that sell it</title>
 <meta name="description" content="Upload your book once. Sonder writes, voices and edits it into 30 videos a month. Your first one is free, no card." />
 <meta name="robots" content="noindex, nofollow" />
 
@@ -63,14 +63,41 @@
      commitment: someone who types their own title has already pictured the
      video. It is also the single number that matters downstream — 58% of
      signups never upload a book, and this carries the title into signup. */
+  /* Progressive opt-in. Each step costs slightly more than the last: a tap
+     (free) reveals the email field (small, and they have already said yes),
+     which reveals the qualifying tap (free), which leads to the upload (big).
+     A bare email field under a headline is a cost before any reward. */
+  .optin-step{display:none}
+  .optin-step.is-on{display:block;animation:stepIn 260ms var(--ease)}
+  @keyframes stepIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .step-q{margin:0 0 12px;font-size:19px;font-weight:600;letter-spacing:-.02em;text-align:center}
+  .choices{display:grid;gap:10px}
+  .choice{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;
+    padding:17px 20px;border-radius:14px;cursor:pointer;font-family:inherit;
+    font-size:16px;font-weight:600;color:var(--paper);
+    background:rgba(255,255,255,.03);border:1px solid var(--line);
+    transition:border-color 160ms var(--ease),background 160ms var(--ease),transform 160ms var(--ease)}
+  .choice:hover{border-color:rgba(127,255,212,.45);background:rgba(127,255,212,.06);transform:translateY(-1px)}
+  .choice:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+  .choice small{display:block;font-weight:400;font-size:13px;color:var(--quiet);margin-top:2px}
+  .outcome{padding:20px;border-radius:14px;border:1px solid rgba(127,255,212,.28);
+    background:rgba(127,255,212,.05);text-align:center}
+  .outcome b{display:block;font-size:17px;margin-bottom:6px}
+  .outcome p{font-size:14.5px;color:var(--quiet);margin:0 0 14px}
+  .backlink{display:block;width:100%;margin-top:10px;background:none;border:0;cursor:pointer;
+    font-family:inherit;font-size:13px;color:var(--quiet);text-decoration:underline}
+
   form.optin{display:grid;gap:10px;margin:0 0 12px}
   form.optin label{font-size:13.5px;color:var(--quiet)}
-  form.optin input{
+  form.optin input,
+  [data-email-form] input{
     width:100%;padding:16px 18px;border-radius:13px;font-size:16px;font-family:inherit;
     color:var(--paper);background:rgba(255,255,255,.04);border:1px solid var(--line);
   }
-  form.optin input::placeholder{color:#5f637a}
-  form.optin input:focus{outline:2px solid var(--mint);outline-offset:1px;border-color:transparent}
+  form.optin input::placeholder,
+  [data-email-form] input::placeholder{color:#5f637a}
+  form.optin input:focus,
+  [data-email-form] input:focus{outline:2px solid var(--mint);outline-offset:1px;border-color:transparent}
 
   .cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
     padding:19px 24px;border-radius:999px;border:0;cursor:pointer;
@@ -181,19 +208,70 @@
   <!-- ============ HOOK ============ -->
   <div>
     <span class="prehead">For authors who already have a book</span>
-    <h1>The video studio that has already <em class="hl">read your book</em>.</h1>
+    <h1>Turn your book into the videos that <em class="hl">sell it</em>.</h1>
     <p class="sub">
-      Upload it once. Sonder writes the script from your actual pages, voices it, edits it,
-      and hands you up to 30 videos a month &mdash; for less than a freelancer charges for one.
+      Upload the book once. Sonder writes the script from your actual pages, voices it, edits
+      it, and hands you up to 30 videos a month &mdash; for less than a freelancer charges for one.
     </p>
 
-    <form class="optin" data-optin>
-      <label for="book">What&rsquo;s your book called?</label>
-      <input id="book" name="book" type="text" autocomplete="off"
-             placeholder="e.g. Last Man Out" maxlength="120" />
-      <button class="cta" type="submit">Make my first video free <span aria-hidden="true">&rarr;</span></button>
-    </form>
-    <p class="note">No card. Takes about four minutes. You keep the video either way.</p>
+    <div class="optin-block" data-optin-block>
+
+      <!-- Step 1: the offer. A tap, not a field. Costs nothing to say yes to. -->
+      <div class="optin-step is-on" data-step="1">
+        <button class="cta" type="button" data-go="2">Make my first video free <span aria-hidden="true">&rarr;</span></button>
+        <p class="note">No card. About four minutes. You keep the video either way.</p>
+      </div>
+
+      <!-- Step 2: the email. They have already said yes, so this is finishing
+           something rather than starting it. Framed as delivery, not a list. -->
+      <div class="optin-step" data-step="2">
+        <form data-email-form>
+          <p class="step-q">Where should we send it?</p>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email"
+                 required placeholder="you@example.com" />
+          <button class="cta" type="submit" style="margin-top:10px">Continue <span aria-hidden="true">&rarr;</span></button>
+        </form>
+        <p class="note">We use this to send your video and set up your account. Nothing else.</p>
+      </div>
+
+      <!-- Step 3: qualify. Two taps, no typing. -->
+      <div class="optin-step" data-step="3">
+        <p class="step-q">Have you got a book?</p>
+        <div class="choices">
+          <button class="choice" type="button" data-book="yes">
+            <span>Yes &mdash; it&rsquo;s written<small>Manuscript ready to upload</small></span>
+          </button>
+          <button class="choice" type="button" data-book="no">
+            <span>Not yet<small>Still writing, or just planning it</small></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4a: has a book. Straight on, with the email carried so they never type it twice. -->
+      <div class="optin-step" data-step="4yes">
+        <div class="outcome">
+          <b>Perfect. Let&rsquo;s make it.</b>
+          <p>Next you&rsquo;ll upload the manuscript and your cover image &mdash; that&rsquo;s the whole setup.</p>
+          <a class="cta" href="https://app.yousonder.com/signup?offer=freevideo" data-signup-yes>
+            Upload my book <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+        <button class="backlink" type="button" data-go="3">Back</button>
+      </div>
+
+      <!-- 4b: no book. Honest, and we keep the email. -->
+      <div class="optin-step" data-step="4no">
+        <div class="outcome">
+          <b>Then Sonder isn&rsquo;t ready for you yet &mdash; and that&rsquo;s worth saying plainly.</b>
+          <p>Every video is built from the words in your finished manuscript. Without one there&rsquo;s nothing for it to read. Finish the book and we&rsquo;ll be here.</p>
+          <a class="cta" href="https://app.yousonder.com/signup?offer=freevideo" data-signup-no>
+            Set up my account anyway <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+        <button class="backlink" type="button" data-go="3">Back</button>
+      </div>
+
+    </div>
 
     <figure class="demo">
       <video src="../assets/lp/demo.mp4" poster="../assets/lp/demo-poster.jpg"
@@ -344,12 +422,9 @@
   <!-- ============ CLOSE ============ -->
   <section>
     <h2>Find out what your book looks like as a video.</h2>
-    <form class="optin" data-optin>
-      <label for="book2">What&rsquo;s your book called?</label>
-      <input id="book2" name="book" type="text" autocomplete="off"
-             placeholder="e.g. Last Man Out" maxlength="120" />
-      <button class="cta" type="submit">Make my first video free <span aria-hidden="true">&rarr;</span></button>
-    </form>
+    <button class="cta" type="button" data-scroll-top>
+      Make my first video free <span aria-hidden="true">&rarr;</span>
+    </button>
     <p class="note">No card. About four minutes. You keep it either way.</p>
 
     <p class="ps">
@@ -366,40 +441,83 @@
 </div>
 
 <script>
-  /* Send the opt-in to signup, carrying the book title and any ad params.
-     The title is optional on purpose — an empty field must never block a
-     conversion. It rides along so signup can prefill it, which is aimed
-     squarely at the 58% of signups who never upload a book at all. */
-  (function () {
-    var CARRY = ['fbclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
-    var here; try { here = new URL(window.location.href); } catch (e) { here = null; }
+(function () {
+  var block = document.querySelector('[data-optin-block]');
+  if (!block) return;
 
-    document.querySelectorAll('form[data-optin]').forEach(function (form) {
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var url = new URL('https://app.yousonder.com/signup');
-        url.searchParams.set('offer', 'freevideo');
+  var steps = block.querySelectorAll('.optin-step');
+  var state = { email: '', book: '' };
 
-        var title = (form.querySelector('input[name="book"]') || {}).value || '';
-        title = title.trim();
-        if (title) url.searchParams.set('book', title.slice(0, 120));
+  /* Ad params ride all the way through to signup. Attribution has to survive
+     the hop to app.yousonder.com — see app.js on the main site. */
+  var CARRY = ['fbclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+  var here; try { here = new URL(window.location.href); } catch (e) { here = null; }
 
-        if (here) {
-          CARRY.forEach(function (k) {
-            var v = here.searchParams.get(k);
-            if (v) url.searchParams.set(k, v);
-          });
-        }
+  function track(name, params) {
+    if (typeof window.fbq === 'function') window.fbq('track', name, params || {});
+  }
 
-        /* Tell Meta they took the step, before the browser leaves the page. */
-        if (typeof window.fbq === 'function') {
-          window.fbq('track', 'InitiateCheckout', { content_name: 'free_video_optin' });
-        }
+  function show(id) {
+    steps.forEach(function (el) { el.classList.toggle('is-on', el.getAttribute('data-step') === id); });
+    var next = block.querySelector('[data-step="' + id + '"]');
+    var field = next && next.querySelector('input');
+    if (field) field.focus({ preventScroll: true });
+  }
 
-        window.location.href = url.toString();
-      });
+  /* Build the signup URL. The email rides along because Signup.tsx already
+     prefills from ?email= — so they never type it twice, and the account they
+     land on is the one we just promised to send the video to. */
+  function signupUrl(hasBook) {
+    var u = new URL('https://app.yousonder.com/signup');
+    u.searchParams.set('offer', 'freevideo');
+    if (state.email) u.searchParams.set('email', state.email);
+    u.searchParams.set('book_ready', hasBook);
+    if (here) CARRY.forEach(function (k) {
+      var v = here.searchParams.get(k);
+      if (v) u.searchParams.set(k, v);
     });
-  })();
+    return u.toString();
+  }
+
+  /* Step 1 -> 2: they said yes to the offer. Free, so it should be. */
+  block.querySelectorAll('[data-go]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var to = btn.getAttribute('data-go');
+      if (to === '2') track('ViewContent', { content_name: 'offer_tapped' });
+      show(to);
+    });
+  });
+
+  /* Step 2 -> 3: the email. This is the lead. */
+  var form = block.querySelector('[data-email-form]');
+  if (form) form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var input = form.querySelector('input[name="email"]');
+    if (!input || !input.checkValidity()) { input && input.reportValidity(); return; }
+    state.email = input.value.trim();
+    track('Lead', { content_name: 'email_captured' });
+    show('3');
+  });
+
+  /* Step 3 -> outcome. The qualifying tap, and the most useful number on the
+     page: what share of paid traffic even has a book to work from. */
+  block.querySelectorAll('[data-book]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      state.book = btn.getAttribute('data-book');
+      track('ViewContent', { content_name: 'book_' + state.book });
+      var link = block.querySelector(state.book === 'yes' ? '[data-signup-yes]' : '[data-signup-no]');
+      if (link) link.href = signupUrl(state.book);
+      show(state.book === 'yes' ? '4yes' : '4no');
+    });
+  });
+
+  /* The last CTA runs the same flow rather than duplicating it. */
+  var top = document.querySelector('[data-scroll-top]');
+  if (top) top.addEventListener('click', function () {
+    block.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    show('1');
+  });
+})();
 </script>
 </body>
 </html>
