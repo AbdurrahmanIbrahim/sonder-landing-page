@@ -231,7 +231,7 @@
                  required placeholder="you@example.com" />
           <button class="cta" type="submit" style="margin-top:10px">Continue <span aria-hidden="true">&rarr;</span></button>
         </form>
-        <p class="note">We use this to send your video and set up your account. Nothing else.</p>
+        <p class="note">We use this to send your video and set up your account. No spam, and you can unsubscribe any time.</p>
       </div>
 
       <!-- Step 3: qualify. Two taps, no typing. -->
@@ -457,6 +457,32 @@
     if (typeof window.fbq === 'function') window.fbq('track', name, params || {});
   }
 
+  /* Store the lead the moment we have it, rather than only carrying it into the
+     signup form. Roughly half of paid traffic never finishes signing up, and
+     until this existed every one of those emails — and the ad click that paid
+     for it — was simply lost.
+
+     Fire-and-forget on purpose: if the API is down or slow, the visitor still
+     moves through the funnel. A lost lead must never become a lost signup. */
+  var API = 'https://sonder-server-production.up.railway.app';
+  function saveLead(extra) {
+    if (!state.email) return;
+    var payload = { email: state.email, source: 'meta_funnel' };
+    if (here) CARRY.forEach(function (k) {
+      var v = here.searchParams.get(k);
+      if (v) payload[k] = v;
+    });
+    Object.keys(extra || {}).forEach(function (k) { payload[k] = extra[k]; });
+    try {
+      fetch(API + '/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true   /* survives the navigation away to signup */
+      }).catch(function () { /* never surface this to the visitor */ });
+    } catch (e) { /* ignore */ }
+  }
+
   function show(id) {
     steps.forEach(function (el) { el.classList.toggle('is-on', el.getAttribute('data-step') === id); });
     var next = block.querySelector('[data-step="' + id + '"]');
@@ -495,6 +521,7 @@
     var input = form.querySelector('input[name="email"]');
     if (!input || !input.checkValidity()) { input && input.reportValidity(); return; }
     state.email = input.value.trim();
+    saveLead();                                   /* stored before they can bounce */
     track('Lead', { content_name: 'email_captured' });
     show('3');
   });
@@ -504,6 +531,7 @@
   block.querySelectorAll('[data-book]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       state.book = btn.getAttribute('data-book');
+      saveLead({ book_ready: state.book });       /* updates the row, does not duplicate it */
       track('ViewContent', { content_name: 'book_' + state.book });
       var link = block.querySelector(state.book === 'yes' ? '[data-signup-yes]' : '[data-signup-no]');
       if (link) link.href = signupUrl(state.book);
