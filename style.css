@@ -1334,7 +1334,12 @@ button { font: inherit; cursor: pointer; }
   padding: clamp(90px, 13vh, 150px) 0 clamp(72px, 10vh, 120px);
   overflow: hidden;
 }
-.slides .section-head { padding-inline: var(--gutter); }
+/* This headline is deliberately long and dramatic ("What's blowing up on social
+   media right now."). Give the head room to hold it on two lines at the house
+   type scale rather than shrinking the type — but keep the lede narrow, since
+   1100px of running text is far past a comfortable measure. */
+.slides .section-head { padding-inline: var(--gutter); max-width: 1120px; }
+.slides .section-lede { max-width: 68ch; margin-inline: auto; }
 
 .slides::before {
   content: "";
