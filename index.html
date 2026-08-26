@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@900&display=swap" />
 
-  <link rel="stylesheet" href="style.css?v=20" />
+  <link rel="stylesheet" href="style.css?v=21" />
 
   <script src="https://fast.wistia.com/player.js" async></script>
 </head>
@@ -404,9 +404,30 @@
               <span class="reel-genre">Parenting</span>
             </figcaption>
           </figure>
+
+          <!-- Second half: an exact copy of the eleven above. The track
+               animates to translateX(-50%), so the two halves must match
+               card-for-card or the loop resets on a mismatched seam and
+               jumps a whole card. Hidden from assistive tech so the rail
+               is announced once, not twice. -->
+
           <figure class="reel" aria-hidden="true">
-            <button class="reel-frame" type="button" data-reel data-wistia-id="le99g7qi7f" data-reel-title="The chapter that changed everything" aria-label="Play: The chapter that changed everything">
-              <img src="assets/stills/european-cartoon.jpg" alt="" loading="lazy" />
+            <button class="reel-frame" type="button" tabindex="-1" data-reel data-wistia-id="il41uz6kze" data-reel-title="One silk thread holds Ron Wade's entire war together" aria-label="Play: One silk thread holds Ron Wade's entire war together">
+              <img src="assets/stills/toybox.jpg" alt="Sonder video &mdash; Toy Box style" loading="lazy" />
+              <span class="reel-style">Toy Box</span>
+              <span class="reel-new">New</span>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
+            <figcaption>
+              <span class="reel-title">One silk thread holds Ron Wade&rsquo;s entire war together</span>
+              <span class="reel-genre">Memoir</span>
+            </figcaption>
+          </figure>
+          <figure class="reel" aria-hidden="true">
+            <button class="reel-frame" type="button" tabindex="-1" data-reel data-wistia-id="le99g7qi7f" data-reel-title="The chapter that changed everything" aria-label="Play: The chapter that changed everything">
+              <img src="assets/stills/european-cartoon.jpg" alt="Sonder video &mdash; The chapter that changed everything" loading="lazy" />
               <span class="reel-style">European Cartoon</span>
               <span class="reel-play" aria-hidden="true">
                 <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
@@ -418,8 +439,8 @@
             </figcaption>
           </figure>
           <figure class="reel" aria-hidden="true">
-            <button class="reel-frame" type="button" data-reel data-wistia-id="1ymppelyqm" data-reel-title="Why this ending wrecks people" aria-label="Play: Why this ending wrecks people">
-              <img src="assets/stills/expert-podcaster.jpg" alt="" loading="lazy" />
+            <button class="reel-frame" type="button" tabindex="-1" data-reel data-wistia-id="1ymppelyqm" data-reel-title="Why this ending wrecks people" aria-label="Play: Why this ending wrecks people">
+              <img src="assets/stills/expert-podcaster.jpg" alt="Sonder video &mdash; Why this ending wrecks people" loading="lazy" />
               <span class="reel-style">Expert Podcaster</span>
               <span class="reel-play" aria-hidden="true">
                 <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
@@ -431,8 +452,8 @@
             </figcaption>
           </figure>
           <figure class="reel" aria-hidden="true">
-            <button class="reel-frame" type="button" data-reel data-wistia-id="2tnccunxqx" data-reel-title="The hook that hit 1.7M" aria-label="Play: The hook that hit 1.7M">
-              <img src="assets/stills/neon-wireframe.jpg" alt="" loading="lazy" />
+            <button class="reel-frame" type="button" tabindex="-1" data-reel data-wistia-id="2tnccunxqx" data-reel-title="The hook that hit 1.7M" aria-label="Play: The hook that hit 1.7M">
+              <img src="assets/stills/neon-wireframe.jpg" alt="Sonder video &mdash; The hook that hit 1.7M" loading="lazy" />
               <span class="reel-style">Neon Wireframe</span>
               <span class="reel-play" aria-hidden="true">
                 <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
@@ -444,7 +465,7 @@
             </figcaption>
           </figure>
           <figure class="reel" aria-hidden="true">
-            <button class="reel-frame" type="button" data-reel data-wistia-id="zr4jayv2lv" data-reel-title="Power gone, towers down, phone useless" aria-label="Play: Power gone, towers down, phone useless">
+            <button class="reel-frame" type="button" tabindex="-1" data-reel data-wistia-id="zr4jayv2lv" data-reel-title="Power gone, towers down, phone useless" aria-label="Play: Power gone, towers down, phone useless">
               <img src="assets/stills/hook-gmrs.jpg" alt="Sonder Reaction Hook &mdash; GMRS Radio Field Manual" loading="lazy" />
               <span class="reel-type">Reaction Hook</span>
               <span class="reel-play" aria-hidden="true">
@@ -457,8 +478,8 @@
             </figcaption>
           </figure>
           <figure class="reel" aria-hidden="true">
-            <button class="reel-frame" type="button" data-reel data-wistia-id="xqg4ugdw8z" data-reel-title="Why nobody talks about this" aria-label="Play: Why nobody talks about this">
-              <img src="assets/stills/expert-panelist.jpg" alt="" loading="lazy" />
+            <button class="reel-frame" type="button" tabindex="-1" data-reel data-wistia-id="xqg4ugdw8z" data-reel-title="Why nobody talks about this" aria-label="Play: Why nobody talks about this">
+              <img src="assets/stills/expert-panelist.jpg" alt="Sonder video &mdash; Why nobody talks about this" loading="lazy" />
               <span class="reel-style">Expert Panelist</span>
               <span class="reel-play" aria-hidden="true">
                 <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
@@ -470,8 +491,8 @@
             </figcaption>
           </figure>
           <figure class="reel" aria-hidden="true">
-            <button class="reel-frame" type="button" data-reel data-wistia-id="ebeee2cm3z" data-reel-title="Three rules every reader breaks" aria-label="Play: Three rules every reader breaks">
-              <img src="assets/stills/yellow-cartoon.jpg" alt="" loading="lazy" />
+            <button class="reel-frame" type="button" tabindex="-1" data-reel data-wistia-id="ebeee2cm3z" data-reel-title="Three rules every reader breaks" aria-label="Play: Three rules every reader breaks">
+              <img src="assets/stills/yellow-cartoon.jpg" alt="Sonder video &mdash; Three rules every reader breaks" loading="lazy" />
               <span class="reel-style">Yellow Cartoon</span>
               <span class="reel-play" aria-hidden="true">
                 <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
@@ -483,8 +504,8 @@
             </figcaption>
           </figure>
           <figure class="reel" aria-hidden="true">
-            <button class="reel-frame" type="button" data-reel data-wistia-id="ejw6zhrgpo" data-reel-title="One paragraph. One million views." aria-label="Play: One paragraph. One million views.">
-              <img src="assets/stills/expert-speaker.jpg" alt="" loading="lazy" />
+            <button class="reel-frame" type="button" tabindex="-1" data-reel data-wistia-id="ejw6zhrgpo" data-reel-title="One paragraph. One million views." aria-label="Play: One paragraph. One million views.">
+              <img src="assets/stills/expert-speaker.jpg" alt="Sonder video &mdash; One paragraph. One million views." loading="lazy" />
               <span class="reel-style">Expert Speaker</span>
               <span class="reel-play" aria-hidden="true">
                 <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
@@ -496,7 +517,7 @@
             </figcaption>
           </figure>
           <figure class="reel" aria-hidden="true">
-            <button class="reel-frame" type="button" data-reel data-wistia-id="oyk3v7e4jp" data-reel-title="One nerve controls 80% of your panic??" aria-label="Play: One nerve controls 80% of your panic??">
+            <button class="reel-frame" type="button" tabindex="-1" data-reel data-wistia-id="oyk3v7e4jp" data-reel-title="One nerve controls 80% of your panic??" aria-label="Play: One nerve controls 80% of your panic??">
               <img src="assets/stills/hook-vagus.jpg" alt="Sonder Reaction Hook &mdash; vagus nerve book" loading="lazy" />
               <span class="reel-type">Reaction Hook</span>
               <span class="reel-play" aria-hidden="true">
@@ -509,8 +530,8 @@
             </figcaption>
           </figure>
           <figure class="reel" aria-hidden="true">
-            <button class="reel-frame" type="button" data-reel data-wistia-id="uvb7ppx8j5" data-reel-title="The fact nobody warned them about" aria-label="Play: The fact nobody warned them about">
-              <img src="assets/stills/skeleton.jpg" alt="" loading="lazy" />
+            <button class="reel-frame" type="button" tabindex="-1" data-reel data-wistia-id="uvb7ppx8j5" data-reel-title="The fact nobody warned them about" aria-label="Play: The fact nobody warned them about">
+              <img src="assets/stills/skeleton.jpg" alt="Sonder video &mdash; The fact nobody warned them about" loading="lazy" />
               <span class="reel-style">Skeleton</span>
               <span class="reel-play" aria-hidden="true">
                 <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
@@ -522,8 +543,8 @@
             </figcaption>
           </figure>
           <figure class="reel" aria-hidden="true">
-            <button class="reel-frame" type="button" data-reel data-wistia-id="z4uq3rclqm" data-reel-title="What every parent has to hear" aria-label="Play: What every parent has to hear">
-              <img src="assets/stills/stick-figure.jpg" alt="" loading="lazy" />
+            <button class="reel-frame" type="button" tabindex="-1" data-reel data-wistia-id="z4uq3rclqm" data-reel-title="What every parent has to hear" aria-label="Play: What every parent has to hear">
+              <img src="assets/stills/stick-figure.jpg" alt="Sonder video &mdash; What every parent has to hear" loading="lazy" />
               <span class="reel-style">Stick Figure</span>
               <span class="reel-play" aria-hidden="true">
                 <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
@@ -545,43 +566,42 @@
       <header class="section-head">
         <span class="eyebrow">Slideshows</span>
         <h2 id="slides-headline" class="section-title">
-          The format eating<br><em>the feed right now.</em>
+          What people watch<br><em>on social media.</em>
         </h2>
         <p class="section-lede">
           Four or five pictures your reader swipes through &mdash; with your book as the reveal at the end.
-          Native to TikTok and Instagram, and it costs the same as a Quick Reaction Hook Video.
+          It is the format winning attention on TikTok and Instagram right now &mdash; and it costs the same as a Quick Reaction Hook Video.
         </p>
       </header>
 
       <!-- A real, complete Sonder slideshow: all five slides of Mike's own
-           Last Man Out carousel, ending on the genuine cover reveal. Nothing
-           here is a mockup or a placeholder. -->
+           Maradona carousel, ending on the genuine cover reveal. -->
       <div class="deck">
         <ol class="deck-track">
           <li class="deck-slide" style="--i:0">
             <span class="deck-num">1</span>
-            <img src="assets/slides/lmo-0.jpg" alt="Slide 1 &mdash; He was shot down over Holland in 1941 and spent the next four and a half years behind German wire." loading="lazy" width="460" height="613" />
+            <img src="assets/slides/mar-0.jpg" alt="Slide 1 &mdash; Maradona warned his own teammate away from the green water bottle. He watched Brazils Branco drink from it anyway." loading="lazy" width="460" height="613" />
           </li>
           <li class="deck-slide" style="--i:1">
             <span class="deck-num">2</span>
-            <img src="assets/slides/lmo-1.jpg" alt="Slide 2 &mdash; The closest he came to being shot was a railway waiting room, where he shouted Heil Churchill at a German majo" loading="lazy" width="460" height="613" />
+            <img src="assets/slides/mar-1.jpg" alt="Slide 2 &mdash; The 1990 World Cup, Argentina against Brazil. A physio walks a cooler of bottles onto the pitch. Some clear, some g" loading="lazy" width="460" height="613" />
           </li>
           <li class="deck-slide" style="--i:2">
             <span class="deck-num">3</span>
-            <img src="assets/slides/lmo-2.jpg" alt="Slide 3 &mdash; The major didnt shoot. Ron reckons it wasnt mercy  the man simply couldnt process what hed heard." loading="lazy" width="460" height="613" />
+            <img src="assets/slides/mar-2.jpg" alt="Slide 3 &mdash; Maradona steered his own teammates off the green ones. Branco grabbed a green bottle and drank  and he just faded." loading="lazy" width="460" height="613" />
           </li>
           <li class="deck-slide" style="--i:3">
             <span class="deck-num">4</span>
-            <img src="assets/slides/lmo-3.jpg" alt="Slide 4 &mdash; Four of his crewmates werent as lucky. They died so he could live." loading="lazy" width="460" height="613" />
+            <img src="assets/slides/mar-3.jpg" alt="Slide 4 &mdash; For years everyone said Brazil were paranoid. Then Maradona went on TV in 2005 and admitted it." loading="lazy" width="460" height="613" />
           </li>
           <li class="deck-slide deck-slide--reveal" style="--i:4">
             <span class="deck-num">5</span>
-            <img src="assets/slides/lmo-4.jpg" alt="Slide 5 &mdash; the book itself: Last Man Out, his own words, in the memoir" loading="lazy" width="460" height="613" />
+            <img src="assets/slides/mar-4.jpg" alt="Slide 5 &mdash; the book itself: The Most Amazing Soccer Stories Of All Time" loading="lazy" width="460" height="613" />
             <span class="deck-flag">The reveal</span>
           </li>
         </ol>
         <p class="deck-cred">
-          <span>A real Sonder slideshow &mdash; <strong>Last Man Out</strong>, an RAF tail gunner&rsquo;s memoir</span>
+          <span>A real Sonder slideshow &mdash; <strong>The Most Amazing Soccer Stories Of All Time</strong></span>
           <span class="deck-hint">Swipe through <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </p>
       </div>
@@ -590,8 +610,8 @@
         <p class="eg-lead">Same format. Very different books.</p>
         <ul class="eg-row">
           <li class="eg-item">
-            <img src="assets/slides/eg-maradona.jpg" alt="Slideshow slide about Maradona and the 1990 World Cup water bottle" loading="lazy" width="320" height="427" />
-            <span class="eg-cap"><strong>The green water bottle</strong>Football &middot; sports history</span>
+            <img src="assets/slides/eg-lmo.jpg" alt="Slideshow slide from Last Man Out, an RAF tail gunner's memoir" loading="lazy" width="320" height="427" />
+            <span class="eg-cap"><strong>Shot down over Holland, 1941</strong>Memoir &middot; WWII history</span>
           </li>
           <li class="eg-item">
             <img src="assets/slides/eg-dad.jpg" alt="Slideshow slide from You Will Rock As a Dad" loading="lazy" width="320" height="427" />
@@ -1000,7 +1020,7 @@
             <span class="format-watch">Watch example <span aria-hidden="true">→</span></span>
           </button>
         </div>
-        <p class="formats-note"><strong>Light</strong> makes Quick Reaction Hook Videos plus one viral video a month. <strong>Every paid plan</strong> makes all four formats — and a slideshow costs the same as a Quick Reaction Hook Video.</p>
+        <p class="formats-note"><strong>Light</strong> makes Quick Reaction Hook Videos plus one viral video a month. <strong>Starter and above</strong> unlock all four formats — and a slideshow costs the same as a Quick Reaction Hook Video.</p>
       </div>
 
       <div class="tiers-carousel" data-tiers-carousel>

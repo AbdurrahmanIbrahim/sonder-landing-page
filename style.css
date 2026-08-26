@@ -1182,7 +1182,11 @@ button { font: inherit; cursor: pointer; }
 }
 .showcase-track {
   display: flex;
-  gap: 22px;
+  /* Spacing lives on .reel as margin-right, NOT as a flex gap here. The track
+     holds its cards twice and animates to translateX(-50%); with a gap the
+     track is 22W + 21G while one period is 11W + 11G, so -50% lands half a gap
+     short and the seam creeps on every cycle. Margin makes each card exactly
+     W + G, so half the track is exactly one period. */
   padding: 12px 0;
   width: max-content;
   animation: showcase-scroll 60s linear infinite;
@@ -1196,7 +1200,11 @@ button { font: inherit; cursor: pointer; }
 .reel {
   flex: 0 0 auto;
   width: clamp(220px, 22vw, 280px);
-  margin: 0;
+  /* The 22px is the marquee's spacing — it lives here, not as a flex gap on
+     .showcase-track, so half the track is exactly one loop period. Keep it in
+     this shorthand: a separate margin-right above a `margin: 0` gets silently
+     wiped by the shorthand. */
+  margin: 0 22px 0 0;
   display: flex;
   flex-direction: column;
   gap: 14px;
