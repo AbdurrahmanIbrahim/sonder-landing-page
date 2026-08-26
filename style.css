@@ -2022,8 +2022,40 @@ button { font: inherit; cursor: pointer; }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 14px;
+  /* Queried below. Safe here rather than on .tier, because .tier-badge is
+     absolutely positioned at top:-12px and must keep hanging outside the card. */
+  container-type: inline-size;
+}
+
+/* The Annual button carries a "2 months free" pill, so the card toggle needs
+   ~212px. With four cards to a row a card only offers ~186-215px, so the
+   toggle was overflowing its card and getting clipped mid-word ("2 months fr").
+   Below the width where label and toggle fit side by side, the toggle takes its
+   own full-width line instead. Container query, not a media query: the card
+   grid goes 4-up / 2-up / 1-up, so a 640px phone has NARROWER cards than a
+   768px tablet and viewport width is the wrong signal. */
+@container (max-width: 300px) {
+  .tier-head .tier-label { width: 100%; }
+  .tier-head .pricing-toggle--card {
+    width: 100%;
+    flex-shrink: 1;
+  }
+  .tier-head .pricing-toggle--card .pricing-toggle-btn {
+    justify-content: center;
+    /* Backstop for the very narrowest cards (the 4-up grid at ~1100px leaves
+       only 186px): let the pill drop below "Annual" rather than push the toggle
+       back outside the card. The button is inline-FLEX, so "Annual" and the
+       pill are flex items — white-space alone cannot separate them, the button
+       has to be allowed to wrap. */
+    flex-wrap: wrap;
+    row-gap: 2px;
+    white-space: normal;
+    text-align: center;
+  }
+  .tier-head .toggle-pct { white-space: nowrap; }
 }
 .tier-label {
   font-size: 11px;
