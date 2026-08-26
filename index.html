@@ -8,6 +8,36 @@
   <script>(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');</script>
   <script async src="https://r.wdfl.co/rw.js" data-rewardful="f9c7cd"></script>
   <meta name="theme-color" content="#0A0613" />
+
+  <!-- ============================================================
+       Meta Pixel — ad tracking for Meta (Facebook/Instagram) campaigns.
+
+       PASTE THE DATASET ID BELOW. Get it from Meta Events Manager:
+       Events Manager > Data sources > your dataset > the numeric ID.
+
+       Left empty the whole thing is INERT: no network request, no cookies,
+       no console noise. That is deliberate — the code can ship and sit dormant
+       until the ads actually start, and pausing ads never requires a deploy.
+
+       Conversions themselves happen on app.yousonder.com, not here, so this
+       tag only sees PageView and the click out to signup. Signup, activation
+       and purchase are tracked in sonder-app and sonder-server.
+       ============================================================ -->
+  <script>
+    window.SONDER_META_PIXEL_ID = ''; /* e.g. '1234567890123456' */
+    (function () {
+      var id = window.SONDER_META_PIXEL_ID;
+      if (!id) return;
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', id);
+      fbq('track', 'PageView');
+    })();
+  </script>
+
   <title>Sonder — #1 most used AI tool for selling books</title>
   <meta name="description" content="Amazon Ads, TikToks, slideshows and viral videos, generated from the book you’ve already written. First video free, no card required." />
 
@@ -23,7 +53,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@900&display=swap" />
 
-  <link rel="stylesheet" href="style.css?v=26" />
+  <link rel="stylesheet" href="style.css?v=27" />
 
   <script src="https://fast.wistia.com/player.js" async></script>
 </head>

@@ -77,6 +77,37 @@
   }, 110);
 })();
 
+// -------- Ad attribution passthrough --------
+// Attribution has to survive the hop from yousonder.com to app.yousonder.com.
+// The Meta Pixel writes _fbc/_fbp on the parent domain, so the app can normally
+// read them — but that quietly breaks if the pixel is blocked, and it gives us
+// nothing for other ad platforms. Carrying the click id and any utm_* forward on
+// the outbound links is a free second path: sonder-app reads them off the query
+// string and hands them to the Conversions API, which is what actually needs the
+// click id to attribute a purchase.
+(function () {
+  var CARRY = ['fbclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'ttclid'];
+  var here;
+  try { here = new URL(window.location.href); } catch (e) { return; }
+
+  var carry = {};
+  var found = false;
+  CARRY.forEach(function (k) {
+    var v = here.searchParams.get(k);
+    if (v) { carry[k] = v; found = true; }
+  });
+  if (!found) return;
+
+  document.querySelectorAll('a[href*="app.yousonder.com"]').forEach(function (a) {
+    var u;
+    try { u = new URL(a.href); } catch (e) { return; }   // leave unparseable links alone
+    Object.keys(carry).forEach(function (k) {
+      if (!u.searchParams.has(k)) u.searchParams.set(k, carry[k]);
+    });
+    a.href = u.toString();
+  });
+})();
+
 (function () {
   'use strict';
 
