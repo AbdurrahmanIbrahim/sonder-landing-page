@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@900&display=swap" />
 
-  <link rel="stylesheet" href="style.css?v=22" />
+  <link rel="stylesheet" href="style.css?v=25" />
 
   <script src="https://fast.wistia.com/player.js" async></script>
 </head>
@@ -574,59 +574,75 @@
         </p>
       </header>
 
-      <!-- A real, complete Sonder slideshow: all five slides of Lexi's own
-           You Will Rock As a Dad carousel, ending on the genuine cover reveal. -->
+      <!-- Three real, complete Sonder carousels. The cards below swap the deck.
+           Only ONE deck lives in the DOM and its five <img> sources are
+           rewritten on click — rendering all three and hiding two still fetched
+           every image (1.2MB), because `hidden` does not stop a lazy image
+           loading. The other two decks now cost nothing until asked for. -->
       <div class="deck">
-        <ol class="deck-track">
+        <ol class="deck-track" data-deck-track>
           <li class="deck-slide" style="--i:0">
             <span class="deck-num">1</span>
-            <img src="assets/slides/dad-0.jpg" alt="Slide 1 &mdash; If you keep sneaking looks at her belly and thinking I have no idea what Im doing, this is for you." loading="lazy" width="460" height="613" />
+            <img src="assets/slides/dad-0.jpg" alt="Slide 1 &mdash; If you keep sneaking looks at her belly and thinking I have no idea what I am doing, this is for you." width="420" height="560" />
           </li>
           <li class="deck-slide" style="--i:1">
             <span class="deck-num">2</span>
-            <img src="assets/slides/dad-1.jpg" alt="Slide 2 &mdash; Before the birth your testosterone actually drops. Your brain rewires so you snap awake at the babys cry." loading="lazy" width="460" height="613" />
+            <img src="assets/slides/dad-1.jpg" alt="Slide 2 &mdash; Before the birth your testosterone actually drops. Your brain rewires so you snap awake at the baby cry." width="420" height="560" />
           </li>
           <li class="deck-slide" style="--i:2">
             <span class="deck-num">3</span>
-            <img src="assets/slides/dad-2.jpg" alt="Slide 3 &mdash; That fear of sleeping through everything and being useless? Biology already sorted it for you." loading="lazy" width="460" height="613" />
+            <img src="assets/slides/dad-2.jpg" alt="Slide 3 &mdash; That fear of sleeping through everything and being useless? Biology already sorted it for you." width="420" height="560" />
           </li>
           <li class="deck-slide" style="--i:3">
             <span class="deck-num">4</span>
-            <img src="assets/slides/dad-3.jpg" alt="Slide 4 &mdash; Theres one rule in there I broke on day one and instantly regretted. Its about food." loading="lazy" width="460" height="613" />
+            <img src="assets/slides/dad-3.jpg" alt="Slide 4 &mdash; There is one rule in there I broke on day one and instantly regretted. It is about food." width="420" height="560" />
           </li>
           <li class="deck-slide deck-slide--reveal" style="--i:4">
             <span class="deck-num">5</span>
-            <img src="assets/slides/dad-4.jpg" alt="Slide 5 &mdash; the book itself: You Will Rock As a Dad" loading="lazy" width="460" height="613" />
+            <img src="assets/slides/dad-4.jpg" alt="Slide 5 &mdash; The book itself: You Will Rock As a Dad" width="420" height="560" />
             <span class="deck-flag">The reveal</span>
           </li>
         </ol>
         <p class="deck-cred">
-          <span>A real Sonder slideshow &mdash; <strong>You Will Rock As a Dad</strong></span>
+          <span>A real Sonder slideshow &mdash; <strong data-deck-cred>You Will Rock As a Dad</strong></span>
           <span class="deck-hint">Swipe through <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </p>
       </div>
 
+      <script type="application/json" data-deck-data>{"dad": {"title": "You Will Rock As a Dad", "slides": [{"src": "assets/slides/dad-0.jpg", "alt": "Slide 1 — If you keep sneaking looks at her belly and thinking I have no idea what I am doing, this is for you."}, {"src": "assets/slides/dad-1.jpg", "alt": "Slide 2 — Before the birth your testosterone actually drops. Your brain rewires so you snap awake at the baby cry."}, {"src": "assets/slides/dad-2.jpg", "alt": "Slide 3 — That fear of sleeping through everything and being useless? Biology already sorted it for you."}, {"src": "assets/slides/dad-3.jpg", "alt": "Slide 4 — There is one rule in there I broke on day one and instantly regretted. It is about food."}, {"src": "assets/slides/dad-4.jpg", "alt": "Slide 5 — The book itself: You Will Rock As a Dad"}]}, "mar": {"title": "The Most Amazing Soccer Stories Of All Time", "slides": [{"src": "assets/slides/mar-0.jpg", "alt": "Slide 1 — Maradona warned his own teammate away from the green water bottle. He watched Brazil Branco drink from it anyway."}, {"src": "assets/slides/mar-1.jpg", "alt": "Slide 2 — The 1990 World Cup, Argentina against Brazil. A physio walks a cooler of bottles onto the pitch. Some clear, some green."}, {"src": "assets/slides/mar-2.jpg", "alt": "Slide 3 — Maradona steered his own teammates off the green ones. Branco grabbed a green bottle and drank, and he just faded."}, {"src": "assets/slides/mar-3.jpg", "alt": "Slide 4 — For years everyone said Brazil were paranoid. Then Maradona went on TV in 2005 and admitted it."}, {"src": "assets/slides/mar-4.jpg", "alt": "Slide 5 — The book itself: The Most Amazing Soccer Stories Of All Time"}]}, "lmo": {"title": "Last Man Out", "slides": [{"src": "assets/slides/lmo-0.jpg", "alt": "Slide 1 — He was shot down over Holland in 1941 and spent the next four and a half years behind German wire."}, {"src": "assets/slides/lmo-1.jpg", "alt": "Slide 2 — The closest he came to being shot was a railway waiting room, where he shouted Heil Churchill at a German major."}, {"src": "assets/slides/lmo-2.jpg", "alt": "Slide 3 — The major did not shoot. Ron reckons it was not mercy, the man simply could not process what he had heard."}, {"src": "assets/slides/lmo-3.jpg", "alt": "Slide 4 — Four of his crewmates were not as lucky. They died so he could live."}, {"src": "assets/slides/lmo-4.jpg", "alt": "Slide 5 — The book itself: Last Man Out"}]}}</script>
+
       <div class="eg">
-        <p class="eg-lead">Same format. Very different books.</p>
+        <p class="eg-lead">Same format. Very different books. <span>Tap one to swap the deck.</span></p>
         <ul class="eg-row">
-          <li class="eg-item">
-            <img src="assets/slides/eg-maradona.jpg" alt="Slideshow slide about Maradona and the 1990 World Cup water bottle" loading="lazy" width="320" height="427" />
-            <span class="eg-cap"><strong>The green water bottle</strong>Football &middot; sports history</span>
+          <li>
+            <button type="button" class="eg-item is-active" data-deck-pick="dad" aria-pressed="true">
+              <img src="assets/slides/eg-dad.jpg" alt="" loading="lazy" width="170" height="227" />
+              <span class="eg-cap"><strong>&ldquo;I have no idea what I&rsquo;m doing&rdquo;</strong>Parenting &middot; first-time dads</span>
+            </button>
           </li>
-          <li class="eg-item">
-            <img src="assets/slides/eg-lmo.jpg" alt="Slideshow slide from Last Man Out, an RAF tail gunner's memoir" loading="lazy" width="320" height="427" />
-            <span class="eg-cap"><strong>Shot down over Holland, 1941</strong>Memoir &middot; WWII history</span>
+          <li>
+            <button type="button" class="eg-item" data-deck-pick="mar" aria-pressed="false">
+              <img src="assets/slides/eg-maradona.jpg" alt="" loading="lazy" width="170" height="227" />
+              <span class="eg-cap"><strong>The green water bottle</strong>Football &middot; sports history</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="eg-item" data-deck-pick="lmo" aria-pressed="false">
+              <img src="assets/slides/eg-lmo.jpg" alt="" loading="lazy" width="170" height="227" />
+              <span class="eg-cap"><strong>Shot down over Holland, 1941</strong>Memoir &middot; WWII history</span>
+            </button>
           </li>
         </ul>
       </div>
 
       <div class="slides-actions">
         <a href="https://app.yousonder.com/signup?offer=freevideo" class="cta cta-primary">
-          <span>Make one free</span>
+          <span>Get your first video free</span>
           <span class="cta-arrow" aria-hidden="true">&rarr;</span>
         </a>
         <button type="button" class="cta cta-secondary" data-reel data-embed-url="https://www.tiktok.com/embed/v2/7668614791489015062" data-reel-link="https://www.tiktok.com/@bloomlit_press/photo/7668614791489015062" data-reel-title="Swipeable slideshow — a real one" data-reel-aspect="0.44">Watch a real one</button>
       </div>
+      <p class="slides-note">Your free video is a viral video &mdash; slideshows start on the Starter plan.</p>
     </section>
 
     <!-- ============== AMAZON ADS — the premium 16:9 showpiece ============== -->
@@ -1052,7 +1068,7 @@
             <li>Your book&rsquo;s B-roll stitched at the end</li>
             <li>1 book upload</li>
             <li>2 videos per day</li>
-            <li>Upgrade for Amazon ads &mdash; and cheaper viral videos</li>
+            <li>Upgrade for Amazon ads, slideshows &mdash; and cheaper viral videos</li>
           </ul>
           <a href="https://app.yousonder.com/signup?offer=freevideo" class="tier-cta">Start for $9 <span aria-hidden="true">→</span></a>
           <p class="tier-foot">Need more? Top up any time with credit packs from $35.</p>
