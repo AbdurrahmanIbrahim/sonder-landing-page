@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0A0613" />
+<title>Sonder — turn your book into the videos that sell it</title>
+<meta name="description" content="Upload your book. Get TikToks, Reels and Amazon ads made from it in minutes. First video free, no card required." />
+
+<!-- Paid traffic only. Keep it out of search so it can never compete with the
+     main site, and so ad-test variants never get indexed. -->
+<meta name="robots" content="noindex, nofollow" />
+
+<!-- ============================================================
+     Meta Pixel. PASTE THE DATASET ID BELOW (Events Manager > Data
+     sources > your dataset > numeric ID). Empty = completely inert:
+     no request, no cookie, no console noise.
+
+     Signup and purchase are tracked on app.yousonder.com and in
+     sonder-server, not here. This tag sees the landing view and the
+     click out.
+     ============================================================ -->
+<script>
+  window.SONDER_META_PIXEL_ID = ''; /* e.g. '1234567890123456' */
+  (function () {
+    var id = window.SONDER_META_PIXEL_ID;
+    if (!id) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', id);
+    fbq('track', 'PageView');
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@900&display=swap" />
+<link rel="icon" type="image/svg+xml" href="../assets/sonder-logo-plum-flat.svg" />
+
+<!-- CSS is inlined rather than linked: one fewer round trip before anything
+     paints, which matters more here than anywhere else on the site. Paid
+     traffic arrives on a phone, often on cellular, and leaves if it waits. -->
+<style>
+  :root{
+    --plum:#0A0613; --plum-deep:#1A0F2E; --plum-mid:#2D1A48;
+    --mint:#7FFFD4; --paper:#F5F5F7; --quiet:#8B8FA3;
+    --line:rgba(245,245,247,.10);
+    --ease:cubic-bezier(.32,.72,0,1);
+    --gutter:clamp(20px,5vw,32px);
+    --max:560px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--plum);color:var(--paper);
+    font-family:Inter,system-ui,-apple-system,sans-serif;
+    font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gutter)}
+  p{margin:0 0 1em}
+  strong{font-weight:600}
+
+  /* Wordmark only. No nav, no login link: every one of those is a paid visitor
+     leaving before they convert. */
+  header{padding:22px 0 4px}
+  .mark{display:inline-flex;align-items:center;gap:5px;font-family:Nunito,system-ui,sans-serif;
+    font-weight:900;font-size:22px;letter-spacing:-.04em;color:var(--paper);text-decoration:none}
+  .mark svg{width:10px;height:10px}
+
+  .hero{padding:18px 0 6px}
+  .eyebrow{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--mint);margin:0 0 14px}
+  h1{
+    margin:0 0 14px;font-weight:700;font-size:clamp(34px,8.4vw,46px);
+    line-height:1.03;letter-spacing:-.035em;text-wrap:balance;
+  }
+  h1 em{font-style:italic;font-weight:600;color:var(--mint)}
+  .sub{color:var(--quiet);font-size:clamp(16px,4.2vw,18px);margin:0 0 22px}
+
+  .demo{
+    position:relative;width:100%;max-width:290px;margin:0 auto 24px;
+    aspect-ratio:9/16;border-radius:16px;overflow:hidden;
+    border:1px solid var(--line);background:var(--plum-deep);
+    box-shadow:0 24px 60px -28px rgba(0,0,0,.85);
+  }
+  .demo video{width:100%;height:100%;object-fit:cover;display:block}
+  .demo figcaption{
+    position:absolute;left:10px;bottom:10px;z-index:2;
+    padding:5px 10px;border-radius:999px;font-size:10px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;
+    background:rgba(10,6,19,.72);border:1px solid var(--line);color:var(--paper);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  }
+
+  /* One action, repeated. Nothing else on this page is clickable except the
+     privacy link in the footer. */
+  .cta{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    width:100%;padding:19px 26px;border-radius:999px;
+    background:var(--mint);color:var(--plum);
+    font-size:17px;font-weight:700;letter-spacing:-.01em;text-decoration:none;
+    box-shadow:0 0 34px rgba(127,255,212,.3);
+    transition:transform 180ms var(--ease),box-shadow 180ms var(--ease);
+  }
+  .cta:hover{transform:translateY(-2px);box-shadow:0 0 48px rgba(127,255,212,.45)}
+  .cta:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
+  .cta-note{margin:12px 0 0;text-align:center;font-size:13px;color:var(--quiet)}
+
+  .trust{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+    margin:22px 0 0;padding:0;list-style:none;
+  }
+  .trust li{
+    font-size:12px;color:var(--paper);padding:7px 13px;border-radius:999px;
+    border:1px solid rgba(127,255,212,.28);background:rgba(127,255,212,.07);
+    white-space:nowrap;
+  }
+  .trust b{color:var(--mint);font-weight:700}
+
+  section{padding:44px 0}
+  h2{margin:0 0 18px;font-size:clamp(23px,5.8vw,28px);font-weight:700;
+    letter-spacing:-.028em;line-height:1.15;text-wrap:balance}
+
+  .formats{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+  .formats li{
+    display:flex;gap:12px;align-items:flex-start;
+    padding:15px 17px;border-radius:14px;
+    border:1px solid var(--line);background:rgba(255,255,255,.02);
+  }
+  .formats b{display:block;font-size:15.5px;font-weight:600;margin-bottom:2px}
+  .formats span{font-size:14px;color:var(--quiet);line-height:1.5}
+  .formats .tick{color:var(--mint);flex:none;font-weight:700;line-height:1.5}
+
+  ol.steps{margin:0;padding:0;list-style:none;display:grid;gap:20px;counter-reset:s}
+  ol.steps li{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start}
+  ol.steps li::before{
+    counter-increment:s;content:counter(s);
+    width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+    background:rgba(127,255,212,.1);border:1px solid rgba(127,255,212,.3);
+    color:var(--mint);font-weight:700;font-size:14px;
+  }
+  ol.steps b{display:block;font-size:16px;font-weight:600;margin-bottom:2px}
+  ol.steps span{font-size:14.5px;color:var(--quiet);line-height:1.5}
+
+  .receipts{display:grid;gap:12px;grid-template-columns:1fr 1fr;margin:0 0 18px}
+  .receipts img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line)}
+  .receipts figure{margin:0}
+  .receipts figcaption{margin-top:7px;font-size:12px;color:var(--quiet);line-height:1.4}
+  .receipts .wide{grid-column:1 / -1}
+
+  blockquote{
+    margin:0;padding:18px 20px;border-radius:14px;
+    border:1px solid var(--line);background:rgba(255,255,255,.02);
+    font-size:16px;line-height:1.5;
+  }
+  blockquote footer{margin-top:9px;font-size:13px;color:var(--quiet)}
+
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 18px}
+  .vs div{padding:17px;border-radius:14px;border:1px solid var(--line);text-align:center}
+  .vs .them{background:rgba(255,255,255,.02)}
+  .vs .us{border-color:rgba(127,255,212,.32);background:rgba(127,255,212,.07)}
+  .vs .lab{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--quiet);margin-bottom:6px}
+  .vs .fig{display:block;font-size:26px;font-weight:700;letter-spacing:-.03em}
+  .vs .us .fig{color:var(--mint)}
+  .vs .note{display:block;font-size:12px;color:var(--quiet);margin-top:4px}
+
+  .close{padding:12px 0 52px}
+  footer.foot{padding:0 0 40px;text-align:center;font-size:12px;color:var(--quiet)}
+  footer.foot a{color:var(--quiet)}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <!-- Deliberately NOT a link. On a paid page the logo is a trust marker, not
+         navigation: every visitor who clicks it costs the ad spend and lands on a
+         26-screen homepage instead of converting. -->
+    <span class="mark">Sonder<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1.5L10 6 2 10.5Z" fill="#7FFFD4"/></svg></span>
+  </header>
+
+  <div class="hero">
+    <span class="eyebrow">For authors &amp; publishers</span>
+    <h1>Turn your book into the videos that <em>sell it</em>.</h1>
+    <p class="sub">
+      Upload your book. Sonder writes it, voices it and edits it into TikToks, Reels
+      and Amazon ads &mdash; in minutes, for less than a coffee.
+    </p>
+
+    <figure class="demo">
+      <!-- Muted, looping, inline: it plays on a phone without a tap and without
+           a heavy third-party player. This is a real Sonder viral video, which
+           is also exactly what the free one will be. -->
+      <video src="../assets/lp/demo.mp4" poster="../assets/lp/demo-poster.jpg"
+             autoplay muted loop playsinline preload="metadata"
+             aria-label="A real Sonder video made from a book"></video>
+      <figcaption>Made by Sonder</figcaption>
+    </figure>
+
+    <a class="cta" href="https://app.yousonder.com/signup?offer=freevideo" data-signup>
+      Get my first video free <span aria-hidden="true">&rarr;</span>
+    </a>
+    <p class="cta-note">No card. No commitment. Takes about four minutes.</p>
+
+    <ul class="trust">
+      <li><b>1,000+</b> videos made</li>
+      <li><b>2.9M</b> views in 30 days</li>
+      <li><b>4,000+</b> hours saved</li>
+    </ul>
+  </div>
+
+  <section>
+    <h2>Four kinds of video, from one upload.</h2>
+    <ul class="formats">
+      <li><span class="tick">&check;</span><span><b>30-second hook videos</b><span>An avatar hypes your book straight to camera. Native to TikTok, Reels and Shorts.</span></span></li>
+      <li><span class="tick">&check;</span><span><b>90-second viral videos</b><span>A cinematic, narrated story with your book woven in. Your big swing.</span></span></li>
+      <li><span class="tick">&check;</span><span><b>Swipeable slideshows</b><span>Four or five pictures readers swipe through, with your book as the reveal.</span></span></li>
+      <li><span class="tick">&check;</span><span><b>Amazon ads</b><span>A 43-second ad built for the page where readers actually buy.</span></span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><span><b>Upload your book</b><span>The manuscript, or just the PDF you already sell. That is the whole setup.</span></span></li>
+      <li><span><b>Pick a style</b><span>Thirteen looks, from cinematic to animated. Sonder writes the script from your actual pages.</span></span></li>
+      <li><span><b>Post it</b><span>Download, or auto-post straight to your accounts. Minutes, not days.</span></span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>It works. Here are the receipts.</h2>
+    <div class="receipts">
+      <figure class="wide">
+        <img src="../assets/lp/receipt-insights.jpg" alt="Instagram Insights: 2.9 million views, 474.5 thousand interactions and 11.7 thousand new followers in 30 days" loading="lazy" width="560" height="482" />
+        <figcaption>One author&rsquo;s Instagram, 30 days of Sonder videos</figcaption>
+      </figure>
+      <figure>
+        <img src="../assets/lp/receipt-roi.jpg" alt="TikTok Shop dashboard showing a 37x return on ad spend from one Sonder video" loading="lazy" width="420" height="525" />
+        <figcaption><strong>37&times;</strong> on ad spend, one video</figcaption>
+      </figure>
+      <figure>
+        <img src="../assets/lp/receipt-sales.jpg" alt="Message from a customer: I am up to 44 sales from Sonder" loading="lazy" width="420" height="120" />
+        <figcaption>&ldquo;I&rsquo;m up to 44 sales from Sonder.&rdquo;</figcaption>
+      </figure>
+    </div>
+    <blockquote>
+      &ldquo;I&rsquo;d posted for months and got crickets. One Sonder video did more in a week
+      than my year of trying.&rdquo;
+      <footer>Marcus &mdash; self-improvement author</footer>
+    </blockquote>
+  </section>
+
+  <section>
+    <h2>What a freelancer charges for one video.</h2>
+    <div class="vs">
+      <div class="them">
+        <span class="lab">Freelancer</span>
+        <span class="fig">$150+</span>
+        <span class="note">3&ndash;5 days each</span>
+      </div>
+      <div class="us">
+        <span class="lab">Sonder</span>
+        <span class="fig">$1.80</span>
+        <span class="note">ready in minutes</span>
+      </div>
+    </div>
+    <p style="font-size:14.5px;color:var(--quiet);margin:0">
+      Plans start at $9 a month. Your first video is free either way &mdash; you can
+      see what it makes from your own book before you decide anything.
+    </p>
+  </section>
+
+  <div class="close">
+    <a class="cta" href="https://app.yousonder.com/signup?offer=freevideo" data-signup>
+      Get my first video free <span aria-hidden="true">&rarr;</span>
+    </a>
+    <p class="cta-note">No card required.</p>
+  </div>
+
+  <footer class="foot">
+    &copy; Sonder &middot; <a href="https://app.yousonder.com/privacy">Privacy</a>
+  </footer>
+
+</div>
+
+<script>
+  /* Carry the ad click id and any utm_* across to app.yousonder.com. The pixel
+     writes _fbc on the parent domain so the app can usually read it, but that
+     breaks silently if the pixel is blocked — and the app stores whatever lands
+     here on the account at signup, which is what lets a purchase days later
+     still be attributed to this click. */
+  (function () {
+    var CARRY = ['fbclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+    var here; try { here = new URL(window.location.href); } catch (e) { return; }
+    var carry = {}, found = false;
+    CARRY.forEach(function (k) { var v = here.searchParams.get(k); if (v) { carry[k] = v; found = true; } });
+    if (!found) return;
+    document.querySelectorAll('a[data-signup]').forEach(function (a) {
+      var u; try { u = new URL(a.href); } catch (e) { return; }
+      Object.keys(carry).forEach(function (k) { if (!u.searchParams.has(k)) u.searchParams.set(k, carry[k]); });
+      a.href = u.toString();
+    });
+  })();
+</script>
+
+</body>
+</html>
