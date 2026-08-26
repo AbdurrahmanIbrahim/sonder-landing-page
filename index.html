@@ -8,11 +8,11 @@
   <script>(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');</script>
   <script async src="https://r.wdfl.co/rw.js" data-rewardful="f9c7cd"></script>
   <meta name="theme-color" content="#0A0613" />
-  <title>Sonder — Every book deserves its own studio.</title>
-  <meta name="description" content="Sonder turns your manuscript into TikTok, Reels, and YouTube Shorts. A full production crew, one click." />
+  <title>Sonder — #1 most used AI tool for selling books</title>
+  <meta name="description" content="Amazon Ads, TikToks, slideshows and viral videos, generated from the book you’ve already written. First video free, no card required." />
 
-  <meta property="og:title" content="Sonder — Every book deserves its own studio." />
-  <meta property="og:description" content="Press one button. Your book becomes the video that millions watch." />
+  <meta property="og:title" content="Sonder — #1 most used AI tool for selling books" />
+  <meta property="og:description" content="Amazon Ads, TikToks, slideshows and viral videos, generated from the book you’ve already written." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://yousonder.com/" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -23,9 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@900&display=swap" />
 
-  <link rel="preload" as="image" href="assets/frames/hero/frame_001.jpg" fetchpriority="high" />
-
-  <link rel="stylesheet" href="style.css?v=3" />
+  <link rel="stylesheet" href="style.css?v=16" />
 
   <script src="https://fast.wistia.com/player.js" async></script>
 </head>
@@ -33,6 +31,17 @@
   <a class="skip-link" href="#main">Skip to content</a>
 
   <div class="grain" aria-hidden="true"></div>
+
+  <!-- Social-signal glyph sprite — used by the hero "wall of proof" tiles. -->
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="ic-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></symbol>
+      <symbol id="ic-comment" viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4v4l4-4h8a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></symbol>
+      <symbol id="ic-share" viewBox="0 0 24 24"><path d="M2.01 21 23 12 2.01 3 2 10l15 2-15 2z"/></symbol>
+      <symbol id="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
+      <symbol id="ic-follow" viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-3.34 0-10 1.67-10 5v3h20v-3c0-3.33-6.66-5-10-5z"/></symbol>
+    </defs>
+  </svg>
 
   <!-- Free-video announcement bar — the offer, visible before anything else. -->
   <div class="announce" role="note">
@@ -63,66 +72,153 @@
 
   <main id="main">
 
-    <!-- ============== HERO — scroll-driven canvas video ============== -->
-    <section class="hero" aria-labelledby="hero-headline" data-hero>
-      <div class="hero-pin">
-        <canvas class="hero-canvas" data-hero-canvas aria-hidden="true"></canvas>
+    <!-- ============== HERO — the wall of proof ============== -->
+    <section class="hero" aria-labelledby="hero-headline">
 
-        <div class="hero-vignette" aria-hidden="true"></div>
-        <div class="hero-tint" aria-hidden="true"></div>
-
-        <div class="hero-overlay">
-          <div class="hero-meta">
-            <span class="meta-spark" aria-hidden="true">
-              <svg viewBox="0 0 12 12"><path d="M 2 1.5 L 10 6 L 2 10.5 Z" fill="#7FFFD4"/></svg>
-            </span>
-            <span>For publishers who want to go viral</span>
-          </div>
-
-          <div class="hero-trust-chips">
-            <div class="hero-trust-chip">
-              <span class="hero-trust-icon" aria-hidden="true">⏱</span>
-              <span><strong class="hero-trust-num" id="hours-saved-num">4,000+</strong> hours saved</span>
-            </div>
-            <div class="hero-trust-chip">
-              <span class="hero-trust-icon" aria-hidden="true">🎬</span>
-              <span><strong class="hero-trust-num" id="videos-made-num">1,000+</strong> videos made</span>
+      <!-- A living mosaic of real Sonder videos. Decorative: the same videos
+           are presented properly, with titles and play buttons, in #showcase. -->
+      <div class="hero-wall" aria-hidden="true">
+          <div class="hero-col hero-col--1">
+            <div class="hero-track hero-track--up" style="animation-duration:68s">
+              <figure class="hero-tile" style="--tile-d:-0.0s"><img src="assets/mosaic/european-cartoon.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-heart" /></svg><b data-tick="90039">90.0K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="2078">2,078</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="6326">6,326</b></span></span><svg class="hero-tile-pop"><use href="#ic-heart" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-2.59s"><img src="assets/mosaic/skeleton.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="117616">117.6K</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-comment" /></svg><b data-tick="1656">1,656</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="4524">4,524</b></span></span><svg class="hero-tile-pop"><use href="#ic-comment" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-0.99s"><img src="assets/mosaic/expert-speaker.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="24584">24.6K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="305">305</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-share" /></svg><b data-tick="824">824</b></span></span><svg class="hero-tile-pop"><use href="#ic-share" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-3.58s"><img src="assets/mosaic/european-cartoon.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-heart" /></svg><b data-tick="163025">163.0K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="2489">2,489</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="5334">5,334</b></span></span><svg class="hero-tile-pop"><use href="#ic-heart" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-1.98s"><img src="assets/mosaic/skeleton.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="9229">9,229</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-comment" /></svg><b data-tick="175">175</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="367">367</b></span></span><svg class="hero-tile-pop"><use href="#ic-comment" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-0.37s"><img src="assets/mosaic/expert-speaker.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="25341">25.3K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="720">720</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-share" /></svg><b data-tick="1553">1,553</b></span></span><svg class="hero-tile-pop"><use href="#ic-share" /></svg></figure>
             </div>
           </div>
-
-          <h1 id="hero-headline" class="hero-headline">
-            <span class="line">Every book deserves</span>
-            <span class="line">its own <em>studio</em>.</span>
-          </h1>
-
-          <p class="hero-sub">A full production crew. One click.</p>
-
-          <p class="hero-offer-badge">
-            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M 2 1.5 L 10 6 L 2 10.5 Z" fill="currentColor"/></svg>
-            <span>First video free &middot; No card required</span>
-          </p>
-
-          <p class="hero-body">
-            Sonder turns your manuscript into TikTok, Reels, and YouTube Shorts — for less than your morning coffee. The team you couldn't afford to hire, on-tap.
-          </p>
-
-          <div class="hero-ctas">
-            <a href="https://app.yousonder.com/signup?offer=freevideo" class="cta cta-primary">
-              <span>Get your first video free</span>
-              <span class="cta-arrow" aria-hidden="true">→</span>
-            </a>
-            <a href="#how" class="cta cta-secondary">See how it works</a>
+          <div class="hero-col hero-col--2">
+            <div class="hero-track hero-track--down" style="animation-duration:52s">
+              <figure class="hero-tile" style="--tile-d:-2.96s"><img src="assets/mosaic/expert-podcaster.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-heart" /></svg><b data-tick="144070">144.1K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="3024">3,024</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="4933">4,933</b></span></span><svg class="hero-tile-pop"><use href="#ic-heart" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-1.36s"><img src="assets/mosaic/hook-gmrs.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="154044">154.0K</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-comment" /></svg><b data-tick="4063">4,063</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="4768">4,768</b></span></span><svg class="hero-tile-pop"><use href="#ic-comment" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-3.95s"><img src="assets/mosaic/yellow-cartoon.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="145160">145.2K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="3707">3,707</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-share" /></svg><b data-tick="8360">8,360</b></span></span><svg class="hero-tile-pop"><use href="#ic-share" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-2.35s"><img src="assets/mosaic/expert-podcaster.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-heart" /></svg><b data-tick="50179">50.2K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="1544">1,544</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="3341">3,341</b></span></span><svg class="hero-tile-pop"><use href="#ic-heart" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-0.74s"><img src="assets/mosaic/hook-gmrs.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="146643">146.6K</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-comment" /></svg><b data-tick="2448">2,448</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="8126">8,126</b></span></span><svg class="hero-tile-pop"><use href="#ic-comment" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-3.33s"><img src="assets/mosaic/yellow-cartoon.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="177427">177.4K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="2983">2,983</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-share" /></svg><b data-tick="8123">8,123</b></span></span><svg class="hero-tile-pop"><use href="#ic-share" /></svg></figure>
+            </div>
           </div>
+          <div class="hero-col hero-col--3">
+            <div class="hero-track hero-track--up" style="animation-duration:78s">
+              <figure class="hero-tile" style="--tile-d:-1.73s"><img src="assets/mosaic/neon-wireframe.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-heart" /></svg><b data-tick="99035">99.0K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="2008">2,008</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="6939">6,939</b></span></span><svg class="hero-tile-pop"><use href="#ic-heart" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-0.12s"><img src="assets/mosaic/stick-figure.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="148350">148.3K</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-comment" /></svg><b data-tick="4373">4,373</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="7380">7,380</b></span></span><svg class="hero-tile-pop"><use href="#ic-comment" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-2.72s"><img src="assets/mosaic/expert-panelist.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="142804">142.8K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="2266">2,266</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-share" /></svg><b data-tick="10103">10.1K</b></span></span><svg class="hero-tile-pop"><use href="#ic-share" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-1.11s"><img src="assets/mosaic/neon-wireframe.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-heart" /></svg><b data-tick="68012">68.0K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="2096">2,096</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="2285">2,285</b></span></span><svg class="hero-tile-pop"><use href="#ic-heart" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-3.7s"><img src="assets/mosaic/stick-figure.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="74773">74.8K</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-comment" /></svg><b data-tick="1683">1,683</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="4509">4,509</b></span></span><svg class="hero-tile-pop"><use href="#ic-comment" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-2.1s"><img src="assets/mosaic/expert-panelist.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="17988">18.0K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="243">243</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-share" /></svg><b data-tick="1137">1,137</b></span></span><svg class="hero-tile-pop"><use href="#ic-share" /></svg></figure>
+            </div>
+          </div>
+          <div class="hero-col hero-col--4">
+            <div class="hero-track hero-track--down" style="animation-duration:58s">
+              <figure class="hero-tile" style="--tile-d:-0.49s"><img src="assets/mosaic/hook-vagus.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-heart" /></svg><b data-tick="80701">80.7K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="1262">1,262</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="5194">5,194</b></span></span><svg class="hero-tile-pop"><use href="#ic-heart" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-3.09s"><img src="assets/mosaic/yellow-cartoon.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="91396">91.4K</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-comment" /></svg><b data-tick="1046">1,046</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="6480">6,480</b></span></span><svg class="hero-tile-pop"><use href="#ic-comment" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-1.48s"><img src="assets/mosaic/european-cartoon.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="89302">89.3K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="1514">1,514</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-share" /></svg><b data-tick="6039">6,039</b></span></span><svg class="hero-tile-pop"><use href="#ic-share" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-4.07s"><img src="assets/mosaic/hook-vagus.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-heart" /></svg><b data-tick="151882">151.9K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="2191">2,191</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="8578">8,578</b></span></span><svg class="hero-tile-pop"><use href="#ic-heart" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-2.47s"><img src="assets/mosaic/yellow-cartoon.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="133750">133.8K</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-comment" /></svg><b data-tick="2741">2,741</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="4885">4,885</b></span></span><svg class="hero-tile-pop"><use href="#ic-comment" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-0.86s"><img src="assets/mosaic/european-cartoon.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="107828">107.8K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="1829">1,829</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-share" /></svg><b data-tick="7986">7,986</b></span></span><svg class="hero-tile-pop"><use href="#ic-share" /></svg></figure>
+            </div>
+          </div>
+          <div class="hero-col hero-col--5">
+            <div class="hero-track hero-track--up" style="animation-duration:46s">
+              <figure class="hero-tile" style="--tile-d:-3.46s"><img src="assets/mosaic/expert-speaker.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-heart" /></svg><b data-tick="7612">7,612</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="215">215</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="373">373</b></span></span><svg class="hero-tile-pop"><use href="#ic-heart" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-1.85s"><img src="assets/mosaic/neon-wireframe.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="157299">157.3K</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-comment" /></svg><b data-tick="2526">2,526</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="5400">5,400</b></span></span><svg class="hero-tile-pop"><use href="#ic-comment" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-0.24s"><img src="assets/mosaic/hook-gmrs.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="51658">51.7K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="1477">1,477</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-share" /></svg><b data-tick="2802">2,802</b></span></span><svg class="hero-tile-pop"><use href="#ic-share" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-2.84s"><img src="assets/mosaic/expert-speaker.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-heart" /></svg><b data-tick="14673">14.7K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="207">207</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="638">638</b></span></span><svg class="hero-tile-pop"><use href="#ic-heart" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-1.23s"><img src="assets/mosaic/neon-wireframe.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="171220">171.2K</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-comment" /></svg><b data-tick="3474">3,474</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="10157">10.2K</b></span></span><svg class="hero-tile-pop"><use href="#ic-comment" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-3.83s"><img src="assets/mosaic/hook-gmrs.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="105757">105.8K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="1768">1,768</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-share" /></svg><b data-tick="8035">8,035</b></span></span><svg class="hero-tile-pop"><use href="#ic-share" /></svg></figure>
+            </div>
+          </div>
+          <div class="hero-col hero-col--6">
+            <div class="hero-track hero-track--down" style="animation-duration:72s">
+              <figure class="hero-tile" style="--tile-d:-2.22s"><img src="assets/mosaic/skeleton.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-heart" /></svg><b data-tick="169932">169.9K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="4747">4,747</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="8554">8,554</b></span></span><svg class="hero-tile-pop"><use href="#ic-heart" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-0.61s"><img src="assets/mosaic/expert-podcaster.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="103944">103.9K</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-comment" /></svg><b data-tick="1203">1,203</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="6353">6,353</b></span></span><svg class="hero-tile-pop"><use href="#ic-comment" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-3.21s"><img src="assets/mosaic/stick-figure.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="25502">25.5K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="543">543</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-share" /></svg><b data-tick="1166">1,166</b></span></span><svg class="hero-tile-pop"><use href="#ic-share" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-1.6s"><img src="assets/mosaic/skeleton.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-heart" /></svg><b data-tick="144989">145.0K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="1885">1,885</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="9375">9,375</b></span></span><svg class="hero-tile-pop"><use href="#ic-heart" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-4.2s"><img src="assets/mosaic/expert-podcaster.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="127993">128.0K</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-comment" /></svg><b data-tick="2407">2,407</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-share" /></svg><b data-tick="6989">6,989</b></span></span><svg class="hero-tile-pop"><use href="#ic-comment" /></svg></figure>
+              <figure class="hero-tile" style="--tile-d:-2.59s"><img src="assets/mosaic/stick-figure.jpg" alt="" width="300" height="533" decoding="async" /><span class="hero-tile-bar"><span class="rx-stat"><svg class="ic"><use href="#ic-heart" /></svg><b data-tick="149553">149.6K</b></span><span class="rx-stat"><svg class="ic"><use href="#ic-comment" /></svg><b data-tick="3685">3,685</b></span><span class="rx-stat is-live"><svg class="ic is-live"><use href="#ic-share" /></svg><b data-tick="10814">10.8K</b></span></span><svg class="hero-tile-pop"><use href="#ic-share" /></svg></figure>
+            </div>
+          </div>
+      </div>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="hero-vignette" aria-hidden="true"></div>
 
-          <p class="hero-cta-note">No card, no commitment, no catch.</p>
+      <!-- Real, evidenced numbers — one Sonder account, 30 days.
+           See the Instagram Insights receipt in #proof. -->
+      <div class="hero-signals" aria-hidden="true">
+        <div class="hero-stream hero-stream--left">
+          <svg class="rx" style="--i:0;--x:6%"><use href="#ic-heart" /></svg>
+          <svg class="rx" style="--i:1;--x:54%"><use href="#ic-comment" /></svg>
+          <svg class="rx" style="--i:2;--x:22%"><use href="#ic-share" /></svg>
+          <svg class="rx" style="--i:3;--x:72%"><use href="#ic-heart" /></svg>
+          <svg class="rx" style="--i:4;--x:38%"><use href="#ic-comment" /></svg>
+          <svg class="rx" style="--i:5;--x:10%"><use href="#ic-share" /></svg>
+          <svg class="rx" style="--i:6;--x:62%"><use href="#ic-heart" /></svg>
+          <svg class="rx" style="--i:7;--x:30%"><use href="#ic-comment" /></svg>
+        </div>
+        <div class="hero-stream hero-stream--right">
+          <svg class="rx" style="--i:0;--x:64%"><use href="#ic-heart" /></svg>
+          <svg class="rx" style="--i:1;--x:14%"><use href="#ic-comment" /></svg>
+          <svg class="rx" style="--i:2;--x:44%"><use href="#ic-share" /></svg>
+          <svg class="rx" style="--i:3;--x:80%"><use href="#ic-heart" /></svg>
+          <svg class="rx" style="--i:4;--x:26%"><use href="#ic-comment" /></svg>
+          <svg class="rx" style="--i:5;--x:56%"><use href="#ic-share" /></svg>
+          <svg class="rx" style="--i:6;--x:4%"><use href="#ic-heart" /></svg>
+          <svg class="rx" style="--i:7;--x:36%"><use href="#ic-comment" /></svg>
+        </div>
+        <span class="hero-badge hero-badge--views">
+          <svg class="ic"><use href="#ic-play" /></svg>
+          <span class="hero-badge-num" data-counter data-target="2.9" data-suffix="M" data-decimals="1">2.9M</span>
+          <span class="hero-badge-label">views</span>
+        </span>
+        <span class="hero-badge hero-badge--likes">
+          <svg class="ic"><use href="#ic-heart" /></svg>
+          <span class="hero-badge-num" data-counter data-target="474.5" data-suffix="K" data-decimals="1">474.5K</span>
+          <span class="hero-badge-label">interactions</span>
+        </span>
+        <span class="hero-badge hero-badge--follows">
+          <svg class="ic"><use href="#ic-follow" /></svg>
+          <span class="hero-badge-num" data-counter data-target="11.7" data-suffix="K" data-decimals="1">11.7K</span>
+          <span class="hero-badge-label">new followers</span>
+        </span>
+      </div>
+
+      <div class="hero-inner">
+        <h1 id="hero-headline" class="hero-headline">
+          <span class="line">#1 most used AI tool</span>
+          <span class="line">for <em>selling books</em>.</span>
+        </h1>
+
+        <p class="hero-sub">
+          Amazon Ads, TikToks, slideshows and viral videos, generated from the book you&rsquo;ve already written.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="https://app.yousonder.com/signup?offer=freevideo" class="cta cta-primary cta-primary--large">
+            <span>Get your first video free</span>
+            <span class="cta-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a href="#how" class="cta cta-secondary">See how it works</a>
         </div>
 
-        <button class="hero-caption" type="button" data-reel data-wistia-id="oenqanb3ej" data-reel-title="Live demo — book in, video out" data-reel-aspect="1.78" aria-label="Play the live demo: book in, video out">Live demo — book in, video out</button>
+        <p class="hero-cta-note">No card, no commitment, no catch.</p>
 
-        <div class="hero-scroll-hint" aria-hidden="true">
-          <span>Scroll</span>
-          <i></i>
+        <div class="hero-trust-chips">
+          <div class="hero-trust-chip">
+            <span class="hero-trust-icon" aria-hidden="true">&#9201;</span>
+            <span><strong class="hero-trust-num" id="hours-saved-num">4,000+</strong> hours saved</span>
+          </div>
+          <div class="hero-trust-chip">
+            <span class="hero-trust-icon" aria-hidden="true">&#127916;</span>
+            <span><strong class="hero-trust-num" id="videos-made-num">1,000+</strong> videos made</span>
+          </div>
         </div>
+      </div>
+
+      <button class="hero-caption" type="button" data-reel data-wistia-id="oenqanb3ej" data-reel-title="Live demo — book in, video out" data-reel-aspect="1.78" aria-label="Play the live demo: book in, video out">Live demo — book in, video out</button>
+
+      <div class="hero-scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <i></i>
       </div>
     </section>
 

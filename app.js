@@ -38,6 +38,45 @@
     .catch(function () { updateHoursBadge(FALLBACK_VIDEOS); });
 })();
 
+// -------- Hero tile engagement counters --------
+// ILLUSTRATIVE FIGURES, NOT MEASURED DATA. The starting numbers are seeded into
+// the markup (data-tick on each .rx-stat b) and drift upward here so the wall
+// reads as live. They are not the real engagement of the specific customer
+// videos shown behind them. Mike's explicit call, 26 Aug 2026, after the point
+// was raised. To make them real, replace the data-tick values in index.html
+// with actual per-video numbers — nothing here needs to change.
+(function () {
+  var nodes = document.querySelectorAll('.hero-tile-bar b[data-tick]');
+  if (!nodes.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var vals = [];
+  for (var i = 0; i < nodes.length; i++) vals[i] = parseInt(nodes[i].getAttribute('data-tick'), 10) || 0;
+
+  function fmt(n) {
+    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+    if (n >= 10000)   return (n / 1000).toFixed(1) + 'K';
+    if (n >= 1000)    return n.toLocaleString();
+    return String(n);
+  }
+
+  // Update a rotating slice each tick rather than all 108 at once: every number
+  // still moves about once a second, at a fraction of the layout cost.
+  var cursor = 0;
+  var SLICE = 14;
+  setInterval(function () {
+    if (document.hidden) return;
+    for (var k = 0; k < SLICE; k++) {
+      var idx = cursor % nodes.length;
+      cursor++;
+      if (Math.random() < 0.72) {
+        vals[idx] += Math.max(1, Math.round(vals[idx] * 0.00016 * (0.4 + Math.random())));
+        nodes[idx].textContent = fmt(vals[idx]);
+      }
+    }
+  }, 110);
+})();
+
 (function () {
   'use strict';
 
@@ -56,135 +95,10 @@
     window.addEventListener('scroll', updateNav, { passive: true });
   }
 
-  // -------- Hero — scroll-driven canvas video --------
-  const heroSection = document.querySelector('[data-hero]');
-  const canvas = document.querySelector('[data-hero-canvas]');
-
-  if (heroSection && canvas) {
-    const ctx = canvas.getContext('2d', { alpha: false });
-    const FRAME_COUNT = 168;
-    const framePath = (i) => `assets/frames/hero/frame_${String(i).padStart(3, '0')}.jpg`;
-
-    const frames = new Array(FRAME_COUNT);
-    let loadedCount = 0;
-    let highestLoaded = -1;
-    let dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-    const sizeCanvas = () => {
-      const rect = canvas.getBoundingClientRect();
-      const w = Math.max(rect.width, window.innerWidth);
-      const h = Math.max(rect.height, window.innerHeight);
-      canvas.width = Math.floor(w * dpr);
-      canvas.height = Math.floor(h * dpr);
-    };
-
-    const drawFrame = (idx) => {
-      // Prefer the requested frame; if not yet loaded, fall back to the
-      // highest-loaded frame that's <= idx so the playback never freezes.
-      let img = frames[idx];
-      if (!img || !img.complete || img.naturalWidth === 0) {
-        for (let i = idx; i >= 0; i--) {
-          const f = frames[i];
-          if (f && f.complete && f.naturalWidth > 0) { img = f; break; }
-        }
-      }
-      if (!img || !img.complete || img.naturalWidth === 0) return;
-
-      const cw = canvas.width;
-      const ch = canvas.height;
-      const iw = img.naturalWidth;
-      const ih = img.naturalHeight;
-
-      // object-fit: cover — scale to fill, crop overflow
-      const scale = Math.max(cw / iw, ch / ih);
-      const w = iw * scale;
-      const h = ih * scale;
-      const x = (cw - w) / 2;
-      const y = (ch - h) / 2;
-
-      ctx.fillStyle = '#0A0613';
-      ctx.fillRect(0, 0, cw, ch);
-      ctx.drawImage(img, x, y, w, h);
-    };
-
-    let currentFrame = 0;
-    const renderCurrent = () => drawFrame(currentFrame);
-
-    // Preload all frames in parallel. Browsers throttle to ~6-8 connections,
-    // so this fills the pipeline efficiently.
-    const preload = () => {
-      for (let i = 0; i < FRAME_COUNT; i++) {
-        const img = new Image();
-        img.decoding = 'async';
-        img.src = framePath(i + 1);
-        img.onload = () => {
-          loadedCount++;
-          if (i > highestLoaded) highestLoaded = i;
-          // First frame: paint immediately so the hero isn't blank
-          if (i === 0) renderCurrent();
-          // If a later frame the user is currently looking at finally loads, redraw
-          if (i === currentFrame) renderCurrent();
-        };
-        frames[i] = img;
-      }
-    };
-
-    sizeCanvas();
-    preload();
-
-    // Scroll driver. We use a raw scroll listener (lighter than ScrollTrigger for this)
-    // and let ScrollTrigger handle non-hero animations.
-    let pending = false;
-    const updateScroll = () => {
-      pending = false;
-      const rect = heroSection.getBoundingClientRect();
-      const total = heroSection.offsetHeight - window.innerHeight;
-      const scrolled = Math.min(Math.max(-rect.top, 0), total);
-      const p = total > 0 ? scrolled / total : 0;
-      const target = Math.min(FRAME_COUNT - 1, Math.max(0, Math.round(p * (FRAME_COUNT - 1))));
-      if (target !== currentFrame) {
-        currentFrame = target;
-        renderCurrent();
-      }
-    };
-    const onScroll = () => {
-      if (!pending) {
-        pending = true;
-        requestAnimationFrame(updateScroll);
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    // Resize: refit canvas, redraw current frame
-    let resizeTO;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTO);
-      resizeTO = setTimeout(() => {
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        sizeCanvas();
-        renderCurrent();
-        if (hasGSAP) ScrollTrigger.refresh();
-      }, 200);
-    });
-
-    // Reduced motion: just show frame 0 (and skip the scroll-driven sequence)
-    if (prefersReduced) {
-      window.removeEventListener('scroll', onScroll);
-      // Best effort: render whatever's loaded
-      const first = new Image();
-      first.onload = () => {
-        sizeCanvas();
-        const cw = canvas.width, ch = canvas.height;
-        const iw = first.naturalWidth, ih = first.naturalHeight;
-        const scale = Math.max(cw / iw, ch / ih);
-        const w = iw * scale, h = ih * scale;
-        ctx.fillStyle = '#0A0613';
-        ctx.fillRect(0, 0, cw, ch);
-        ctx.drawImage(first, (cw - w) / 2, (ch - h) / 2, w, h);
-      };
-      first.src = framePath(1);
-    }
-  }
+  // -------- Hero --------
+  // The hero is now a pure-CSS "wall of proof": a marquee of real Sonder
+  // videos drifting behind the claim. No canvas, no frame sequence, no scroll
+  // listener. The engagement badges reuse the [data-counter] machinery below.
 
   // -------- Stats count-up --------
   const counters = document.querySelectorAll('[data-counter]');
