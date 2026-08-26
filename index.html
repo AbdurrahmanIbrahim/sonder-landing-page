@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@900&display=swap" />
 
-  <link rel="stylesheet" href="style.css?v=19" />
+  <link rel="stylesheet" href="style.css?v=20" />
 
   <script src="https://fast.wistia.com/player.js" async></script>
 </head>
@@ -261,14 +261,17 @@
       <div class="showcase-rail" data-showcase-rail>
         <div class="showcase-track">
           <figure class="reel">
-            <div class="reel-frame reel-frame--static">
+            <button class="reel-frame" type="button" data-reel data-wistia-id="il41uz6kze" data-reel-title="One silk thread holds Ron Wade's entire war together" aria-label="Play: One silk thread holds Ron Wade's entire war together">
               <img src="assets/stills/toybox.jpg" alt="Sonder video &mdash; Toy Box style" loading="lazy" />
               <span class="reel-style">Toy Box</span>
               <span class="reel-new">New</span>
-            </div>
+              <span class="reel-play" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M 10 6 L 26 16 L 10 26 Z" fill="#0A0613"/></svg>
+              </span>
+            </button>
             <figcaption>
-              <span class="reel-title">Toy Box</span>
-              <span class="reel-genre">Newest style</span>
+              <span class="reel-title">One silk thread holds Ron Wade&rsquo;s entire war together</span>
+              <span class="reel-genre">Memoir</span>
             </figcaption>
           </figure>
           <figure class="reel">
@@ -550,40 +553,51 @@
         </p>
       </header>
 
-      <!-- The swipe deck. Real slides from a real Sonder slideshow; the last
-           card is the mechanic that sells it — their story pulls the reader
-           through, and the book is the payoff. -->
+      <!-- A real, complete Sonder slideshow: all five slides of Mike's own
+           Last Man Out carousel, ending on the genuine cover reveal. Nothing
+           here is a mockup or a placeholder. -->
       <div class="deck">
         <ol class="deck-track">
           <li class="deck-slide" style="--i:0">
             <span class="deck-num">1</span>
-            <img src="assets/slides/slide-1.jpg" alt="Slideshow slide 1 &mdash; she kept paying for a house she never went back to" loading="lazy" width="440" height="550" />
+            <img src="assets/slides/lmo-0.jpg" alt="Slide 1 &mdash; He was shot down over Holland in 1941 and spent the next four and a half years behind German wire." loading="lazy" width="460" height="613" />
           </li>
           <li class="deck-slide" style="--i:1">
             <span class="deck-num">2</span>
-            <img src="assets/slides/slide-2.jpg" alt="Slideshow slide 2 &mdash; everything inside was left exactly as it was" loading="lazy" width="440" height="550" />
+            <img src="assets/slides/lmo-1.jpg" alt="Slide 2 &mdash; The closest he came to being shot was a railway waiting room, where he shouted Heil Churchill at a German majo" loading="lazy" width="460" height="613" />
           </li>
           <li class="deck-slide" style="--i:2">
             <span class="deck-num">3</span>
-            <img src="assets/slides/slide-3.jpg" alt="Slideshow slide 3 &mdash; and one envelope was never opened" loading="lazy" width="440" height="550" />
+            <img src="assets/slides/lmo-2.jpg" alt="Slide 3 &mdash; The major didnt shoot. Ron reckons it wasnt mercy  the man simply couldnt process what hed heard." loading="lazy" width="460" height="613" />
           </li>
           <li class="deck-slide" style="--i:3">
             <span class="deck-num">4</span>
-            <img src="assets/slides/slide-4.jpg" alt="Slideshow slide 4 &mdash; she had written it to herself, forty years earlier" loading="lazy" width="440" height="550" />
+            <img src="assets/slides/lmo-3.jpg" alt="Slide 4 &mdash; Four of his crewmates werent as lucky. They died so he could live." loading="lazy" width="460" height="613" />
           </li>
           <li class="deck-slide deck-slide--reveal" style="--i:4">
             <span class="deck-num">5</span>
-            <span class="deck-reveal">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h11a3 3 0 0 1 3 3v15a1 1 0 0 1-1 1H6a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v11.17A2.98 2.98 0 0 1 6 16h12V5a1 1 0 0 0-1-1H6zm0 14a1 1 0 1 0 0 2h12v-2H6z"/></svg>
-              <strong>Your book</strong>
-              <em>The reveal</em>
-            </span>
+            <img src="assets/slides/lmo-4.jpg" alt="Slide 5 &mdash; the book itself: Last Man Out, his own words, in the memoir" loading="lazy" width="460" height="613" />
+            <span class="deck-flag">The reveal</span>
           </li>
         </ol>
-        <p class="deck-hint">
-          <span>Swipe through</span>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p class="deck-cred">
+          <span>A real Sonder slideshow &mdash; <strong>Last Man Out</strong>, an RAF tail gunner&rsquo;s memoir</span>
+          <span class="deck-hint">Swipe through <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </p>
+      </div>
+
+      <div class="eg">
+        <p class="eg-lead">Same format. Very different books.</p>
+        <ul class="eg-row">
+          <li class="eg-item">
+            <img src="assets/slides/eg-maradona.jpg" alt="Slideshow slide about Maradona and the 1990 World Cup water bottle" loading="lazy" width="320" height="427" />
+            <span class="eg-cap"><strong>The green water bottle</strong>Football &middot; sports history</span>
+          </li>
+          <li class="eg-item">
+            <img src="assets/slides/eg-dad.jpg" alt="Slideshow slide from You Will Rock As a Dad" loading="lazy" width="320" height="427" />
+            <span class="eg-cap"><strong>&ldquo;I have no idea what I&rsquo;m doing&rdquo;</strong>Parenting &middot; first-time dads</span>
+          </li>
+        </ul>
       </div>
 
       <div class="slides-actions">
