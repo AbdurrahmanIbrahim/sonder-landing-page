@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0A0613" />
+<title>Sonder — turn your book into the videos that sell it</title>
+<meta name="description" content="Upload your book once. Sonder writes, voices and edits it into 30 videos a month. Your first one is free, no card." />
+<meta name="robots" content="noindex, nofollow" />
+
+<!-- Meta Pixel. PASTE THE DATASET ID BELOW. Empty = completely inert. -->
+<script>
+  window.SONDER_META_PIXEL_ID = ''; /* e.g. '1234567890123456' */
+  (function () {
+    var id = window.SONDER_META_PIXEL_ID;
+    if (!id) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', id);
+    fbq('track', 'PageView');
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@900&display=swap" />
+<link rel="icon" type="image/svg+xml" href="../assets/sonder-logo-plum-flat.svg" />
+
+<style>
+  :root{
+    --plum:#0A0613; --panel:#140C21; --deep:#1A0F2E;
+    --mint:#7FFFD4; --paper:#F5F5F7; --quiet:#8B8FA3;
+    --line:rgba(245,245,247,.10); --soft:rgba(245,245,247,.06);
+    --ease:cubic-bezier(.32,.72,0,1);
+    --gutter:clamp(20px,5vw,30px);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--plum);color:var(--paper);
+    font-family:Inter,system-ui,-apple-system,sans-serif;font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:600px;margin:0 auto;padding-inline:var(--gutter)}
+  p{margin:0 0 1em} p:last-child{margin-bottom:0}
+  strong{font-weight:600}
+  em.hl{font-style:normal;color:var(--mint);font-weight:600}
+
+  header{padding:20px 0 2px}
+  .mark{display:inline-flex;align-items:center;gap:5px;font-family:Nunito,system-ui,sans-serif;
+    font-weight:900;font-size:21px;letter-spacing:-.04em}
+  .mark svg{width:10px;height:10px}
+
+  .prehead{display:inline-block;margin:16px 0 12px;padding:6px 13px;border-radius:999px;
+    font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--mint);background:rgba(127,255,212,.08);border:1px solid rgba(127,255,212,.28)}
+  h1{margin:0 0 14px;font-weight:700;font-size:clamp(32px,7.6vw,44px);line-height:1.05;
+    letter-spacing:-.035em;text-wrap:balance}
+  .sub{color:var(--quiet);font-size:clamp(16px,4.2vw,18.5px);margin:0 0 24px}
+
+  /* Two-step opt-in. Asking for the book title first is a deliberate micro-
+     commitment: someone who types their own title has already pictured the
+     video. It is also the single number that matters downstream — 58% of
+     signups never upload a book, and this carries the title into signup. */
+  /* Progressive opt-in. Each step costs slightly more than the last: a tap
+     (free) reveals the email field (small, and they have already said yes),
+     which reveals the qualifying tap (free), which leads to the upload (big).
+     A bare email field under a headline is a cost before any reward. */
+  .optin-step{display:none}
+  .optin-step.is-on{display:block;animation:stepIn 260ms var(--ease)}
+  @keyframes stepIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .step-q{margin:0 0 12px;font-size:19px;font-weight:600;letter-spacing:-.02em;text-align:center}
+  .choices{display:grid;gap:10px}
+  .choice{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;
+    padding:17px 20px;border-radius:14px;cursor:pointer;font-family:inherit;
+    font-size:16px;font-weight:600;color:var(--paper);
+    background:rgba(255,255,255,.03);border:1px solid var(--line);
+    transition:border-color 160ms var(--ease),background 160ms var(--ease),transform 160ms var(--ease)}
+  .choice:hover{border-color:rgba(127,255,212,.45);background:rgba(127,255,212,.06);transform:translateY(-1px)}
+  .choice:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+  .choice small{display:block;font-weight:400;font-size:13px;color:var(--quiet);margin-top:2px}
+  .outcome{padding:20px;border-radius:14px;border:1px solid rgba(127,255,212,.28);
+    background:rgba(127,255,212,.05);text-align:center}
+  .outcome b{display:block;font-size:17px;margin-bottom:6px}
+  .outcome p{font-size:14.5px;color:var(--quiet);margin:0 0 14px}
+  .backlink{display:block;width:100%;margin-top:10px;background:none;border:0;cursor:pointer;
+    font-family:inherit;font-size:13px;color:var(--quiet);text-decoration:underline}
+
+  form.optin{display:grid;gap:10px;margin:0 0 12px}
+  form.optin label{font-size:13.5px;color:var(--quiet)}
+  form.optin input,
+  [data-email-form] input{
+    width:100%;padding:16px 18px;border-radius:13px;font-size:16px;font-family:inherit;
+    color:var(--paper);background:rgba(255,255,255,.04);border:1px solid var(--line);
+  }
+  form.optin input::placeholder,
+  [data-email-form] input::placeholder{color:#5f637a}
+  form.optin input:focus,
+  [data-email-form] input:focus{outline:2px solid var(--mint);outline-offset:1px;border-color:transparent}
+
+  .cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+    padding:19px 24px;border-radius:999px;border:0;cursor:pointer;
+    background:var(--mint);color:var(--plum);font-family:inherit;
+    font-size:17px;font-weight:700;letter-spacing:-.01em;text-decoration:none;
+    box-shadow:0 0 34px rgba(127,255,212,.3);
+    transition:transform 180ms var(--ease),box-shadow 180ms var(--ease)}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 0 48px rgba(127,255,212,.45)}
+  .cta:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
+  .note{margin:11px 0 0;text-align:center;font-size:13px;color:var(--quiet)}
+
+  .demo{position:relative;width:100%;max-width:272px;margin:26px auto 0;aspect-ratio:9/16;
+    border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--deep);
+    box-shadow:0 24px 60px -28px rgba(0,0,0,.85)}
+  .demo video{width:100%;height:100%;object-fit:cover;display:block}
+  .demo figcaption{position:absolute;left:10px;bottom:10px;padding:5px 10px;border-radius:999px;
+    font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    background:rgba(10,6,19,.72);border:1px solid var(--line);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+
+  .trust{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:22px 0 0;padding:0;list-style:none}
+  .trust li{font-size:12px;padding:7px 13px;border-radius:999px;
+    border:1px solid rgba(127,255,212,.26);background:rgba(127,255,212,.06);white-space:nowrap}
+  .trust b{color:var(--mint);font-weight:700}
+
+  section{padding:46px 0;border-top:1px solid var(--soft)}
+  h2{margin:0 0 16px;font-size:clamp(24px,6vw,30px);font-weight:700;line-height:1.14;
+    letter-spacing:-.03em;text-wrap:balance}
+  h3{margin:26px 0 8px;font-size:18px;font-weight:600;letter-spacing:-.015em}
+  .kicker{display:block;font-size:11px;font-weight:600;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--mint);margin:0 0 12px}
+
+  .tried{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:9px}
+  .tried li{display:grid;grid-template-columns:22px 1fr;gap:11px;padding:13px 15px;
+    border-radius:12px;background:rgba(255,255,255,.02);border:1px solid var(--soft);
+    font-size:15px;color:var(--quiet)}
+  .tried .x{color:#F08A7A;font-weight:700}
+  .tried b{color:var(--paper);font-weight:600}
+
+  .steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:18px}
+  .steps li{counter-increment:s;display:grid;grid-template-columns:36px 1fr;gap:14px}
+  .steps li::before{content:counter(s);width:36px;height:36px;border-radius:50%;
+    display:grid;place-items:center;background:rgba(127,255,212,.1);
+    border:1px solid rgba(127,255,212,.3);color:var(--mint);font-weight:700;font-size:14px}
+  .steps b{display:block;font-size:16.5px;font-weight:600;margin-bottom:2px}
+  .steps span{font-size:15px;color:var(--quiet)}
+
+  .receipts{display:grid;gap:12px;grid-template-columns:1fr 1fr;margin:0 0 16px}
+  .receipts figure{margin:0}
+  .receipts img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line)}
+  .receipts figcaption{margin-top:7px;font-size:12px;color:var(--quiet);line-height:1.4}
+  .receipts .wide{grid-column:1/-1}
+
+  blockquote{margin:0 0 12px;padding:17px 19px;border-radius:13px;border:1px solid var(--soft);
+    background:rgba(255,255,255,.02);font-size:16px}
+  blockquote footer{margin-top:8px;font-size:13px;color:var(--quiet)}
+
+  .founders{display:grid;gap:14px}
+  .founder{display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:start}
+  .founder img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:1px solid var(--line)}
+  .founder b{display:block;font-size:16px;font-weight:600}
+  .founder span{font-size:14.5px;color:var(--quiet);line-height:1.5}
+
+  .stack{border:1px solid rgba(127,255,212,.26);border-radius:16px;padding:22px;
+    background:linear-gradient(180deg,rgba(127,255,212,.05),rgba(26,15,46,.4))}
+  .stack ul{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:10px}
+  .stack li{display:grid;grid-template-columns:20px 1fr auto;gap:11px;align-items:baseline;
+    font-size:15px;padding-bottom:10px;border-bottom:1px dashed var(--soft)}
+  .stack li:last-child{border-bottom:0;padding-bottom:0}
+  .stack .tick{color:var(--mint);font-weight:700}
+  .stack .val{color:var(--quiet);font-size:13.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .stack .total{display:flex;justify-content:space-between;align-items:baseline;
+    padding-top:14px;border-top:1px solid var(--line);font-size:15px}
+  .stack .total b{font-size:26px;letter-spacing:-.03em;color:var(--mint)}
+  .strike{text-decoration:line-through;opacity:.55}
+
+  .guard{display:grid;gap:10px;margin-top:18px}
+  .guard div{display:grid;grid-template-columns:22px 1fr;gap:11px;padding:14px 16px;
+    border-radius:12px;border:1px solid var(--soft);background:rgba(255,255,255,.02);font-size:14.8px}
+  .guard .tick{color:var(--mint);font-weight:700}
+  .guard b{font-weight:600}
+
+  details{border-bottom:1px solid var(--soft);padding:14px 0}
+  details summary{cursor:pointer;font-weight:600;font-size:16px;list-style:none;
+    display:flex;justify-content:space-between;gap:12px;align-items:center}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";color:var(--mint);font-weight:700;font-size:20px;line-height:1}
+  details[open] summary::after{content:"\2212"}
+  details p{margin:10px 0 0;font-size:15px;color:var(--quiet)}
+
+  .ps{margin-top:22px;padding:18px 20px;border-radius:13px;border:1px solid var(--soft);
+    background:rgba(255,255,255,.02);font-size:15.2px;color:var(--quiet)}
+  .ps b{color:var(--paper)}
+
+  footer.foot{padding:34px 0 46px;text-align:center;font-size:12px;color:var(--quiet)}
+  footer.foot a{color:var(--quiet)}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <!-- Not a link. On a funnel page the logo is a trust marker, not an exit. -->
+    <span class="mark">Sonder<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1.5L10 6 2 10.5Z" fill="#7FFFD4"/></svg></span>
+  </header>
+
+  <!-- ============ HOOK ============ -->
+  <div>
+    <span class="prehead">For authors who already have a book</span>
+    <h1>Turn your book into the videos that <em class="hl">sell it</em>.</h1>
+    <p class="sub">
+      Upload the book once. Sonder writes the script from your actual pages, voices it, edits
+      it, and hands you up to 30 videos a month &mdash; for less than a freelancer charges for one.
+    </p>
+
+    <div class="optin-block" data-optin-block>
+
+      <!-- Step 1: the offer. A tap, not a field. Costs nothing to say yes to. -->
+      <div class="optin-step is-on" data-step="1">
+        <button class="cta" type="button" data-go="2">Make my first video free <span aria-hidden="true">&rarr;</span></button>
+        <p class="note">No card. About four minutes. You keep the video either way.</p>
+      </div>
+
+      <!-- Step 2: the email. They have already said yes, so this is finishing
+           something rather than starting it. Framed as delivery, not a list. -->
+      <div class="optin-step" data-step="2">
+        <form data-email-form>
+          <p class="step-q">Where should we send it?</p>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email"
+                 required placeholder="you@example.com" />
+          <button class="cta" type="submit" style="margin-top:10px">Continue <span aria-hidden="true">&rarr;</span></button>
+        </form>
+        <p class="note">We use this to send your video and set up your account. No spam, and you can unsubscribe any time.</p>
+      </div>
+
+      <!-- Step 3: qualify. Two taps, no typing. -->
+      <div class="optin-step" data-step="3">
+        <p class="step-q">Have you got a book?</p>
+        <div class="choices">
+          <button class="choice" type="button" data-book="yes">
+            <span>Yes &mdash; it&rsquo;s written<small>Manuscript ready to upload</small></span>
+          </button>
+          <button class="choice" type="button" data-book="no">
+            <span>Not yet<small>Still writing, or just planning it</small></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4a: has a book. Straight on, with the email carried so they never type it twice. -->
+      <div class="optin-step" data-step="4yes">
+        <div class="outcome">
+          <b>Perfect. Let&rsquo;s make it.</b>
+          <p>Next you&rsquo;ll upload the manuscript and your cover image &mdash; that&rsquo;s the whole setup.</p>
+          <a class="cta" href="https://app.yousonder.com/signup?offer=freevideo" data-signup-yes>
+            Upload my book <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+        <button class="backlink" type="button" data-go="3">Back</button>
+      </div>
+
+      <!-- 4b: no book. Honest, and we keep the email. -->
+      <div class="optin-step" data-step="4no">
+        <div class="outcome">
+          <b>Then Sonder isn&rsquo;t ready for you yet &mdash; and that&rsquo;s worth saying plainly.</b>
+          <p>Every video is built from the words in your finished manuscript. Without one there&rsquo;s nothing for it to read. Finish the book and we&rsquo;ll be here.</p>
+          <a class="cta" href="https://app.yousonder.com/signup?offer=freevideo" data-signup-no>
+            Set up my account anyway <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+        <button class="backlink" type="button" data-go="3">Back</button>
+      </div>
+
+    </div>
+
+    <figure class="demo">
+      <video src="../assets/lp/demo.mp4" poster="../assets/lp/demo-poster.jpg"
+             autoplay muted loop playsinline preload="metadata"
+             aria-label="A real Sonder video made from a book"></video>
+      <figcaption>Made by Sonder from a book</figcaption>
+    </figure>
+
+    <ul class="trust">
+      <li><b>1,000+</b> videos made</li>
+      <li><b>2.9M</b> views in 30 days</li>
+      <li><b>4,000+</b> hours saved</li>
+    </ul>
+  </div>
+
+  <!-- ============ THE NEW OPPORTUNITY ============ -->
+  <section>
+    <span class="kicker">Why nothing you&rsquo;ve tried worked</span>
+    <h2>Your book isn&rsquo;t the problem. Nobody has seen it.</h2>
+    <p>You&rsquo;ve almost certainly already tried some of these:</p>
+    <ul class="tried">
+      <li><span class="x">&times;</span><span><b>Amazon ads.</b> They work while you pay. The day you stop, so do the sales.</span></li>
+      <li><span class="x">&times;</span><span><b>Posting yourself.</b> One decent video eats a day. The algorithm wants thirty a month.</span></li>
+      <li><span class="x">&times;</span><span><b>A freelancer.</b> $150 a video and three to five days of briefing, revisions and chasing.</span></li>
+      <li><span class="x">&times;</span><span><b>An agency.</b> $500&ndash;2,500 a month, a call every fortnight, and they never read the book.</span></li>
+    </ul>
+    <p>
+      Sonder isn&rsquo;t a cheaper version of any of those. It&rsquo;s a different thing entirely:
+      <strong>a studio that has read your book</strong> and turns the parts readers actually
+      stop for into video. You never film. You never edit. You never appear.
+    </p>
+  </section>
+
+  <!-- ============ EPIPHANY BRIDGE ============ -->
+  <section>
+    <span class="kicker">Why this exists</span>
+    <h2>Two publishers got tired of watching good books go quiet.</h2>
+    <div class="founders">
+      <div class="founder">
+        <img src="../assets/lp/mike.jpg" alt="Mike, co-founder of Sonder" loading="lazy" width="56" height="56" />
+        <span><b>Mike</b><span>Twenty years making video &mdash; TikTok, Speedo and Ring as clients, and the BBC on speed-dial when they need someone to explain media. Also a seven-figure publisher with 50+ books.</span></span>
+      </div>
+      <div class="founder">
+        <img src="../assets/lp/lexi.jpg" alt="Lexi, co-founder of Sonder" loading="lazy" width="56" height="56" />
+        <span><b>Lexi</b><span>Turned a children&rsquo;s book into a TikTok phenomenon with tens of millions of views. Built a marketing agency at nineteen.</span></span>
+      </div>
+    </div>
+    <p style="margin-top:18px">
+      They kept seeing the same thing: genuinely good books, invisible. Not because the writing
+      was weak &mdash; because one author cannot personally make thirty videos a month. Everything
+      they knew about what actually works on camera went into Sonder, so that an author doesn&rsquo;t
+      have to learn any of it.
+    </p>
+  </section>
+
+  <!-- ============ BELIEF 1: DOES IT WORK? ============ -->
+  <section>
+    <span class="kicker">&ldquo;But does AI video actually sell books?&rdquo;</span>
+    <h2>Here are the receipts.</h2>
+    <div class="receipts">
+      <figure class="wide">
+        <img src="../assets/lp/receipt-insights.jpg" alt="Instagram Insights: 2.9 million views, 474.5 thousand interactions and 11.7 thousand new followers in 30 days" loading="lazy" width="560" height="482" />
+        <figcaption>One author&rsquo;s Instagram &mdash; 30 days of Sonder videos</figcaption>
+      </figure>
+      <figure>
+        <img src="../assets/lp/receipt-roi.jpg" alt="TikTok Shop dashboard showing 37x return on ad spend from one Sonder video" loading="lazy" width="420" height="525" />
+        <figcaption><strong>37&times;</strong> on ad spend, one video</figcaption>
+      </figure>
+      <figure>
+        <img src="../assets/lp/receipt-sales.jpg" alt="Customer message: I am up to 44 sales from Sonder" loading="lazy" width="420" height="120" />
+        <figcaption>&ldquo;I&rsquo;m up to 44 sales from Sonder.&rdquo;</figcaption>
+      </figure>
+    </div>
+    <blockquote>
+      &ldquo;I&rsquo;d posted for months and got crickets. One Sonder video did more in a week than my year of trying.&rdquo;
+      <footer>Marcus &mdash; self-improvement author</footer>
+    </blockquote>
+    <blockquote>
+      &ldquo;I started 5 days ago and made 10 sales.&rdquo;
+      <footer>Lynn &mdash; children&rsquo;s-book author</footer>
+    </blockquote>
+  </section>
+
+  <!-- ============ BELIEF 2: COULD *I* DO IT? ============ -->
+  <section>
+    <span class="kicker">&ldquo;I&rsquo;m an author, not a video person&rdquo;</span>
+    <h2>Three steps. None of them involve a camera.</h2>
+    <ol class="steps">
+      <li><span><b>Upload your book</b><span>The manuscript, or the PDF you already sell. That is the entire setup.</span></span></li>
+      <li><span><b>Pick a look</b><span>Thirteen styles. Sonder writes the script from your actual pages &mdash; you don&rsquo;t write a word.</span></span></li>
+      <li><span><b>Post it</b><span>Download, or auto-post straight to TikTok, Reels and Shorts. Minutes, not days.</span></span></li>
+    </ol>
+    <p style="margin-top:20px">
+      No filming. No editing. No script to write. No appearing on camera. If you can upload a
+      file, you can do this.
+    </p>
+  </section>
+
+  <!-- ============ THE OFFER / VALUE STACK ============ -->
+  <section>
+    <span class="kicker">The offer</span>
+    <h2>What a month of this costs everywhere else.</h2>
+    <div class="stack">
+      <ul>
+        <li><span class="tick">&check;</span><span>5 cinematic videos, made from your book</span><span class="val">$750 freelance</span></li>
+        <li><span class="tick">&check;</span><span>Scripts written from your actual pages</span><span class="val">included</span></li>
+        <li><span class="tick">&check;</span><span>Professional voiceover &amp; animated captions</span><span class="val">included</span></li>
+        <li><span class="tick">&check;</span><span>All four formats &mdash; hooks, viral, slideshows, Amazon ads</span><span class="val">included</span></li>
+        <li><span class="tick">&check;</span><span>Auto-posting to your accounts</span><span class="val">included</span></li>
+        <li><span class="tick">&check;</span><span>You own every video, commercially, forever</span><span class="val">included</span></li>
+      </ul>
+      <div class="total">
+        <span>Sonder Starter <span class="strike">$750</span></span>
+        <b>$49<span style="font-size:14px;color:var(--quiet);font-weight:400">/mo</span></b>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:15px;color:var(--quiet)">
+      Plans start at $9. And you don&rsquo;t decide any of that today &mdash; your first video is
+      free, and we don&rsquo;t ask for a card to make it.
+    </p>
+  </section>
+
+  <!-- ============ BELIEF 3: WHAT'S THE CATCH? ============ -->
+  <section>
+    <span class="kicker">The catch, in full</span>
+    <h2>There isn&rsquo;t one. Here&rsquo;s the fine print anyway.</h2>
+    <div class="guard">
+      <div><span class="tick">&check;</span><span><b>Your first video is genuinely free.</b> No card, no trial that quietly bills you.</span></div>
+      <div><span class="tick">&check;</span><span><b>You own everything.</b> Every video is yours to use commercially, forever, including if you leave.</span></div>
+      <div><span class="tick">&check;</span><span><b>Cancel any time</b>, from your settings, in two clicks. No call, no retention script.</span></div>
+      <div><span class="tick">&check;</span><span><b>14-day refund window</b> on anything you pay for.</span></div>
+      <div><span class="tick">&check;</span><span><b>We&rsquo;re honest about AI.</b> Occasionally a letter renders oddly. Prolific beats perfect &mdash; and you can regenerate.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ REMAINING OBJECTIONS ============ -->
+  <section>
+    <span class="kicker">Still wondering</span>
+    <h2>The questions everyone asks.</h2>
+    <details><summary>How long does one take?</summary><p>Minutes. Upload the book once, then each new video is a couple of clicks and a short render.</p></details>
+    <details><summary>What kind of books work?</summary><p>Memoir, self-help, business, health, history, children&rsquo;s, fiction. If it has a story or an idea in it, it has videos in it.</p></details>
+    <details><summary>Do I need editing experience?</summary><p>None. There is nothing to edit. You pick a style and Sonder does the rest.</p></details>
+    <details><summary>Can I really try before paying?</summary><p>Yes. First video free, no card. That is the whole point of this page.</p></details>
+    <details><summary>Who owns the videos?</summary><p>You do. Commercially, forever.</p></details>
+    <details><summary>Where does it post?</summary><p>TikTok, Instagram Reels and YouTube Shorts, automatically if you want. Or just download them.</p></details>
+  </section>
+
+  <!-- ============ CLOSE ============ -->
+  <section>
+    <h2>Find out what your book looks like as a video.</h2>
+    <button class="cta" type="button" data-scroll-top>
+      Make my first video free <span aria-hidden="true">&rarr;</span>
+    </button>
+    <p class="note">No card. About four minutes. You keep it either way.</p>
+
+    <p class="ps">
+      <b>P.S.</b> &mdash; If you skipped to the bottom, here it is in one line: upload the book
+      you&rsquo;ve already written, and in about four minutes you&rsquo;ll watch a video made
+      out of it. It costs nothing and we don&rsquo;t take a card. The only thing you risk is
+      finding out how good your book looks on screen.
+    </p>
+  </section>
+
+  <footer class="foot">
+    &copy; Sonder &middot; <a href="https://app.yousonder.com/privacy">Privacy</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var block = document.querySelector('[data-optin-block]');
+  if (!block) return;
+
+  var steps = block.querySelectorAll('.optin-step');
+  var state = { email: '', book: '' };
+
+  /* Ad params ride all the way through to signup. Attribution has to survive
+     the hop to app.yousonder.com — see app.js on the main site. */
+  var CARRY = ['fbclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+  var here; try { here = new URL(window.location.href); } catch (e) { here = null; }
+
+  function track(name, params) {
+    if (typeof window.fbq === 'function') window.fbq('track', name, params || {});
+  }
+
+  /* Store the lead the moment we have it, rather than only carrying it into the
+     signup form. Roughly half of paid traffic never finishes signing up, and
+     until this existed every one of those emails — and the ad click that paid
+     for it — was simply lost.
+
+     Fire-and-forget on purpose: if the API is down or slow, the visitor still
+     moves through the funnel. A lost lead must never become a lost signup. */
+  var API = 'https://sonder-server-production.up.railway.app';
+  function saveLead(extra) {
+    if (!state.email) return;
+    var payload = { email: state.email, source: 'meta_funnel' };
+    if (here) CARRY.forEach(function (k) {
+      var v = here.searchParams.get(k);
+      if (v) payload[k] = v;
+    });
+    Object.keys(extra || {}).forEach(function (k) { payload[k] = extra[k]; });
+    try {
+      fetch(API + '/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true   /* survives the navigation away to signup */
+      }).catch(function () { /* never surface this to the visitor */ });
+    } catch (e) { /* ignore */ }
+  }
+
+  function show(id) {
+    steps.forEach(function (el) { el.classList.toggle('is-on', el.getAttribute('data-step') === id); });
+    var next = block.querySelector('[data-step="' + id + '"]');
+    var field = next && next.querySelector('input');
+    if (field) field.focus({ preventScroll: true });
+  }
+
+  /* Build the signup URL. The email rides along because Signup.tsx already
+     prefills from ?email= — so they never type it twice, and the account they
+     land on is the one we just promised to send the video to. */
+  function signupUrl(hasBook) {
+    var u = new URL('https://app.yousonder.com/signup');
+    u.searchParams.set('offer', 'freevideo');
+    if (state.email) u.searchParams.set('email', state.email);
+    u.searchParams.set('book_ready', hasBook);
+    if (here) CARRY.forEach(function (k) {
+      var v = here.searchParams.get(k);
+      if (v) u.searchParams.set(k, v);
+    });
+    return u.toString();
+  }
+
+  /* Step 1 -> 2: they said yes to the offer. Free, so it should be. */
+  block.querySelectorAll('[data-go]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var to = btn.getAttribute('data-go');
+      if (to === '2') track('ViewContent', { content_name: 'offer_tapped' });
+      show(to);
+    });
+  });
+
+  /* Step 2 -> 3: the email. This is the lead. */
+  var form = block.querySelector('[data-email-form]');
+  if (form) form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var input = form.querySelector('input[name="email"]');
+    if (!input || !input.checkValidity()) { input && input.reportValidity(); return; }
+    state.email = input.value.trim();
+    saveLead();                                   /* stored before they can bounce */
+    track('Lead', { content_name: 'email_captured' });
+    show('3');
+  });
+
+  /* Step 3 -> outcome. The qualifying tap, and the most useful number on the
+     page: what share of paid traffic even has a book to work from. */
+  block.querySelectorAll('[data-book]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      state.book = btn.getAttribute('data-book');
+      saveLead({ book_ready: state.book });       /* updates the row, does not duplicate it */
+      track('ViewContent', { content_name: 'book_' + state.book });
+      var link = block.querySelector(state.book === 'yes' ? '[data-signup-yes]' : '[data-signup-no]');
+      if (link) link.href = signupUrl(state.book);
+      show(state.book === 'yes' ? '4yes' : '4no');
+    });
+  });
+
+  /* The last CTA runs the same flow rather than duplicating it. */
+  var top = document.querySelector('[data-scroll-top]');
+  if (top) top.addEventListener('click', function () {
+    block.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    show('1');
+  });
+})();
+</script>
+</body>
+</html>
