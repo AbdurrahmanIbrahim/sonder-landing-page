@@ -177,7 +177,11 @@
   .stack .val{color:var(--quiet);font-size:13.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
   .stack .total{display:flex;justify-content:space-between;align-items:baseline;
     padding-top:14px;border-top:1px solid var(--line);font-size:15px}
+  /* Only the first row carries the rule; the second sits under it as the
+     answer to it, not as a second section. */
+  .stack .total + .total{padding-top:7px;border-top:0}
   .stack .total b{font-size:26px;letter-spacing:-.03em;color:var(--mint)}
+  .stack .total .strike{font-size:19px}
   .strike{text-decoration:line-through;opacity:.55}
 
   .guard{display:grid;gap:10px;margin-top:18px}
@@ -390,7 +394,11 @@
         <li><span class="tick">&check;</span><span>You own every video, commercially, forever</span><span class="val">included</span></li>
       </ul>
       <div class="total">
-        <span>Sonder Starter <span class="strike">$750</span></span>
+        <span>A freelancer</span>
+        <span class="strike">$750</span>
+      </div>
+      <div class="total">
+        <span>Sonder Starter</span>
         <b>$49<span style="font-size:14px;color:var(--quiet);font-weight:400">/mo</span></b>
       </div>
     </div>
