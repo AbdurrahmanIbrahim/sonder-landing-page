@@ -161,6 +161,8 @@
   .founder b{display:block;font-size:16px;font-weight:600}
   .founder span{font-size:14.5px;color:var(--quiet);line-height:1.5}
   .founder-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+  /* font-size lives on the anchor, not the container: `.founder span` above is
+     more specific than `.founder-links`, so a rule there is silently ignored. */
   .founder-links a{font-size:13px;color:var(--mint);text-decoration:none;
     border-bottom:1px solid rgba(127,255,212,.3)}
   .founder-links a:hover{border-bottom-color:var(--mint)}
@@ -316,11 +318,11 @@
     <div class="founders">
       <div class="founder">
         <img src="../assets/lp/mike.jpg" alt="Michael Langdon, co-founder of Sonder" loading="lazy" width="56" height="56" />
-        <span><b>Michael Langdon</b><span>Twenty years making video &mdash; TikTok, Speedo and Ring as clients, and the BBC on speed-dial when they need someone to explain media. Also a seven-figure publisher with 50+ books.</span></span>
+        <span><b>Michael Langdon</b><span>Twenty years making video &mdash; TikTok, Speedo and Ring as clients, and the BBC on speed-dial when they need someone to explain media. Also a seven-figure publisher with 50+ books.<span class="founder-links"><a href="https://www.instagram.com/itsmikelangdon/" target="_blank" rel="noopener">@itsmikelangdon</a></span></span></span>
       </div>
       <div class="founder">
         <img src="../assets/lp/lexi.jpg" alt="Lexi Kaz, co-founder of Sonder" loading="lazy" width="56" height="56" />
-        <span><b>Lexi Kaz</b><span>Turned a children&rsquo;s book into a TikTok phenomenon &mdash; <strong>50M+ views</strong> and two Amazon #1 bestsellers. Built a marketing agency at nineteen.</span></span>
+        <span><b>Lexi Kaz</b><span>Turned a pregnancy book &mdash; not the likeliest viral subject &mdash; into <strong>50M+ views</strong> and two Amazon #1 bestsellers. Built a marketing agency at nineteen.<span class="founder-links"><a href="https://www.instagram.com/lexikazzy/" target="_blank" rel="noopener">@lexikazzy</a></span></span></span>
       </div>
     </div>
     <p style="margin-top:18px">
