@@ -314,5 +314,27 @@
   })();
 </script>
 
+<script>
+  /* The only conversion signal this page had was PageView, so nothing separated
+     "landed" from "went to sign up" — and on a page whose whole job is that one
+     click, that is the measurement that matters.
+
+     InitiateCheckout rather than Lead: /f owns Lead, and it means something
+     stricter there (an email we actually captured). Reusing it here for a click
+     would blend two different things into one number across the split test.
+
+     Delegated off document so it survives the href rewrite above, and fires on
+     keyboard activation too, since an <a> click event covers Enter. */
+  (function () {
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[data-signup]') : null;
+      if (!a) return;
+      if (typeof window.fbq === 'function') {
+        window.fbq('track', 'InitiateCheckout', { content_name: 'go_cta' });
+      }
+    });
+  })();
+</script>
+
 </body>
 </html>
