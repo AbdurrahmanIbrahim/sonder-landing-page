@@ -67,7 +67,11 @@
      (free) reveals the email field (small, and they have already said yes),
      which reveals the qualifying tap (free), which leads to the upload (big).
      A bare email field under a headline is a cost before any reward. */
-  .optin-step{display:none}
+  .altcta{display:inline-flex;align-items:center;gap:6px;font-size:14.5px;font-weight:600;
+  color:var(--mint);text-decoration:underline;text-underline-offset:4px}
+.altline{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
+  font-size:14px;color:var(--quiet);line-height:1.6}
+.optin-step{display:none}
   .optin-step.is-on{display:block;animation:stepIn 260ms var(--ease)}
   @keyframes stepIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   .step-q{margin:0 0 12px;font-size:19px;font-weight:600;letter-spacing:-.02em;text-align:center}
@@ -265,6 +269,13 @@
           <a class="cta" href="https://app.yousonder.com/signup?offer=freevideo" data-signup-yes>
             Upload my book <span aria-hidden="true">&rarr;</span>
           </a>
+          <!-- Under the free video, deliberately. Two equal buttons split the
+               decision and cost signups; a book owner's fastest value is the
+               video, and the webinar invite reaches them by email regardless.
+               This is only for the ones who want both, now. -->
+          <p class="altline">Want to see how we sell them once they exist?
+            <a class="altcta" href="#" data-webinar="has-book">Join Thursday&rsquo;s live session <span aria-hidden="true">&rarr;</span></a>
+          </p>
         </div>
         <button class="backlink" type="button" data-go="3">Back</button>
       </div>
@@ -272,11 +283,14 @@
       <!-- 4b: no book. Honest, and we keep the email. -->
       <div class="optin-step" data-step="4no">
         <div class="outcome">
-          <b>Then Sonder isn&rsquo;t ready for you yet &mdash; and that&rsquo;s worth saying plainly.</b>
-          <p>Every video is built from the words in your finished manuscript. Without one there&rsquo;s nothing for it to read. Finish the book and we&rsquo;ll be here.</p>
-          <a class="cta" href="https://app.yousonder.com/signup?offer=freevideo" data-signup-no>
-            Set up my account anyway <span aria-hidden="true">&rarr;</span>
+          <b>Then the book is the easy part. The audience is what&rsquo;s missing.</b>
+          <p>Every video is built from a finished manuscript, so there is nothing for Sonder to read yet &mdash; we would rather say that than sell you something you cannot use. But the audience is the thing almost every author leaves until after launch, and it is exactly what we spend an hour on, live, every Thursday.</p>
+          <a class="cta" href="#" data-webinar="no-book">
+            Save my free seat &mdash; Thursday, 12pm ET <span aria-hidden="true">&rarr;</span>
           </a>
+          <p class="altline">Rather just have the account ready for when it&rsquo;s finished?
+            <a class="altcta" href="https://app.yousonder.com/signup?offer=freevideo" data-signup-no>Set it up now <span aria-hidden="true">&rarr;</span></a>
+          </p>
         </div>
         <button class="backlink" type="button" data-go="3">Back</button>
       </div>
@@ -479,6 +493,9 @@
 
      Fire-and-forget on purpose: if the API is down or slow, the visitor still
      moves through the funnel. A lost lead must never become a lost signup. */
+  /* Thursday's live session. Same URL as the webinar landing pages. */
+  var WEBINAR_URL = 'https://us06web.zoom.us/webinar/register/WN_DoboCMnEThyqKUHBWPzEzA';
+
   var API = 'https://sonder-server-production.up.railway.app';
   function saveLead(extra) {
     if (!state.email) return;
@@ -519,6 +536,17 @@
     });
     return u.toString();
   }
+
+  /* Webinar routes. saveLead() has already run by this point, so they are in
+     the invite sequence whether they click or not — this is for the ones who
+     want the seat immediately. */
+  Array.prototype.forEach.call(block.querySelectorAll('[data-webinar]'), function (el) {
+    el.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      track('ViewContent', { content_name: 'webinar_seat', content_category: el.getAttribute('data-webinar') });
+      window.location.href = WEBINAR_URL;
+    });
+  });
 
   /* Step 1 -> 2: they said yes to the offer. Free, so it should be. */
   block.querySelectorAll('[data-go]').forEach(function (btn) {
