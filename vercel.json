@@ -18,6 +18,7 @@
     { "source": "/academy/:path*", "destination": "https://app.yousonder.com/academy/:path*", "permanent": true },
     { "source": "/settings", "destination": "https://app.yousonder.com/settings", "permanent": true },
     { "source": "/enterprise-packages", "destination": "https://app.yousonder.com/enterprise-packages", "permanent": false },
+    { "source": "/scale-packages", "destination": "https://app.yousonder.com/scale-packages", "permanent": false },
     { "source": "/webinar1", "destination": "/webinar3", "permanent": false },
     { "source": "/webinar1/:path*", "destination": "/webinar3", "permanent": false },
     { "source": "/webinar2", "destination": "/webinar3", "permanent": false },
