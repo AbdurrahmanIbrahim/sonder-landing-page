@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FFFFFF" />
+<title>You're in &mdash; Sonder Live Masterclass</title>
+<meta name="description" content="Your seat is saved for the Sonder live masterclass, Thursday at 12pm Eastern." />
+<meta name="robots" content="noindex, nofollow" />
+
+<!-- Meta Pixel — Sonder Web dataset, same id as /, /f, /go and /webinar3.
+     THIS PAGE IS THE CONVERSION. Zoom is a different domain and we cannot put a
+     pixel on it, so before this page existed the only thing Meta could see was
+     somebody CLICKING a seat button on /webinar3 — a click, not a registration.
+     Zoom redirects here once the form is actually submitted, so the event fired
+     below is the first honest "this person registered" signal in the funnel.
+     Point the ad set's optimisation event at CompleteRegistration. -->
+<script>
+  window.SONDER_META_PIXEL_ID = '1999564797365444';
+  (function () {
+    var id = window.SONDER_META_PIXEL_ID;
+    if (!id) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', id); fbq('track', 'PageView');
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" />
+<link rel="icon" type="image/svg+xml" href="../assets/sonder-logo-plum-flat.svg" />
+
+<style>
+/* Same tokens as /webinar3 — this is the page immediately after it and any
+   drift reads as a different company. Single-theme light, painted explicitly. */
+:root{
+  --paper:#FFFFFF;
+  --wash:#F4F2F8;
+  --wash-2:#EAE5F2;
+  --ink:#17111F;
+  --ink-2:#5A5368;
+  --ink-3:#6E6780;
+  --rule:#E2DDEC;
+  --plum:#2D1A48;
+  --violet:#6B3FA0;
+  --mint:#7FFFD4;
+  --mint-ink:#05261C;
+  --mint-deep:#00795C;
+  --display:'Nunito',system-ui,-apple-system,sans-serif;
+  --body:'Inter',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --gut:clamp(20px,5vw,40px);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{width:min(720px,100% - var(--gut)*2);margin-inline:auto}
+
+header{border-bottom:1px solid var(--rule);background:var(--paper)}
+.bar-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 0}
+.mark{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+.mark svg{width:29px;height:29px}
+.mark b{font-family:var(--display);font-weight:900;font-size:20px;letter-spacing:-.02em}
+.mark i{color:var(--mint-deep);font-style:normal}
+.bar-note{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);letter-spacing:.02em}
+@media (max-width:560px){.bar-note{display:none}}
+
+main{padding:clamp(38px,7vw,68px) 0 clamp(46px,8vw,80px)}
+
+.tick{width:60px;height:60px;border-radius:50%;background:var(--mint);
+  display:grid;place-items:center;margin-bottom:22px}
+.tick svg{width:30px;height:30px;stroke:var(--mint-ink);stroke-width:3;fill:none;
+  stroke-linecap:round;stroke-linejoin:round}
+
+h1{font-family:var(--display);font-weight:900;letter-spacing:-.025em;line-height:1.06;
+  font-size:clamp(2.1rem,6.2vw,3.2rem);margin:0}
+.lede{font-size:clamp(1.02rem,2.4vw,1.16rem);color:var(--ink-2);margin-top:16px;max-width:56ch}
+.lede b{color:var(--ink);font-weight:700}
+
+/* ---------- the when card ---------- */
+.when{margin-top:30px;border:2px solid var(--plum);border-radius:16px;overflow:hidden;
+  box-shadow:0 12px 30px rgba(45,26,72,.09)}
+.when-top{background:var(--plum);color:#fff;padding:13px 22px}
+.when-top span{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:#C9BFDD}
+.when-body{padding:22px}
+.when-date{font-family:var(--display);font-weight:900;font-size:clamp(1.4rem,4vw,1.85rem);
+  letter-spacing:-.02em;line-height:1.15;margin:0}
+.when-time{font-family:var(--mono);font-weight:600;color:var(--mint-deep);font-size:15px;margin-top:7px}
+.when-local{font-size:14.5px;color:var(--ink-3);margin-top:9px}
+.cal{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.cal a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+  font-size:14px;font-weight:600;color:var(--plum);background:var(--wash);
+  border:1px solid var(--rule);border-radius:99px;padding:9px 16px}
+.cal a:hover{background:var(--wash-2)}
+
+/* ---------- next steps ---------- */
+h2{font-family:var(--display);font-weight:900;letter-spacing:-.02em;
+  font-size:clamp(1.25rem,3.4vw,1.5rem);margin:40px 0 4px}
+ol.steps{list-style:none;padding:0;margin:18px 0 0;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:0 16px;
+  padding:16px 0;border-top:1px solid var(--rule)}
+ol.steps li:last-child{border-bottom:1px solid var(--rule)}
+ol.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);
+  font-weight:600;font-size:13px;color:#fff;background:var(--plum);
+  width:28px;height:28px;border-radius:50%;display:grid;place-items:center}
+ol.steps h3{margin:3px 0 4px;font-size:16.5px;font-family:var(--body);font-weight:700}
+ol.steps p{margin:0;font-size:15px;color:var(--ink-2)}
+ol.steps b{color:var(--ink)}
+
+.aside{margin-top:34px;background:var(--wash);border:1px solid var(--rule);
+  border-radius:14px;padding:20px 22px}
+.aside h3{margin:0 0 6px;font-family:var(--display);font-weight:900;font-size:17.5px;
+  letter-spacing:-.01em}
+.aside p{margin:0;font-size:15px;color:var(--ink-2)}
+.aside a{color:var(--violet);font-weight:600}
+
+footer{border-top:1px solid var(--rule);padding:26px 0 34px;margin-top:46px}
+footer p{margin:0;font-size:13px;color:var(--ink-3)}
+footer a{color:var(--ink-3)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar-in">
+    <a class="mark" href="/" aria-label="Sonder">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
+      <b>Sonder<i>.</i></b></a>
+    <span class="bar-note">Sonder Live Masterclass</span>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="tick" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+
+    <h1>You're in.</h1>
+    <p class="lede">Your seat is saved. <b>Zoom has emailed you the joining link</b> &mdash; that email is the only way into the room, so it is worth finding it now rather than four minutes before we start.</p>
+
+    <div class="when">
+      <div class="when-top"><span>Your session</span></div>
+      <div class="when-body">
+        <p class="when-date" id="when-date">Thursday</p>
+        <p class="when-time">12:00pm Eastern &middot; 60 minutes, then Q&amp;A</p>
+        <p class="when-local" id="when-local"></p>
+        <div class="cal">
+          <a id="cal-google" href="#" target="_blank" rel="noopener">Add to Google Calendar</a>
+          <a id="cal-ics" href="#" download="sonder-masterclass.ics">Add to Apple or Outlook</a>
+        </div>
+      </div>
+    </div>
+
+    <h2>What happens next</h2>
+    <ol class="steps">
+      <li>
+        <div>
+          <h3>Find the email from Zoom</h3>
+          <p>It arrives within a minute or two and carries <b>your personal join link</b>. If it is not there, check spam &mdash; and if it still is not there, reply to any Sonder email and we will resend it by hand.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Join on a computer if you can</h3>
+          <p>Most of the hour is us building videos on screen from a real book. It works on a phone, but you will be squinting at the part that matters.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Bring your niche and your book</h3>
+          <p>The Q&amp;A runs until the questions do, and we write hooks live for whoever asks. Turning up with a specific book beats turning up with a general question.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="aside">
+      <h3>Want a head start?</h3>
+      <p>You do not need to do anything before Thursday. But if you would rather arrive with your book already in, <a href="https://app.yousonder.com/signup">create a free account</a> and upload it &mdash; then the parts we demo will be running on your own title while you watch.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>&copy; 2026 YouSonder O&Uuml; &middot; <a href="https://app.yousonder.com/privacy">Privacy</a> &middot; <a href="https://yousonder.com">yousonder.com</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* The same next-Thursday rule as /webinar3 and the server, offset-corrected
+     twice so it survives both US daylight-saving switches. If you change the
+     rule, change it in all three places — /webinar3 is the reference. */
+  var WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  function nyParts(d){var p={};new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour12:false,
+    weekday:'short',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'})
+    .formatToParts(d).forEach(function(x){p[x.type]=x.value});return p}
+  function nyOffset(d){var p=nyParts(d);return Date.UTC(+p.year,+p.month-1,+p.day,(+p.hour)%24,+p.minute,+p.second)-d.getTime()}
+  function fromNY(y,m,d,h,mi){var t=Date.UTC(y,m-1,d,h,mi);for(var i=0;i<2;i++){t=Date.UTC(y,m-1,d,h,mi)-nyOffset(new Date(t))}return new Date(t)}
+  function nextSession(now){var p=nyParts(now),y=+p.year,m=+p.month,d=+p.day;
+    var delta=(4-WD.indexOf(p.weekday)+7)%7;var c=fromNY(y,m,d+delta,12,0);
+    if(c.getTime()<=now.getTime())c=fromNY(y,m,d+delta+7,12,0);return c}
+
+  var $=function(id){return document.getElementById(id)};
+  var target=nextSession(new Date());
+  var ends=new Date(target.getTime()+90*60*1000);
+
+  try{
+    var label=new Intl.DateTimeFormat('en-GB',{timeZone:'America/New_York',weekday:'long',day:'numeric',month:'long'}).format(target);
+    if($('when-date'))$('when-date').textContent=label;
+  }catch(e){}
+
+  /* Their own clock, but only when it actually differs — telling somebody in
+     New York that noon Eastern is noon their time is noise. */
+  try{
+    var tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
+    var mine=new Intl.DateTimeFormat('en-GB',{hour:'numeric',minute:'2-digit',hourCycle:'h12'}).format(target);
+    var ny=new Intl.DateTimeFormat('en-GB',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',hourCycle:'h12'}).format(target);
+    var myDay=new Intl.DateTimeFormat('en-GB',{weekday:'long'}).format(target);
+    var el=$('when-local');
+    if(el&&tz&&tz!=='America/New_York'&&mine!==ny){
+      el.textContent='That is '+myDay+' at '+mine.toLowerCase().replace(/\s/g,'')+' where you are ('+tz.replace(/_/g,' ')+').';
+    }
+  }catch(e){}
+
+  /* ---- Calendar links ------------------------------------------------- */
+  function stamp(d){return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'')}
+  var TITLE='Sonder Live Masterclass';
+  var DETAIL='Your Zoom joining link is in the confirmation email Zoom sent you.';
+
+  try{
+    var g=$('cal-google');
+    if(g){
+      g.href='https://calendar.google.com/calendar/render?action=TEMPLATE'
+        +'&text='+encodeURIComponent(TITLE)
+        +'&dates='+stamp(target)+'/'+stamp(ends)
+        +'&details='+encodeURIComponent(DETAIL);
+    }
+  }catch(e){}
+
+  try{
+    var ics=[
+      'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Sonder//Masterclass//EN','BEGIN:VEVENT',
+      'UID:'+stamp(target)+'-masterclass@yousonder.com',
+      'DTSTAMP:'+stamp(new Date()),
+      'DTSTART:'+stamp(target),
+      'DTEND:'+stamp(ends),
+      'SUMMARY:'+TITLE,
+      'DESCRIPTION:'+DETAIL,
+      'END:VEVENT','END:VCALENDAR'
+    ].join('\r\n');
+    var a=$('cal-ics');
+    if(a)a.href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);
+  }catch(e){}
+
+  /* ---- The conversion event ------------------------------------------
+     Fired once per browser per session. A refresh, a back-button, or the
+     same person opening the link twice must not each count as a separate
+     registration — an inflated conversion number teaches the ad algorithm
+     the wrong thing, which is worse than no number at all. */
+  try{
+    var KEY='sonder_webinar_registered_fired';
+    var already=false;
+    try{already=sessionStorage.getItem(KEY)==='1'}catch(e){}
+    if(!already&&typeof window.fbq==='function'){
+      fbq('track','CompleteRegistration',{content_name:'webinar_seat',status:'registered'});
+      try{sessionStorage.setItem(KEY,'1')}catch(e){}
+    }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
