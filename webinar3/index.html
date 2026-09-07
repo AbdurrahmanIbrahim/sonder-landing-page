@@ -256,6 +256,28 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
 .disc b{color:var(--ink-2);font-weight:700}
 .disc p+p{margin-top:11px}
 
+/* ---------- proof line under the hero stats ---------- */
+.receipts .proofline{margin-top:clamp(16px,2.4vw,22px);padding-top:clamp(15px,2.2vw,20px);
+  border-top:1px solid rgba(255,255,255,.16);font-size:14.5px;line-height:1.55;color:#E6E1EF;max-width:78ch}
+.receipts .proofline b{display:inline;font-family:var(--mono);font-size:inherit;color:#fff}
+.receipts .proofline em{color:#fff;font-style:italic}
+
+/* ---------- countdown: never show dashes before the script runs ---------- */
+.cd-static{font-size:13.5px;color:var(--ink-3);text-align:center;margin-top:16px;line-height:1.5}
+.cd.is-idle{display:none}
+
+/* ---------- sticky mobile CTA ---------- */
+.stickycta{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.94);backdrop-filter:blur(10px);
+  border-top:1px solid var(--rule);box-shadow:0 -6px 24px rgba(45,26,72,.10);
+  transform:translateY(110%);transition:transform .22s ease}
+.stickycta.on{transform:translateY(0)}
+.stickycta .btn{width:100%;margin:0}
+.stickycta .fine{font-size:11.5px;color:var(--ink-3);text-align:center;margin-top:6px;line-height:1.4}
+@media (max-width:760px){.stickycta{display:block}
+  body.has-sticky{padding-bottom:96px}}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
     transition-duration:.001ms!important}
@@ -268,7 +290,7 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
     <a class="mark" href="#top" aria-label="Sonder">
       <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
       <b>Sonder<i>.</i></b></a>
-    <div class="clock"><span class="pip" aria-hidden="true"></span><span class="lbl">Doors open in</span><b id="bar-cd">Thursdays, 12:00pm ET</b></div>
+    <div class="clock"><span class="pip" aria-hidden="true"></span><span class="lbl" id="bar-lbl">Next session</span><b id="bar-cd">Thursday &middot; 12:00pm ET</b></div>
     <a class="btn sm" href="#seat" data-seat data-cta="header">RSVP free</a>
   </div>
 </header>
@@ -279,10 +301,10 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
     <div>
       <span class="kicker"><span class="pip" aria-hidden="true"></span> Free live masterclass · for authors</span>
       <h1>The new way self-published authors are selling thousands of books in 2026 <span class="hl">without any ads.</span></h1>
-      <p class="lede"><strong style="color:var(--ink);font-weight:700;">Upload one book. Ten minutes later, four videos that sell it.</strong> Two publishers show you exactly how they do it &mdash; then upload a real book on the call and build four finished videos from it while you watch.</p>
+      <p class="lede"><strong style="color:var(--ink);font-weight:700;">No ads. No following. No filming, editing, or showing your face.</strong> Even if you suck at book marketing. Two publishers show you the exact system live, then turn a real book into four finished videos while you watch.</p>
       <p class="whenline">Every Thursday <span class="sep">·</span> 12:00pm Eastern <span class="sep">·</span> 60 minutes + Q&amp;A</p>
       <a class="btn" href="#seat" data-seat data-cta="hero">Save my free seat &rarr;</a>
-      <p class="microcopy">Free, and there is no card. Results shown are our own and are not typical &mdash; see the note at the foot of this page.</p>
+      <p class="microcopy">Free, no card. Seats are capped by the room and Thursday sessions fill. Results shown are our own and are not typical &mdash; see the note at the foot of this page.</p>
       <div class="who-row">
         <span class="pics"><img src="../assets/founders/lexi.jpg" alt="Lexi Kaz" width="48" height="48"><img src="../assets/founders/mike.jpg" alt="Michael Langdon" width="48" height="48"></span>
         <p>Hosted live by <b>Lexi Kaz</b> &amp; <b>Michael Langdon</b><br>Co-founders of Sonder</p>
@@ -293,13 +315,14 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
       <p class="dt" id="when-date">Thursday</p>
       <p class="tm">12:00pm Eastern</p>
       <p class="loc" id="when-local"></p>
-      <div class="cd" role="timer">
+      <p class="cd-static" id="cd-static">Doors open Thursday at 12:00pm Eastern.</p>
+      <div class="cd is-idle" id="cd" role="timer">
         <div><b id="cd-d">--</b><i>Days</i></div><div><b id="cd-h">--</b><i>Hrs</i></div>
         <div><b id="cd-m">--</b><i>Min</i></div><div><b id="cd-s">--</b><i>Sec</i></div>
       </div>
       <a class="btn" href="#" data-seat data-cta="card">Save my free seat &rarr;</a>
       <p class="seat-note"></p>
-      <p class="fine">No card. Runs every Thursday &mdash; miss this one and take the next.</p>
+      <p class="fine">Free, no card. Seats are capped by the room and Thursday sessions fill.</p>
     </aside>
   </div>
 </section>
@@ -311,6 +334,7 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
     <div><b>107,677</b><span>Books Michael has sold across 56 titles</span></div>
     <div><b>$30,000</b><span>Michael sold on TikTok Shop in his first run at it</span></div>
   </div>
+  <div class="wrap"><p class="proofline"><em>Last Man Out</em>, a WW2 memoir: <b>2,041 copies</b> in its first three months, posting two Sonder videos a day.</p></div>
 </section>
 
 <section class="sec">
@@ -333,6 +357,7 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
           <h3>Lexi's story &mdash; and the end of "social doesn't work for book publishers"</h3>
           <p>Her first book took seven months to write and earned <b>$1,700</b>. She then published nothing for a full year, waiting for it to reach a hundred reviews. When she finally went looking for growth she found TikTok, where every serious operator she met was selling supplements. She was the only person in the room selling books.</p>
           <p>By March 2025 she was selling <b>$230,000 of books in a month</b> through 5,200 affiliates &mdash; on <b>under $4,000</b> of Amazon ads, with <b>87% of buyers arriving without ever seeing one</b>. In June 2026 that same first book peaked at <b>#152 of every book on Amazon US</b>.</p>
+          <p>She also takes apart the four beliefs that keep authors invisible, because every one of them is wrong: <b>&ldquo;I&rsquo;m not a creator&rdquo;</b> &mdash; you are a publisher running a system, and the system creates. <b>&ldquo;My niche is boring&rdquo;</b> &mdash; there are no boring niches, only scripts with no hook. <b>&ldquo;Organic reach is dead&rdquo;</b> &mdash; dead for people posting once a week, compounding for people posting with volume. <b>&ldquo;I don&rsquo;t have time&rdquo;</b> &mdash; you don&rsquo;t have time to film, and you are never going to be asked to.</p>
           <div class="figs">
             <div><b>199</b><span>Videos that did nothing before one worked</span></div>
             <div><b>&lt;1,500</b><span>Followers of her own</span></div>
@@ -366,14 +391,35 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
           <h3>"I don't know how to make video." You don't have to.</h3>
           <p>This is the objection we hear more than every other one combined, and it is the whole reason the product exists. <b>No camera. No face. No voice. No editing software. Nothing to learn.</b></p>
           <p>Michael spent twenty years learning video professionally so that you would never need to. On the call we show you what that actually means in practice, rather than asserting it.</p>
+          <p>And then how the volume is actually done: <b>batch the scripts</b>, one sitting for a week of hooks, written against proven structures rather than a blank page; <b>go faceless</b>, because the highest-performing author videos never show one; and <b>post once, publish three times</b> &mdash; TikTok first, then the same asset to Reels and LinkedIn. One piece of work, three algorithms.</p>
+        </div>
+      </li>
+
+      <li class="beat">
+        <span class="n">05</span>
+        <div>
+          <h3>The 95/5 rule, and the anatomy of a hook</h3>
+          <p>Virality is engineering, not lightning. You do not invent the wheel &mdash; you re-tread it. <b>95%</b> of a video is the proven structure: hook cadence, pacing, shot length, text placement, everything the algorithm has already validated. <b>5%</b> is the part you change &mdash; the avatar, the pain, the payoff. That 5% is where your originality goes, and it is the only place the brain registers something new.</p>
+          <p>Then the four beats every working script has: the <b>pain or desire</b> inside the first second and a half, with no intro and no hello; the <b>anti-credential</b>, because zero authority buys maximum trust; the <b>open loop</b> that promises a payoff and delays it, since retention is the currency the algorithm pays you in; and a <b>CTA that gets it sent</b> rather than followed.</p>
+          <p class="pullq">&ldquo;Nobody tells [your avatar] that [surprising truth]&hellip; and it&rsquo;s quietly costing them [specific pain].&rdquo;</p>
+          <p>That template is yours to take away and use the same night, whether or not you ever touch our software.</p>
+        </div>
+      </li>
+
+      <li class="beat">
+        <span class="n">06</span>
+        <div>
+          <h3>Why Amazon pays you to bring your own traffic</h3>
+          <p>This is the part almost nobody tells KDP authors, and it is the strongest argument on the page. A video puts your book in front of people who were never searching for it. Amazon then sees off-platform buyers arriving at your listing &mdash; its favourite kind of customer. That external sales velocity lifts your rank, and the rank unlocks Amazon&rsquo;s own internal traffic on top of it.</p>
+          <p>You do not have to take our word for it, because Amazon pays for this on purpose: its <b>Brand Referral Bonus</b> credits sellers an average of <b>10% of sales driven from external sources</b> like social media. Sellers call the rank lift that follows the halo effect. We show you the arithmetic live.</p>
         </div>
       </li>
 
       <li class="beat key">
-        <span class="n">05</span>
+        <span class="n">07</span>
         <div>
           <h3>The live build &mdash; upload this, ten minutes, you get this</h3>
-          <p>We take a real book on the call and put it through the machine. You watch the screen, not a slide. <b>Everything is pre-rendered, so nobody sits waiting on a progress bar.</b></p>
+          <p><b>Upload one book. Ten minutes later, four videos that sell it.</b> We take a real book on the call and put it through the machine. You watch the screen, not a slide. <b>Everything is pre-rendered, so nobody sits waiting on a progress bar.</b></p>
           <div class="outs">
             <div><span class="t">Output 01</span><b>Amazon ad</b><p>16:9, built to run as a Sponsored Brands video on the listing itself.</p></div>
             <div><span class="t">Output 02</span><b>Slideshow</b><p>The format doing the heaviest lifting on TikTok right now.</p></div>
@@ -384,7 +430,7 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
       </li>
 
       <li class="beat">
-        <span class="n">06</span>
+        <span class="n">08</span>
         <div>
           <h3>Proof &mdash; what this has actually done</h3>
           <p>Real output from real catalogues, with the numbers attached and the failures left in. Including our own: <em>Last Man Out</em>, a Second World War memoir Michael published on 1 June 2026 and ran through Sonder at two videos a day.</p>
@@ -393,7 +439,7 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
       </li>
 
       <li class="beat">
-        <span class="n">07</span>
+        <span class="n">09</span>
         <div>
           <h3>The offer</h3>
           <p>There is one, it is only for people on the call, and we will tell you exactly what it is before we ask you for anything. You are free to ignore it and keep every part of the hour that came before it.</p>
@@ -401,7 +447,7 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
       </li>
 
       <li class="beat">
-        <span class="n">08</span>
+        <span class="n">10</span>
         <div>
           <h3>Q&amp;A, for as long as you have questions</h3>
           <p>Both of us, live, until the questions run out. This is reliably the most useful part of the hour &mdash; it is where the real objections get answered rather than dodged, and it is different every single week.</p>
@@ -488,6 +534,11 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
 </section>
 </main>
 
+<div class="stickycta" id="stickycta" aria-hidden="true">
+  <a class="btn" href="#" data-seat data-cta="sticky">Save my free seat &rarr;</a>
+  <p class="fine">Free, no card &middot; Thursday, 12:00pm ET</p>
+</div>
+
 <footer>
   <div class="wrap">
     <div class="foot-top">
@@ -545,8 +596,37 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
     if($('cd-s'))$('cd-s').textContent=pad(sec);
     var b=$('bar-cd');
     if(b)b.textContent=d>0?(d+'d '+pad(h)+'h '+pad(m)+'m'):(pad(h)+':'+pad(m)+':'+pad(sec));
+    /* Only once the clock is live does "Doors open in" make sense; before the
+       script runs the header must read as a sentence, not a broken one. */
+    var lbl=$('bar-lbl');
+    if(lbl&&lbl.textContent!=='Doors open in')lbl.textContent='Doors open in';
+    var grid=$('cd');
+    if(grid&&grid.className.indexOf('is-idle')>-1){
+      grid.className=grid.className.replace(/\s*is-idle/,'');
+      var st=$('cd-static');if(st&&st.parentNode)st.parentNode.removeChild(st);
+    }
   }
   tick();setInterval(tick,1000);
+
+  /* Sticky mobile CTA — Meta traffic is overwhelmingly phone and the page is
+     long, so the ask has to follow the reader down it. CSS keeps it off
+     desktop; this only decides when it appears. */
+  (function(){
+    var bar=$('stickycta'),hero=document.querySelector('.hero');
+    if(!bar||!hero)return;
+    document.body.className+=(document.body.className?' ':'')+'has-sticky';
+    var shown=false;
+    function sync(){
+      var past=hero.getBoundingClientRect().bottom<0;
+      if(past===shown)return;
+      shown=past;
+      bar.className=past?'stickycta on':'stickycta';
+      bar.setAttribute('aria-hidden',past?'false':'true');
+    }
+    sync();
+    window.addEventListener('scroll',sync,{passive:true});
+    window.addEventListener('resize',sync,{passive:true});
+  })();
 
   function track(n,p){if(typeof window.fbq==='function')window.fbq('track',n,p||{})}
   Array.prototype.forEach.call(document.querySelectorAll('[data-seat]'),function(btn){
