@@ -2007,8 +2007,15 @@ button { font: inherit; cursor: pointer; }
   color: var(--quiet);
 }
 
-/* Tiers carousel — 5 plans, 4 shown; White Glove (Agency) sits off-screen
-   right and is revealed by the → arrow. Scroll-snap keeps it swipeable. */
+/* Tiers carousel — 4 plans, all 4 shown at desktop width, so app.js hides both
+   arrows there; they come back below 1080px where the track scrolls two at a
+   time. Scroll-snap keeps it swipeable.
+
+   It was 5 until White Glove (Agency) was retired on 2026-09-08 — it used to be
+   the one sitting off-screen right, revealed by the → arrow. The
+   .tier--premium / .tier-badge--premium rules below are what dressed it and are
+   kept deliberately: they are what a reversal would need, and they cost nothing
+   while unused. */
 .tiers-carousel { position: relative; }
 .tiers {
   display: flex;
