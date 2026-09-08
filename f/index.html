@@ -233,7 +233,7 @@
       <!-- Step 1: the offer. A tap, not a field. Costs nothing to say yes to. -->
       <div class="optin-step is-on" data-step="1">
         <button class="cta" type="button" data-go="2">Make my first video free <span aria-hidden="true">&rarr;</span></button>
-        <p class="note">No card. About four minutes. You keep the video either way.</p>
+        <p class="note" data-trial-alt="Start your 7-day free trial to make it. $0 today, cancel any time.">No card. About four minutes. You keep the video either way.</p>
       </div>
 
       <!-- Step 2: the email. They have already said yes, so this is finishing
@@ -427,7 +427,7 @@
     <span class="kicker">The catch, in full</span>
     <h2>There isn&rsquo;t one. Here&rsquo;s the fine print anyway.</h2>
     <div class="guard">
-      <div><span class="tick">&check;</span><span><b>Your first video is genuinely free.</b> No card, no trial that quietly bills you.</span></div>
+      <div><span class="tick">&check;</span><span data-trial-alt-html="<b>Your first video is free.</b> It comes with a 7-day trial &mdash; nothing to pay today, and we email you before the first payment."><b>Your first video is genuinely free.</b> No card, no trial that quietly bills you.</span></div>
       <div><span class="tick">&check;</span><span><b>You own everything.</b> Every video is yours to use commercially, forever, including if you leave.</span></div>
       <div><span class="tick">&check;</span><span><b>Cancel any time</b>, from your settings, in two clicks. No call, no retention script.</span></div>
       <div><span class="tick">&check;</span><span><b>14-day refund window</b> on anything you pay for.</span></div>
@@ -453,7 +453,7 @@
     <button class="cta" type="button" data-scroll-top>
       Make my first video free <span aria-hidden="true">&rarr;</span>
     </button>
-    <p class="note">No card. About four minutes. You keep it either way.</p>
+    <p class="note" data-trial-alt="Start your 7-day free trial to make it. $0 today, cancel any time.">No card. About four minutes. You keep it either way.</p>
 
     <p class="ps">
       <b>P.S.</b> &mdash; If you skipped to the bottom, here it is in one line: upload the book
@@ -525,9 +525,13 @@
   /* Build the signup URL. The email rides along because Signup.tsx already
      prefills from ?email= — so they never type it twice, and the account they
      land on is the one we just promised to send the video to. */
+  /* Flipped by the server, not by a rebuild. See the config fetch at the foot of
+     this script for why the whole page reads one Railway variable. */
+  var TRIAL_MODE = false;
+
   function signupUrl(hasBook) {
     var u = new URL('https://app.yousonder.com/signup');
-    u.searchParams.set('offer', 'freevideo');
+    u.searchParams.set('offer', TRIAL_MODE ? 'trial' : 'freevideo');
     if (state.email) u.searchParams.set('email', state.email);
     u.searchParams.set('book_ready', hasBook);
     if (here) CARRY.forEach(function (k) {
@@ -536,6 +540,37 @@
     });
     return u.toString();
   }
+
+  /* ---- Trial mode -------------------------------------------------------
+     ONE Railway variable decides whether this page promises "no card" or a
+     7-day trial, and it is read at runtime rather than baked in at build time.
+     That is deliberate: the promise on this page and the checkout the app puts
+     in front of people have to change together or the funnel contradicts
+     itself mid-flow, and nobody trusts a page that does that.
+
+     Fails CLOSED to the free journey — if the config call is slow, blocked or
+     malformed we leave the honest existing copy alone. The copy swap is
+     idempotent and the elements carry their own alternative text, so nothing
+     here has to know what any sentence says. */
+  (function () {
+    try {
+      fetch(API + '/api/public/config', { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (cfg) {
+          if (!cfg || !cfg.trialFunnel || cfg.trialFunnel.enabled !== true) return;
+          TRIAL_MODE = true;
+          Array.prototype.forEach.call(
+            document.querySelectorAll('[data-trial-alt]'),
+            function (el) { el.textContent = el.getAttribute('data-trial-alt'); }
+          );
+          Array.prototype.forEach.call(
+            document.querySelectorAll('[data-trial-alt-html]'),
+            function (el) { el.innerHTML = el.getAttribute('data-trial-alt-html'); }
+          );
+        })
+        .catch(function () { /* free journey stands */ });
+    } catch (e) { /* free journey stands */ }
+  })();
 
   /* Webinar routes. saveLead() has already run by this point, so they are in
      the invite sequence whether they click or not — this is for the ones who
