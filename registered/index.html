@@ -14,7 +14,9 @@
      somebody CLICKING a seat button on /webinar3 — a click, not a registration.
      Zoom redirects here once the form is actually submitted, so the event fired
      below is the first honest "this person registered" signal in the funnel.
-     Point the ad set's optimisation event at CompleteRegistration. -->
+     Point the ad set's optimisation event at Schedule. This used to fire
+     CompleteRegistration, which is the app's signup event, so every webinar
+     seat was counted as a Sonder signup. Schedule keeps the two apart. -->
 <script>
   window.SONDER_META_PIXEL_ID = '1999564797365444';
   (function () {
@@ -185,7 +187,7 @@ footer a{color:var(--ink-3)}
 
     <div class="aside">
       <h3>Want a head start?</h3>
-      <p>You do not need to do anything before Thursday. But if you would rather arrive with your book already in, <a href="https://app.yousonder.com/signup">create a free account</a> and upload it &mdash; then the parts we demo will be running on your own title while you watch.</p>
+      <p>You do not need to do anything before Thursday. But if you would rather arrive with your book already in, <a href="https://app.yousonder.com/signup?offer=trial">start your 7-day free trial</a> and upload it. Then the parts we demo will be running on your own title while you watch.</p>
     </div>
   </div>
 </main>
@@ -275,7 +277,7 @@ footer a{color:var(--ink-3)}
     var already=false;
     try{already=sessionStorage.getItem(KEY)==='1'}catch(e){}
     if(!already&&typeof window.fbq==='function'){
-      fbq('track','CompleteRegistration',{content_name:'webinar_seat',status:'registered'});
+      fbq('track','Schedule',{content_name:'webinar_seat',status:'registered'});
       try{sessionStorage.setItem(KEY,'1')}catch(e){}
     }
   }catch(e){}
