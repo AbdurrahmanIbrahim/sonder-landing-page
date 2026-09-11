@@ -464,10 +464,9 @@
   }
 
   // -------- Exit-intent modal --------
-  // Safety-net restatement of the free-video offer for leavers. One direct
-  // claim link (signup?offer=freevideo grants the trial at account creation) —
-  // no email capture: the offer is already all over the page, so the shortest
-  // path wins.
+  // Safety-net reminder of the 7-day trial for leavers. One direct link
+  // (signup?offer=trial) and no email capture: the offer is already all over
+  // the page, so the shortest path wins.
   const exitModal = document.querySelector('[data-exit-modal]');
   const exitClose = document.querySelector('[data-exit-close]');
 
@@ -496,10 +495,10 @@
       exitModal.hidden = false;
       document.body.style.overflow = 'hidden';
       requestAnimationFrame(() => exitModal.classList.add('is-open'));
-      // Focus the claim CTA for keyboard users
+      // Focus the trial CTA for keyboard users
       setTimeout(() => {
-        const claim = exitModal.querySelector('[data-exit-claim]');
-        if (claim) claim.focus();
+        const cta = exitModal.querySelector('[data-exit-cta]');
+        if (cta) cta.focus();
       }, 400);
     };
 

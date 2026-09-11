@@ -748,8 +748,7 @@ button { font: inherit; cursor: pointer; }
   .hero-sub { font-size: 15.5px; margin-top: 16px; }
   .hero-ctas { margin-top: 26px; gap: 12px; width: 100%; flex-direction: column; }
   .hero-ctas .cta-primary { width: 100%; justify-content: center; }
-  /* The announcement bar already carries the no-card promise. */
-  .hero-cta-note { display: none; }
+  /* The note carries the price terms, so it stays visible on phones too. */
   .hero-trust-chips { margin-top: 20px; }
 }
 
@@ -1515,8 +1514,8 @@ button { font: inherit; cursor: pointer; }
   border: none; background: none; cursor: pointer;
   font-family: var(--font-sans);
 }
-/* The free trial video can only be a Viral Script (TRIAL_VIDEO_TYPES on the
-   server), so this section must not imply a free slideshow. */
+/* One line under the slideshow CTA. The trial opens everything on Starter
+   except Amazon Ads, so slideshows are in it. */
 .slides-note {
   margin: 14px 0 0;
   text-align: center;
@@ -2463,6 +2462,15 @@ button { font: inherit; cursor: pointer; }
   border-color: var(--aurora);
   box-shadow: 0 0 36px rgba(127, 255, 212, 0.45);
 }
+/* Under every plan's CTA. The trial is always Starter, whichever card was
+   clicked, so the switch rule sits next to the button. */
+.tier-trial {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--paper-60);
+  text-align: center;
+}
 .tier-foot {
   margin: 14px 0 0;
   font-size: 12px;
@@ -2667,6 +2675,12 @@ button { font: inherit; cursor: pointer; }
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--quiet);
+}
+.final-terms {
+  margin: -14px 0 0;
+  font-size: 13px;
+  color: var(--quiet);
+  text-align: center;
 }
 
 /* ====== FOOTER ====== */
