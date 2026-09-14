@@ -86,7 +86,7 @@
 // string and hands them to the Conversions API, which is what actually needs the
 // click id to attribute a purchase.
 (function () {
-  var CARRY = ['fbclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'ttclid'];
+  var CARRY = ['fbclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'ttclid', 'via', 'dub_id'];
   var here;
   try { here = new URL(window.location.href); } catch (e) { return; }
 
