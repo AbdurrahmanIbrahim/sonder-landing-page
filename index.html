@@ -53,7 +53,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@900&display=swap" />
 
-  <link rel="stylesheet" href="style.css?v=29" />
+  <link rel="stylesheet" href="style.css?v=31" />
 
   <script src="https://fast.wistia.com/player.js" async></script>
 </head>
@@ -1010,38 +1010,68 @@
       <div class="formats" aria-label="What you can make">
         <p class="formats-eyebrow">What you can make <span>— tap any to watch a real example</span></p>
         <div class="formats-grid">
-          <button type="button" class="format-card" data-reel data-wistia-id="0vkekjaip2" data-reel-title="30-Second Quick Reaction Hook Video — example" data-reel-aspect="0.5625">
-            <span class="format-top">
-              <span class="format-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
-              <span class="format-len">30-second Quick Reaction Hook Video</span>
+          <!-- Ordered best-first (Mike, 14 Sep 2026). Each stage shows a real
+               frame from the very example the card opens, whole and uncropped,
+               on its own colour. Hover (or scroll into view on a phone) plays a
+               short muted loop from the same video; the lightbox is unchanged. -->
+          <button type="button" class="format-card" data-fx="viral" data-reel data-wistia-id="qwxw1cmlao" data-reel-title="90-Second Viral Video — example" data-reel-aspect="0.5625">
+            <span class="fx-stage" aria-hidden="true">
+              <span class="fx-frame fx-frame--phone">
+                <img src="assets/formats/viral.webp" alt="" width="540" height="960" loading="lazy" decoding="async" />
+                <video class="fx-video" muted playsinline loop preload="none" data-src="assets/formats/viral.mp4"></video>
+              </span>
+              <span class="fx-chip">90 sec</span>
+              <span class="fx-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
             </span>
-            <span class="format-desc">An avatar hypes your book straight to camera. Native to TikTok, Reels &amp; YouTube Shorts.</span>
-            <span class="format-watch">Watch example <span aria-hidden="true">→</span></span>
-          </button>
-          <button type="button" class="format-card" data-reel data-wistia-id="ry7ffqgoz8" data-reel-title="40-Second Amazon Ad — example" data-reel-aspect="1.7778">
-            <span class="format-top">
-              <span class="format-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
-              <span class="format-len">40-second Amazon ad</span>
-            </span>
-            <span class="format-desc">A book ad built to run on Amazon and drive clicks straight to your listing.</span>
-            <span class="format-watch">Watch example <span aria-hidden="true">→</span></span>
-          </button>
-          <button type="button" class="format-card" data-reel data-wistia-id="qwxw1cmlao" data-reel-title="90-Second Viral Video — example" data-reel-aspect="0.5625">
-            <span class="format-top">
-              <span class="format-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
-              <span class="format-len">90-second viral video</span>
-            </span>
+            <span class="format-len">90-second viral video</span>
             <span class="format-desc">A cinematic, narrated story with your book woven in. Your big swing to go viral.</span>
             <span class="format-watch">Watch example <span aria-hidden="true">→</span></span>
           </button>
           <!-- Not a Wistia reel: this one embeds the real TikTok post in the same
                lightbox (data-embed-url), with data-reel-link as the fallback. -->
-          <button type="button" class="format-card" data-reel data-embed-url="https://www.tiktok.com/embed/v2/7668614791489015062" data-reel-link="https://www.tiktok.com/@bloomlit_press/photo/7668614791489015062" data-reel-title="Swipeable slideshow — example" data-reel-aspect="0.44">
-            <span class="format-top">
-              <span class="format-play" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="8" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.8" opacity="0.5"/><rect x="9" y="3" width="12.5" height="18" rx="2.5" fill="currentColor"/></svg></span>
-              <span class="format-len">Swipeable slideshow</span>
+          <button type="button" class="format-card" data-fx="slideshow" data-reel data-embed-url="https://www.tiktok.com/embed/v2/7668614791489015062" data-reel-link="https://www.tiktok.com/@bloomlit_press/photo/7668614791489015062" data-reel-title="Swipeable slideshow — example" data-reel-aspect="0.44">
+            <span class="fx-stage" aria-hidden="true">
+              <span class="fx-slide fx-slide--back"><img src="assets/slides/lmo-0.jpg" alt="" width="420" height="560" loading="lazy" decoding="async" /></span>
+              <span class="fx-slide fx-slide--mid"><img src="assets/slides/lmo-1.jpg" alt="" width="420" height="560" loading="lazy" decoding="async" /></span>
+              <span class="fx-slide fx-slide--front" data-fx-deck>
+                <img src="assets/slides/lmo-0.jpg" alt="" width="420" height="560" loading="lazy" decoding="async" />
+                <img src="assets/slides/lmo-1.jpg" alt="" width="420" height="560" loading="lazy" decoding="async" />
+                <img src="assets/slides/lmo-2.jpg" alt="" width="420" height="560" loading="lazy" decoding="async" />
+                <img src="assets/slides/lmo-3.jpg" alt="" width="420" height="560" loading="lazy" decoding="async" />
+                <img class="is-on" src="assets/slides/lmo-4.jpg" alt="" width="420" height="560" loading="lazy" decoding="async" />
+              </span>
+              <span class="fx-dots"><i></i><i></i><i></i><i></i><i class="is-on"></i></span>
+              <span class="fx-chip">4–5 slides</span>
+              <span class="fx-play" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="8" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.8" opacity="0.6"/><rect x="9" y="3" width="12.5" height="18" rx="2.5" fill="currentColor"/></svg></span>
             </span>
+            <span class="format-len">Swipeable slideshow</span>
             <span class="format-desc">4 to 5 pictures your followers swipe through, with your book as the reveal at the end. Native to TikTok &amp; Instagram.</span>
+            <span class="format-watch">Watch example <span aria-hidden="true">→</span></span>
+          </button>
+          <button type="button" class="format-card" data-fx="amazon" data-reel data-video-src="assets/formats/amazon-full.mp4" data-video-poster="assets/formats/amazon.webp" data-reel-title="40-Second Amazon Ad — example" data-reel-aspect="1.7778">
+            <span class="fx-stage" aria-hidden="true">
+              <span class="fx-frame fx-frame--wide">
+                <img src="assets/formats/amazon.webp" alt="" width="720" height="405" loading="lazy" decoding="async" />
+                <video class="fx-video" muted playsinline loop preload="none" data-src="assets/formats/amazon.mp4"></video>
+              </span>
+              <span class="fx-chip">40 sec</span>
+              <span class="fx-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+            </span>
+            <span class="format-len">40-second Amazon ad</span>
+            <span class="format-desc">A book ad built to run on Amazon and drive clicks straight to your listing.</span>
+            <span class="format-watch">Watch example <span aria-hidden="true">→</span></span>
+          </button>
+          <button type="button" class="format-card" data-fx="reaction" data-reel data-video-src="assets/formats/reaction-full.mp4" data-video-poster="assets/formats/reaction.webp" data-reel-title="30-Second Quick Reaction Hook Video — example" data-reel-aspect="0.5625">
+            <span class="fx-stage" aria-hidden="true">
+              <span class="fx-frame fx-frame--phone">
+                <img src="assets/formats/reaction.webp" alt="" width="540" height="960" loading="lazy" decoding="async" />
+                <video class="fx-video" muted playsinline loop preload="none" data-src="assets/formats/reaction.mp4"></video>
+              </span>
+              <span class="fx-chip">30 sec</span>
+              <span class="fx-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+            </span>
+            <span class="format-len">30-second Quick Reaction Hook Video</span>
+            <span class="format-desc">An avatar hypes your book straight to camera. Native to TikTok, Reels &amp; YouTube Shorts.</span>
             <span class="format-watch">Watch example <span aria-hidden="true">→</span></span>
           </button>
         </div>
@@ -1426,6 +1456,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=2"></script>
 </body>
 </html>
