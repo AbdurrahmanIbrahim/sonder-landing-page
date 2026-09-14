@@ -331,7 +331,7 @@
     if (lightbox) lightbox.querySelectorAll('.lightbox-link').forEach(l => l.remove());
   };
 
-  const openLightbox = (wistiaId, title, aspect, embedUrl, linkUrl) => {
+  const openLightbox = (wistiaId, title, aspect, embedUrl, linkUrl, videoSrc, videoPoster) => {
     if (!lightbox || !lightboxInner) return;
 
     clearLightboxPlayer();
@@ -360,6 +360,17 @@
         link.innerHTML = 'View on TikTok <span aria-hidden="true">↗</span>';
         lightbox.appendChild(link);
       }
+    } else if (videoSrc) {
+      // Self-hosted example (the format cards' Amazon ad and Quick Reaction Hook
+      // Video, which are not on Wistia). No autoplay, for the same reason as the
+      // Wistia branch below: the visitor's own tap on play is what gives sound.
+      const video = document.createElement('video');
+      video.src = videoSrc;
+      if (videoPoster) video.poster = videoPoster;
+      video.controls = true;
+      video.playsInline = true;
+      video.preload = 'metadata';
+      lightboxInner.appendChild(video);
     } else if (wistiaId) {
       const player = document.createElement('wistia-player');
       player.setAttribute('media-id', wistiaId);
@@ -403,9 +414,78 @@
       const aspect = btn.dataset.reelAspect || '';
       const embedUrl = btn.dataset.embedUrl || '';
       const linkUrl = btn.dataset.reelLink || '';
-      openLightbox(wistiaId, title, aspect, embedUrl, linkUrl);
+      const videoSrc = btn.dataset.videoSrc || '';
+      const videoPoster = btn.dataset.videoPoster || '';
+      openLightbox(wistiaId, title, aspect, embedUrl, linkUrl, videoSrc, videoPoster);
     });
   });
+
+  // -------- Format cards: live previews --------
+  // Desktop: a card plays its short muted loop while hovered or focused.
+  // Touch: whichever card is mostly on screen plays. The slideshow card flips
+  // through its real slides instead. Nothing moves for reduced motion or
+  // data saver, where the posters alone do the work.
+  const fxCards = Array.from(document.querySelectorAll('.format-card[data-fx]'));
+  if (fxCards.length) {
+    const saveData = !!(navigator.connection && navigator.connection.saveData);
+    const motionOK = !prefersReduced && !saveData;
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const decks = new WeakMap();
+
+    const startDeck = (card) => {
+      const deck = card.querySelector('[data-fx-deck]');
+      if (!deck || decks.has(card)) return;
+      const imgs = Array.from(deck.querySelectorAll('img'));
+      const dots = Array.from(card.querySelectorAll('.fx-dots i'));
+      let i = imgs.findIndex((img) => img.classList.contains('is-on'));
+      const timer = setInterval(() => {
+        imgs[i].classList.remove('is-on');
+        if (dots[i]) dots[i].classList.remove('is-on');
+        i = (i + 1) % imgs.length;
+        imgs[i].classList.add('is-on');
+        if (dots[i]) dots[i].classList.add('is-on');
+      }, 1400);
+      decks.set(card, timer);
+    };
+    const stopDeck = (card) => {
+      if (!decks.has(card)) return;
+      clearInterval(decks.get(card));
+      decks.delete(card);
+    };
+
+    const startFx = (card) => {
+      if (!motionOK) return;
+      card.classList.add('is-live');
+      const v = card.querySelector('video[data-src]');
+      if (v) {
+        if (!v.getAttribute('src')) v.src = v.dataset.src;
+        const played = v.play();
+        if (played && played.catch) played.catch(() => card.classList.remove('is-live'));
+      }
+      startDeck(card);
+    };
+    const stopFx = (card) => {
+      card.classList.remove('is-live');
+      const v = card.querySelector('video[data-src]');
+      if (v && !v.paused) v.pause();
+      stopDeck(card);
+    };
+
+    fxCards.forEach((card) => card.addEventListener('click', () => stopFx(card)));
+    if (canHover) {
+      fxCards.forEach((card) => {
+        card.addEventListener('mouseenter', () => startFx(card));
+        card.addEventListener('mouseleave', () => stopFx(card));
+        card.addEventListener('focus', () => startFx(card));
+        card.addEventListener('blur', () => stopFx(card));
+      });
+    } else if (motionOK && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => (e.isIntersecting ? startFx(e.target) : stopFx(e.target)));
+      }, { threshold: 0.6 });
+      fxCards.forEach((card) => io.observe(card));
+    }
+  }
 
   if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
   if (lightbox) {

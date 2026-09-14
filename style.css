@@ -2104,17 +2104,31 @@ button { font: inherit; cursor: pointer; }
   .formats-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 560px) {
-  .formats-grid { grid-template-columns: 1fr; }
+  .formats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 }
+
+/* Each format carries its own colour (Mike, 14 Sep 2026: "too much black and
+   teal"). Accents tint the card, the stage, the play button and the link, so
+   the four read as four different things at a glance. Teal stays on the
+   eyebrow only. */
+.format-card[data-fx="viral"]     { --fx-a: #FF7A59; --fx-b: #FF3D8B; }
+.format-card[data-fx="slideshow"] { --fx-a: #C98BFF; --fx-b: #FF5FB6; }
+.format-card[data-fx="amazon"]    { --fx-a: #FFC94D; --fx-b: #FF7F2A; }
+.format-card[data-fx="reaction"]  { --fx-a: #5BB0FF; --fx-b: #6C6BFF; }
+
 .format-card {
+  --fx-a: var(--aurora);
+  --fx-b: var(--violet);
+  min-width: 0;               /* let 2-up phone columns shrink to fit */
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 20px 20px 18px;
-  border: 1px solid var(--paper-08);
-  border-radius: 16px;
-  background: linear-gradient(180deg, rgba(127, 255, 212, 0.04) 0%, rgba(26, 15, 46, 0.25) 100%);
+  gap: 8px;
+  padding: 10px 10px 18px;
+  border: 1px solid color-mix(in srgb, var(--fx-a) 20%, transparent);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--fx-a) 9%, transparent) 0%, rgba(26, 15, 46, 0.3) 70%);
   cursor: pointer;
   color: var(--paper);
   font: inherit;
@@ -2122,45 +2136,215 @@ button { font: inherit; cursor: pointer; }
               border-color var(--t-med) var(--ease),
               box-shadow var(--t-med) var(--ease);
 }
-.format-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--aurora-30);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 18px rgba(127, 255, 212, 0.1);
+.format-card:hover,
+.format-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--fx-a) 55%, transparent);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35),
+              0 0 36px color-mix(in srgb, var(--fx-a) 22%, transparent);
 }
-.format-top {
+.format-card:focus-visible { outline: 2px solid var(--fx-a); outline-offset: 3px; }
+
+/* The stage: a 4:5 window of colour with the format inside it. Every frame
+   keeps its media's own aspect ratio, so nothing is ever cropped (a book cover
+   in any frame stays whole). */
+.fx-stage {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  border-radius: 12px;
+  overflow: hidden;
+  isolation: isolate;
+  margin-bottom: 6px;
+  background:
+    radial-gradient(90% 70% at 12% 8%, color-mix(in srgb, var(--fx-a) 90%, transparent) 0%, transparent 62%),
+    radial-gradient(90% 75% at 92% 96%, color-mix(in srgb, var(--fx-b) 90%, transparent) 0%, transparent 64%),
+    linear-gradient(155deg, color-mix(in srgb, var(--fx-a) 45%, #0A0613) 0%, color-mix(in srgb, var(--fx-b) 40%, #0A0613) 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+/* A soft vignette so white captions in the frames never sit on bright colour. */
+.fx-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 58%, rgba(10, 6, 19, 0.55) 100%);
+}
+
+.fx-frame,
+.fx-slide {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  overflow: hidden;
+  background: #0A0613;
+  box-shadow: 0 18px 38px rgba(10, 6, 19, 0.5), 0 2px 6px rgba(10, 6, 19, 0.35);
+  transition: transform var(--t-med) var(--ease);
+}
+.fx-frame img,
+.fx-frame video,
+.fx-slide img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* the box already has the media's ratio */
+  display: block;
+}
+.fx-video { opacity: 0; transition: opacity 300ms ease; }
+.format-card.is-live .fx-video { opacity: 1; }
+
+/* Viral and Quick Reaction Hook: both are vertical social videos, so both
+   sit in a phone (Mike, 14 Sep). They tilt opposite ways so the pair reads
+   as two phones, not one copied. */
+.fx-frame--phone {
+  height: 84%;
+  aspect-ratio: 9 / 16;
+  border-radius: 22px;
+  border: 5px solid #120d1c;
+  box-shadow: 0 18px 38px rgba(10, 6, 19, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  transform: translate(-50%, -50%) rotate(3deg);
+}
+.fx-frame--phone::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 6px;
+  left: 50%;
+  width: 30%;
+  height: 9px;
+  border-radius: 999px;
+  background: #120d1c;
+  transform: translateX(-50%);
+}
+.format-card:hover .fx-frame--phone,
+.format-card.is-live .fx-frame--phone { transform: translate(-50%, -50%) rotate(0deg) scale(1.03); }
+.format-card[data-fx="viral"] .fx-frame--phone { transform: translate(-50%, -50%) rotate(-3deg); }
+.format-card[data-fx="viral"]:hover .fx-frame--phone,
+.format-card[data-fx="viral"].is-live .fx-frame--phone { transform: translate(-50%, -50%) rotate(0deg) scale(1.03); }
+
+/* Amazon: a landscape screen, shown whole. */
+.fx-frame--wide {
+  width: 88%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  transform: translate(-50%, -50%) perspective(900px) rotateY(-10deg) rotateX(4deg);
+  box-shadow: 0 22px 44px rgba(10, 6, 19, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+.format-card:hover .fx-frame--wide,
+.format-card.is-live .fx-frame--wide { transform: translate(-50%, -50%) perspective(900px) rotateY(0deg) rotateX(0deg) scale(1.04); }
+
+/* Slideshow: three real slides fanned like a swipe stack. */
+.fx-slide {
+  width: 56%;
+  aspect-ratio: 3 / 4;
+  border-radius: 10px;
+}
+.fx-slide--back  { transform: translate(-50%, -50%) translateX(-30%) rotate(-12deg) scale(0.9); opacity: 0.85; }
+.fx-slide--mid   { transform: translate(-50%, -50%) translateX(30%) rotate(11deg) scale(0.9); opacity: 0.9; }
+.fx-slide--front { transform: translate(-50%, -50%) rotate(-2deg); z-index: 2; }
+.format-card:hover .fx-slide--back,
+.format-card.is-live .fx-slide--back  { transform: translate(-50%, -50%) translateX(-40%) rotate(-16deg) scale(0.9); }
+.format-card:hover .fx-slide--mid,
+.format-card.is-live .fx-slide--mid   { transform: translate(-50%, -50%) translateX(40%) rotate(15deg) scale(0.9); }
+.format-card:hover .fx-slide--front,
+.format-card.is-live .fx-slide--front { transform: translate(-50%, -50%) rotate(0deg) scale(1.04); }
+.fx-slide--front img { opacity: 0; transition: opacity 380ms ease; }
+.fx-slide--front img.is-on { opacity: 1; }
+.fx-dots {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 11px;
+  display: flex;
+  gap: 5px;
+  transform: translateX(-50%);
+}
+.fx-dots i {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(245, 245, 247, 0.4);
+  transition: background 300ms ease, width 300ms var(--ease);
+}
+.fx-dots i.is-on { width: 14px; background: #fff; }
+
+/* Duration chip + play button, the same two corners on every card. */
+.fx-chip {
+  position: absolute;
+  z-index: 4;
+  left: 10px;
+  bottom: 10px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  background: rgba(10, 6, 19, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.fx-play {
+  position: absolute;
+  z-index: 4;
+  right: 10px;
+  bottom: 10px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-.format-play {
-  flex-shrink: 0;
-  width: 34px; height: 34px;
-  display: flex; align-items: center; justify-content: center;
+  justify-content: center;
   border-radius: 999px;
-  background: var(--aurora);
-  color: var(--plum-black);
-  box-shadow: 0 0 14px var(--aurora-30);
+  color: #fff;
+  background: linear-gradient(135deg, var(--fx-a), var(--fx-b));
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--fx-b) 45%, transparent);
+  transition: transform var(--t-fast) var(--ease);
 }
-.format-play svg { width: 16px; height: 16px; margin-left: 1px; }
+.fx-play svg { width: 16px; height: 16px; margin-left: 1px; }
+.format-card:hover .fx-play { transform: scale(1.1); }
+
 .format-len {
+  padding: 0 8px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 18px;
+  font-size: 17px;
+  line-height: 1.25;
   letter-spacing: -0.01em;
   color: var(--paper);
   text-transform: capitalize;
+  text-wrap: balance;
 }
 .format-desc {
+  padding: 0 8px;
   font-size: 13.5px;
   line-height: 1.5;
   color: var(--paper-60);
   flex: 1;
 }
 .format-watch {
+  padding: 0 8px;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: var(--aurora);
+  color: var(--fx-a);
+}
+@media (max-width: 560px) {
+  .format-card { padding: 7px 7px 14px; gap: 6px; border-radius: 16px; }
+  .fx-stage { border-radius: 10px; margin-bottom: 4px; }
+  .fx-chip { left: 7px; bottom: 7px; padding: 3px 7px; font-size: 10px; }
+  .fx-play { right: 7px; bottom: 7px; width: 30px; height: 30px; }
+  .fx-play svg { width: 13px; height: 13px; }
+  .fx-dots { top: 8px; }
+  .format-len { padding: 0 5px; font-size: 14.5px; }
+  .format-desc { padding: 0 5px; font-size: 12.5px; }
+  .format-watch { padding: 0 5px; font-size: 11.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-frame, .fx-slide { transition: none; }
 }
 .formats-note {
   margin: 16px 0 0;
