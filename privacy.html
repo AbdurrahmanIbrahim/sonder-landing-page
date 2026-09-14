@@ -13,11 +13,13 @@
        one analytics tag with its options as data- attributes, and it counts
        anything that looks like one, so never quote the tag in a comment. Keeps
        the old ?via= links working and sets the click cookie on .yousonder.com
-       so app.yousonder.com sees it too. When the programme's link domain is
-       confirmed, add data-domains with {"refer": that domain}. -->
+       so app.yousonder.com sees it too. data-domains.refer must equal the
+       programme's link domain in Dub (Settings → Domains), or verification
+       fails with "missing the referral link domain". -->
   <script
     src="https://www.dubcdn.com/analytics/script.js"
     defer
+    data-domains='{"refer":"refer.yousonder.com"}'
     data-query-params='["via"]'
     data-cookie-options='{"domain":".yousonder.com","expiresInDays":90}'
   ></script>
