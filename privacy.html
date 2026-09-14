@@ -8,34 +8,19 @@
   <script>(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');</script>
   <script async src="https://r.wdfl.co/rw.js" data-rewardful="f9c7cd"></script>
 
-  <!-- Dub Partners affiliate tracking. Loads only when the server says the Dub
-       programme is live (GET /api/public/config → dub.enabled), so switching it
-       on is a Railway variable, not a deploy. Keeps the old ?via= links working
-       and shares the click cookie with app.yousonder.com. -->
-  <script>
-    (function () {
-      try {
-        fetch('https://sonder-server-production.up.railway.app/api/public/config')
-          .then(function (r) { return r.ok ? r.json() : null; })
-          .then(function (c) {
-            var d = c && c.dub;
-            if (!d || !d.enabled || document.querySelector('script[data-dub]')) return;
-            var s = document.createElement('script');
-            s.src = 'https://www.dubcdn.com/analytics/script.js';
-            s.defer = true;
-            s.setAttribute('data-dub', '1');
-            if (d.referDomain) s.setAttribute('data-domains', JSON.stringify({ refer: d.referDomain }));
-            s.setAttribute('data-query-params', JSON.stringify(['via']));
-            var h = location.hostname;
-            var opts = { expiresInDays: 90 };
-            if (h === 'yousonder.com' || /\.yousonder\.com$/.test(h)) opts.domain = '.yousonder.com';
-            s.setAttribute('data-cookie-options', JSON.stringify(opts));
-            document.head.appendChild(s);
-          })
-          .catch(function () {});
-      } catch (e) {}
-    })();
-  </script>
+  <!-- Dub Partners affiliate tracking (replaces Rewardful). A real tag, not a
+       loader: Dub's "Verify installation" reads the raw HTML and wants exactly
+       one analytics tag with its options as data- attributes, and it counts
+       anything that looks like one, so never quote the tag in a comment. Keeps
+       the old ?via= links working and sets the click cookie on .yousonder.com
+       so app.yousonder.com sees it too. When the programme's link domain is
+       confirmed, add data-domains with {"refer": that domain}. -->
+  <script
+    src="https://www.dubcdn.com/analytics/script.js"
+    defer
+    data-query-params='["via"]'
+    data-cookie-options='{"domain":".yousonder.com","expiresInDays":90}'
+  ></script>
   <meta name="theme-color" content="#0A0613" />
   <title>Privacy Policy — Sonder</title>
   <meta name="description" content="How Sonder collects, uses, protects, and lets you control your data — including your uploaded book content." />
