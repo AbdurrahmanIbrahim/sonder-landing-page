@@ -280,7 +280,7 @@
     });
   }
 
-  // -------- Pricing tier carousel (4 visible, arrow reveals the 5th) --------
+  // -------- Pricing tier carousel (3 plans; arrows only when the track scrolls) --------
   const tierCarousel = document.querySelector('[data-tiers-carousel]');
   if (tierCarousel) {
     const track = tierCarousel.querySelector('[data-tiers-track]');
