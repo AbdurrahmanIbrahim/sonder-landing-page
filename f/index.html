@@ -265,7 +265,7 @@
       <div class="optin-step" data-step="4yes">
         <div class="outcome">
           <b>Perfect. Let&rsquo;s make it.</b>
-          <p>Next you&rsquo;ll add a card for your free trial ($0 today), then upload the manuscript and your cover image. That&rsquo;s the whole setup.</p>
+          <p>Next you&rsquo;ll add a card for your free trial ($0 today), then upload a PDF of the manuscript and your cover image. That&rsquo;s the whole setup. Footage of the book is optional: Sonder makes that shot from your cover.</p>
           <a class="cta" href="https://app.yousonder.com/signup?offer=trial" data-signup-yes>
             Start my free trial <span aria-hidden="true">&rarr;</span>
           </a>
@@ -288,9 +288,16 @@
           <a class="cta" href="#" data-webinar="no-book">
             Save my free seat &mdash; Thursday, 12pm ET <span aria-hidden="true">&rarr;</span>
           </a>
+          <!-- These are two different offers and they were sitting next to each
+               other unlabelled. The session is free and takes no card; the trial
+               is $0 today and does. A visitor who read "free seat", clicked the
+               trial and met a card form had been told the truth twice and
+               believed the wrong half. -->
+          <p class="note">Free, and no card needed for the session.</p>
           <p class="altline">Rather start your 7-day free trial now anyway?
             <a class="altcta" href="https://app.yousonder.com/signup?offer=trial" data-signup-no>Start it now <span aria-hidden="true">&rarr;</span></a>
           </p>
+          <p class="note">That one is separate: $0 today, card up front, $49 from day 8. Cancel any time.</p>
         </div>
         <button class="backlink" type="button" data-go="3">Back</button>
       </div>
@@ -384,7 +391,7 @@
     <span class="kicker">&ldquo;I&rsquo;m an author, not a video person&rdquo;</span>
     <h2>Three steps. None of them involve a camera.</h2>
     <ol class="steps">
-      <li><span><b>Upload your book</b><span>The manuscript, or the PDF you already sell. That is the entire setup.</span></span></li>
+      <li><span><b>Upload your book</b><span>A PDF of the manuscript and your cover. Footage of the book is optional: Sonder makes that shot from the cover. That is the entire setup.</span></span></li>
       <li><span><b>Pick a look</b><span>Thirteen styles. Sonder writes the script from your actual pages &mdash; you don&rsquo;t write a word.</span></span></li>
       <li><span><b>Post it</b><span>Download it, or auto-post to TikTok, Reels, Shorts and Facebook. Auto-posting unlocks after your first 5 videos.</span></span></li>
     </ol>
@@ -456,10 +463,10 @@
 
     <p class="ps">
       <b>P.S.</b> &mdash; If you skipped to the bottom, here it is in one line: upload the book
-      you&rsquo;ve already written, and in about four minutes you&rsquo;ll watch a video made
-      out of it &mdash; built on the frameworks that are already getting tens of millions of
-      views on social media. It costs nothing today and you can cancel any time. The only thing
-      you risk is finding out how good your book looks on screen.
+      you&rsquo;ve already written and your cover, and about ten minutes later you&rsquo;ll be
+      watching a video made out of it &mdash; built on the frameworks that are already getting
+      tens of millions of views on social media. It costs nothing today and you can cancel any
+      time. The only thing you risk is finding out how good your book looks on screen.
     </p>
   </section>
 
@@ -477,8 +484,11 @@
   var state = { email: '', book: '' };
 
   /* Ad params ride all the way through to signup. Attribution has to survive
-     the hop to app.yousonder.com — see app.js on the main site. */
-  var CARRY = ['fbclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+     the hop to app.yousonder.com — see app.js on the main site, which this list
+     now matches. It used to stop at Meta and the utm set, so a Google, TikTok
+     or partner click arrived at the app stripped of the one id that could have
+     attributed it. */
+  var CARRY = ['fbclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','ttclid','via','dub_id'];
   var here; try { here = new URL(window.location.href); } catch (e) { here = null; }
 
   function track(name, params) {
@@ -586,6 +596,29 @@
   if (top) top.addEventListener('click', function () {
     block.scrollIntoView({ behavior: 'smooth', block: 'center' });
     show('1');
+  });
+
+  /* Tag both signup links NOW, not only when the book question is answered.
+     They are real hrefs in the markup, so a visitor who reaches one any other
+     way — a restored step, a middle-click, a script that half loaded — was
+     leaving for the app with the ad click id stripped off. */
+  ['[data-signup-yes]', '[data-signup-no]'].forEach(function (sel) {
+    var a = block.querySelector(sel);
+    if (a) a.href = signupUrl(sel === '[data-signup-yes]' ? 'yes' : 'no');
+  });
+
+  /* The click that leaves for signup.
+     This page fired Lead when the email was captured and then nothing at all,
+     so the step that matters most on a page whose whole job is this one tap —
+     "they went to sign up" — was invisible to Meta, and /go has been reporting
+     it since it launched. Same event name and the same delegated shape as
+     go/index.html, so the two pages stay comparable in one report.
+     Not preventDefault: the navigation carries on regardless, and an ad pixel
+     must never stand between a visitor and the signup form. */
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('[data-signup-yes],[data-signup-no]') : null;
+    if (!a) return;
+    track('InitiateCheckout', { content_name: 'f_signup', content_category: state.book || 'unknown' });
   });
 })();
 </script>

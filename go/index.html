@@ -252,7 +252,7 @@
   <section>
     <h2>How it works</h2>
     <ol class="steps">
-      <li><span><b>Upload your book</b><span>The manuscript, or just the PDF you already sell. That is the whole setup.</span></span></li>
+      <li><span><b>Upload your book</b><span>A PDF of the manuscript and your cover. Footage of the book is optional: Sonder makes that shot from the cover. That is the whole setup.</span></span></li>
       <li><span><b>Pick a style</b><span>Thirteen looks, from cinematic to animated. Sonder writes the script from your actual pages.</span></span></li>
       <li><span><b>Post it</b><span>Download, or auto-post straight to your accounts. Minutes, not days.</span></span></li>
     </ol>
@@ -301,7 +301,9 @@
      here on the account at signup, which is what lets a purchase days later
      still be attributed to this click. */
   (function () {
-    var CARRY = ['fbclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+    /* Matches app.js on the main site. Stopping at Meta and the utm set left a
+       Google, TikTok or partner click with nothing to attribute it by. */
+    var CARRY = ['fbclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','ttclid','via','dub_id'];
     var here; try { here = new URL(window.location.href); } catch (e) { return; }
     var carry = {}, found = false;
     CARRY.forEach(function (k) { var v = here.searchParams.get(k); if (v) { carry[k] = v; found = true; } });
