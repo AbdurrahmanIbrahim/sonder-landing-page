@@ -119,6 +119,9 @@
     white-space:nowrap;
   }
   .trust b{color:var(--mint);font-weight:700}
+  /* Hero order is button, note, video, trust row (see the markup). */
+  .cta-note + .demo{margin-top:26px}
+  .demo + .trust{margin-top:0}
 
   section{padding:44px 0}
   h2{margin:0 0 18px;font-size:clamp(23px,5.8vw,28px);font-weight:700;
@@ -193,6 +196,16 @@
       and Amazon ads &mdash; in minutes, for less than a coffee.
     </p>
 
+    <!-- The button comes BEFORE the video. With the 9:16 video first, the button
+         started 838px down a 390x844 phone: entirely below the first screen, and
+         lower still inside the Facebook and Instagram in-app browsers, which is
+         where this page's traffic arrives. The video is the proof, so it sits
+         directly underneath for anyone who wants to see it first. -->
+    <a class="cta" href="https://app.yousonder.com/signup?offer=trial" data-signup>
+      Start your 7-day free trial <span aria-hidden="true">&rarr;</span>
+    </a>
+    <p class="cta-note">$0 today, then $49/month from day 8. Cancel any time.</p>
+
     <figure class="demo">
       <!-- Muted, looping, inline: it plays on a phone without a tap and without
            a heavy third-party player. This is a real Sonder viral video, the
@@ -202,11 +215,6 @@
              aria-label="A real Sonder video made from a book"></video>
       <figcaption>Made by Sonder</figcaption>
     </figure>
-
-    <a class="cta" href="https://app.yousonder.com/signup?offer=trial" data-signup>
-      Start your 7-day free trial <span aria-hidden="true">&rarr;</span>
-    </a>
-    <p class="cta-note">$0 today, then $49/month from day 8. Cancel any time.</p>
 
     <ul class="trust">
       <li><b>1,000+</b> videos made</li>
