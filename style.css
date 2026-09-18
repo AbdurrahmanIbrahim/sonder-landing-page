@@ -63,6 +63,18 @@ body {
   overflow-x: hidden;
 }
 
+/* Decoration is allowed to hang past the screen edge: the founders glow
+   (right:-15%), the Amazon-ad carousel's peeking side cards. Desktop browsers
+   cut it off at the window because of body's overflow-x above, but PHONE and
+   TABLET browsers ignore that on the root and widen the whole page to fit it
+   instead: the homepage rendered 449px wide on a 390px phone and 883px on a
+   768px tablet, with the top-bar "Start my trial" link off-screen and the page
+   pannable sideways. <main> spans the full window at every size, so clipping
+   it is the same cut desktop already makes, enforced where phones obey it.
+   `clip`, not `hidden`, so <main> never becomes a scroll container; `hidden`
+   first only as the fallback for browsers without `clip`. */
+main { overflow-x: hidden; overflow-x: clip; }
+
 img, svg { display: block; max-width: 100%; }
 button { font: inherit; cursor: pointer; }
 
@@ -1752,7 +1764,6 @@ button { font: inherit; cursor: pointer; }
   z-index: -1;
   filter: blur(20px);
 }
-
 .founder-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
