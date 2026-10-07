@@ -164,7 +164,8 @@ p{margin:0}
   background:var(--wash);border:1px solid var(--rule);border-radius:9px;font-variant-numeric:tabular-nums}
 .seatcard .cnt:empty{display:none}
 form{display:flex;flex-direction:column;gap:13px;margin-top:18px}
-.field{display:flex;flex-direction:column;gap:5px}
+.field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .field label{font-size:13.5px;font-weight:600;color:var(--ink)}
 .field input{font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1.5px solid var(--rule-2);
   border-radius:11px;padding:12px 13px;width:100%;min-width:0}
@@ -325,9 +326,15 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
       <p class="cnt" id="when-count"></p>
 
       <form id="lv-form" novalidate>
-        <div class="field">
-          <label for="first">First name</label>
-          <input id="first" name="firstName" type="text" autocomplete="given-name" maxlength="60" required />
+        <div class="row2">
+          <div class="field">
+            <label for="first">First name</label>
+            <input id="first" name="firstName" type="text" autocomplete="given-name" maxlength="60" required />
+          </div>
+          <div class="field">
+            <label for="last">Last name</label>
+            <input id="last" name="lastName" type="text" autocomplete="family-name" maxlength="60" required />
+          </div>
         </div>
         <div class="field">
           <label for="email">Email</label>
@@ -636,7 +643,7 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
 
   function say(text,ok){msg.textContent=text||'';msg.className=ok?'formmsg ok':'formmsg'}
   function bad(id,text){
-    ['first','email','phone'].forEach(function(f){$(f).removeAttribute('aria-invalid')});
+    ['first','last','email','phone'].forEach(function(f){$(f).removeAttribute('aria-invalid')});
     if(id){$(id).setAttribute('aria-invalid','true');$(id).focus()}
     say(text,false);return false;
   }
@@ -649,13 +656,15 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
 
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    var first=$('first').value.trim(), email=$('email').value.trim(), wantsSms=sms.checked, phone=$('phone').value.trim();
+    var first=$('first').value.trim(), last=$('last').value.trim(), email=$('email').value.trim(), wantsSms=sms.checked, phone=$('phone').value.trim();
     if(!first)return bad('first','Please add your first name.');
+    /* Zoom's registration needs a last name too. */
+    if(!last)return bad('last','Please add your last name.');
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))return bad('email','That email doesn’t look right. Please check it.');
     if(wantsSms&&phone.replace(/\D/g,'').length<10)return bad('phone','Add a US or Canadian mobile number, or untick the box.');
     bad(null,'');busy(true);
 
-    var body={firstName:first,email:email,smsConsent:wantsSms,consentVersion:wantsSms?CONSENT_VERSION:null,phone:wantsSms?phone:null,
+    var body={firstName:first,lastName:last,email:email,smsConsent:wantsSms,consentVersion:wantsSms?CONSENT_VERSION:null,phone:wantsSms?phone:null,
       tz:userTz(),company:$('company').value,elapsedMs:Math.round(clockNow()-loadedAt),
       referrer:document.referrer?document.referrer.slice(0,500):null,landingUrl:location.href.split('#')[0].slice(0,500)};
     for(var k in attribution)if(Object.prototype.hasOwnProperty.call(attribution,k))body[k]=attribution[k];
@@ -670,6 +679,7 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
         if(x.status===400){busy(false);
           if(j.error==='invalid_email')return bad('email','That email doesn’t look right. Please check it.');
           if(j.error==='invalid_name')return bad('first','Please add your first name.');
+          if(j.error==='invalid_last_name')return bad('last','Please add your last name.');
           return bad(null,'Please try that again.');
         }
         if(j.ok){
