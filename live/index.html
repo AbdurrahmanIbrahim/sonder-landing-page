@@ -49,6 +49,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" />
 <link rel="icon" type="image/svg+xml" href="/assets/sonder-logo-plum-flat.svg" />
+<!-- Phone country picker (intl-tel-input, pinned). Flags are sprites in the
+     library's own package on jsdelivr, so every OS shows real flags. -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@29.5.3/dist/css/intlTelInput.min.css" />
 
 <style>
 /* =====================================================================
@@ -172,12 +175,25 @@ form{display:flex;flex-direction:column;gap:13px;margin-top:18px}
 .field input:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 3px rgba(107,63,160,.18)}
 .field input[aria-invalid="true"]{border-color:var(--error);box-shadow:0 0 0 3px rgba(180,35,24,.12)}
 .field .hint{font-size:12px;color:var(--ink-3)}
-.field .opt{font-weight:400;color:var(--ink-3)}
-.tel{display:flex;align-items:stretch;border:1.5px solid var(--rule-2);border-radius:11px;background:#fff;overflow:hidden}
-.tel:focus-within{border-color:var(--violet);box-shadow:0 0 0 3px rgba(107,63,160,.18)}
-.tel:has(input[aria-invalid="true"]){border-color:var(--error)}
-.tel .cc{display:flex;align-items:center;padding:0 12px;font-family:var(--mono);font-size:14px;color:var(--ink-2);background:var(--wash);border-right:1.5px solid var(--rule-2)}
-.tel input,.tel input:focus,.tel input[aria-invalid="true"]{border:0;border-radius:0;box-shadow:none}
+/* The phone country picker: flag + dialling code on the left, like Mino Lee's.
+   US, Canada, UK and Australia first, a divider, then every other country. */
+.phone-field .iti{display:block;width:100%;
+  --iti-border-color:var(--rule-2);--iti-hover-color:var(--wash);--iti-country-selector-bg:#fff;
+  --iti-icon-color:var(--ink-2);--iti-spacer-horizontal:12px}
+.phone-field .iti__selected-country{border-radius:11px 0 0 11px}
+.phone-field .iti__selected-country-primary{background:var(--wash);border-right:1.5px solid var(--rule-2);border-radius:10px 0 0 10px}
+.phone-field .iti__selected-dial-code{font-family:var(--mono);font-size:14px;color:var(--ink)}
+.iti__country{font-family:var(--body);font-size:15px;padding:10px 12px}
+.iti__country-name{color:var(--ink)}
+.iti__dial-code{color:var(--ink-3)}
+.iti__country.iti__highlight{background:var(--wash)}
+.iti__country[id$="__item-au"]{border-bottom:1px solid var(--rule-2)}
+/* The picker's search box sits inside .field, so undo the form-input look there
+   and give back the room its search icon needs. */
+.phone-field .iti__search-input,.phone-field .iti__search-input:focus{font-family:var(--body);font-size:15px;
+  border:0;border-bottom:1px solid var(--rule);border-radius:0;box-shadow:none;padding-block:12px;
+  padding-left:calc(var(--iti-spacer-horizontal) + var(--iti-globe-icon-size, 16px) + var(--iti-spacer-horizontal));
+  padding-right:calc(var(--iti-spacer-horizontal) + var(--iti-clear-icon-size, 16px) + var(--iti-spacer-horizontal))}
 .consent-line{font-size:11.5px;line-height:1.5;color:var(--ink-3)}
 .consent-line a{color:var(--violet)}
 .seatcard .btn{width:100%;margin-top:4px}
@@ -343,12 +359,9 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
           <span class="hint">Your personal Zoom link goes here.</span>
         </div>
 
-        <div class="field">
-          <label for="phone">Phone number <span class="opt">(optional: we'll text you when we go live)</span></label>
-          <div class="tel">
-            <span class="cc" aria-hidden="true">+1</span>
-            <input id="phone" name="phone" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="40" placeholder="(555) 555-0123" aria-describedby="sms-terms" />
-          </div>
+        <div class="field phone-field">
+          <label for="phone">Phone number</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" aria-describedby="sms-terms" />
         </div>
 
         <div class="hp" aria-hidden="true">
@@ -537,6 +550,7 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@29.5.3/dist/js/intlTelInput.min.js"></script>
 <script>
 (function(){
   "use strict";
@@ -554,6 +568,8 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
   var LEXI_VIDEO_POSTER = '';
   var DURATION_MIN = 90, JOIN_LEAD_MIN = 15;
   var STORE_KEY = 'sonder.live.reg';
+  /* The picker's number rules (libphonenumber), loaded from the same pinned package. */
+  var ITI_UTILS = 'https://cdn.jsdelivr.net/npm/intl-tel-input@29.5.3/dist/js/utils.js';
 
   var $ = function(id){ return document.getElementById(id); };
   var clockNow = function(){ return (window.performance && performance.now) ? performance.now() : Date.now(); };
@@ -643,6 +659,28 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
   /* ===== The form ===== */
   var form=$('lv-form'), msg=$('form-msg'), btn=$('submit');
 
+  /* ===== Phone: a country picker like Mino Lee's =====
+     US, Canada, UK and Australia first, then every other country. Texts go to
+     the US and Canada for now; other numbers are kept for later (the server
+     marks them) and those people get email reminders. If the library cannot
+     load, the field still works as a plain +1 number. */
+  var iti=null;
+  try{
+    if(window.intlTelInput){
+      iti=window.intlTelInput($('phone'),{
+        initialCountry:'us',
+        countryOrder:['us','ca','gb','au'],
+        separateDialCode:true,
+        countrySearch:true,
+        formatAsYouType:true,
+        /* new Function keeps import() out of this script's parse, so an old
+           browser loses only the number check, never the whole form. */
+        loadUtils:function(){return (new Function('u','return import(u)'))(ITI_UTILS)}
+      });
+    }
+  }catch(e){iti=null}
+  if(!iti)$('phone').placeholder='(555) 555-0123';
+
   function say(text,ok){msg.textContent=text||'';msg.className=ok?'formmsg ok':'formmsg'}
   function bad(id,text){
     ['first','last','email','phone'].forEach(function(f){$(f).removeAttribute('aria-invalid')});
@@ -658,12 +696,24 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
 
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    var first=$('first').value.trim(), last=$('last').value.trim(), email=$('email').value.trim(), phone=$('phone').value.trim(), wantsSms=phone.length>0;
+    var first=$('first').value.trim(), last=$('last').value.trim(), email=$('email').value.trim(), phoneRaw=$('phone').value.trim(), wantsSms=phoneRaw.length>0, phone=phoneRaw;
     if(!first)return bad('first','Please add your first name.');
     /* Zoom's registration needs a last name too. */
     if(!last)return bad('last','Please add your last name.');
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))return bad('email','That email doesn’t look right. Please check it.');
-    if(wantsSms&&phone.replace(/\D/g,'').length<10)return bad('phone','That number looks too short. Use a US or Canadian mobile number, or leave it blank.');
+    if(wantsSms){
+      if(iti){
+        var valid=null,full='';
+        try{valid=iti.isValidNumber()}catch(err){valid=null}
+        if(valid===false)return bad('phone','That number doesn\u2019t look right for the country picked. Check it, or leave it blank.');
+        try{full=iti.getNumber()||''}catch(err){full=''}
+        if(full&&full.charAt(0)==='+'){phone=full}
+        else{var sel=null;try{sel=iti.getSelectedCountry()}catch(err){}
+          if(sel&&sel.dialCode&&phoneRaw.charAt(0)!=='+')phone='+'+sel.dialCode+' '+phoneRaw}
+      }else if(phoneRaw.replace(/\D/g,'').length<10){
+        return bad('phone','That number looks too short. Check it, or leave it blank.');
+      }
+    }
     bad(null,'');busy(true);
 
     var body={firstName:first,lastName:last,email:email,smsConsent:wantsSms,consentVersion:wantsSms?CONSENT_VERSION:null,phone:wantsSms?phone:null,
