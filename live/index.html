@@ -144,8 +144,32 @@ p{margin:0}
 .whenline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:20px;
   font-family:var(--mono);font-size:14.5px;font-weight:600;color:var(--plum)}
 .whenline .sep{color:var(--ink-3)}
-.lexi-video{margin-top:22px;max-width:520px}
-.lexi-video video{width:100%;border-radius:16px;background:var(--plum);aspect-ratio:16/9}
+.lexi-video{margin-top:24px;max-width:520px}
+.lv-poster{all:unset;box-sizing:border-box;position:relative;display:block;width:100%;aspect-ratio:16/9;cursor:pointer;
+  border-radius:18px;overflow:hidden;color:#fff;border:2px solid var(--plum);box-shadow:0 8px 0 0 var(--wash-2);
+  background:radial-gradient(120% 90% at 85% 10%,rgba(127,255,212,.28),transparent 55%),
+    radial-gradient(90% 80% at 0% 100%,rgba(107,63,160,.55),transparent 60%),var(--plum)}
+.lv-poster:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
+.lv-who{position:absolute;top:16px;left:16px;display:flex;align-items:center;gap:10px}
+.lv-who img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--mint)}
+.lv-who b{display:block;font-size:14px;font-weight:700;line-height:1.2}
+.lv-who i{display:block;font-style:normal;font-size:12px;color:#D6CFE4}
+.lv-play{position:absolute;inset:0;margin:auto;width:76px;height:76px;border-radius:50%;background:var(--mint);
+  display:grid;place-items:center;box-shadow:0 6px 0 0 rgba(10,6,19,.35);transition:transform .15s ease}
+.lv-play svg{margin-left:4px}
+.lv-poster:hover .lv-play{transform:scale(1.06)}
+.lv-title{position:absolute;left:16px;right:84px;bottom:16px;font-family:var(--display);font-weight:900;
+  font-size:clamp(1rem,2.4vw,1.25rem);line-height:1.2;letter-spacing:-.02em;text-wrap:balance}
+.lv-dur{position:absolute;right:16px;bottom:16px;font-family:var(--mono);font-size:12px;font-weight:600;
+  background:rgba(10,6,19,.55);border-radius:7px;padding:4px 8px}
+.lv-video{display:block;width:100%;aspect-ratio:16/9;border-radius:18px;background:#0A0613;object-fit:contain}
+.lv-soon{margin-top:10px;font-size:13.5px;color:var(--ink-2)}
+@media (max-width:480px){
+  .lv-who{top:12px;left:12px}.lv-who img{width:32px;height:32px}
+  .lv-play{width:54px;height:54px}.lv-play svg{width:22px;height:22px}
+  .lv-title{left:12px;bottom:12px;right:64px;font-size:.95rem}
+  .lv-dur{right:12px;bottom:12px}
+}
 .hero-hosts{display:flex;align-items:center;gap:13px;margin-top:26px;padding-top:22px;border-top:1px solid var(--rule)}
 .hero-hosts .pics{display:flex;flex-shrink:0}
 .hero-hosts img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:3px solid #fff;
@@ -330,9 +354,19 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
       <h1>How authors are getting millions of views on their books <span class="hl">without showing their face.</span></h1>
       <p class="lede">90 minutes, live on Zoom. Two seven-figure publishers show you what is working right now for authors using Sonder, then turn a real book into finished videos while you watch.</p>
       <p class="whenline"><span id="when-hero">Thursday</span> <span class="sep">&middot;</span> <span id="when-hero-time">12pm ET / 9am PT</span> <span class="sep">&middot;</span> Free</p>
-      <!-- Lexi's 90-second video: set LEXI_VIDEO_URL in the script at the foot of
-           the page and this block appears. The page works without it. -->
-      <div class="lexi-video" id="lexi-video" hidden></div>
+      <!-- Lexi's 90-second video. The poster is ours (the 200px headshot is all we
+           have of her); set LEXI_VIDEO_URL in the script at the foot of the page
+           and pressing it plays the video in place. Until then it says the video
+           is coming soon. -->
+      <div class="lexi-video" id="lexi-video">
+        <button type="button" class="lv-poster" id="lexi-play" aria-label="Play: Lexi on what you'll see on Thursday, 90 seconds">
+          <span class="lv-who"><img src="/assets/founders/lexi.jpg" alt="" width="40" height="40"><span><b>Lexi Kaz</b><i>Co-founder, Sonder</i></span></span>
+          <span class="lv-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5.5v13l10.5-6.5z" fill="#2D1A48"/></svg></span>
+          <span class="lv-title">What you'll see on Thursday, in 90 seconds</span>
+          <span class="lv-dur">1:30</span>
+        </button>
+        <p class="lv-soon" id="lexi-soon" role="status" hidden>Lexi's video is on its way. Save your seat in the meantime.</p>
+      </div>
     </div>
 
     <aside class="seatcard" id="seat" aria-labelledby="seat-title">
@@ -563,9 +597,10 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
      word for word with the line under the button (#sms-terms). Adding a number
      and pressing the button is the consent. New wording = new version. */
   var CONSENT_VERSION = 'v2';
-  /* Lexi's 90-second video (mp4 on Sonder's storage). Empty = no video block. */
+  /* Lexi's 90-second video (mp4 on Sonder's own storage). Empty = the poster
+     says the video is on its way. If her video is portrait, also switch
+     .lv-poster and .lv-video to aspect-ratio 9/16 with a narrower max-width. */
   var LEXI_VIDEO_URL = '';
-  var LEXI_VIDEO_POSTER = '';
   var DURATION_MIN = 90, JOIN_LEAD_MIN = 15;
   var STORE_KEY = 'sonder.live.reg';
   /* The picker's number rules (libphonenumber), loaded from the same pinned package. */
@@ -767,13 +802,18 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
     });
   });
 
-  /* ===== Lexi's video, when there is one ===== */
-  if(LEXI_VIDEO_URL){
-    var box=$('lexi-video'),lv=document.createElement('video');
-    lv.src=LEXI_VIDEO_URL;lv.controls=true;lv.preload='metadata';lv.playsInline=true;lv.setAttribute('playsinline','');
-    if(LEXI_VIDEO_POSTER)lv.poster=LEXI_VIDEO_POSTER;
-    box.appendChild(lv);box.hidden=false;
-  }
+  /* ===== Lexi's video: the poster plays it in place ===== */
+  (function(){
+    var poster=$('lexi-play');
+    if(!poster)return;
+    poster.addEventListener('click',function(){
+      if(!LEXI_VIDEO_URL){$('lexi-soon').hidden=false;return}
+      var v=document.createElement('video');
+      v.src=LEXI_VIDEO_URL;v.controls=true;v.autoplay=true;v.playsInline=true;v.className='lv-video';
+      v.setAttribute('playsinline','');v.setAttribute('aria-label','Lexi on what you will see on Thursday');
+      poster.parentNode.replaceChild(v,poster);var p=v.play();if(p&&p.catch)p.catch(function(){});
+    });
+  })();
 
   /* ===== Sticky phone CTA: once the form has scrolled away ===== */
   (function(){
