@@ -568,9 +568,14 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
     .formatToParts(d).forEach(function(x){p[x.type]=x.value});return p}
   function nyOffset(d){var p=nyParts(d);return Date.UTC(+p.year,+p.month-1,+p.day,(+p.hour)%24,+p.minute,+p.second)-d.getTime()}
   function fromNY(y,m,d,h,mi){var t=Date.UTC(y,m-1,d,h,mi);for(var i=0;i<2;i++){t=Date.UTC(y,m-1,d,h,mi)-nyOffset(new Date(t))}return new Date(t)}
+  /* The second Thursday of each month is the customers-only session: the public
+     Zoom series has no occurrence that day, so the page never offers it (7 Oct 2026). */
+  function customersOnly(dt){var p=nyParts(dt),day=+p.day;return p.weekday==='Thu'&&day>=8&&day<=14}
   function nextSession(now){var p=nyParts(now),y=+p.year,m=+p.month,d=+p.day;
-    var delta=(4-WD.indexOf(p.weekday)+7)%7;var c=fromNY(y,m,d+delta,12,0);
-    if(c.getTime()<=now.getTime())c=fromNY(y,m,d+delta+7,12,0);return c}
+    var k=(4-WD.indexOf(p.weekday)+7)%7;var c=fromNY(y,m,d+k,12,0);
+    if(c.getTime()<=now.getTime()){k+=7;c=fromNY(y,m,d+k,12,0)}
+    while(customersOnly(c)){k+=7;c=fromNY(y,m,d+k,12,0)}
+    return c}
 
   var target=nextSession(new Date());
   var pad=function(n){return n<10?'0'+n:String(n)};

@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FFFFFF" />
+<title>How authors are getting millions of views without showing their face | Sonder live</title>
+<meta name="description" content="A free live session every Thursday at 12pm ET / 9am PT: what is working right now for authors using Sonder, and a real book turned into videos while you watch." />
+<meta name="robots" content="noindex, nofollow" />
+<meta property="og:title" content="How authors are getting millions of views on their books without showing their face" />
+<meta property="og:description" content="Free and live every Thursday, 12pm ET / 9am PT. Real author results, and a real book turned into videos while you watch." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.yousonder.com/live" />
+
+<!-- yousonder.com/live: the webinar sign-up page for Lexi's posts (7 Oct 2026).
+     Organic traffic books a seat here first; the 7-day trial is offered on the
+     thank-you page (/live/youre-in). The form posts to sonder-server
+     (routes/liveWebinar.ts), which registers the person on the public Zoom
+     series and records text-reminder consent. If that fails for any reason the
+     browser is sent to Zoom's own form ("Social System" tracking link), so
+     nobody is lost. Paid traffic keeps /f. -->
+
+<!-- Dub Partners affiliate tracking: keeps affiliates' ?via= links working here
+     and sets the click cookie on .yousonder.com so the app sees it at signup. -->
+<script
+  src="https://www.dubcdn.com/analytics/script.js"
+  defer
+  data-domains='{"refer":"refer.yousonder.com"}'
+  data-query-params='["via"]'
+  data-cookie-options='{"domain":".yousonder.com","expiresInDays":90}'
+></script>
+
+<!-- Meta Pixel: Sonder Web dataset, same id as / , /f, /go and /webinar3. -->
+<script>
+  window.SONDER_META_PIXEL_ID = '1999564797365444';
+  (function () {
+    var id = window.SONDER_META_PIXEL_ID;
+    if (!id) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', id); fbq('track', 'PageView');
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" />
+<link rel="icon" type="image/svg+xml" href="/assets/sonder-logo-plum-flat.svg" />
+
+<style>
+/* =====================================================================
+   /live — the same register as /webinar3 (Sonder plum, mint, Nunito),
+   but the customers lead and the form sits in the first screen.
+   Deliberately single-theme light, like /webinar3: every colour is painted
+   explicitly and nothing is left to the host theme.
+   ===================================================================== */
+:root{
+  --paper:#FFFFFF;
+  --wash:#F4F2F8;
+  --wash-2:#EAE5F2;
+  --ink:#17111F;
+  --ink-2:#5A5368;
+  --ink-3:#6E6780;
+  --rule:#E2DDEC;
+  --rule-2:#CFC7DE;
+  --plum:#2D1A48;
+  --violet:#6B3FA0;
+  --mint:#7FFFD4;
+  --mint-ink:#05261C;
+  --mint-deep:#00795C;
+  --amber:#9A5B00;
+  --error:#B42318;
+  --display:'Nunito',system-ui,-apple-system,sans-serif;
+  --body:'Inter',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --gut:clamp(20px,5vw,40px);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px;border-radius:6px}
+.wrap{width:100%;max-width:1060px;margin:0 auto;padding-inline:var(--gut)}
+h1,h2,h3{font-family:var(--display);font-weight:900;letter-spacing:-.03em;margin:0;text-wrap:balance}
+h1{font-size:clamp(1.85rem,4.2vw,2.9rem);line-height:1.05}
+h2{font-size:clamp(1.6rem,4vw,2.5rem);line-height:1.08}
+h3{font-size:clamp(1.1rem,2.4vw,1.35rem);line-height:1.25;letter-spacing:-.02em}
+p{margin:0}
+.lede{font-size:clamp(1.02rem,2.1vw,1.18rem);color:var(--ink-2);max-width:60ch}
+.hl{background:linear-gradient(180deg,transparent 42%,var(--mint) 42%,var(--mint) 94%,transparent 94%);padding:0 .08em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ---------- bar ---------- */
+.bar{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--rule)}
+.bar-in{display:flex;align-items:center;gap:14px;min-height:64px}
+.mark{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0}
+.mark svg{width:24px;height:24px}
+.mark b{font-family:var(--display);font-weight:900;font-size:20px;letter-spacing:-.045em;color:var(--plum)}
+.mark i{color:var(--mint-deep);font-style:normal}
+.clock{margin-left:auto;display:flex;align-items:center;gap:8px;font-family:var(--mono);
+  font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.clock b{color:var(--ink);font-weight:600}
+.pip{width:8px;height:8px;border-radius:50%;background:var(--mint-deep);flex-shrink:0;
+  animation:blip 2.4s ease-out infinite}
+@keyframes blip{0%{box-shadow:0 0 0 0 rgba(0,121,92,.45)}70%{box-shadow:0 0 0 8px rgba(0,121,92,0)}100%{box-shadow:0 0 0 0 rgba(0,121,92,0)}}
+@media (max-width:760px){.clock .lbl{display:none}}
+@media (max-width:430px){.clock{display:none}.bar-in .btn{margin-left:auto}}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;
+  font-family:var(--body);font-weight:700;font-size:17px;padding:16px 28px;border-radius:999px;
+  background:var(--mint);color:var(--mint-ink);border:2px solid var(--plum);text-decoration:none;
+  box-shadow:0 4px 0 0 var(--plum);transition:transform .12s ease,box-shadow .12s ease;text-align:center}
+.btn:hover{transform:translateY(2px);box-shadow:0 2px 0 0 var(--plum)}
+.btn:active{transform:translateY(4px);box-shadow:0 0 0 0 var(--plum)}
+.btn[disabled]{opacity:.7;cursor:progress;transform:none;box-shadow:0 4px 0 0 var(--plum)}
+.btn.sm{font-size:14px;padding:9px 17px;box-shadow:0 3px 0 0 var(--plum)}
+
+/* ---------- hero ---------- */
+.hero{background:linear-gradient(180deg,var(--wash),var(--paper));border-bottom:1px solid var(--rule);
+  padding:clamp(34px,5vw,60px) 0 clamp(36px,5vw,56px)}
+.hero-in{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr);
+  grid-template-areas:"copy form" "hosts form";gap:0 clamp(28px,4vw,52px);align-items:start}
+.hero-copy{grid-area:copy}
+.hero-hosts{grid-area:hosts;align-self:start}
+.seatcard{grid-area:form}
+@media (max-width:900px){
+  .hero-in{grid-template-columns:1fr;grid-template-areas:"copy" "form" "hosts";gap:26px}
+}
+.kicker{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--violet);font-weight:600;
+  background:#fff;border:1px solid var(--rule-2);border-radius:999px;padding:8px 15px}
+.hero h1{margin:18px 0 0}
+.hero .lede{margin-top:16px}
+.whenline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:20px;
+  font-family:var(--mono);font-size:14.5px;font-weight:600;color:var(--plum)}
+.whenline .sep{color:var(--ink-3)}
+.lexi-video{margin-top:22px;max-width:520px}
+.lexi-video video{width:100%;border-radius:16px;background:var(--plum);aspect-ratio:16/9}
+.hero-hosts{display:flex;align-items:center;gap:13px;margin-top:26px;padding-top:22px;border-top:1px solid var(--rule)}
+.hero-hosts .pics{display:flex;flex-shrink:0}
+.hero-hosts img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:3px solid #fff;
+  box-shadow:0 1px 4px rgba(23,17,31,.16)}
+.hero-hosts img+img{margin-left:-14px}
+.hero-hosts p{font-size:14.5px;color:var(--ink-2);line-height:1.45}
+.hero-hosts b{color:var(--ink);font-weight:700}
+
+/* ---------- the form card ---------- */
+.seatcard{background:#fff;border:2px solid var(--plum);border-radius:20px;padding:24px 22px 22px;
+  box-shadow:0 8px 0 0 var(--wash-2);scroll-margin-top:84px}
+.seatcard .st{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--violet);font-weight:600}
+.seatcard .st.live{color:var(--mint-deep)}
+.seatcard .dt{font-family:var(--display);font-weight:900;font-size:1.5rem;letter-spacing:-.035em;margin-top:8px;line-height:1.15}
+.seatcard .tm{font-family:var(--mono);font-size:14px;color:var(--mint-deep);font-weight:600;margin-top:4px}
+.seatcard .loc{font-size:12.5px;color:var(--ink-3);margin-top:4px}
+.seatcard .cnt{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);margin-top:10px;padding:8px 11px;
+  background:var(--wash);border:1px solid var(--rule);border-radius:9px;font-variant-numeric:tabular-nums}
+.seatcard .cnt:empty{display:none}
+form{display:flex;flex-direction:column;gap:13px;margin-top:18px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:13.5px;font-weight:600;color:var(--ink)}
+.field input{font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1.5px solid var(--rule-2);
+  border-radius:11px;padding:12px 13px;width:100%;min-width:0}
+.field input:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 3px rgba(107,63,160,.18)}
+.field input[aria-invalid="true"]{border-color:var(--error);box-shadow:0 0 0 3px rgba(180,35,24,.12)}
+.field .hint{font-size:12px;color:var(--ink-3)}
+.optin{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;
+  background:var(--wash);border:1px solid var(--rule);border-radius:12px;padding:12px 13px}
+.optin input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--mint-deep);cursor:pointer}
+.optin label{font-size:12.5px;line-height:1.5;color:var(--ink-2);cursor:pointer}
+.optin label b{display:block;font-size:14px;color:var(--ink);font-weight:600;margin-bottom:2px}
+.optin .links{grid-column:2;font-size:12px;color:var(--ink-3)}
+.optin .links a{color:var(--violet)}
+.seatcard .btn{width:100%;margin-top:4px}
+.formmsg{font-size:13.5px;line-height:1.45;color:var(--error);min-height:0}
+.formmsg:empty{display:none}
+.formmsg.ok{color:var(--mint-deep)}
+.seatcard .fine{font-size:12.5px;color:var(--ink-3);text-align:center;line-height:1.5}
+.hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+
+/* ---------- proof band ---------- */
+.receipts{background:var(--plum);color:#fff;padding:clamp(26px,4vw,38px) 0}
+.receipts .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,3vw,30px)}
+@media (max-width:760px){.receipts .grid{grid-template-columns:1fr 1fr;gap:22px}}
+.receipts b{display:block;font-family:var(--mono);font-weight:600;font-size:clamp(1.15rem,3vw,1.6rem);
+  letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--mint)}
+.receipts span{display:block;font-size:13px;color:#D6CFE4;margin-top:7px;line-height:1.45}
+.receipts .proofline{margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.16);
+  font-size:13px;color:#C9C0D9}
+
+/* ---------- sections ---------- */
+.sec{padding:clamp(48px,7vw,84px) 0}
+.sec.wash{background:var(--wash);border-block:1px solid var(--rule)}
+.sechead{max-width:64ch;margin-bottom:clamp(26px,4vw,40px)}
+.sechead .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--violet);font-weight:600;margin:0 0 12px}
+.sechead p{margin-top:14px}
+
+/* stories: one column so every screenshot is readable */
+.stories{display:flex;flex-direction:column;gap:0}
+.story{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(18px,3vw,36px);
+  padding:clamp(24px,3.4vw,34px) 0;border-top:2px solid var(--rule);align-items:center}
+.story:last-child{border-bottom:2px solid var(--rule)}
+@media (max-width:820px){.story{grid-template-columns:1fr}}
+.story .who{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--violet);font-weight:600}
+.story h3{margin:8px 0 10px}
+.story p{font-size:15.5px;color:var(--ink-2);max-width:56ch}
+.story p+p{margin-top:10px}
+.story figure{margin:0;display:flex;flex-direction:column;gap:8px}
+.story figure img{border-radius:12px;border:1px solid var(--rule-2);width:100%;height:auto}
+.story figcaption{font-size:12.5px;color:var(--ink-3)}
+.vary{margin-top:18px;font-size:13px;color:var(--ink-3)}
+
+/* testimonial videos */
+.vids{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,3vw,28px)}
+@media (max-width:760px){.vids{grid-template-columns:1fr}}
+.vid{background:#fff;border:2px solid var(--rule-2);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.vid button{all:unset;cursor:pointer;display:block;position:relative}
+.vid button:focus-visible{outline:3px solid var(--violet);outline-offset:-3px}
+.vid button img{width:100%;height:auto;aspect-ratio:1000/720;object-fit:cover}
+.vid video{display:block;width:100%;aspect-ratio:1000/720;background:#0A0613;object-fit:contain}
+.vid .cap{padding:16px 18px 18px}
+.vid .cap b{display:block;font-family:var(--display);font-weight:900;font-size:1.1rem;letter-spacing:-.02em}
+.vid .cap span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:3px}
+.vid .cap p{font-size:14.5px;color:var(--ink-2);margin-top:10px}
+
+/* agenda */
+.agenda{list-style:none;margin:0;padding:0;counter-reset:a;display:flex;flex-direction:column}
+.agenda li{counter-increment:a;display:grid;grid-template-columns:38px minmax(0,1fr);gap:16px;align-items:start;
+  padding:18px 0;border-top:1px solid var(--rule);font-size:16.5px}
+.agenda li:last-child{border-bottom:1px solid var(--rule)}
+.agenda li::before{content:counter(a);font-family:var(--mono);font-weight:600;font-size:14px;color:#fff;background:var(--plum);
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center}
+.agenda li b{font-weight:700}
+.agenda li span{display:block;font-size:14.5px;color:var(--ink-2);margin-top:3px}
+.tip{margin-top:20px;font-size:14.5px;color:var(--ink-2);background:var(--wash);border-radius:12px;padding:14px 16px;max-width:64ch}
+
+/* hosts line */
+.hostline{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.hostline .pics{display:flex}
+.hostline img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 2px 10px rgba(23,17,31,.18)}
+.hostline img+img{margin-left:-16px}
+.hostline p{flex:1 1 320px;font-size:16px;color:var(--ink-2);max-width:62ch}
+.hostline p b{color:var(--ink)}
+
+/* faq */
+.faq{max-width:78ch}
+.faq details{border-top:1px solid var(--rule)}
+.faq details:last-of-type{border-bottom:1px solid var(--rule)}
+.faq summary{list-style:none;cursor:pointer;padding:19px 42px 19px 0;position:relative;font-weight:700;font-size:16.5px;line-height:1.45}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:8px;top:17px;font-family:var(--mono);font-size:20px;color:var(--mint-deep);transition:transform .2s ease}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .a{padding:0 0 20px;font-size:15px;color:var(--ink-2);line-height:1.68;max-width:66ch}
+
+/* final */
+.urgent{background:var(--plum);color:#fff;text-align:center;padding:clamp(48px,7vw,80px) 0}
+.urgent .cap{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mint);font-weight:600}
+.urgent h2{margin-top:14px;color:#fff}
+.urgent .when2{font-family:var(--mono);font-size:15px;color:var(--mint);margin-top:18px;font-weight:600}
+.urgent .btn{margin-top:24px;border-color:var(--mint);box-shadow:0 4px 0 0 rgba(127,255,212,.45)}
+.urgent .btn:hover{box-shadow:0 2px 0 0 rgba(127,255,212,.45)}
+.urgent .fine{font-size:13px;color:#A99EBE;margin-top:14px}
+
+/* footer */
+footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56px;font-size:12.5px;color:var(--ink-3);line-height:1.7}
+.foot-top{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center;padding-bottom:22px;border-bottom:1px solid var(--rule)}
+.foot-top a{color:var(--ink-2);text-decoration:none}
+.foot-top a:hover{color:var(--mint-deep)}
+.disc{margin-top:22px;max-width:96ch}
+.disc b{color:var(--ink-2);font-weight:700}
+.disc p+p{margin-top:11px}
+
+/* sticky mobile CTA */
+.stickycta{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
+  background:rgba(255,255,255,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-top:1px solid var(--rule);box-shadow:0 -6px 24px rgba(45,26,72,.10);
+  transform:translateY(110%);transition:transform .22s ease}
+.stickycta.on{transform:translateY(0)}
+.stickycta .btn{width:100%;margin:0}
+@media (max-width:760px){.stickycta{display:block}body.has-sticky{padding-bottom:84px}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="mark" href="#top" aria-label="Sonder">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
+      <b>Sonder<i>.</i></b></a>
+    <div class="clock"><span class="pip" aria-hidden="true"></span><span class="lbl">Next session</span><b id="bar-when">Thursday &middot; 12pm ET</b></div>
+    <a class="btn sm" href="#seat" data-seat>Save my seat</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <span class="kicker"><span class="pip" aria-hidden="true"></span> Free live session &middot; every Thursday</span>
+      <h1>How authors are getting millions of views on their books <span class="hl">without showing their face.</span></h1>
+      <p class="lede">90 minutes, live on Zoom. Two seven-figure publishers show you what is working right now for authors using Sonder, then turn a real book into finished videos while you watch.</p>
+      <p class="whenline">Every Thursday <span class="sep">&middot;</span> 12pm ET / 9am PT <span class="sep">&middot;</span> Free</p>
+      <!-- Lexi's 90-second video: set LEXI_VIDEO_URL in the script at the foot of
+           the page and this block appears. The page works without it. -->
+      <div class="lexi-video" id="lexi-video" hidden></div>
+    </div>
+
+    <aside class="seatcard" id="seat" aria-labelledby="seat-title">
+      <p class="st" id="seat-status">Next session</p>
+      <p class="dt" id="seat-title"><span id="when-date">Thursday</span></p>
+      <p class="tm" id="when-time">12pm ET &middot; 9am PT</p>
+      <p class="loc" id="when-local"></p>
+      <p class="cnt" id="when-count"></p>
+
+      <form id="lv-form" novalidate>
+        <div class="field">
+          <label for="first">First name</label>
+          <input id="first" name="firstName" type="text" autocomplete="given-name" maxlength="60" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required />
+          <span class="hint">Your personal Zoom link goes here.</span>
+        </div>
+
+        <div class="optin">
+          <input id="sms" name="smsConsent" type="checkbox" />
+          <label for="sms"><b>Text me a reminder when we go live</b>Text me reminders from Sonder about this webinar, including when we go live (up to 4 texts per session). Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. Consent is not required to register.</label>
+          <span class="links">See our <a href="https://app.yousonder.com/terms" target="_blank" rel="noopener">Terms</a> and <a href="https://app.yousonder.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+        </div>
+        <div class="field" id="phone-wrap" hidden>
+          <label for="phone">Mobile number</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="40" placeholder="(555) 555-0123" />
+          <span class="hint">US and Canada numbers for now.</span>
+        </div>
+
+        <div class="hp" aria-hidden="true">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <button class="btn" id="submit" type="submit">Save my free seat &rarr;</button>
+        <p class="formmsg" id="form-msg" role="status" aria-live="polite"></p>
+        <p class="fine">Free, no card. Zoom emails you your join link.</p>
+      </form>
+    </aside>
+
+    <div class="hero-hosts">
+      <span class="pics"><img src="/assets/founders/lexi.jpg" alt="Lexi Kaz" width="46" height="46"><img src="/assets/founders/mike.jpg" alt="Michael Langdon" width="46" height="46"></span>
+      <p>Hosted live by <b>Lexi Kaz</b> &amp; <b>Michael Langdon</b>, the founders of Sonder</p>
+    </div>
+  </div>
+</section>
+
+<section class="receipts" aria-label="What Sonder authors have reported">
+  <div class="wrap grid">
+    <div><b>#1,101,449 &rarr; #17,080</b><span>Christine's Amazon rank, after daily faceless videos</span></div>
+    <div><b>101,700</b><span>Views on Christine's top video</span></div>
+    <div><b>45 of 45</b><span>Copies of Rich's Spanish edition sold, from one video</span></div>
+    <div><b>10 sales</b><span>Lynn's first five days of posting Sonder videos</span></div>
+  </div>
+  <div class="wrap"><p class="proofline">Results vary from author to author. Their own words are below.</p></div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sechead">
+      <p class="eyebrow">In their own words</p>
+      <h2>What Sonder authors are seeing</h2>
+      <p class="lede">Messages authors sent us, shared with their permission.</p>
+    </div>
+    <div class="stories">
+      <article class="story">
+        <div>
+          <p class="who">Christine &middot; <i>Assertive Kindness</i></p>
+          <h3>From #1,101,449 to #17,080 on Amazon</h3>
+          <p>On 6 September, Christine's book was ranked #1,101,449 on Amazon. Invisible.</p>
+          <p>She started posting short, faceless videos about the book's core ideas, every day. Her top one reached 101,700 views. Then she sent Lexi this.</p>
+        </div>
+        <figure>
+          <img src="/assets/live/christine-bsr.jpg" width="820" height="255" loading="lazy" alt="Christine's messages: today's BSR for Assertive Kindness is #17,080; on Sept 6 it was as low as #1,101,449">
+          <figcaption>Christine's messages to Lexi</figcaption>
+        </figure>
+      </article>
+      <article class="story">
+        <div>
+          <p class="who">Rich &middot; Spanish edition</p>
+          <h3>One video. 45 books. Sold out.</h3>
+          <p>Rich had a stack of Spanish translations of his book and no way to sell them. He'd tried finding Spanish-speaking creators to promote them, but nobody was interested in a book with zero sales.</p>
+          <p>45 copies, sold out from one video. He's now ordering 300 more.</p>
+        </div>
+        <figure>
+          <img src="/assets/live/rich-45-copies.jpg" width="1100" height="207" loading="lazy" alt="Rich A's comment: it took only 1 Spanish video to sell out all 45 copies I had">
+          <figcaption>Rich's comment in our Sonder community</figcaption>
+        </figure>
+      </article>
+      <article class="story">
+        <div>
+          <p class="who">Lynn &middot; children's books</p>
+          <h3>10 sales in her first 5 days</h3>
+          <p>Lynn writes children's books. Five days after she started posting Sonder videos, she posted this.</p>
+        </div>
+        <figure>
+          <img src="/assets/live/lynn-10-sales.jpg" width="1100" height="110" loading="lazy" alt="Lynn's message: I started Sonder videos 5 days ago and have made 10 sales">
+          <figcaption>Lynn's message (name hidden by us)</figcaption>
+        </figure>
+      </article>
+      <article class="story">
+        <div>
+          <p class="who">Jared &middot; TikTok Shop</p>
+          <h3>&ldquo;It really isn't my thing.&rdquo;</h3>
+          <p>Jared had sold over 800 books on TikTok Shop, then stopped posting. In his words: &ldquo;It really isn't my thing.&rdquo; Then he started posting every day again.</p>
+          <p>One weekend's sales paid for his Sonder subscription. His post in our community was titled &ldquo;As a lazy TikToker, I love Sonder.&rdquo;</p>
+        </div>
+        <figure>
+          <img src="/assets/live/jared-views.jpg" width="1100" height="249" loading="lazy" alt="Jared's TikTok analytics: one video at 25K views, another at 10K">
+          <figcaption>Jared's TikTok, June</figcaption>
+        </figure>
+      </article>
+    </div>
+    <p class="vary">Results vary from author to author.</p>
+  </div>
+</section>
+
+<section class="sec wash">
+  <div class="wrap">
+    <div class="sechead">
+      <p class="eyebrow">Hear it from them</p>
+      <h2>Not really a social media person? Watch these first.</h2>
+    </div>
+    <div class="vids">
+      <div class="vid">
+        <button type="button" data-video="https://sienveexppekdxoaeamd.supabase.co/storage/v1/object/public/pipeline-artifacts/marketing/testimonials/mike-sobola-captioned.mp4" aria-label="Play: Mike Sobola, Sonder author, 38 seconds">
+          <img src="/assets/live/sobola-thumb.jpg" width="1000" height="720" loading="lazy" alt="">
+        </button>
+        <div class="cap"><b>Mike Sobola</b><span>Sonder author &middot; 38 seconds</span><p>Mike calls himself a little late to the game with social media. Here's what he says about Sonder.</p></div>
+      </div>
+      <div class="vid">
+        <button type="button" data-video="https://sienveexppekdxoaeamd.supabase.co/storage/v1/object/public/pipeline-artifacts/marketing/testimonials/nancy-dove-captioned.mp4" aria-label="Play: Nancy Dove, Sonder author, 41 seconds">
+          <img src="/assets/live/nancy-thumb.jpg" width="1000" height="720" loading="lazy" alt="">
+        </button>
+        <div class="cap"><b>Nancy Dove</b><span>Sonder author &middot; 41 seconds</span><p>Nancy writes about borderline personality disorder. She was stuck in what she calls &ldquo;200-views jail&rdquo;. &ldquo;I have broken free&hellip; I am now getting organic sales.&rdquo;</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sechead">
+      <p class="eyebrow">Thursday, live on Zoom</p>
+      <h2>What we'll show you</h2>
+    </div>
+    <ol class="agenda">
+      <li><div><b>What every book video that takes off has in common</b></div></li>
+      <li><div><b>How authors like Christine post daily without showing their face</b><span>No camera, no voice, no editing.</span></div></li>
+      <li><div><b>The framework behind a $230,000 month of book sales</b><span>Lexi's, with the numbers and the caveats. See the note at the foot of this page.</span></div></li>
+      <li><div><b>A real book turned into videos, live, while you watch</b></div></li>
+      <li><div><b>Your questions, answered</b><span>The Q&amp;A runs until the questions do, and we write hooks live for whoever asks.</span></div></li>
+    </ol>
+    <p class="tip">Join from a computer if you can. Most of the session is us building videos on screen from a real book, and bring your book: turning up with a specific title beats a general question.</p>
+  </div>
+</section>
+
+<section class="sec wash">
+  <div class="wrap">
+    <div class="hostline">
+      <span class="pics"><img src="/assets/founders/lexi.jpg" alt="Lexi Kaz" width="64" height="64"><img src="/assets/founders/mike.jpg" alt="Michael Langdon" width="64" height="64"></span>
+      <p><b>Your hosts are Lexi Kaz and Michael Langdon.</b> We're both seven-figure publishers, but this session isn't about us. It's about what's working right now for authors using Sonder.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sechead"><p class="eyebrow">Straight answers</p><h2>Before you ask</h2></div>
+    <div class="faq">
+      <details open><summary>Is it actually free?</summary><div class="a">Yes, and there's no card. At the end there's an offer for anyone who wants it. Everything before that is yours either way.</div></details>
+      <details><summary>Do I have to be on camera?</summary><div class="a">No. The videos doing the most work for our authors don't need your face or your voice. That's most of the reason this works for people who would never film themselves.</div></details>
+      <details><summary>What if I can't make Thursday?</summary><div class="a">Your Zoom link works for the next Thursday too, so your seat carries over. The second Thursday of each month is a customers-only session, so we skip that one.</div></details>
+      <details><summary>Will there be a replay?</summary><div class="a">We run it live every week, so the best answer is to come to one. The Q&amp;A is the most useful part, and a recording never captures it.</div></details>
+      <details><summary>Why would I give you my phone number?</summary><div class="a">Only if you want texts. Tick the box and we'll text you before we go live and the moment we start: up to 4 texts per session. Reply STOP any time. Texts are for US and Canada numbers for now; everyone gets email reminders.</div></details>
+      <details><summary>I haven't finished my book. Should I still come?</summary><div class="a">If you're writing one, yes: the audience is the thing most authors build last and should build first.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="urgent">
+  <div class="wrap">
+    <p class="cap">Free &middot; live &middot; 90 minutes</p>
+    <h2>Save your seat for Thursday.</h2>
+    <p class="when2"><span id="when-date-2">Thursday</span> &middot; 12pm ET / 9am PT</p>
+    <a class="btn" href="#seat" data-seat>Save my free seat &rarr;</a>
+    <p class="fine">No card. Your Zoom link arrives by email.</p>
+  </div>
+</section>
+</main>
+
+<div class="stickycta" id="stickycta" aria-hidden="true">
+  <a class="btn" href="#seat" data-seat tabindex="-1">Save my free seat &rarr;</a>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="mark" href="#top" aria-label="Sonder">
+        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
+        <b>Sonder<i>.</i></b></a>
+      <span><a href="https://app.yousonder.com/terms">Terms</a> &nbsp;&middot;&nbsp; <a href="https://app.yousonder.com/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="https://www.yousonder.com">yousonder.com</a></span>
+    </div>
+    <div class="disc">
+      <p><b>Results disclaimer.</b> The stories on this page are individual authors' results, shared with their permission. They are not typical, and results vary from author to author. Lexi's $230,000 month is the gross amount customers paid for books in March 2025, before print costs, affiliate commissions and platform fees. It is not income.</p>
+      <p>This session is educational and ends with a paid offer you are free to ignore. Nothing here is a guarantee that you will sell books, and nothing here is financial advice.</p>
+      <p>&copy; 2026 YouSonder O&Uuml; &middot; All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  /* ===== The settings ===== */
+  var API = 'https://sonder-server-production.up.railway.app';
+  /* Zoom's own form, "Social System" tracking link: where anyone goes if our
+     registration cannot run. Never the plain registration URL. */
+  var ZOOM_FALLBACK = 'https://us06web.zoom.us/webinar/register/1217907644559/WN_DoboCMnEThyqKUHBWPzEzA';
+  /* Must match a version in sonder-server lib/liveWebinar.ts SMS_CONSENT_TEXT,
+     word for word with the label on the box above. New wording = new version. */
+  var CONSENT_VERSION = 'v1';
+  /* Lexi's 90-second video (mp4 on Sonder's storage). Empty = no video block. */
+  var LEXI_VIDEO_URL = '';
+  var LEXI_VIDEO_POSTER = '';
+  var DURATION_MIN = 90, JOIN_LEAD_MIN = 15;
+  var STORE_KEY = 'sonder.live.reg';
+
+  var $ = function(id){ return document.getElementById(id); };
+  var clockNow = function(){ return (window.performance && performance.now) ? performance.now() : Date.now(); };
+  var loadedAt = clockNow();
+
+  /* ===== The clock: the same rule as the server and the emails =====
+     Next Thursday at 12pm New York time, skipping the second Thursday of the
+     month (the customers-only session); the room opens 15 minutes early and
+     a session is on air for 90 minutes. Offset-corrected twice so it survives
+     both daylight-saving switches. */
+  var WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  function nyParts(d){var p={};new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour12:false,
+    weekday:'short',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'})
+    .formatToParts(d).forEach(function(x){p[x.type]=x.value});return p}
+  function nyOffset(d){var p=nyParts(d);return Date.UTC(+p.year,+p.month-1,+p.day,(+p.hour)%24,+p.minute,+p.second)-d.getTime()}
+  function fromNY(y,m,d,h,mi){var t=Date.UTC(y,m-1,d,h,mi);for(var i=0;i<2;i++){t=Date.UTC(y,m-1,d,h,mi)-nyOffset(new Date(t))}return new Date(t)}
+  function customersOnly(dt){var p=nyParts(dt),day=+p.day;return p.weekday==='Thu'&&day>=8&&day<=14}
+  function nextPublic(now){var p=nyParts(now),y=+p.year,m=+p.month,d=+p.day;
+    var k=(4-WD.indexOf(p.weekday)+7)%7;var c=fromNY(y,m,d+k,12,0);
+    if(c.getTime()<=now.getTime()){k+=7;c=fromNY(y,m,d+k,12,0)}
+    while(customersOnly(c)){k+=7;c=fromNY(y,m,d+k,12,0)}
+    return c}
+  function choose(now){
+    var c=nextPublic(new Date(now.getTime()-DURATION_MIN*60000));
+    return {at:c,live:c.getTime()<=now.getTime()||c.getTime()-now.getTime()<=JOIN_LEAD_MIN*60000};
+  }
+
+  function clockIn(dt,tz){
+    try{var p={};new Intl.DateTimeFormat('en-US',{timeZone:tz,hour:'numeric',minute:'2-digit',hour12:true})
+      .formatToParts(dt).forEach(function(x){p[x.type]=x.value});
+      return p.hour+(p.minute&&p.minute!=='00'?':'+p.minute:'')+String(p.dayPeriod||'').toLowerCase();
+    }catch(e){return ''}
+  }
+  function dayIn(dt,tz,withDate){
+    try{return new Intl.DateTimeFormat('en-GB',withDate?{timeZone:tz,weekday:'long',day:'numeric',month:'long'}:{timeZone:tz,weekday:'long'}).format(dt)}catch(e){return 'Thursday'}
+  }
+  function userTz(){try{return Intl.DateTimeFormat().resolvedOptions().timeZone||null}catch(e){return null}}
+
+  var session = choose(new Date());
+
+  function render(){
+    var at=session.at;
+    var label=dayIn(at,'America/New_York',true);
+    if($('when-date'))$('when-date').textContent=label;
+    if($('when-date-2'))$('when-date-2').textContent=label;
+    var et=clockIn(at,'America/New_York'), pt=clockIn(at,'America/Los_Angeles');
+    if($('when-time'))$('when-time').textContent=et+' ET · '+pt+' PT';
+    var tz=userTz(), local=tz?clockIn(at,tz):'';
+    var loc=$('when-local');
+    if(loc){loc.textContent=(tz&&local&&local!==et&&local!==pt)?'That’s '+dayIn(at,tz,false)+' at '+local+' where you are.':''}
+    if($('bar-when'))$('bar-when').textContent=dayIn(at,'America/New_York',false).slice(0,3)+' '+new Intl.DateTimeFormat('en-GB',{timeZone:'America/New_York',day:'numeric',month:'short'}).format(at)+' · '+et+' ET';
+    var st=$('seat-status'), btn=$('submit');
+    if(session.live){
+      if(st){st.textContent='We’re live right now';st.className='st live'}
+      if(btn&&!btn.disabled)btn.innerHTML='Join now: save my seat &rarr;';
+    }else{
+      if(st){st.textContent='Next session';st.className='st'}
+      if(btn&&!btn.disabled)btn.innerHTML='Save my free seat &rarr;';
+    }
+    tick();
+  }
+  function tick(){
+    var el=$('when-count'); if(!el)return;
+    if(session.live){el.textContent='Live now. Sign up and go straight in.';return}
+    var left=session.at.getTime()-Date.now();
+    if(left<=0){session=choose(new Date());render();return}
+    var mins=Math.floor(left/60000),d=Math.floor(mins/1440),h=Math.floor(mins%1440/60),m=mins%60;
+    el.textContent='Starts in '+(d>0?d+(d===1?' day ':' days ')+h+(h===1?' hour':' hours'):h>0?h+'h '+m+'m':m+(m===1?' minute':' minutes'));
+  }
+  render();
+  setInterval(function(){var c=choose(new Date());if(c.at.getTime()!==session.at.getTime()||c.live!==session.live){session=c;render()}else{tick()}},30000);
+
+  /* The server has the last word on the date (same rule, one place to change it). */
+  try{
+    fetch(API+'/api/live-webinar/next',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(j){
+      if(!j||!j.sessionAt)return;var t=Date.parse(j.sessionAt);if(!isFinite(t))return;
+      if(t!==session.at.getTime()||!!j.liveNow!==session.live){session={at:new Date(t),live:!!j.liveNow};render()}
+    }).catch(function(){});
+  }catch(e){}
+
+  /* ===== Attribution carried into the sign-up ===== */
+  var attribution={};
+  try{var qs=new URLSearchParams(location.search);
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','via','fbclid'].forEach(function(k){var v=qs.get(k);if(v)attribution[k]=v.slice(0,200)});
+  }catch(e){}
+
+  /* ===== The form ===== */
+  var form=$('lv-form'), sms=$('sms'), phoneWrap=$('phone-wrap'), msg=$('form-msg'), btn=$('submit');
+  sms.addEventListener('change',function(){phoneWrap.hidden=!sms.checked;if(sms.checked)$('phone').focus();else{$('phone').removeAttribute('aria-invalid')}});
+
+  function say(text,ok){msg.textContent=text||'';msg.className=ok?'formmsg ok':'formmsg'}
+  function bad(id,text){
+    ['first','email','phone'].forEach(function(f){$(f).removeAttribute('aria-invalid')});
+    if(id){$(id).setAttribute('aria-invalid','true');$(id).focus()}
+    say(text,false);return false;
+  }
+  function busy(on){btn.disabled=on;btn.innerHTML=on?'Saving your seat…':(session.live?'Join now: save my seat &rarr;':'Save my free seat &rarr;')}
+  function remember(reg){try{sessionStorage.setItem(STORE_KEY,JSON.stringify(reg))}catch(e){}}
+  function toZoom(url){
+    say('Taking you to Zoom to finish saving your seat…',true);
+    setTimeout(function(){location.href=url||ZOOM_FALLBACK},900);
+  }
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var first=$('first').value.trim(), email=$('email').value.trim(), wantsSms=sms.checked, phone=$('phone').value.trim();
+    if(!first)return bad('first','Please add your first name.');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))return bad('email','That email doesn’t look right. Please check it.');
+    if(wantsSms&&phone.replace(/\D/g,'').length<10)return bad('phone','Add a US or Canadian mobile number, or untick the box.');
+    bad(null,'');busy(true);
+
+    var body={firstName:first,email:email,smsConsent:wantsSms,consentVersion:wantsSms?CONSENT_VERSION:null,phone:wantsSms?phone:null,
+      tz:userTz(),company:$('company').value,elapsedMs:Math.round(clockNow()-loadedAt),
+      referrer:document.referrer?document.referrer.slice(0,500):null,landingUrl:location.href.split('#')[0].slice(0,500)};
+    for(var k in attribution)if(Object.prototype.hasOwnProperty.call(attribution,k))body[k]=attribution[k];
+
+    var ctrl=('AbortController' in window)?new AbortController():null;
+    var timer=setTimeout(function(){if(ctrl)ctrl.abort()},15000);
+    fetch(API+'/api/live-webinar/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:ctrl?ctrl.signal:undefined})
+      .then(function(r){return r.json().catch(function(){return {}}).then(function(j){return {status:r.status,j:j||{}}})})
+      .then(function(x){
+        clearTimeout(timer);var j=x.j;
+        if(x.status===429){busy(false);return bad(null,'Too many tries from this connection. Wait a few minutes, then try again.')}
+        if(x.status===400){busy(false);
+          if(j.error==='invalid_email')return bad('email','That email doesn’t look right. Please check it.');
+          if(j.error==='invalid_name')return bad('first','Please add your first name.');
+          return bad(null,'Please try that again.');
+        }
+        if(j.ok){
+          remember({at:Date.now(),first:first,email:email.toLowerCase(),sessionAt:j.sessionAt,liveNow:!!j.liveNow,
+            sms:j.sms||'none',smsLive:!!j.smsLive,utm:attribution});
+          if(j.liveNow&&j.joinUrl){location.href=j.joinUrl;return}
+          location.href='/live/youre-in/';return;
+        }
+        toZoom(j.fallbackUrl);
+      })
+      .catch(function(){clearTimeout(timer);toZoom(null)});
+  });
+
+  /* ===== Buttons that bring the form into view ===== */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-seat]'),function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var card=$('seat');card.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+      setTimeout(function(){$('first').focus({preventScroll:true})},450);
+    });
+  });
+
+  /* ===== Testimonial videos: load only when someone presses play ===== */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-video]'),function(b){
+    b.addEventListener('click',function(){
+      var v=document.createElement('video');
+      v.src=b.getAttribute('data-video');v.controls=true;v.autoplay=true;v.playsInline=true;
+      v.setAttribute('playsinline','');v.setAttribute('aria-label',b.getAttribute('aria-label')||'Video');
+      b.parentNode.replaceChild(v,b);var p=v.play();if(p&&p.catch)p.catch(function(){});
+    });
+  });
+
+  /* ===== Lexi's video, when there is one ===== */
+  if(LEXI_VIDEO_URL){
+    var box=$('lexi-video'),lv=document.createElement('video');
+    lv.src=LEXI_VIDEO_URL;lv.controls=true;lv.preload='metadata';lv.playsInline=true;lv.setAttribute('playsinline','');
+    if(LEXI_VIDEO_POSTER)lv.poster=LEXI_VIDEO_POSTER;
+    box.appendChild(lv);box.hidden=false;
+  }
+
+  /* ===== Sticky phone CTA: once the form has scrolled away ===== */
+  (function(){
+    var bar=$('stickycta'),card=$('seat');
+    if(!bar||!card)return;
+    document.body.className+=(document.body.className?' ':'')+'has-sticky';
+    var shown=false;
+    function sync(){
+      var r=card.getBoundingClientRect(), away=r.bottom<0;
+      if(away===shown)return;shown=away;
+      bar.className=away?'stickycta on':'stickycta';
+      bar.setAttribute('aria-hidden',away?'false':'true');
+      bar.querySelector('a').setAttribute('tabindex',away?'0':'-1');
+    }
+    sync();
+    window.addEventListener('scroll',sync,{passive:true});
+    window.addEventListener('resize',sync,{passive:true});
+  })();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FFFFFF" />
+<title>You're in | Sonder live</title>
+<meta name="robots" content="noindex, nofollow" />
+
+<!-- yousonder.com/live/youre-in: the thank-you page after /live. One button:
+     the 7-day trial, with their email filled in (Mike, 7 Oct 2026). What it
+     knows about the person comes from sessionStorage, written by /live after
+     a successful sign-up; opened cold it still works, just without the name
+     and the prefill. The email never travels in THIS page's URL, so the Meta
+     Pixel here never sees it. -->
+
+<script
+  src="https://www.dubcdn.com/analytics/script.js"
+  defer
+  data-domains='{"refer":"refer.yousonder.com"}'
+  data-query-params='["via"]'
+  data-cookie-options='{"domain":".yousonder.com","expiresInDays":90}'
+></script>
+
+<script>
+  window.SONDER_META_PIXEL_ID = '1999564797365444';
+  (function () {
+    var id = window.SONDER_META_PIXEL_ID;
+    if (!id) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', id); fbq('track', 'PageView');
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" />
+<link rel="icon" type="image/svg+xml" href="/assets/sonder-logo-plum-flat.svg" />
+
+<style>
+/* The /live register, one column: the seat confirmed, then the one ask. */
+:root{
+  --paper:#FFFFFF; --wash:#F4F2F8; --wash-2:#EAE5F2; --ink:#17111F; --ink-2:#5A5368; --ink-3:#6E6780;
+  --rule:#E2DDEC; --rule-2:#CFC7DE; --plum:#2D1A48; --violet:#6B3FA0; --mint:#7FFFD4; --mint-ink:#05261C;
+  --mint-deep:#00795C;
+  --display:'Nunito',system-ui,-apple-system,sans-serif;
+  --body:'Inter',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--wash);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px;border-radius:6px}
+.wrap{width:100%;max-width:640px;margin:0 auto;padding-inline:20px;padding-block:28px 64px;display:flex;flex-direction:column;gap:22px}
+.mark{display:flex;align-items:center;gap:9px;text-decoration:none}
+.mark svg{width:24px;height:24px}
+.mark b{font-family:var(--display);font-weight:900;font-size:20px;letter-spacing:-.045em;color:var(--plum)}
+.mark i{color:var(--mint-deep);font-style:normal}
+h1,h2{font-family:var(--display);font-weight:900;letter-spacing:-.03em;margin:0;text-wrap:balance}
+h1{font-size:clamp(2rem,6vw,2.7rem);line-height:1.05}
+h2{font-size:clamp(1.4rem,4vw,1.8rem);line-height:1.12}
+p{margin:0}
+.card{background:#fff;border:1px solid var(--rule);border-radius:18px;padding:24px 22px;display:flex;flex-direction:column;gap:12px}
+.tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:600;color:var(--mint-deep)}
+.tick{width:22px;height:22px;border-radius:50%;background:var(--mint);border:2px solid var(--plum);display:grid;place-items:center;font-size:12px;color:var(--plum);font-weight:700}
+.when{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--plum)}
+.loc{font-size:13px;color:var(--ink-3)}
+.body{font-size:15.5px;color:var(--ink-2)}
+.cal{font-size:14px;color:var(--ink-2)}
+.cal a{color:var(--violet);font-weight:600}
+.trial{background:var(--plum);border-color:var(--plum);color:#fff;gap:14px}
+.trial .tag{color:var(--mint)}
+.trial p{color:#D9D2E7;font-size:15.5px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;
+  font-family:var(--body);font-weight:700;font-size:17px;padding:16px 26px;border-radius:999px;
+  background:var(--mint);color:var(--mint-ink);border:2px solid var(--mint);text-decoration:none;
+  box-shadow:0 4px 0 0 rgba(127,255,212,.45);transition:transform .12s ease,box-shadow .12s ease;text-align:center}
+.btn:hover{transform:translateY(2px);box-shadow:0 2px 0 0 rgba(127,255,212,.45)}
+.trial .fine{font-size:12.5px;color:#B6ACC9}
+.live{background:#fff;border:2px solid var(--mint-deep)}
+.live .btn{background:var(--mint);border-color:var(--plum);box-shadow:0 4px 0 0 var(--plum)}
+.tips{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.tips li{font-size:15px;color:var(--ink-2)}
+.tips li b{display:block;color:var(--ink)}
+.foot{font-size:12.5px;color:var(--ink-3);text-align:center}
+.foot a{color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="mark" href="/live" aria-label="Sonder">
+    <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
+    <b>Sonder<i>.</i></b></a>
+
+  <section class="card" aria-labelledby="in-title">
+    <p class="tag"><span class="tick" aria-hidden="true">&#10003;</span> Seat saved</p>
+    <h1 id="in-title">You're in.</h1>
+    <p class="when" id="when">Thursday &middot; 12pm ET / 9am PT</p>
+    <p class="loc" id="when-local" hidden></p>
+    <p class="body">Zoom is emailing you your personal join link now. That email is your way into the room, so it's worth finding it before Thursday. If it isn't there in a few minutes, check your spam folder.</p>
+    <p class="body" id="sms-line" hidden></p>
+    <p class="cal">Add it to your calendar: <a id="cal-google" href="https://calendar.google.com/" target="_blank" rel="noopener">Google</a> &middot; <a id="cal-ics" href="https://sonder-server-production.up.railway.app/api/live-webinar/ics">Apple / Outlook</a></p>
+  </section>
+
+  <section class="card trial" aria-labelledby="trial-title">
+    <p class="tag">While you wait</p>
+    <h2 id="trial-title">Try Sonder free for 7 days</h2>
+    <p>Upload your book before Thursday, and the parts we demo will be running on your own title while you watch.</p>
+    <a class="btn" id="trial" href="https://app.yousonder.com/signup?offer=trial&amp;utm_source=live_page&amp;utm_medium=organic&amp;utm_campaign=webinar&amp;utm_content=live_thankyou">Start your free 7-day trial &rarr;</a>
+    <p class="fine">$0 today, then $49/month from day 8. Cancel any time.</p>
+  </section>
+
+  <section class="card" aria-label="Before Thursday">
+    <ul class="tips">
+      <li><b>Join on a computer if you can</b>Most of the session is us building videos on screen from a real book. It works on a phone, but you'll be squinting at the part that matters.</li>
+      <li><b>Bring your book</b>The Q&amp;A runs until the questions do, and we write hooks live for whoever asks. A specific title beats a general question.</li>
+    </ul>
+  </section>
+
+  <p class="foot">&copy; 2026 YouSonder O&Uuml; &middot; <a href="https://app.yousonder.com/terms">Terms</a> &middot; <a href="https://app.yousonder.com/privacy">Privacy</a></p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var API='https://sonder-server-production.up.railway.app';
+  var STORE_KEY='sonder.live.reg';
+  var TITLE='Sonder live: how authors get millions of views without showing their face';
+  var DURATION_MIN=90;
+  var $=function(id){return document.getElementById(id)};
+
+  /* Same clock as /live (12pm New York, second Thursday skipped). */
+  var WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  function nyParts(d){var p={};new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour12:false,
+    weekday:'short',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'})
+    .formatToParts(d).forEach(function(x){p[x.type]=x.value});return p}
+  function nyOffset(d){var p=nyParts(d);return Date.UTC(+p.year,+p.month-1,+p.day,(+p.hour)%24,+p.minute,+p.second)-d.getTime()}
+  function fromNY(y,m,d,h,mi){var t=Date.UTC(y,m-1,d,h,mi);for(var i=0;i<2;i++){t=Date.UTC(y,m-1,d,h,mi)-nyOffset(new Date(t))}return new Date(t)}
+  function customersOnly(dt){var p=nyParts(dt),day=+p.day;return p.weekday==='Thu'&&day>=8&&day<=14}
+  function nextPublic(now){var p=nyParts(now),y=+p.year,m=+p.month,d=+p.day;
+    var k=(4-WD.indexOf(p.weekday)+7)%7;var c=fromNY(y,m,d+k,12,0);
+    if(c.getTime()<=now.getTime()){k+=7;c=fromNY(y,m,d+k,12,0)}
+    while(customersOnly(c)){k+=7;c=fromNY(y,m,d+k,12,0)}
+    return c}
+  function clockIn(dt,tz){
+    try{var p={};new Intl.DateTimeFormat('en-US',{timeZone:tz,hour:'numeric',minute:'2-digit',hour12:true})
+      .formatToParts(dt).forEach(function(x){p[x.type]=x.value});
+      return p.hour+(p.minute&&p.minute!=='00'?':'+p.minute:'')+String(p.dayPeriod||'').toLowerCase();
+    }catch(e){return ''}
+  }
+  function dayIn(dt,tz,withDate){
+    try{return new Intl.DateTimeFormat('en-GB',withDate?{timeZone:tz,weekday:'long',day:'numeric',month:'long'}:{timeZone:tz,weekday:'long'}).format(dt)}catch(e){return 'Thursday'}
+  }
+  function stamp(d){return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'')}
+
+  /* What /live left for us: fresh (6 hours) or nothing. */
+  var reg=null;
+  try{reg=JSON.parse(sessionStorage.getItem(STORE_KEY)||'null')}catch(e){reg=null}
+  if(!reg||typeof reg!=='object'||!reg.at||Date.now()-reg.at>6*3600000)reg=null;
+
+  var t=reg&&reg.sessionAt?Date.parse(reg.sessionAt):NaN;
+  var at=isFinite(t)&&t+DURATION_MIN*60000>Date.now()?new Date(t):nextPublic(new Date());
+
+  if(reg&&reg.first){$('in-title').textContent='You’re in, '+reg.first+'.'}
+  var et=clockIn(at,'America/New_York'),pt=clockIn(at,'America/Los_Angeles');
+  $('when').textContent=dayIn(at,'America/New_York',true)+' · '+et+' ET / '+pt+' PT';
+  try{var tz=Intl.DateTimeFormat().resolvedOptions().timeZone,local=tz?clockIn(at,tz):'';
+    if(tz&&local&&local!==et&&local!==pt){$('when-local').textContent='That’s '+dayIn(at,tz,false)+' at '+local+' where you are.';$('when-local').hidden=false}
+  }catch(e){}
+
+  /* Texts: promise them only once they are really being sent. */
+  var smsText={
+    saved:reg&&reg.smsLive?'We’ll also text you the day before, an hour before, and the moment we go live.':'We’ve saved your number for text reminders. You’ll get email reminders either way.',
+    invalid_phone:'That phone number didn’t look right, so we’ll remind you by email.',
+    unsupported_country:'Text reminders are for US and Canada numbers for now, so we’ll remind you by email.'
+  };
+  if(reg&&smsText[reg.sms]){$('sms-line').textContent=smsText[reg.sms];$('sms-line').hidden=false}
+
+  /* Calendar: no personal link in it (that is in Zoom's email). */
+  var end=new Date(at.getTime()+DURATION_MIN*60000);
+  var g=new URLSearchParams({action:'TEMPLATE',text:TITLE,dates:stamp(at)+'/'+stamp(end),
+    details:'Your personal Zoom link is in the email from Zoom. Join from a computer if you can.',location:'Zoom'});
+  $('cal-google').href='https://calendar.google.com/calendar/render?'+g.toString();
+  $('cal-ics').href=API+'/api/live-webinar/ics?s='+encodeURIComponent(at.toISOString());
+
+  /* The one ask: the trial, their email filled in, the post's own tags kept. */
+  var utm=(reg&&reg.utm)||{};
+  var q=new URLSearchParams({offer:'trial'});
+  if(reg&&reg.email)q.set('email',reg.email);
+  q.set('utm_source',utm.utm_source||'live_page');
+  q.set('utm_medium',utm.utm_medium||'organic');
+  q.set('utm_campaign',utm.utm_campaign||'webinar');
+  q.set('utm_content','live_thankyou');
+  if(utm.utm_term)q.set('utm_term',utm.utm_term);
+  if(utm.via)q.set('via',utm.via);
+  $('trial').href='https://app.yousonder.com/signup?'+q.toString();
+
+  /* One Lead per sign-up, however often this page is reloaded. */
+  try{
+    if(reg&&window.fbq){var k='sonder.live.lead.'+reg.at;if(!sessionStorage.getItem(k)){fbq('track','Lead');sessionStorage.setItem(k,'1')}}
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
