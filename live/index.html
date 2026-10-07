@@ -144,31 +144,29 @@ p{margin:0}
 .whenline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:20px;
   font-family:var(--mono);font-size:14.5px;font-weight:600;color:var(--plum)}
 .whenline .sep{color:var(--ink-3)}
-.lexi-video{margin-top:24px;max-width:520px}
+.vsec{background:var(--paper);padding:clamp(28px,4vw,52px) 0 clamp(36px,5vw,64px)}
+.lexi-video{margin:0 auto;max-width:100%}
 .lv-poster{all:unset;box-sizing:border-box;position:relative;display:block;width:100%;aspect-ratio:16/9;cursor:pointer;
   border-radius:18px;overflow:hidden;color:#fff;border:2px solid var(--plum);box-shadow:0 8px 0 0 var(--wash-2);
   background:radial-gradient(120% 90% at 85% 10%,rgba(127,255,212,.28),transparent 55%),
     radial-gradient(90% 80% at 0% 100%,rgba(107,63,160,.55),transparent 60%),var(--plum)}
 .lv-poster:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
-.lv-who{position:absolute;top:16px;left:16px;display:flex;align-items:center;gap:10px}
-.lv-who img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--mint)}
-.lv-who b{display:block;font-size:14px;font-weight:700;line-height:1.2}
-.lv-who i{display:block;font-style:normal;font-size:12px;color:#D6CFE4}
-.lv-play{position:absolute;inset:0;margin:auto;width:76px;height:76px;border-radius:50%;background:var(--mint);
+.lv-who{position:absolute;top:clamp(14px,2.4vw,26px);left:clamp(14px,2.4vw,26px);display:flex;align-items:center;gap:12px}
+.lv-who img{width:clamp(34px,4.4vw,52px);height:clamp(34px,4.4vw,52px);border-radius:50%;object-fit:cover;border:2px solid var(--mint)}
+.lv-who b{display:block;font-size:clamp(14px,1.6vw,17px);font-weight:700;line-height:1.2}
+.lv-who i{display:block;font-style:normal;font-size:clamp(12px,1.3vw,14px);color:#D6CFE4}
+.lv-play{position:absolute;inset:0;margin:auto;width:clamp(56px,8vw,104px);height:clamp(56px,8vw,104px);border-radius:50%;background:var(--mint);
   display:grid;place-items:center;box-shadow:0 6px 0 0 rgba(10,6,19,.35);transition:transform .15s ease}
-.lv-play svg{margin-left:4px}
+.lv-play svg{margin-left:5px;width:38%;height:38%}
 .lv-poster:hover .lv-play{transform:scale(1.06)}
-.lv-title{position:absolute;left:16px;right:84px;bottom:16px;font-family:var(--display);font-weight:900;
-  font-size:clamp(1rem,2.4vw,1.25rem);line-height:1.2;letter-spacing:-.02em;text-wrap:balance}
-.lv-dur{position:absolute;right:16px;bottom:16px;font-family:var(--mono);font-size:12px;font-weight:600;
-  background:rgba(10,6,19,.55);border-radius:7px;padding:4px 8px}
+.lv-title{position:absolute;left:clamp(14px,2.4vw,28px);right:clamp(64px,10vw,120px);bottom:clamp(14px,2.4vw,28px);font-family:var(--display);font-weight:900;
+  font-size:clamp(1rem,3vw,2rem);line-height:1.15;letter-spacing:-.025em;text-wrap:balance}
+.lv-dur{position:absolute;right:clamp(14px,2.4vw,28px);bottom:clamp(14px,2.4vw,28px);font-family:var(--mono);font-size:clamp(12px,1.3vw,14px);font-weight:600;
+  background:rgba(10,6,19,.55);border-radius:7px;padding:4px 9px}
 .lv-video{display:block;width:100%;aspect-ratio:16/9;border-radius:18px;background:#0A0613;object-fit:contain}
-.lv-soon{margin-top:10px;font-size:13.5px;color:var(--ink-2)}
+.lv-soon{margin-top:12px;font-size:14px;color:var(--ink-2);text-align:center}
 @media (max-width:480px){
-  .lv-who{top:12px;left:12px}.lv-who img{width:32px;height:32px}
-  .lv-play{width:54px;height:54px}.lv-play svg{width:22px;height:22px}
-  .lv-title{left:12px;bottom:12px;right:64px;font-size:.95rem}
-  .lv-dur{right:12px;bottom:12px}
+  .lv-title{font-size:.95rem}
 }
 .hero-hosts{display:flex;align-items:center;gap:13px;margin-top:26px;padding-top:22px;border-top:1px solid var(--rule)}
 .hero-hosts .pics{display:flex;flex-shrink:0}
@@ -354,19 +352,6 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
       <h1>How authors are getting millions of views on their books <span class="hl">without showing their face.</span></h1>
       <p class="lede">90 minutes, live on Zoom. Two seven-figure publishers show you what is working right now for authors using Sonder, then turn a real book into finished videos while you watch.</p>
       <p class="whenline"><span id="when-hero">Thursday</span> <span class="sep">&middot;</span> <span id="when-hero-time">12pm ET / 9am PT</span> <span class="sep">&middot;</span> Free</p>
-      <!-- Lexi's 90-second video. The poster is ours (the 200px headshot is all we
-           have of her); set LEXI_VIDEO_URL in the script at the foot of the page
-           and pressing it plays the video in place. Until then it says the video
-           is coming soon. -->
-      <div class="lexi-video" id="lexi-video">
-        <button type="button" class="lv-poster" id="lexi-play" aria-label="Play: Lexi on what you'll see on Thursday, 90 seconds">
-          <span class="lv-who"><img src="/assets/founders/lexi.jpg" alt="" width="40" height="40"><span><b>Lexi Kaz</b><i>Co-founder, Sonder</i></span></span>
-          <span class="lv-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5.5v13l10.5-6.5z" fill="#2D1A48"/></svg></span>
-          <span class="lv-title">What you'll see on Thursday, in 90 seconds</span>
-          <span class="lv-dur">1:30</span>
-        </button>
-        <p class="lv-soon" id="lexi-soon" role="status" hidden>Lexi's video is on its way. Save your seat in the meantime.</p>
-      </div>
     </div>
 
     <aside class="seatcard" id="seat" aria-labelledby="seat-title">
@@ -416,6 +401,26 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
     <div class="hero-hosts">
       <span class="pics"><img src="/assets/founders/lexi.jpg" alt="Lexi Kaz" width="46" height="46"><img src="/assets/founders/mike.jpg" alt="Michael Langdon" width="46" height="46"></span>
       <p>Hosted live by <b>Lexi Kaz</b> &amp; <b>Michael Langdon</b>, the founders of Sonder</p>
+    </div>
+  </div>
+</section>
+
+<!-- Lexi's video gets a section of its own, full width, between the hero and
+     the proof band (Abdul, 7 Oct 2026). -->
+<section class="vsec" aria-label="Lexi's 90-second video">
+  <div class="wrap">
+    <!-- Lexi's 90-second video. The poster is ours (the 200px headshot is all we
+         have of her); set LEXI_VIDEO_URL in the script at the foot of the page
+         and pressing it plays the video in place. Until then it says the video
+         is coming soon. -->
+    <div class="lexi-video" id="lexi-video">
+      <button type="button" class="lv-poster" id="lexi-play" aria-label="Play: Lexi on what you'll see on Thursday, 90 seconds">
+        <span class="lv-who"><img src="/assets/founders/lexi.jpg" alt="" width="40" height="40"><span><b>Lexi Kaz</b><i>Co-founder, Sonder</i></span></span>
+        <span class="lv-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5.5v13l10.5-6.5z" fill="#2D1A48"/></svg></span>
+        <span class="lv-title">What you'll see on Thursday, in 90 seconds</span>
+        <span class="lv-dur">1:30</span>
+      </button>
+      <p class="lv-soon" id="lexi-soon" role="status" hidden>Lexi's video is on its way. Save your seat in the meantime.</p>
     </div>
   </div>
 </section>
