@@ -329,7 +329,7 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
       <span class="kicker"><span class="pip" aria-hidden="true"></span> Free live session &middot; every Thursday</span>
       <h1>How authors are getting millions of views on their books <span class="hl">without showing their face.</span></h1>
       <p class="lede">90 minutes, live on Zoom. Two seven-figure publishers show you what is working right now for authors using Sonder, then turn a real book into finished videos while you watch.</p>
-      <p class="whenline">Every Thursday <span class="sep">&middot;</span> 12pm ET / 9am PT <span class="sep">&middot;</span> Free</p>
+      <p class="whenline"><span id="when-hero">Thursday</span> <span class="sep">&middot;</span> <span id="when-hero-time">12pm ET / 9am PT</span> <span class="sep">&middot;</span> Free</p>
       <!-- Lexi's 90-second video: set LEXI_VIDEO_URL in the script at the foot of
            the page and this block appears. The page works without it. -->
       <div class="lexi-video" id="lexi-video" hidden></div>
@@ -616,6 +616,9 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
     if($('when-date'))$('when-date').textContent=label;
     if($('when-date-2'))$('when-date-2').textContent=label;
     var et=clockIn(at,'America/New_York'), pt=clockIn(at,'America/Los_Angeles');
+    /* The hero line names the next session's date, not "every Thursday". */
+    if($('when-hero'))$('when-hero').textContent=label;
+    if($('when-hero-time'))$('when-hero-time').textContent=et+' ET / '+pt+' PT';
     if($('when-time'))$('when-time').textContent=et+' ET · '+pt+' PT';
     var tz=userTz(), local=tz?clockIn(at,tz):'';
     var loc=$('when-local');
