@@ -146,6 +146,8 @@ p{margin:0}
 .whenline .sep{color:var(--ink-3)}
 .vsec{background:var(--paper);padding:clamp(28px,4vw,52px) 0 clamp(36px,5vw,64px)}
 .lexi-video{margin:0 auto;max-width:100%}
+.vsec-head{font-family:var(--body);font-weight:500;font-size:clamp(1.15rem,2.6vw,1.6rem);line-height:1.5;
+  letter-spacing:-.01em;text-align:center;color:var(--ink);max-width:46ch;margin:0 auto clamp(18px,3vw,30px)}
 .lv-poster{all:unset;box-sizing:border-box;position:relative;display:block;width:100%;aspect-ratio:16/9;cursor:pointer;
   border-radius:18px;overflow:hidden;color:#fff;border:2px solid var(--plum);box-shadow:0 8px 0 0 var(--wash-2);
   background:radial-gradient(120% 90% at 85% 10%,rgba(127,255,212,.28),transparent 55%),
@@ -407,8 +409,9 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
 
 <!-- Lexi's video gets a section of its own, full width, between the hero and
      the proof band (Abdul, 7 Oct 2026). -->
-<section class="vsec" aria-label="Lexi's 90-second video">
+<section class="vsec" aria-labelledby="vsec-head">
   <div class="wrap">
+    <h2 class="vsec-head" id="vsec-head"><span class="hl">Watch this short video</span> to learn how this free live session can help you sell more books, without ever showing your face <span aria-hidden="true">&#x1F447;</span></h2>
     <!-- Lexi's 90-second video. The poster is ours (the 200px headshot is all we
          have of her); set LEXI_VIDEO_URL in the script at the foot of the page
          and pressing it plays the video in place. Until then it says the video
