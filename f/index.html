@@ -155,6 +155,28 @@
   .receipts figcaption{margin-top:7px;font-size:12px;color:var(--quiet);line-height:1.4}
   .receipts .wide{grid-column:1/-1}
 
+  .stories{display:grid;gap:0;margin:16px 0 0}
+  .story{padding:18px 0;border-top:1px solid var(--line)}
+  .story:last-child{border-bottom:1px solid var(--line)}
+  .story .who{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint);font-weight:600;margin:0}
+  .story h3{margin:6px 0 8px;font-size:19px;line-height:1.25}
+  .story p{font-size:15px;color:var(--quiet);margin:0 0 10px}
+  .story figure{margin:4px 0 0}
+  .story img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line)}
+  .story figcaption{margin-top:7px;font-size:12px;color:var(--quiet);line-height:1.4}
+  .vary{font-size:12.5px;color:var(--quiet);margin:12px 0 0}
+  .vids{display:grid;gap:14px;grid-template-columns:1fr;margin-top:16px}
+  @media (min-width:640px){.vids{grid-template-columns:1fr 1fr}}
+  .vid{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);display:flex;flex-direction:column}
+  .vid button{all:unset;cursor:pointer;display:block;position:relative}
+  .vid button:focus-visible{outline:2px solid var(--mint);outline-offset:-2px}
+  .vid button img{width:100%;height:auto;display:block;aspect-ratio:1000/720;object-fit:cover}
+  .vid video{display:block;width:100%;aspect-ratio:1000/720;background:#0A0613;object-fit:contain}
+  .vid .cap{padding:12px 14px 14px}
+  .vid .cap b{display:block;font-size:16px;font-weight:700}
+  .vid .cap span{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet);margin-top:2px}
+  .vid .cap p{font-size:14px;color:var(--quiet);margin:8px 0 0}
+
   blockquote{margin:0 0 12px;padding:17px 19px;border-radius:13px;border:1px solid var(--soft);
     background:rgba(255,255,255,.02);font-size:16px}
   blockquote footer{margin-top:8px;font-size:13px;color:var(--quiet)}
@@ -359,31 +381,73 @@
   </section>
 
   <!-- ============ BELIEF 1: DOES IT WORK? ============ -->
+  <!-- Customer-led (Mike, 8 Oct 2026): the same four authors and two videos as
+       /live and the trial emails, all shared with permission. Replaces the old
+       receipts grid and the Marcus quote, which had no source behind it. -->
   <section>
     <span class="kicker">&ldquo;But does AI video actually sell books?&rdquo;</span>
     <h2>Here are the receipts.</h2>
-    <div class="receipts">
-      <figure class="wide">
-        <img src="../assets/lp/receipt-insights.jpg" alt="Instagram Insights: 2.9 million views, 474.5 thousand interactions and 11.7 thousand new followers in 30 days" loading="lazy" width="560" height="482" />
-        <figcaption>One author&rsquo;s Instagram &mdash; 30 days of Sonder videos</figcaption>
-      </figure>
-      <figure>
-        <img src="../assets/lp/receipt-roi.jpg" alt="TikTok Shop dashboard showing 37x return on ad spend from one Sonder video" loading="lazy" width="420" height="525" />
-        <figcaption><strong>37&times;</strong> on ad spend, one video</figcaption>
-      </figure>
-      <figure>
-        <img src="../assets/lp/receipt-sales.jpg" alt="Customer message: I am up to 44 sales from Sonder" loading="lazy" width="420" height="120" />
-        <figcaption>&ldquo;I&rsquo;m up to 44 sales from Sonder.&rdquo;</figcaption>
-      </figure>
+    <p>Messages authors sent us, shared with their permission.</p>
+    <div class="stories">
+      <article class="story">
+        <p class="who">Christine &middot; <i>Assertive Kindness</i></p>
+        <h3>From #1,101,449 to #17,080 on Amazon</h3>
+        <p>She started posting short, faceless videos about her book&rsquo;s core ideas, every day. Her top one reached 101,700 views. Then she sent Lexi this.</p>
+        <figure>
+          <img src="/assets/live/christine-bsr.jpg" width="820" height="255" loading="lazy" alt="Christine's messages: today's BSR for Assertive Kindness is #17,080; on Sept 6 it was as low as #1,101,449" />
+          <figcaption>Christine&rsquo;s messages to Lexi</figcaption>
+        </figure>
+      </article>
+      <article class="story">
+        <p class="who">Rich &middot; Spanish edition</p>
+        <h3>One video. 45 books. Sold out.</h3>
+        <p>Nobody would promote a Spanish translation with zero sales. So he made one Sonder video in Spanish. It sold all 45 copies, and he&rsquo;s now ordering 300 more.</p>
+        <figure>
+          <img src="/assets/live/rich-45-copies.jpg" width="1100" height="207" loading="lazy" alt="Rich A's comment: it took only 1 Spanish video to sell out all 45 copies I had" />
+          <figcaption>Rich&rsquo;s comment in our Sonder community</figcaption>
+        </figure>
+      </article>
+      <article class="story">
+        <p class="who">Lynn &middot; children&rsquo;s books</p>
+        <h3>10 sales in her first 5 days</h3>
+        <p>Five days after she started posting Sonder videos, she posted this.</p>
+        <figure>
+          <img src="/assets/live/lynn-10-sales.jpg" width="1100" height="110" loading="lazy" alt="Lynn's message: I started Sonder videos 5 days ago and have made 10 sales" />
+          <figcaption>Lynn&rsquo;s message (name hidden by us)</figcaption>
+        </figure>
+      </article>
+      <article class="story">
+        <p class="who">Jared &middot; TikTok Shop</p>
+        <h3>&ldquo;It really isn&rsquo;t my thing.&rdquo;</h3>
+        <p>He&rsquo;d stopped posting. Now he posts every day again, and one weekend&rsquo;s sales paid for his Sonder subscription. His post in our community: &ldquo;As a lazy TikToker, I love Sonder.&rdquo;</p>
+        <figure>
+          <img src="/assets/live/jared-views.jpg" width="1100" height="249" loading="lazy" alt="Jared's TikTok analytics: one video at 25K views, another at 10K" />
+          <figcaption>Jared&rsquo;s TikTok, June</figcaption>
+        </figure>
+      </article>
     </div>
-    <blockquote>
-      &ldquo;I&rsquo;d posted for months and got crickets. One Sonder video did more in a week than my year of trying.&rdquo;
-      <footer>Marcus &mdash; self-improvement author</footer>
-    </blockquote>
-    <blockquote>
-      &ldquo;I started 5 days ago and made 10 sales.&rdquo;
-      <footer>Lynn &mdash; children&rsquo;s-book author</footer>
-    </blockquote>
+    <p class="vary">Results vary from author to author.</p>
+  </section>
+
+  <!-- ============ HEAR IT FROM THEM ============ -->
+  <section>
+    <span class="kicker">&ldquo;I&rsquo;m not really a social media person&rdquo;</span>
+    <h2>Neither were they. Watch these first.</h2>
+    <div class="vids">
+      <div class="vid">
+        <button type="button" data-video="https://sienveexppekdxoaeamd.supabase.co/storage/v1/object/public/pipeline-artifacts/marketing/testimonials/mike-sobola-captioned.mp4" aria-label="Play: Mike Sobola, Sonder author, 38 seconds">
+          <img src="/assets/live/sobola-thumb.jpg" width="1000" height="720" loading="lazy" alt="" />
+        </button>
+        <div class="cap"><b>Mike Sobola</b><span>Sonder author &middot; 38 seconds</span><p>&ldquo;They make it easy, even for somebody like me.&rdquo;</p></div>
+      </div>
+      <div class="vid">
+        <button type="button" data-video="https://sienveexppekdxoaeamd.supabase.co/storage/v1/object/public/pipeline-artifacts/marketing/testimonials/nancy-dove-captioned.mp4" aria-label="Play: Nancy Dove, Sonder author, 41 seconds">
+          <img src="/assets/live/nancy-thumb.jpg" width="1000" height="720" loading="lazy" alt="" />
+        </button>
+        <div class="cap"><b>Nancy Dove</b><span>Sonder author &middot; 41 seconds</span><p>Stuck in what she calls &ldquo;200-views jail&rdquo;. &ldquo;I have broken free&hellip; I am now getting organic sales.&rdquo;</p></div>
+      </div>
+    </div>
+    <p class="vary">Results vary from author to author.</p>
   </section>
 
   <!-- ============ BELIEF 2: COULD *I* DO IT? ============ -->
@@ -621,6 +685,16 @@
     track('InitiateCheckout', { content_name: 'f_signup', content_category: state.book || 'unknown' });
   });
 })();
+
+  /* Testimonial videos: load only when someone presses play (same as /live). */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-video]'), function (b) {
+    b.addEventListener('click', function () {
+      var v = document.createElement('video');
+      v.src = b.getAttribute('data-video'); v.controls = true; v.autoplay = true; v.playsInline = true;
+      v.setAttribute('playsinline', ''); v.setAttribute('aria-label', b.getAttribute('aria-label') || 'Video');
+      b.parentNode.replaceChild(v, b); var p = v.play(); if (p && p.catch) p.catch(function () {});
+    });
+  });
 </script>
 </body>
 </html>
