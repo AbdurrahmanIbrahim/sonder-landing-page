@@ -101,9 +101,9 @@ p{margin:0}
   <section class="card" aria-labelledby="in-title">
     <p class="tag"><span class="tick" aria-hidden="true">&#10003;</span> Seat saved</p>
     <h1 id="in-title">You're in.</h1>
-    <p class="when" id="when">Thursday &middot; 12pm ET / 9am PT</p>
+    <p class="when" id="when">Wednesday &middot; 12pm ET / 9am PT</p>
     <p class="loc" id="when-local" hidden></p>
-    <p class="body">Zoom is emailing you your personal join link now. That email is your way into the room, so it's worth finding it before Thursday. If it isn't there in a few minutes, check your spam folder.</p>
+    <p class="body">Zoom is emailing you your personal join link now. That email is your way into the room, so it's worth finding it before Wednesday. If it isn't there in a few minutes, check your spam folder.</p>
     <p class="body" id="sms-line" hidden></p>
     <p class="cal">Add it to your calendar: <a id="cal-google" href="https://calendar.google.com/" target="_blank" rel="noopener">Google</a> &middot; <a id="cal-ics" href="https://sonder-server-production.up.railway.app/api/live-webinar/ics">Apple / Outlook</a></p>
   </section>
@@ -111,12 +111,12 @@ p{margin:0}
   <section class="card trial" aria-labelledby="trial-title">
     <p class="tag">While you wait</p>
     <h2 id="trial-title">Try Sonder free for 7 days</h2>
-    <p>Upload your book before Thursday, and the parts we demo will be running on your own title while you watch.</p>
+    <p>Upload your book before Wednesday, and the parts we demo will be running on your own title while you watch.</p>
     <a class="btn" id="trial" href="https://app.yousonder.com/signup?offer=trial&amp;utm_source=live_page&amp;utm_medium=organic&amp;utm_campaign=webinar&amp;utm_content=live_thankyou">Start your free 7-day trial &rarr;</a>
     <p class="fine">$0 today, then $49/month from day 8. Cancel any time.</p>
   </section>
 
-  <section class="card" aria-label="Before Thursday">
+  <section class="card" aria-label="Before Wednesday">
     <ul class="tips">
       <li><b>Join on a computer if you can</b>Most of the session is us building videos on screen from a real book. It works on a phone, but you'll be squinting at the part that matters.</li>
       <li><b>Bring your book</b>The Q&amp;A runs until the questions do, and we write hooks live for whoever asks. A specific title beats a general question.</li>
@@ -135,16 +135,24 @@ p{margin:0}
   var DURATION_MIN=90;
   var $=function(id){return document.getElementById(id)};
 
-  /* Same clock as /live (12pm New York, second Thursday skipped). */
+  /* Same clock as /live. The .ics comes from the server; the Google link uses this date. */
+  /* THE SCHEDULE RULE. Every copy of it must match the server's
+     lib/webinarSession.ts + customerSessionSchedule.ts (and every other page
+     that carries this block: /live, /live/youre-in, /registered, /webinar1-3).
+     Public session: every Wednesday at 12pm New York time (9am Pacific).
+     Skipped: the second Wednesday of the month (day 8-14), which is the
+     customers-only session, but only from 1 Nov 2026 on. 14 Oct 2026 stays
+     public (October's customer session already ran on 8 Oct). */
+  var SKIP_FROM=20261101;
   var WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   function nyParts(d){var p={};new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour12:false,
     weekday:'short',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'})
     .formatToParts(d).forEach(function(x){p[x.type]=x.value});return p}
   function nyOffset(d){var p=nyParts(d);return Date.UTC(+p.year,+p.month-1,+p.day,(+p.hour)%24,+p.minute,+p.second)-d.getTime()}
   function fromNY(y,m,d,h,mi){var t=Date.UTC(y,m-1,d,h,mi);for(var i=0;i<2;i++){t=Date.UTC(y,m-1,d,h,mi)-nyOffset(new Date(t))}return new Date(t)}
-  function customersOnly(dt){var p=nyParts(dt),day=+p.day;return p.weekday==='Thu'&&day>=8&&day<=14}
+  function customersOnly(dt){var p=nyParts(dt),day=+p.day;return p.weekday==='Wed'&&day>=8&&day<=14&&(+p.year)*10000+(+p.month)*100+day>=SKIP_FROM}
   function nextPublic(now){var p=nyParts(now),y=+p.year,m=+p.month,d=+p.day;
-    var k=(4-WD.indexOf(p.weekday)+7)%7;var c=fromNY(y,m,d+k,12,0);
+    var k=(3-WD.indexOf(p.weekday)+7)%7;var c=fromNY(y,m,d+k,12,0);
     if(c.getTime()<=now.getTime()){k+=7;c=fromNY(y,m,d+k,12,0)}
     while(customersOnly(c)){k+=7;c=fromNY(y,m,d+k,12,0)}
     return c}
@@ -155,7 +163,7 @@ p{margin:0}
     }catch(e){return ''}
   }
   function dayIn(dt,tz,withDate){
-    try{return new Intl.DateTimeFormat('en-GB',withDate?{timeZone:tz,weekday:'long',day:'numeric',month:'long'}:{timeZone:tz,weekday:'long'}).format(dt)}catch(e){return 'Thursday'}
+    try{return new Intl.DateTimeFormat('en-GB',withDate?{timeZone:tz,weekday:'long',day:'numeric',month:'long'}:{timeZone:tz,weekday:'long'}).format(dt)}catch(e){return 'Wednesday'}
   }
   function stamp(d){return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'')}
 

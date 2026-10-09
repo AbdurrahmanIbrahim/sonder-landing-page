@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#FFFFFF" />
 <title>You're in &mdash; Sonder Live Masterclass</title>
-<meta name="description" content="Your seat is saved for the Sonder live masterclass, Thursday at 12pm Eastern." />
+<meta name="description" content="Your seat is saved for the Sonder live masterclass, Wednesday at 12pm ET / 9am PT." />
 <meta name="robots" content="noindex, nofollow" />
 
 <!-- Meta Pixel — Sonder Web dataset, same id as /, /f, /go and /webinar3.
@@ -151,8 +151,8 @@ footer a{color:var(--ink-3)}
     <div class="when">
       <div class="when-top"><span>Your session</span></div>
       <div class="when-body">
-        <p class="when-date" id="when-date">Thursday</p>
-        <p class="when-time">12:00pm Eastern &middot; 60 minutes, then Q&amp;A</p>
+        <p class="when-date" id="when-date">Wednesday</p>
+        <p class="when-time"><span id="when-time">12pm ET / 9am PT</span> &middot; 60 minutes, then Q&amp;A</p>
         <p class="when-local" id="when-local"></p>
         <div class="cal">
           <a id="cal-google" href="#" target="_blank" rel="noopener">Add to Google Calendar</a>
@@ -185,7 +185,7 @@ footer a{color:var(--ink-3)}
 
     <div class="aside">
       <h3>Want a head start?</h3>
-      <p>You do not need to do anything before Thursday. But if you would rather arrive with your book already in, <a href="https://app.yousonder.com/signup?offer=trial">start your 7-day free trial</a> and upload it. Then the parts we demo will be running on your own title while you watch.</p>
+      <p>You do not need to do anything before Wednesday. But if you would rather arrive with your book already in, <a href="https://app.yousonder.com/signup?offer=trial">start your 7-day free trial</a> and upload it. Then the parts we demo will be running on your own title while you watch.</p>
     </div>
   </div>
 </main>
@@ -200,20 +200,25 @@ footer a{color:var(--ink-3)}
 (function(){
   "use strict";
 
-  /* The same next-Thursday rule as /webinar3 and the server, offset-corrected
-     twice so it survives both US daylight-saving switches. If you change the
-     rule, change it in all three places — /webinar3 is the reference. */
+  /* Next session, offset-corrected twice so it survives both US
+     daylight-saving switches. */
+  /* THE SCHEDULE RULE. Every copy of it must match the server's
+     lib/webinarSession.ts + customerSessionSchedule.ts (and every other page
+     that carries this block: /live, /live/youre-in, /registered, /webinar1-3).
+     Public session: every Wednesday at 12pm New York time (9am Pacific).
+     Skipped: the second Wednesday of the month (day 8-14), which is the
+     customers-only session, but only from 1 Nov 2026 on. 14 Oct 2026 stays
+     public (October's customer session already ran on 8 Oct). */
+  var SKIP_FROM=20261101;
   var WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   function nyParts(d){var p={};new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour12:false,
     weekday:'short',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'})
     .formatToParts(d).forEach(function(x){p[x.type]=x.value});return p}
   function nyOffset(d){var p=nyParts(d);return Date.UTC(+p.year,+p.month-1,+p.day,(+p.hour)%24,+p.minute,+p.second)-d.getTime()}
   function fromNY(y,m,d,h,mi){var t=Date.UTC(y,m-1,d,h,mi);for(var i=0;i<2;i++){t=Date.UTC(y,m-1,d,h,mi)-nyOffset(new Date(t))}return new Date(t)}
-  /* The second Thursday of each month is the customers-only session: the public
-     Zoom series has no occurrence that day, so the page never offers it (7 Oct 2026). */
-  function customersOnly(dt){var p=nyParts(dt),day=+p.day;return p.weekday==='Thu'&&day>=8&&day<=14}
+  function customersOnly(dt){var p=nyParts(dt),day=+p.day;return p.weekday==='Wed'&&day>=8&&day<=14&&(+p.year)*10000+(+p.month)*100+day>=SKIP_FROM}
   function nextSession(now){var p=nyParts(now),y=+p.year,m=+p.month,d=+p.day;
-    var k=(4-WD.indexOf(p.weekday)+7)%7;var c=fromNY(y,m,d+k,12,0);
+    var k=(3-WD.indexOf(p.weekday)+7)%7;var c=fromNY(y,m,d+k,12,0);
     if(c.getTime()<=now.getTime()){k+=7;c=fromNY(y,m,d+k,12,0)}
     while(customersOnly(c)){k+=7;c=fromNY(y,m,d+k,12,0)}
     return c}
@@ -226,6 +231,18 @@ footer a{color:var(--ink-3)}
     var label=new Intl.DateTimeFormat('en-GB',{timeZone:'America/New_York',weekday:'long',day:'numeric',month:'long'}).format(target);
     if($('when-date'))$('when-date').textContent=label;
   }catch(e){}
+  /* Eastern and Pacific, both computed (house rule: every stated time shows ET and PT). */
+  function clockIn(dt,tz){
+    try{var p={};new Intl.DateTimeFormat('en-US',{timeZone:tz,hour:'numeric',minute:'2-digit',hour12:true})
+      .formatToParts(dt).forEach(function(x){p[x.type]=x.value});
+      return p.hour+(p.minute&&p.minute!=='00'?':'+p.minute:'')+String(p.dayPeriod||'').toLowerCase();
+    }catch(e){return ''}
+  }
+  function fillTimes(){var et=clockIn(target,'America/New_York'),pt=clockIn(target,'America/Los_Angeles');
+    if(!et||!pt)return;var txt=et+' ET / '+pt+' PT';
+    if($('when-time'))$('when-time').textContent=txt;
+    Array.prototype.forEach.call(document.querySelectorAll('.when-time-2'),function(n){n.textContent=txt})}
+  try{fillTimes()}catch(e){}
 
   /* Their own clock, but only when it actually differs — telling somebody in
      New York that noon Eastern is noon their time is noise. */
@@ -233,9 +250,10 @@ footer a{color:var(--ink-3)}
     var tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
     var mine=new Intl.DateTimeFormat('en-GB',{hour:'numeric',minute:'2-digit',hourCycle:'h12'}).format(target);
     var ny=new Intl.DateTimeFormat('en-GB',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',hourCycle:'h12'}).format(target);
+    var la=new Intl.DateTimeFormat('en-GB',{timeZone:'America/Los_Angeles',hour:'numeric',minute:'2-digit',hourCycle:'h12'}).format(target);
     var myDay=new Intl.DateTimeFormat('en-GB',{weekday:'long'}).format(target);
     var el=$('when-local');
-    if(el&&tz&&tz!=='America/New_York'&&mine!==ny){
+    if(el&&tz&&tz!=='America/New_York'&&mine!==ny&&mine!==la){
       el.textContent='That is '+myDay+' at '+mine.toLowerCase().replace(/\s/g,'')+' where you are ('+tz.replace(/_/g,' ')+').';
     }
   }catch(e){}
