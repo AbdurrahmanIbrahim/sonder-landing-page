@@ -8,8 +8,9 @@
    - monthly: one first-party cookie, sonder_vid, holding a random id made
      here. It says nothing about the person, is shared with no one, lasts up to
      13 months, and is set on .yousonder.com so the app's signup screen
-     recognises the same visitor. Not set when the browser sends Global Privacy
-     Control or Do Not Track; that visit is still counted for the day.
+     recognises the same visitor. Only set when consent.js allows it: after
+     Accept in the EU/EEA/UK/Switzerland, never under Global Privacy Control or
+     Do Not Track. Either way the visit is still counted for the day.
 
    Sends only once the page is actually on screen: Meta's in-app browser
    preloads ad pages in the background, and those were never seen by anyone.
@@ -20,7 +21,11 @@
     var URL_ = 'https://sonder-server-production.up.railway.app/api/public/visit';
     var sent = false;
 
+    // consent.js decides (opt-in where the law asks for it, GPC/DNT everywhere).
+    // If it somehow did not load, fall back to the GPC/DNT rule alone.
     function optedOut() {
+      var c = window.sonderConsent;
+      if (c && typeof c.allowed === 'function') return !c.allowed();
       return navigator.globalPrivacyControl === true || navigator.doNotTrack === '1' || window.doNotTrack === '1';
     }
 
