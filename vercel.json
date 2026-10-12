@@ -25,6 +25,7 @@
     { "source": "/webinar1/:path*", "destination": "/webinar3", "permanent": false },
     { "source": "/webinar2", "destination": "/webinar3", "permanent": false },
     { "source": "/webinar2/:path*", "destination": "/webinar3", "permanent": false },
-    { "source": "/webinar-offer", "destination": "https://app.yousonder.com/pricing?promo=webinar", "permanent": false }
+    { "source": "/webinar-offer", "destination": "https://app.yousonder.com/pricing?promo=webinar", "permanent": false },
+    { "source": "/j/:code", "destination": "https://api.yousonder.com/j/:code", "permanent": false }
   ]
 }
