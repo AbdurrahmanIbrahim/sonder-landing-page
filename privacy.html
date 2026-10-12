@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+<script src="/consent.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
   <!-- Dub Partners affiliate tracking (Rewardful was retired 7 Oct 2026). A real tag, not a
@@ -13,6 +14,7 @@
        programme's link domain in Dub (Settings → Domains), or verification
        fails with "missing the referral link domain". -->
   <script
+    type="text/plain" data-consent="dub"
     src="https://www.dubcdn.com/analytics/script.js"
     defer
     data-domains='{"refer":"refer.yousonder.com"}'
@@ -171,7 +173,7 @@
       </a>
 
       <h1>Privacy Policy</h1>
-      <p class="legal-eff">Effective September 17, 2026</p>
+      <p class="legal-eff">Effective October 12, 2026</p>
 
       <p class="legal-intro">
         Your book is your life's work, and we treat it that way. This policy explains, in plain terms,
@@ -298,17 +300,41 @@
         </p>
       </section>
 
-      <section>
+      <section id="cookies">
         <h2>8. Cookies and advertising</h2>
         <p>
           We use cookies and similar technologies that are necessary to run the app (for example,
-          keeping you signed in). We do not currently run third-party analytics.
+          keeping you signed in).
         </p>
         <p>
-          We expect to begin advertising Sonder on third-party platforms such as Meta (Facebook and
-          Instagram). When we do, we may use their advertising and measurement technologies (such as
-          the Meta Pixel) to understand the performance of our ads. We will update this policy before
-          those technologies are active, and where required we will ask for your consent.
+          <strong>Counting visitors.</strong> To count how many people visit our website, our own code
+          sets one cookie, <code>sonder_vid</code>, containing a random identifier. It lasts up to 13
+          months, is not shared with anyone, and is not used to identify you or for advertising. We also
+          count daily visits without any cookie, using a code worked out from your IP address and
+          browser that changes every day; we do not keep your IP address for this. If your browser sends
+          a Global Privacy Control or Do Not Track signal, we do not set the cookie.
+        </p>
+        <p>
+          <strong>Advertising.</strong> We advertise Sonder on Meta (Facebook and Instagram) and use the
+          Meta Pixel on our website to measure how our adverts perform. The Meta Pixel sets cookies and
+          sends Meta information about your visit, such as the pages you view and your browser.
+        </p>
+        <p>
+          <strong>Referrals.</strong> If you arrive through a partner&rsquo;s referral link, our referral
+          provider sets a cookie so the partner can be credited if you subscribe.
+        </p>
+        <p>
+          <strong>Your choice.</strong> If you are in the European Union, the European Economic Area,
+          the United Kingdom or Switzerland, we ask before setting the visitor cookie, the Meta Pixel or
+          the referral cookie, and none of them runs unless you choose Accept. If you choose Reject, we
+          also do not send details of your sign-up or purchase to Meta. Wherever you are, if your
+          browser sends a Global Privacy Control or Do Not Track signal, we treat it as Reject.
+        </p>
+        <p>
+          You can change your choice at any time:
+          <button type="button" onclick="window.sonderConsent &amp;&amp; window.sonderConsent.open()"
+            style="font:inherit;color:inherit;text-decoration:underline;background:none;border:0;padding:0;cursor:pointer">Cookie settings</button>.
+          You can also block or delete cookies in your browser settings.
         </p>
       </section>
 
