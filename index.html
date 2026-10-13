@@ -1328,7 +1328,19 @@
             </button>
           </dt>
           <dd class="faq-a" id="faq-a5" hidden>
-            <p>Yes. Every plan starts with a 7-day free trial on Starter. You add a card to start, but nothing is charged today. Cancel before day 8 and you pay nothing. We email you 2 days before your first payment.</p>
+            <p>Yes. Every plan starts with a 7-day free trial on Starter. You add a card to start, but nothing is charged today. To check the card is real, Stripe places a temporary $49 hold on it, which we release straight away. Cancel before day 8 and you pay nothing. We email you 2 days before your first payment.</p>
+          </dd>
+        </div>
+
+        <div class="faq-item">
+          <dt>
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-a5-hold">
+              Why is there $49 pending on my card?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+          </dt>
+          <dd class="faq-a" id="faq-a5-hold" hidden>
+            <p>That&rsquo;s a hold, not a payment. Before a free trial starts, Stripe, our payment provider, checks your card is real and can cover the first month by placing a temporary hold for that amount. We ask for this because a lot of sign-ups used card numbers that didn&rsquo;t work. We release the hold straight away and no money is taken. Some banks keep showing it as pending for a few days before it disappears on its own.</p>
           </dd>
         </div>
 
