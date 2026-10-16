@@ -58,6 +58,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 /* stage */
 .stage{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding-inline:16px;padding-block:0 40px;min-height:100dvh}
 .ring{position:absolute;left:50%;top:30px;width:min(780px,140vw);transform:translateX(-50%);pointer-events:none;z-index:0}
+/* Intro: the tall card would cut through the ring and triangle, so it keeps only the soft halo. */
+.stage.intro .ring .rl{display:none}
 .top{position:relative;z-index:1;width:100%;max-width:640px;display:grid;grid-template-columns:44px 1fr 44px;align-items:center;padding-top:16px}
 .back{width:40px;height:40px;border-radius:50%;border:0;background:none;color:var(--paper);display:grid;place-items:center}
 .back:hover{background:rgba(255,255,255,.07)}
@@ -164,7 +166,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 </style>
 </head>
 <body>
-<div class="stage" id="stage">
+<div class="stage intro" id="stage">
   <svg class="ring" viewBox="0 0 600 600" aria-hidden="true">
     <defs><radialGradient id="halo" cx="50%" cy="50%" r="50%">
       <stop offset="0" stop-color="#4A2F6E" stop-opacity=".62"/>
@@ -172,8 +174,8 @@ button{font:inherit;color:inherit;cursor:pointer}
       <stop offset="1" stop-color="#1A0F2E" stop-opacity="0"/>
     </radialGradient></defs>
     <circle cx="300" cy="300" r="300" fill="url(#halo)"/>
-    <circle cx="300" cy="300" r="190" fill="none" stroke="#B794F4" stroke-opacity=".2" stroke-width="1.4"/>
-    <path d="M382 190 L416 209 L382 228 Z" fill="#7FFFD4" opacity=".85"/>
+    <circle class="rl" cx="300" cy="300" r="190" fill="none" stroke="#B794F4" stroke-opacity=".2" stroke-width="1.4"/>
+    <path class="rl" d="M382 190 L416 209 L382 228 Z" fill="#7FFFD4" opacity=".85"/>
   </svg>
   <div class="top">
     <button class="back off" id="back" data-act="back" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -361,6 +363,7 @@ function render(scroll, focus) {
   card.innerHTML = SCREENS[cur]();
   if (card.getAttribute('data-screen') !== cur) { card.style.animation = 'none'; void card.offsetWidth; card.style.animation = ''; card.setAttribute('data-screen', cur); }
   mount();
+  document.getElementById('stage').classList.toggle('intro', cur === 'intro');
   document.getElementById('back').classList.toggle('off', !hist.length || cur === 'intro' || cur === 'result');
   var at = 0, rows = CH.map(function (c, ci) { var i = c[1].indexOf(cur); var w;
     if (i >= 0) { at = ci; w = (i + 1) / c[1].length * 100; } else w = ORDER.indexOf(cur) > ORDER.indexOf(c[1][c[1].length - 1]) ? 100 : 0;
