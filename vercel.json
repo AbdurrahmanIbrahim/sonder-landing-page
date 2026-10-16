@@ -8,7 +8,6 @@
     { "source": "/unsubscribe", "destination": "https://app.yousonder.com/unsubscribe", "permanent": true },
     { "source": "/privacy", "destination": "https://app.yousonder.com/privacy", "permanent": false },
     { "source": "/dashboard", "destination": "https://app.yousonder.com/", "permanent": true },
-    { "source": "/onboarding", "destination": "https://app.yousonder.com/onboarding", "permanent": true },
     { "source": "/books", "destination": "https://app.yousonder.com/books", "permanent": true },
     { "source": "/books/:path*", "destination": "https://app.yousonder.com/books/:path*", "permanent": true },
     { "source": "/generate", "destination": "https://app.yousonder.com/generate", "permanent": true },
