@@ -2878,6 +2878,28 @@ button { font: inherit; cursor: pointer; }
 }
 .foot-col a:hover { color: var(--paper); }
 
+/* Trusted-partner strip (BookReverb, 19 Oct 2026), same idea as their footer line for us. */
+.foot-partner {
+  margin: 0;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--paper-08);
+  font-size: 14px;
+  color: var(--paper-60);
+}
+.foot-partner-label {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--aurora);
+}
+.foot-partner a {
+  color: var(--paper);
+  text-underline-offset: 3px;
+}
+
 .foot-base {
   display: flex; justify-content: space-between; align-items: center;
   padding-top: 32px;
