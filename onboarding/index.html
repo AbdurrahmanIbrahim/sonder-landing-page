@@ -507,7 +507,8 @@ var SCREENS = {
     return '<h1>How many books do you want to promote?</h1><p class="sub">You can add more later.</p><div class="opts" role="radiogroup">' +
       opt({ label:'Just this one', on:S.books === 1, attrs:'data-pick="books" data-val="1" data-auto' }) +
       opt({ label:'Two books', on:S.books === 2, attrs:'data-pick="books" data-val="2" data-auto' }) +
-      opt({ label:'Three or more', on:S.books === 3, attrs:'data-pick="books" data-val="3" data-auto' }) + '</div>'; },
+      opt({ label:'Three or more', on:S.books === 3, attrs:'data-pick="books" data-val="3" data-auto' }) + '</div>' +
+      '<p class="fine">Publishing for a list of authors? <a href="/publishers">See Sonder for publishers</a></p>'; },
   proof: function () {
     return '<p class="eyebrow">Built by authors</p><h1>Made by two authors who sell books on social media.</h1><div class="founders">' +
       '<div class="founder"><span class="fn">Mike, co-founder</span><span class="fv">107,677</span><span class="fd">books sold across 56 titles</span></div>' +
