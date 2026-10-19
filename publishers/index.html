@@ -5,10 +5,10 @@
 <script src="/consent.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0A0613" />
-<title>Sonder for publishers · Your first video from your ONIX file</title>
-<meta name="description" content="Upload your ONIX file, or write a short summary, and Sonder makes your first video straight away. Your first 3 videos are free. No card needed." />
-<meta property="og:title" content="Sonder for publishers · Your first video from your ONIX file" />
-<meta property="og:description" content="Upload your ONIX file and Sonder makes your first video in minutes. Your first 3 videos are free. No card needed." />
+<title>Sonder for Publishers · Video marketing for your whole list</title>
+<meta name="description" content="Sonder turns your ONIX feed into TikToks, Reels, slideshows and Amazon ad videos for every title on your list, frontlist and backlist. Your first 3 videos are free. No card, no manuscript needed." />
+<meta property="og:title" content="Sonder for Publishers · Video marketing for your whole list" />
+<meta property="og:description" content="Upload your ONIX file. Sonder makes short videos for every title on your list, for your imprint and every author you publish. First 3 videos free." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.yousonder.com/publishers" />
 <meta property="og:site_name" content="Sonder" />
@@ -30,117 +30,754 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@900&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" />
 <link rel="icon" type="image/svg+xml" href="/assets/sonder-logo-plum-flat.svg" />
 <script src="/visit.js" defer></script>
 <style>
-
-/* Same visual system as /onboarding: Plum Black stage, Sonder halo backdrop, one white card. */
+/* Layout: the main site's night world (plum, halo, video wall) with a publishing-house accent:
+   a literary serif italic for the words that matter, mono for the ONIX itself, and one paper-white
+   chapter for the problem. The hero's ONIX-record-into-videos machine is the thing to remember. */
 :root{
   color-scheme:dark;
-  --canvas:#0A0613; --deep:#1A0F2E; --mid:#2D1A48; --glow:#4A2F6E;
-  --mint:#7FFFD4; --mint-deep:#0E8F68; --mint-tint:#ECFBF5; --mint-line:#A9EAD3; --mint-ink:#0B3D2E;
-  --violet:#B794F4; --paper:#F5F5F7; --quiet:#8B8FA3;
-  --card:#FFFFFF; --ink:#140B22; --ink-2:#4A4458; --ink-3:#857F93; --hair:#E8E5EE; --hover:#F6F4FA;
-  --f-display:'Nunito', ui-rounded, 'SF Pro Rounded', system-ui, sans-serif;
-  --f-body:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --f-mono:'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --plum:#0A0613; --plum-deep:#1A0F2E; --plum-mid:#2D1A48; --plum-glow:#4A2F6E;
+  --mint:#7FFFD4; --mint-2:#2DD4BF; --violet:#B794F4; --coral:#FF8A7A; --gold:#F5C46B;
+  --paper:#F5F5F7; --ink:#0F0A1A; --quiet:#8B8FA3; --soft:#C9CBD6; --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.16);
+  --card:#120C1F; --card-2:#17102A;
+  --f-body:"Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --f-serif:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --f-mark:"Nunito", "Avenir Next", system-ui, sans-serif;
+  --wrap:1180px;
 }
 *{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;background:var(--canvas);color:var(--paper);font-family:var(--f-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
-:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
-.card :focus-visible{outline-color:var(--ink)}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--plum);color:var(--paper);font-family:var(--f-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:20px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;background:var(--mint);color:var(--ink);padding:8px 14px;border-radius:8px;z-index:100}
+.skip:focus{left:8px}
+:focus-visible{outline:2px solid var(--mint);outline-offset:3px;border-radius:6px}
+em.s{font-family:var(--f-serif);font-style:italic;font-weight:400;letter-spacing:-.005em}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mint)}
+h1,h2,h3{margin:0;text-wrap:balance}
+h2{font-size:clamp(34px,5.2vw,62px);line-height:1.02;letter-spacing:-.035em;font-weight:700}
+h2 em.s{font-size:1.08em;color:var(--mint)}
+.lede{font-size:clamp(17px,1.6vw,20px);color:var(--soft);max-width:60ch;margin:0;text-wrap:pretty}
 
-.stage{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding-inline:16px;padding-block:0 40px;min-height:100dvh}
-/* Only the soft halo: a tall card over the ring line and triangle looked like a glitch. */
-.ring{position:absolute;left:50%;top:50%;width:min(780px,140vw);transform:translate(-50%,-50%);pointer-events:none;z-index:0}
-.top{position:relative;z-index:1;width:100%;max-width:640px;display:flex;justify-content:center;padding-top:20px}
-.wm{font-family:var(--f-display);font-weight:900;font-size:25px;letter-spacing:-.045em;color:var(--paper);display:inline-flex;align-items:baseline;gap:3px}
-.wm svg{width:7px;height:9px}
-.wm small{font-family:var(--f-mono);font-weight:500;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);margin-left:8px;align-self:center}
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:58px;padding:0 28px;border-radius:999px;font-weight:600;font-size:17px;text-decoration:none;transition:transform .15s ease, box-shadow .2s ease, background .2s}
+.btn svg{width:18px;height:18px}
+.btn-primary{background:var(--mint);color:var(--ink);box-shadow:0 10px 40px -10px rgba(127,255,212,.55)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 50px -12px rgba(127,255,212,.7)}
+.btn-ghost{color:var(--paper);border:1px solid var(--line-2)}
+.btn-ghost:hover{background:rgba(255,255,255,.05)}
+.under{font-size:14px;color:var(--quiet);display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+.under span{display:inline-flex;align-items:center;gap:7px}
+.under svg{width:15px;height:15px;color:var(--mint)}
 
-/* Card and footer sit together in the middle of the screen, whatever its height (no ring above to make room for). */
-.cardwrap{position:relative;z-index:1;width:100%;max-width:490px;margin-top:auto;padding-top:32px}
-.stage>.foot{margin-bottom:auto}
-.card{background:var(--card);color:var(--ink);color-scheme:light;border-radius:28px;padding:30px 24px 24px;box-shadow:0 40px 90px -40px rgba(74,47,110,.9);display:flex;flex-direction:column;gap:18px;animation:rise .35s ease both}
-@keyframes rise{from{opacity:.35;transform:translateY(10px)}to{opacity:1;transform:none}}
-.card h1{font-family:var(--f-display);font-weight:800;font-size:clamp(27px,6.6vw,34px);line-height:1.12;letter-spacing:-.02em;margin:0;text-wrap:balance}
-.eyebrow{margin:0 0 -8px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mint-deep)}
+/* announce + nav */
+.announce{background:linear-gradient(90deg,var(--plum-mid),#3a2160 50%,var(--plum-mid));text-align:center;font-size:14px;padding:9px 16px;border-bottom:1px solid var(--line-2)}
+.announce a{text-decoration:none}
+.announce b{color:var(--mint);font-weight:600}
+.nav{position:sticky;top:0;z-index:50;transition:background .25s, border-color .25s;border-bottom:1px solid transparent}
+.nav.is-scrolled{background:rgba(10,6,19,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:72px}
+.mark{display:inline-flex;align-items:baseline;gap:8px;text-decoration:none}
+.mark b{font-family:var(--f-mark);font-weight:900;font-size:26px;letter-spacing:-.045em}
+.mark i{font-style:normal;color:var(--mint);font-size:13px}
+.mark small{font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--quiet)}
+.nav-links{display:flex;align-items:center;gap:26px;font-size:15px;color:var(--soft)}
+.nav-links a{text-decoration:none}
+.nav-links a:hover{color:var(--paper)}
+.nav-cta{background:var(--mint);color:var(--ink)!important;padding:11px 18px;border-radius:999px;font-weight:600}
+@media (max-width:920px){.nav-links .hide-s{display:none}}
 
-.points{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
-.points li{display:flex;gap:12px;align-items:center;font-size:15.5px;color:var(--ink);line-height:1.4}
-.ico{width:40px;height:40px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--mint-tint);color:var(--mint-deep)}
-.ico svg{width:20px;height:20px}
-.points li.free{font-weight:600}
+/* HERO */
+.hero{position:relative;overflow:hidden;padding-block:56px 110px;isolation:isolate}
+.wall{position:absolute;inset:-40px -20px;display:grid;grid-template-columns:repeat(7,1fr);gap:18px;opacity:.22;z-index:-2;transform:rotate(-6deg) scale(1.15);pointer-events:none}
+.col{overflow:hidden}
+.track{display:flex;flex-direction:column;animation:drift var(--d,60s) linear infinite}
+.col:nth-child(even) .track{animation-direction:reverse}
+.track img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:16px;margin-bottom:18px}
+@keyframes drift{to{transform:translateY(-50%)}}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(60% 55% at 30% 40%, rgba(10,6,19,.55), var(--plum) 78%),
+  radial-gradient(40% 40% at 80% 30%, rgba(74,47,110,.55), transparent 70%)}
+.hero-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:44px;align-items:center}
+.hero h1{font-size:clamp(46px,6.8vw,92px);line-height:.95;letter-spacing:-.045em;font-weight:800;margin:18px 0 22px}
+.hero h1 em.s{display:inline-block;font-size:1.06em;background:linear-gradient(100deg,var(--mint) 10%,#A8F0FF 45%,var(--violet) 95%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.08em}
+.hero .lede{margin-bottom:30px}
+.ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:20px}
+.badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:7px 13px;border-radius:999px;border:1px solid var(--line-2);background:rgba(18,12,31,.6);color:var(--soft)}
+.pill b{color:var(--paper);font-weight:600}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 4px rgba(127,255,212,.15)}
 
-.cta{width:100%;min-height:60px;border-radius:999px;border:0;background:var(--ink);color:#fff;font-weight:600;font-size:17px;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 24px;transition:background .15s,transform .1s;text-decoration:none}
-.cta:hover{background:#26183A}
-.cta:active{transform:scale(.99)}
-.cta svg{width:20px;height:20px;fill:none;stroke:var(--mint);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.fine{font-size:12.5px;color:var(--ink-3);margin:-4px 0 0;text-align:center;text-wrap:pretty}
+/* the machine: ONIX record -> videos */
+.machine{position:relative;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+.record{position:relative;background:linear-gradient(180deg,#140d24,#0f0a1c);border:1px solid var(--line-2);border-radius:20px;padding:18px 18px 16px;font-family:var(--f-mono);font-size:12px;line-height:1.75;color:#a9a3c2;box-shadow:0 40px 80px -30px rgba(0,0,0,.8);overflow:hidden;min-width:0}
+.record-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet)}
+.record-head span:first-child{display:inline-flex;gap:6px}
+.record-head i{width:9px;height:9px;border-radius:50%;background:#3a3150;display:inline-block}
+.record pre{margin:0;white-space:pre-wrap;word-break:break-word}
+.record .t{color:#7c7499}
+.record .v{color:var(--paper)}
+.record .k{color:var(--violet)}
+.record .hl{background:rgba(127,255,212,.08);border-radius:4px;box-shadow:inset 2px 0 0 var(--mint);transition:background .4s}
+.scan{position:absolute;left:0;right:0;height:46px;top:-60px;background:linear-gradient(180deg,transparent,rgba(127,255,212,.16),transparent);animation:scan 4.2s ease-in-out infinite}
+@keyframes scan{0%{top:-60px}60%,100%{top:110%}}
+.phones{position:relative;width:clamp(200px,17vw,245px);height:clamp(370px,32vw,450px)}
+.phone{position:absolute;width:64%;border-radius:22px;padding:6px;background:#1b1430;border:1px solid var(--line-2);box-shadow:0 30px 60px -25px rgba(0,0,0,.9);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.phones .phone:nth-child(1){left:-4%;top:13%;transform:rotate(-9deg);z-index:1}
+.phones .phone:nth-child(2){left:18%;top:0;z-index:3}
+.phones .phone:nth-child(3){right:-4%;top:15%;transform:rotate(9deg);z-index:2}
+.machine:hover .phones .phone:nth-child(1){transform:rotate(-13deg) translateX(-10px)}
+.machine:hover .phones .phone:nth-child(3){transform:rotate(13deg) translateX(10px)}
+.phone video,.phone img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:17px;background:#000}
+.phone .tag{position:absolute;left:12px;bottom:12px;font-size:11px;font-weight:600;padding:4px 9px;border-radius:999px;background:rgba(10,6,19,.78);backdrop-filter:blur(6px);border:1px solid var(--line-2)}
+.phone .tag::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--fx,var(--mint));margin-right:6px;vertical-align:1px}
+.flow{position:absolute;left:calc(100% - 210px - clamp(150px,15vw,200px));top:50%;width:60px;height:2px;pointer-events:none}
+.machine .arrow{position:absolute;right:calc(clamp(200px,17vw,245px) + 6px);top:50%;transform:translate(50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--mint);color:var(--ink);display:grid;place-items:center;box-shadow:0 0 0 8px rgba(127,255,212,.12),0 10px 30px -5px rgba(127,255,212,.5);z-index:2}
+.machine .arrow svg{width:20px;height:20px}
+.float{position:absolute;font-size:13px;padding:9px 14px;border-radius:14px;background:rgba(18,12,31,.88);border:1px solid var(--line-2);backdrop-filter:blur(8px);box-shadow:0 20px 40px -20px rgba(0,0,0,.8);display:flex;gap:9px;align-items:center;animation:bob 6s ease-in-out infinite}
+.float b{color:var(--mint)}
+.float svg{width:16px;height:16px;color:var(--mint)}
+.float.f1{top:-30px;left:18px}
+.float.f2{bottom:-10px;left:20%;animation-delay:-3s}
+@keyframes bob{50%{transform:translateY(-8px)}}
 
-.foot{position:relative;z-index:1;margin:18px 0 0;font-size:13.5px;color:var(--quiet);text-align:center;display:flex;flex-direction:column;gap:4px}
-.foot a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+/* trade marquee */
+.trade{border-block:1px solid var(--line);background:#0c0817;overflow:hidden;padding-block:22px}
+.trade-row{display:flex;gap:56px;width:max-content;animation:slide 48s linear infinite;font-family:var(--f-serif);font-style:italic;font-size:clamp(26px,3vw,40px);color:#5f5878;white-space:nowrap}
+.trade-row span{display:inline-flex;align-items:center;gap:56px}
+.trade-row span::after{content:"✦";font-style:normal;font-size:.5em;color:var(--mint)}
+@keyframes slide{to{transform:translateX(-50%)}}
 
-@media(max-width:420px){
-  .card{padding:26px 18px 20px;border-radius:24px}
-  .wm small{display:none}
+section{position:relative}
+.sec{padding-block:clamp(64px,8vw,116px)}
+
+/* evidence */
+.evidence-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:56px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.stat{background:var(--plum);padding:34px 30px 30px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.stat .n{font-family:var(--f-serif);font-size:clamp(60px,7vw,92px);line-height:.9;letter-spacing:-.02em;color:var(--paper)}
+.stat .n sup,.stat .n small{font-size:.45em;color:var(--mint);vertical-align:top;margin-left:2px}
+.stat p{margin:0;color:var(--soft);font-size:16px}
+.stat cite{font-style:normal;font-size:12px;color:var(--quiet);margin-top:auto;padding-top:10px}
+.stat cite a{color:inherit}
+
+/* paper chapter: the problem */
+.paper{background:var(--paper);color:var(--ink);border-radius:36px 36px 0 0;margin-top:-30px}
+.paper .eyebrow{color:#6b3fbf}
+.paper h2 em.s{color:#6b3fbf}
+.problem{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:start}
+.problem h2{font-size:clamp(40px,6vw,78px)}
+.pains{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid rgba(15,10,26,.14)}
+.pains li{display:grid;grid-template-columns:48px 1fr;gap:16px;padding:22px 0;border-bottom:1px solid rgba(15,10,26,.14)}
+.pains .num{font-family:var(--f-serif);font-style:italic;font-size:30px;color:#6b3fbf;line-height:1}
+.pains b{display:block;font-size:19px;margin-bottom:4px;letter-spacing:-.01em}
+.pains p{margin:0;color:#4b4560;font-size:16px}
+.shelf{margin-top:70px;display:flex;align-items:flex-end;gap:8px;height:210px;padding-inline:4px;border-bottom:10px solid #2a2140;border-radius:0 0 6px 6px;overflow:hidden}
+.spine{flex:0 0 auto;border-radius:3px 3px 0 0;position:relative;display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;font-family:var(--f-serif);font-style:italic;font-size:13px;writing-mode:vertical-rl;transform:rotate(180deg);color:rgba(255,255,255,.85)}
+.spine.lit{box-shadow:0 0 0 2px var(--mint),0 0 30px rgba(45,212,191,.45)}
+.shelf-cap{display:flex;justify-content:space-between;margin-top:12px;font-size:13px;color:#6b6580}
+.shelf-cap b{color:var(--ink)}
+
+/* how */
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:60px}
+.step{position:relative;background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);border-radius:26px;padding:30px 28px 28px;overflow:hidden;min-width:0}
+.step .idx{font-family:var(--f-serif);font-style:italic;font-size:64px;line-height:.8;color:transparent;-webkit-text-stroke:1px rgba(127,255,212,.5)}
+.step h3{font-size:24px;letter-spacing:-.02em;margin:18px 0 10px}
+.step p{margin:0;color:var(--soft);font-size:16px}
+.step .chip{display:inline-flex;margin-top:16px;font-family:var(--f-mono);font-size:12px;color:var(--mint);padding:5px 10px;border:1px solid rgba(127,255,212,.25);border-radius:8px}
+.step::after{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(74,47,110,.6),transparent 70%)}
+
+/* list */
+.list-sec{overflow:hidden}
+.titles{display:grid;gap:16px;margin-top:56px}
+.trow{display:flex;gap:16px;width:max-content;animation:slide 60s linear infinite}
+.trow.rev{animation-direction:reverse;animation-duration:70s}
+.tcard{display:grid;grid-template-columns:62px 1fr;gap:14px;align-items:center;width:330px;padding:14px;border-radius:18px;background:var(--card);border:1px solid var(--line)}
+.tcover{height:92px;border-radius:6px;box-shadow:inset -6px 0 10px rgba(0,0,0,.25);position:relative}
+.tmeta{min-width:0}
+.tmeta small{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet)}
+.tmeta b{display:block;font-size:15px;margin:3px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:11.5px;padding:3px 8px;border-radius:999px;background:rgba(127,255,212,.09);color:var(--mint);border:1px solid rgba(127,255,212,.18)}
+.list-note{margin-top:22px;font-size:13px;color:var(--quiet);text-align:center}
+
+/* formats */
+.formats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:56px}
+.fmt{position:relative;border-radius:24px;overflow:hidden;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;min-width:0}
+.fmt .stage{position:relative;aspect-ratio:4/5;display:grid;place-items:center;overflow:hidden;background:radial-gradient(80% 70% at 50% 30%, color-mix(in srgb, var(--fx) 30%, transparent), transparent 70%), #0e0919}
+.fmt .stage video,.fmt .stage img{width:62%;aspect-ratio:9/16;object-fit:cover;border-radius:16px;box-shadow:0 30px 50px -20px rgba(0,0,0,.9);border:5px solid #1b1430}
+.fmt .stage.wide video{width:88%;aspect-ratio:16/9}
+.fmt .fan{position:relative;width:62%;aspect-ratio:9/16}
+.fmt .fan img{position:absolute;inset:0;width:100%;height:100%;transition:transform .4s}
+.fmt .fan img:nth-child(1){transform:rotate(-9deg) translateX(-18%)}
+.fmt .fan img:nth-child(2){transform:rotate(7deg) translateX(16%)}
+.fmt:hover .fan img:nth-child(1){transform:rotate(-14deg) translateX(-26%)}
+.fmt:hover .fan img:nth-child(2){transform:rotate(12deg) translateX(24%)}
+.fmt .body{padding:20px 20px 22px}
+.fmt small{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fx)}
+.fmt h3{font-size:20px;margin:6px 0 6px;letter-spacing:-.015em}
+.fmt p{margin:0;color:var(--soft);font-size:15px}
+.fmt[data-fx=viral]{--fx:var(--coral)}
+.fmt[data-fx=slides]{--fx:var(--violet)}
+.fmt[data-fx=amazon]{--fx:var(--gold)}
+.fmt[data-fx=hook]{--fx:#7AB8FF}
+
+/* authors split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.ticks{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:16px}
+.ticks li{display:grid;grid-template-columns:28px 1fr;gap:12px;font-size:17px;color:var(--soft)}
+.ticks li b{color:var(--paper);font-weight:600}
+.ticks svg{width:22px;height:22px;color:var(--mint);margin-top:2px}
+.handoff{position:relative;height:460px}
+.handoff .hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:150px;height:150px;border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle at 35% 30%,#3a2463,#1a0f2e);border:1px solid var(--line-2);box-shadow:0 0 0 14px rgba(74,47,110,.25),0 0 0 28px rgba(74,47,110,.12);font-family:var(--f-serif);font-style:italic;font-size:22px;line-height:1.1}
+.handoff .hub small{display:block;font-family:var(--f-mono);font-style:normal;font-size:10px;letter-spacing:.16em;color:var(--mint);margin-top:4px}
+.orbit{position:absolute;inset:0;animation:spin 60s linear infinite}
+.who{position:absolute;width:150px;padding:10px 12px;border-radius:14px;background:var(--card);border:1px solid var(--line-2);font-size:13px;animation:spin 60s linear infinite reverse}
+.who b{display:block;font-size:13.5px}
+.who span{color:var(--mint);font-size:12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* built for publishing */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:26px;overflow:hidden;margin-top:56px}
+.trust div{background:var(--plum);padding:30px 28px;min-width:0}
+.trust svg{width:28px;height:28px;color:var(--mint);margin-bottom:16px}
+.trust h3{font-size:19px;letter-spacing:-.01em;margin-bottom:8px}
+.trust p{margin:0;color:var(--soft);font-size:15.5px}
+.trust code{font-family:var(--f-mono);font-size:13px;color:var(--mint)}
+
+/* founders */
+.founders{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+.fpics{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fpic{margin:0;border-radius:22px;overflow:hidden;position:relative;border:1px solid var(--line)}
+.fpic img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.fpic figcaption{position:absolute;left:12px;right:12px;bottom:12px;padding:12px 14px;border-radius:14px;background:rgba(10,6,19,.82);backdrop-filter:blur(8px);font-size:13px}
+.fpic figcaption b{display:block;font-family:var(--f-serif);font-size:30px;font-weight:400;line-height:1;color:var(--mint)}
+.fine{font-size:12.5px;color:var(--quiet);margin-top:14px}
+
+/* offer */
+.offer{position:relative;border-radius:36px;overflow:hidden;padding:clamp(40px,6vw,80px);background:
+  radial-gradient(70% 90% at 85% 10%, rgba(127,255,212,.18), transparent 60%),
+  radial-gradient(60% 80% at 10% 100%, rgba(183,148,244,.25), transparent 60%),
+  linear-gradient(160deg,#21143a,#120c1f);border:1px solid var(--line-2);display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center}
+.offer h2{font-size:clamp(36px,5vw,64px)}
+.offer-card{background:rgba(10,6,19,.55);border:1px solid var(--line-2);border-radius:24px;padding:26px}
+.offer-card .big{font-family:var(--f-serif);font-size:84px;line-height:.85;color:var(--mint)}
+.offer-card ul{list-style:none;padding:0;margin:16px 0 22px;display:grid;gap:10px;font-size:15px;color:var(--soft)}
+.offer-card li{display:flex;gap:10px}
+.offer-card li::before{content:"✓";color:var(--mint);font-weight:700}
+
+/* faq */
+.faq{max-width:860px;margin:50px auto 0}
+.faq details{border-bottom:1px solid var(--line);padding:6px 0}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:18px 0;font-size:19px;font-weight:600;letter-spacing:-.01em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--f-serif);font-size:30px;color:var(--mint);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin:0 0 20px;color:var(--soft);max-width:70ch}
+
+/* final */
+.final{text-align:center;padding-block:clamp(90px,12vw,170px);overflow:hidden}
+.final h2{font-size:clamp(44px,7vw,96px);line-height:.95}
+.final .lede{margin:22px auto 34px}
+.final::before{content:"";position:absolute;left:50%;top:50%;width:900px;height:900px;max-width:150vw;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(74,47,110,.6),transparent 65%);z-index:-1}
+.final .ctas{justify-content:center}
+
+footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;color:var(--quiet)}
+.foot-in{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-between;align-items:center}
+.foot-in nav{display:flex;flex-wrap:wrap;gap:18px}
+.foot-in a{text-decoration:none}
+.foot-in a:hover{color:var(--paper)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv-l{transform:translateX(-36px)}
+.rv-r{transform:translateX(36px)}
+.rv-s{transform:scale(.94)}
+.stagger>*{transition-delay:calc(var(--i,0)*90ms)}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .track,.trade-row,.trow,.orbit,.who,.scan,.float{animation:none}
 }
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition:none!important}}
+.no-js .rv{opacity:1;transform:none}
 
+/* responsive */
+@media (max-width:1020px){
+  .hero-grid,.problem,.split,.founders,.offer,.evidence-head{grid-template-columns:1fr}
+  .machine{max-width:620px}
+  .formats{grid-template-columns:repeat(2,1fr)}
+  .handoff{height:420px}
+}
+@media (max-width:760px){
+  body{font-size:16px}
+  .wall{grid-template-columns:repeat(4,1fr)}
+  .stats,.how-grid,.trust{grid-template-columns:1fr}
+  .machine{grid-template-columns:1fr}
+  .machine .arrow{position:relative;right:auto;top:auto;transform:rotate(90deg);margin:-4px auto}
+  .phones{margin:10px auto 0;width:min(300px,80vw);height:min(520px,140vw)}
+  .float.f2{display:none}
+  .nav-links a:not(.nav-cta){display:none}
+  .shelf{height:150px}
+  .handoff{height:380px;transform:scale(.86)}
+}
+@media (max-width:520px){
+  .formats{grid-template-columns:1fr}
+  .btn{width:100%}
+}
 </style>
 </head>
-<body>
-<div class="stage">
-  <svg class="ring" viewBox="0 0 600 600" aria-hidden="true">
-    <defs><radialGradient id="halo" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="#4A2F6E" stop-opacity=".62"/>
-      <stop offset=".55" stop-color="#2D1A48" stop-opacity=".32"/>
-      <stop offset="1" stop-color="#1A0F2E" stop-opacity="0"/>
-    </radialGradient></defs>
-    <circle cx="300" cy="300" r="300" fill="url(#halo)"/>
-  </svg>
-  <div class="top">
-    <span class="wm">Sonder<svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 L10 6 L0 12Z" fill="#7FFFD4"/></svg><small>Publishers</small></span>
+<body class="no-js">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="announce" role="note"><a class="go" href="https://app.yousonder.com/signup?publisher=1">✦ For publishers: <b>your first 3 videos are free.</b> No card. No manuscript. →</a></div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="mark" href="/" aria-label="Sonder home"><b>Sonder</b><i aria-hidden="true">▸</i><small>for publishers</small></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#list" class="hide-s">Your whole list</a>
+      <a href="#formats" class="hide-s">Formats</a>
+      <a href="#trust" class="hide-s">Built for publishing</a>
+      <a href="#faq" class="hide-s">FAQ</a>
+      <a href="https://app.yousonder.com/login">Sign in</a>
+      <a class="nav-cta go" href="https://app.yousonder.com/signup?publisher=1">Upload your ONIX</a>
+    </nav>
   </div>
-  <main class="cardwrap"><div class="card">
-    <p class="eyebrow">For publishers</p>
-    <h1>Your first video from your ONIX file, in minutes.</h1>
-    <ul class="points">
-      <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4M7.5 8.5L12 4l4.5 4.5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></span><span>Upload your ONIX file, or write a short summary.</span></li>
-      <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg></span><span>We make your first video straight away.</span></li>
-      <li class="free"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12"/><path d="M12 8c-1.5-3-5-3.5-5-1.5S10 8 12 8zM12 8c1.5-3 5-3.5 5-1.5S14 8 12 8z"/></svg></span><span>Your first 3 videos are free. No card needed.</span></li>
-      <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span><span>Your books are never used to train AI.</span></li>
-    </ul>
-    <a class="cta" id="go" href="https://app.yousonder.com/signup?publisher=1">Make my first video free<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    <p class="fine">You can change the look, voice and captions for every video after the first.</p>
-  </div></main>
-  <p class="foot"><span>Already have an account? <a href="https://app.yousonder.com/login">Log in</a></span><span>Promoting your own book? <a href="/onboarding">Sonder for authors</a></span></p>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="h1">
+  <div class="wall" aria-hidden="true">
+    <div class="col"><div class="track" style="--d:70s"><img src="/assets/mosaic/european-cartoon.jpg" alt=""><img src="/assets/mosaic/expert-speaker.jpg" alt=""><img src="/assets/mosaic/skeleton.jpg" alt=""><img src="/assets/mosaic/european-cartoon.jpg" alt=""><img src="/assets/mosaic/expert-speaker.jpg" alt=""><img src="/assets/mosaic/skeleton.jpg" alt=""></div></div>
+    <div class="col"><div class="track" style="--d:56s"><img src="/assets/mosaic/hook-gmrs.jpg" alt=""><img src="/assets/mosaic/yellow-cartoon.jpg" alt=""><img src="/assets/mosaic/expert-podcaster.jpg" alt=""><img src="/assets/mosaic/hook-gmrs.jpg" alt=""><img src="/assets/mosaic/yellow-cartoon.jpg" alt=""><img src="/assets/mosaic/expert-podcaster.jpg" alt=""></div></div>
+    <div class="col"><div class="track" style="--d:80s"><img src="/assets/mosaic/stick-figure.jpg" alt=""><img src="/assets/mosaic/neon-wireframe.jpg" alt=""><img src="/assets/mosaic/expert-panelist.jpg" alt=""><img src="/assets/mosaic/stick-figure.jpg" alt=""><img src="/assets/mosaic/neon-wireframe.jpg" alt=""><img src="/assets/mosaic/expert-panelist.jpg" alt=""></div></div>
+    <div class="col"><div class="track" style="--d:62s"><img src="/assets/mosaic/hook-vagus.jpg" alt=""><img src="/assets/mosaic/european-cartoon.jpg" alt=""><img src="/assets/mosaic/yellow-cartoon.jpg" alt=""><img src="/assets/mosaic/hook-vagus.jpg" alt=""><img src="/assets/mosaic/european-cartoon.jpg" alt=""><img src="/assets/mosaic/yellow-cartoon.jpg" alt=""></div></div>
+    <div class="col"><div class="track" style="--d:50s"><img src="/assets/mosaic/expert-speaker.jpg" alt=""><img src="/assets/mosaic/hook-gmrs.jpg" alt=""><img src="/assets/mosaic/neon-wireframe.jpg" alt=""><img src="/assets/mosaic/expert-speaker.jpg" alt=""><img src="/assets/mosaic/hook-gmrs.jpg" alt=""><img src="/assets/mosaic/neon-wireframe.jpg" alt=""></div></div>
+    <div class="col"><div class="track" style="--d:74s"><img src="/assets/mosaic/skeleton.jpg" alt=""><img src="/assets/mosaic/expert-podcaster.jpg" alt=""><img src="/assets/mosaic/stick-figure.jpg" alt=""><img src="/assets/mosaic/skeleton.jpg" alt=""><img src="/assets/mosaic/expert-podcaster.jpg" alt=""><img src="/assets/mosaic/stick-figure.jpg" alt=""></div></div>
+    <div class="col"><div class="track" style="--d:66s"><img src="/assets/mosaic/expert-panelist.jpg" alt=""><img src="/assets/mosaic/hook-vagus.jpg" alt=""><img src="/assets/mosaic/european-cartoon.jpg" alt=""><img src="/assets/mosaic/expert-panelist.jpg" alt=""><img src="/assets/mosaic/hook-vagus.jpg" alt=""><img src="/assets/mosaic/european-cartoon.jpg" alt=""></div></div>
+  </div>
+
+  <div class="wrap hero-grid">
+    <div class="rv">
+      <p class="eyebrow">Sonder for publishers</p>
+      <h1 id="h1">Every title on your list, <em class="s">on every feed.</em></h1>
+      <p class="lede">Send us the ONIX you already send to retailers. Sonder turns every title into TikToks, Reels, slideshows and Amazon ad videos, frontlist and backlist, for your imprint and for every author you publish.</p>
+      <div class="ctas">
+        <a class="btn btn-primary go" href="https://app.yousonder.com/signup?publisher=1">Upload your ONIX. First video free <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+      <p class="under">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>3 videos free</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No card</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No manuscript needed</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Never used to train AI</span>
+      </p>
+    </div>
+
+    <div class="machine rv rv-r" aria-label="An ONIX record becoming three videos">
+      <div class="record">
+        <div class="scan" aria-hidden="true"></div>
+        <div class="record-head"><span><i></i><i></i><i></i></span><span>your_catalogue.xml</span></div>
+<pre aria-hidden="true"><span class="t">&lt;Product&gt;</span>
+  <span class="t">&lt;</span><span class="k">TitleText</span><span class="t">&gt;</span><span class="v hl" data-hl>The Salt House</span><span class="t">&lt;/…&gt;</span>
+  <span class="t">&lt;</span><span class="k">Contributor</span><span class="t">&gt;</span><span class="v hl" data-hl>Jane Ashby</span><span class="t">&lt;/…&gt;</span>
+  <span class="t">&lt;</span><span class="k">Subject</span> <span class="t">scheme="Thema"&gt;</span><span class="v hl" data-hl>FBA · FRD</span><span class="t">&lt;/…&gt;</span>
+  <span class="t">&lt;</span><span class="k">Text</span> <span class="t">type="Description"&gt;</span>
+    <span class="v hl" data-hl>She burned the letter before he could read it. But she kept the stamp…</span>
+  <span class="t">&lt;/Text&gt;</span>
+  <span class="t">&lt;</span><span class="k">Text</span> <span class="t">type="Review"&gt;</span><span class="v hl" data-hl>"Impossible to put down."</span><span class="t">&lt;/…&gt;</span>
+  <span class="t">&lt;</span><span class="k">ResourceLink</span><span class="t">&gt;</span><span class="v">cover.jpg</span><span class="t">&lt;/…&gt;</span>
+<span class="t">&lt;/Product&gt;</span></pre>
+      </div>
+      <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+      <div class="phones">
+        <div class="phone" style="--fx:var(--coral)"><video src="/assets/formats/viral.mp4" poster="/assets/formats/viral.webp" muted loop playsinline autoplay preload="metadata"></video><span class="tag">Viral video</span></div>
+        <div class="phone" style="--fx:var(--violet)"><img src="/assets/slides/lmo-1.jpg" alt=""><span class="tag">Slideshow</span></div>
+        <div class="phone" style="--fx:var(--gold)"><video src="/assets/formats/reaction.mp4" poster="/assets/formats/reaction.webp" muted loop playsinline autoplay preload="metadata"></video><span class="tag">Hook video</span></div>
+      </div>
+      <div class="float f1" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/></svg>Read in <b>seconds</b></div>
+      <div class="float f2" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Ready for <b>every title</b></div>
+    </div>
+  </div>
+</section>
+
+<div class="trade" aria-hidden="true">
+  <div class="trade-row">
+    <span>Frontlist</span><span>Backlist</span><span>Midlist</span><span>Audiobooks</span><span>Picture books</span><span>Series</span><span>Debuts</span><span>Reissues</span><span>Non-fiction</span><span>Your authors</span>
+    <span>Frontlist</span><span>Backlist</span><span>Midlist</span><span>Audiobooks</span><span>Picture books</span><span>Series</span><span>Debuts</span><span>Reissues</span><span>Non-fiction</span><span>Your authors</span>
+  </div>
 </div>
+
+<!-- EVIDENCE -->
+<section class="sec" aria-labelledby="ev-h">
+  <div class="wrap">
+    <div class="evidence-head">
+      <div class="rv">
+        <p class="eyebrow">Why now</p>
+        <h2 id="ev-h">Readers find books <em class="s">on video</em> now.</h2>
+      </div>
+      <p class="lede rv">Discovery has moved to the feed. The titles that show up there sell, and the rest wait to be found. Most lists can't make videos for every book. Now they can.</p>
+    </div>
+    <div class="stats stagger" id="stats">
+      <div class="stat rv"><span class="n" data-count="70">70<small>%</small></span><p>of US print book sales in 2023 were <b>backlist</b> titles, a record high.</p><cite>Circana BookScan, via <a href="https://www.publishersweekly.com/pw/print/20240226/94448-weighing-the-pros-and-cons-for-2024-book-sales.html" target="_blank" rel="noopener">Publishers Weekly</a>, Feb 2024</cite></div>
+      <div class="stat rv"><span class="n" data-count="50">50<small>M+</small></span><p>books recommended on <b>BookTok</b> were sold in Europe in 2025, worth €800M.</p><cite>TikTok with NielsenIQ BookData and Media Control, <a href="https://newsroom.tiktok.com/booktok-50-millionen?lang=de-DE" target="_blank" rel="noopener">TikTok newsroom</a>, Mar 2026</cite></div>
+      <div class="stat rv"><span class="n">3<small> in </small>4</span><p>books UK readers found through <b>video sites</b> were bought by 13 to 34-year-olds.</p><cite>NielsenIQ BookData, <a href="https://nielseniq.com/global/en/insights/commentary/2025/the-age-of-social-reading" target="_blank" rel="noopener">Books &amp; Consumers</a>, Sep 2025</cite></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM (paper chapter) -->
+<section class="sec paper" aria-labelledby="pr-h">
+  <div class="wrap">
+    <div class="problem">
+      <div class="rv rv-l">
+        <p class="eyebrow">The problem</p>
+        <h2 id="pr-h">70% of sales are backlist. <em class="s">When did yours last get a video?</em></h2>
+      </div>
+      <ol class="pains stagger">
+        <li class="rv"><span class="num">i.</span><div><b>The lead titles get the budget.</b><p>Marketing time follows the frontlist. Yet 70% of US print sales in 2023 came from backlist, the part of the list that rarely gets a campaign.</p></div></li>
+        <li class="rv"><span class="num">ii.</span><div><b>Discovery moved to video.</b><p>Readers find books on TikTok, Reels and Shorts. Most lists can't make a video for every title, so most titles never appear there.</p></div></li>
+        <li class="rv"><span class="num">iii.</span><div><b>Authors are left to do it alone.</b><p>In a survey of 812 traditionally published authors, over 60% felt marginalised on marketing strategy, and only 20% felt closely involved. <span style="color:#8a849c">(Jericho Writers, 2025)</span></p></div></li>
+        <li class="rv"><span class="num">iv.</span><div><b>Video doesn't scale by hand.</b><p>Every title needs fresh posts every week. Briefing an agency or editing in-house for a whole list was never realistic. Until now.</p></div></li>
+      </ol>
+    </div>
+    <div class="shelf rv" id="shelf" aria-hidden="true"></div>
+    <div class="shelf-cap"><span>Your list today: a few titles in the spotlight.</span><span><b>With Sonder: every spine lights up.</b></span></div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="sec" id="how" aria-labelledby="how-h">
+  <div class="wrap">
+    <div class="rv" style="max-width:780px">
+      <p class="eyebrow">How it works</p>
+      <h2 id="how-h">From metadata to marketing <em class="s">in three steps.</em></h2>
+    </div>
+    <div class="how-grid stagger">
+      <article class="step rv" style="--i:0">
+        <span class="idx" aria-hidden="true">01</span>
+        <h3>Send your ONIX</h3>
+        <p>Upload the file you already send to Amazon and Nielsen, or add Sonder as a trading partner and every new title arrives by itself. No ONIX? Write a summary, paste Amazon links or upload a manuscript.</p>
+        <span class="chip">ONIX 3.0 · 3.1 · SFTP feed</span>
+      </article>
+      <article class="step rv" style="--i:1">
+        <span class="idx" aria-hidden="true">02</span>
+        <h3>We read every title</h3>
+        <p>Descriptions, subjects, reviews, excerpts and covers. Each book is matched to the right kind of video for its genre and reader: story-led for novels, myth-busting for non-fiction, gift-ready for picture books.</p>
+        <span class="chip">Thema · BISAC · reviews · excerpts</span>
+      </article>
+      <article class="step rv" style="--i:2">
+        <span class="idx" aria-hidden="true">03</span>
+        <h3>Videos for the whole list</h3>
+        <p>Viral videos, slideshows and Amazon ad videos, captioned and voiced, ready to post on your imprint's accounts or to hand to each author. Change the look, voice or hook for any title.</p>
+        <span class="chip">TikTok · Reels · Shorts · Amazon</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- WHOLE LIST -->
+<section class="sec list-sec" id="list" aria-labelledby="list-h">
+  <div class="wrap">
+    <div class="rv" style="max-width:820px">
+      <p class="eyebrow">Your whole list</p>
+      <h2 id="list-h">Not just the lead title. <em class="s">Every single one.</em></h2>
+      <p class="lede" style="margin-top:18px">A backlist title from 2011 gets the same attention as next month's launch. Series get every book. Audiobooks get their own. And when a new title lands in your feed, its videos follow.</p>
+    </div>
+  </div>
+  <div class="titles" aria-hidden="true">
+    <div class="trow" id="row1"></div>
+    <div class="trow rev" id="row2"></div>
+  </div>
+  <p class="list-note">An example list, for illustration.</p>
+</section>
+
+<!-- FORMATS -->
+<section class="sec" id="formats" aria-labelledby="fmt-h" style="padding-top:20px">
+  <div class="wrap">
+    <div class="rv" style="max-width:820px">
+      <p class="eyebrow">What every title gets</p>
+      <h2 id="fmt-h">Four formats that <em class="s">sell books.</em></h2>
+    </div>
+    <div class="formats stagger">
+      <article class="fmt rv" data-fx="viral" style="--i:0">
+        <div class="stage"><video src="/assets/formats/viral.mp4" poster="/assets/formats/viral.webp" muted loop playsinline preload="none" data-hover></video></div>
+        <div class="body"><small>Viral video</small><h3>The scroll-stopper</h3><p>A narrated short built around a hook from the book, for TikTok, Reels and Shorts.</p></div>
+      </article>
+      <article class="fmt rv" data-fx="slides" style="--i:1">
+        <div class="stage"><div class="fan"><img src="/assets/slides/lmo-0.jpg" alt="" loading="lazy" style="border-radius:14px;object-fit:cover"><img src="/assets/slides/lmo-2.jpg" alt="" loading="lazy" style="border-radius:14px;object-fit:cover"></div></div>
+        <div class="body"><small>Slideshow</small><h3>The BookTok carousel</h3><p>Swipeable slides with a line that hooks and the cover at the end. Readers save them.</p></div>
+      </article>
+      <article class="fmt rv" data-fx="amazon" style="--i:2">
+        <div class="stage wide"><video src="/assets/formats/amazon.mp4" poster="/assets/formats/amazon.webp" muted loop playsinline preload="none" data-hover></video></div>
+        <div class="body"><small>Amazon ad video</small><h3>The shop-floor ad</h3><p>A 16:9 video ad built for Amazon, made for buyers who are already shopping.</p></div>
+      </article>
+      <article class="fmt rv" data-fx="hook" style="--i:3">
+        <div class="stage"><video src="/assets/formats/reaction.mp4" poster="/assets/formats/reaction.webp" muted loop playsinline preload="none" data-hover></video></div>
+        <div class="body"><small>Hook video</small><h3>The quick reaction</h3><p>A short, punchy reaction to a moment in the book. Cheap to make, easy to post daily.</p></div>
+      </article>
+    </div>
+    <p class="list-note rv" style="margin-top:26px">Amazon's own research: adding video to Sponsored Brands ads lifted click-through by 25% (all product categories, <a href="https://www.amazon.science/publications/sponsored-brands-video-rings-up-clicks-and-sales-in-the-short-and-long-run" target="_blank" rel="noopener">Applied Marketing Analytics, 2023</a>).</p>
+  </div>
+</section>
+
+<!-- AUTHORS -->
+<section class="sec" aria-labelledby="au-h">
+  <div class="wrap split">
+    <div class="rv rv-l">
+      <p class="eyebrow">For your authors</p>
+      <h2 id="au-h">Give every author <em class="s">a marketing team.</em></h2>
+      <p class="lede" style="margin-top:18px">Authors are asked to market their own books more than ever. Hand each one a set of ready-made videos for their title, or post them on your imprint's accounts. Either way, nobody starts from a blank screen.</p>
+      <ul class="ticks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg><span><b>Imprint accounts or author accounts.</b> Post them yourselves, or send each author their own.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg><span><b>A service you can offer.</b> Self-publishing services and agencies can add video marketing to every package.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg><span><b>Consistent across the list.</b> One look for the imprint, or a look per genre. Your call.</span></li>
+      </ul>
+    </div>
+    <div class="handoff rv rv-s" aria-hidden="true">
+      <div class="orbit">
+        <div class="who" style="left:2%;top:8%"><b>Debut novelist</b><span>6 videos ready</span></div>
+        <div class="who" style="right:0;top:14%"><b>Series author</b><span>Book 4 · 9 videos</span></div>
+        <div class="who" style="left:0;bottom:12%"><b>Picture-book duo</b><span>Gift videos ready</span></div>
+        <div class="who" style="right:4%;bottom:6%"><b>Backlist memoir</b><span>Back on the feed</span></div>
+      </div>
+      <div class="hub">Your imprint<small>One upload</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILT FOR PUBLISHING -->
+<section class="sec" id="trust" aria-labelledby="tr-h" style="padding-top:20px">
+  <div class="wrap">
+    <div class="rv" style="max-width:820px">
+      <p class="eyebrow">Built for publishing</p>
+      <h2 id="tr-h">Works the way <em class="s">your list already works.</em></h2>
+    </div>
+    <div class="trust stagger">
+      <div class="rv" style="--i:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13l-2 2 2 2M15 13l2 2-2 2"/></svg><h3>Speaks ONIX</h3><p>ONIX 3.0 and 3.1, reference or short tags, one title or your whole catalogue. Paperback, ebook and audio of one book become one entry.</p></div>
+      <div class="rv" style="--i:1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 4h16v6H4zM4 14h16v6H4z"/><path d="M8 7h.01M8 17h.01"/></svg><h3>An automatic feed</h3><p>Add Sonder as a trading partner over <code>SFTP</code>, like any retailer. New titles, updates and covers arrive on their own.</p></div>
+      <div class="rv" style="--i:2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><h3>Your books stay yours</h3><p>Never used to train AI. Only used to make your videos, never shared or sold. No manuscript needed: your metadata is enough to start.</p></div>
+      <div class="rv" style="--i:3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><h3>Editable everything</h3><p>Every script can be read and changed before it's made. Pick the look, voice, hook and captions per title or for the whole list.</p></div>
+      <div class="rv" style="--i:4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg><h3>See what works</h3><p>Views, followers and results per video, so you can tell which titles are taking off and give them more.</p></div>
+      <div class="rv" style="--i:5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><h3>Minutes, not briefs</h3><p>No agency brief, no shoot, no edit queue. A title goes from record to finished video in about fifteen minutes.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDERS -->
+<section class="sec" aria-labelledby="fo-h">
+  <div class="wrap founders">
+    <div class="fpics rv rv-l">
+      <figure class="fpic"><img src="/assets/founders/mike.jpg" alt="Mike, co-founder of Sonder" loading="lazy"><figcaption><b>107,677</b>books sold across 56 titles</figcaption></figure>
+      <figure class="fpic" style="margin-top:40px"><img src="/assets/founders/lexi.jpg" alt="Lexi, co-founder of Sonder" loading="lazy"><figcaption><b>$230k</b>of books in one month</figcaption></figure>
+    </div>
+    <div class="rv rv-r">
+      <p class="eyebrow">Who built this</p>
+      <h2 id="fo-h">Made by people who <em class="s">sell books on social.</em></h2>
+      <p class="lede" style="margin-top:18px">Sonder was built by two authors and publishers who learned, title by title, that the books that get posted about every day are the books that sell. Sonder is that habit, automated, for a whole list.</p>
+      <p class="fine">Founders' own results. They are not typical, and yours will vary.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="sec" aria-labelledby="of-h" style="padding-top:0">
+  <div class="wrap">
+    <div class="offer rv rv-s">
+      <div>
+        <p class="eyebrow">Try it on your list</p>
+        <h2 id="of-h">Your first video, <em class="s">before you finish your coffee.</em></h2>
+        <p class="lede" style="margin-top:18px">Upload your ONIX file and pick a title. Your first video starts straight away with our best defaults: an Inkwell look, a warm narrator and a hook that challenges what readers think they know. Change any of it afterwards.</p>
+      </div>
+      <div class="offer-card">
+        <div class="big">3</div>
+        <div style="font-weight:600;font-size:18px">free videos to start</div>
+        <ul>
+          <li>No card needed</li>
+          <li>No manuscript needed</li>
+          <li>Your whole catalogue loads, free</li>
+          <li>Volume plans when your list is ready</li>
+        </ul>
+        <a class="btn btn-primary go" style="width:100%" href="https://app.yousonder.com/signup?publisher=1">Upload your ONIX</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" aria-labelledby="faq-h" style="padding-top:20px">
+  <div class="wrap">
+    <div class="rv" style="text-align:center">
+      <p class="eyebrow">Questions publishers ask</p>
+      <h2 id="faq-h">Good questions. <em class="s">Straight answers.</em></h2>
+    </div>
+    <div class="faq">
+      <details><summary>Do we need to send manuscripts?</summary><p>No. Your ONIX record is enough to start: description, subjects, reviews and any excerpt. If you want the strongest videos for a lead title, you can add its manuscript, but it's never required.</p></details>
+      <details><summary>Is our content used to train AI?</summary><p>No. Your books and metadata are only used to make your videos. They're never used to train AI models, ours or anyone else's, and never shared or sold.</p></details>
+      <details><summary>Which ONIX versions do you support?</summary><p>ONIX 3.0 and 3.1, in reference or short tags, as a single file or a zip. ONIX 2.1 was retired by EDItEUR in 2023, so please export as ONIX 3. You can upload a file or set up an automatic SFTP feed.</p></details>
+      <details><summary>What if we don't have ONIX to hand?</summary><p>Write a short summary of a book, paste its Amazon link, or upload the manuscript. All three work, and you can mix them across your list.</p></details>
+      <details><summary>Can our authors use the videos?</summary><p>Yes. Post them on your imprint's accounts, or hand each author the videos for their title to post on their own.</p></details>
+      <details><summary>Can we change the style?</summary><p>Yes. Your first video uses our defaults so you see results fast. After that you choose the look, the voice, the hook and the captions, per title or for the whole list, and you can edit every script before it's made.</p></details>
+      <details><summary>What does it cost?</summary><p>Your first 3 videos are free, with no card. After that, publisher plans are priced by how many videos you make each month. Once your titles are in, we'll recommend the right one for the size of your list.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final" aria-labelledby="fi-h">
+  <div class="wrap rv">
+    <h2 id="fi-h">Bring your <em class="s">whole list</em> to life.</h2>
+    <p class="lede">Upload your ONIX file and watch your first video get made. It takes about as long as reading this page twice.</p>
+    <div class="ctas">
+      <a class="btn btn-primary go" href="https://app.yousonder.com/signup?publisher=1">Upload your ONIX. First video free <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <p class="under" style="justify-content:center">Already have an account? <a href="https://app.yousonder.com/login">Log in</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <a class="mark" href="/" aria-label="Sonder home"><b>Sonder</b><i aria-hidden="true">▸</i></a>
+    <nav aria-label="Footer">
+      <a href="/">For authors</a>
+      <a href="/privacy">Privacy</a>
+      <a href="https://app.yousonder.com/login">Sign in</a>
+    </nav>
+    <span>© 2026 Sonder</span>
+  </div>
+</footer>
 
 <script>
 (function () {
+  document.body.classList.remove('no-js');
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- the sign-up links: carry tracking codes, consent-gated lead event ---------- */
   var APP = 'https://app.yousonder.com';
   var CARRY = ['fbclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','ttclid','via','dub_id'];
-  var btn = document.getElementById('go');
   var url = APP + '/signup?publisher=1';
   try {
     var here = new URL(location.href), u = new URL(url);
     CARRY.forEach(function (k) { var v = here.searchParams.get(k); if (v) u.searchParams.set(k, v); });
     url = u.toString();
   } catch (e) {}
-  btn.href = url;
-  btn.addEventListener('click', function (e) {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-    e.preventDefault();
-    /* fbq is consent.js's queue: nothing reaches Meta unless the visitor's consent allows it. */
-    try { if (window.fbq) fbq('trackCustom', 'PublisherLead', { content_name:'publisher_landing' }); } catch (err) {}
-    /* A short pause so the event leaves before the page changes, as on /onboarding. */
-    setTimeout(function () { location.href = url; }, 250);
+  [].forEach.call(document.querySelectorAll('a.go'), function (a) {
+    a.href = url;
+    a.addEventListener('click', function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      e.preventDefault();
+      /* fbq is consent.js's queue: nothing reaches Meta unless the visitor's consent allows it. */
+      try { if (window.fbq) fbq('trackCustom', 'PublisherLead', { content_name:'publisher_landing' }); } catch (err) {}
+      setTimeout(function () { location.href = url; }, 250);
+    });
+  });
+
+  /* ---------- nav ---------- */
+  var nav = document.getElementById('nav');
+  var onScroll = function () { nav.classList.toggle('is-scrolled', window.scrollY > 10); };
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---------- reveals ---------- */
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }) : null;
+  [].forEach.call(document.querySelectorAll('.rv'), function (el) { io ? io.observe(el) : el.classList.add('in'); });
+  [].forEach.call(document.querySelectorAll('.stagger'), function (g) { [].forEach.call(g.children, function (c, i) { c.style.setProperty('--i', i); }); });
+
+  /* ---------- stats count up when they arrive ---------- */
+  [].forEach.call(document.querySelectorAll('[data-count]'), function (el) {
+    var to = +el.getAttribute('data-count'), unit = el.querySelector('small'), unitHTML = unit ? unit.outerHTML : '';
+    if (reduce || !('IntersectionObserver' in window)) return;
+    el.innerHTML = '0' + unitHTML;
+    var ob = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return; ob.disconnect();
+      var t0 = performance.now();
+      (function tick(t) { var k = Math.min(1, (t - t0) / 1400), e = 1 - Math.pow(1 - k, 3);
+        el.innerHTML = Math.round(to * e) + unitHTML; if (k < 1) requestAnimationFrame(tick); })(t0);
+    }, { threshold: .5 });
+    ob.observe(el);
+  });
+
+  /* ---------- the ONIX record: highlight fields in turn, as if being read ---------- */
+  var hls = document.querySelectorAll('[data-hl]'), hi = 0;
+  [].forEach.call(hls, function (h) { h.classList.remove('hl'); });
+  if (!reduce && hls.length) setInterval(function () {
+    [].forEach.call(hls, function (h) { h.classList.remove('hl'); });
+    hls[hi % hls.length].classList.add('hl'); hi++;
+  }, 900);
+  else [].forEach.call(hls, function (h) { h.classList.add('hl'); });
+
+  /* ---------- the shelf: a few lit spines, then the whole list lights up when it scrolls in ---------- */
+  var shelf = document.getElementById('shelf');
+  if (shelf) {
+    var cols = ['#3b2a5c','#6b3fbf','#22394f','#5a2e3a','#2f4a3a','#4a3b1f','#25324f','#58315f','#1f3f45','#4b2a2a'];
+    var n = window.innerWidth < 700 ? 26 : 52, spines = [];
+    for (var i = 0; i < n; i++) {
+      var s = document.createElement('span');
+      s.className = 'spine';
+      s.style.width = (16 + ((i * 37) % 22)) + 'px';
+      s.style.height = (58 + ((i * 53) % 40)) + '%';
+      s.style.background = cols[(i * 7) % cols.length];
+      if (i % 9 === 4) s.classList.add('lit');
+      shelf.appendChild(s); spines.push(s);
+    }
+    var lit = false;
+    var so = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+      if (lit || !es[0].isIntersecting) return; lit = true;
+      spines.forEach(function (sp, k) { setTimeout(function () { sp.classList.add('lit'); }, reduce ? 0 : 900 + k * 45); });
+    }, { threshold: 0.6 }) : null;
+    so ? so.observe(shelf) : spines.forEach(function (sp) { sp.classList.add('lit'); });
+  }
+
+  /* ---------- the example list: two drifting rows of titles with their videos ---------- */
+  var T = [
+    ['Frontlist · Thriller','The Quiet Hour',['Viral','Slideshow','Amazon ad'],'#5a2e3a'],
+    ['Backlist · 2011','A House by the Sea',['Viral','Slideshow'],'#22394f'],
+    ['Audiobook','The Long Road North',['Viral','Hook'],'#2f4a3a'],
+    ['Picture book · 3–6','Fox Loses His Hat',['Gift video','Slideshow'],'#6b3fbf'],
+    ['Series · Book 4','Murder at the Mill',['Viral','Slideshow','Hook'],'#4a3b1f'],
+    ['Non-fiction','Sleep Like You Mean It',['Viral','Amazon ad'],'#25324f'],
+    ['Debut · Literary','What the River Kept',['Viral','Slideshow'],'#58315f'],
+    ['Reissue · Classic','The Lighthouse Year',['Slideshow','Amazon ad'],'#1f3f45'],
+    ['Memoir','Small Kitchen, Big Family',['Viral','Hook'],'#4b2a2a'],
+    ['Middle grade','The Map Room',['Viral','Slideshow'],'#3b2a5c']
+  ];
+  function card(t) {
+    return '<div class="tcard"><div class="tcover" style="background:linear-gradient(160deg,' + t[3] + ',#0f0a1c)"></div><div class="tmeta"><small>' + t[0] + '</small><b>' + t[1] + '</b><div class="chips">' + t[2].map(function (c) { return '<span>✓ ' + c + '</span>'; }).join('') + '</div></div></div>';
+  }
+  var r1 = document.getElementById('row1'), r2 = document.getElementById('row2');
+  if (r1 && r2) {
+    var a = T.slice(0, 5).concat(T.slice(0, 5)), b = T.slice(5).concat(T.slice(5));
+    r1.innerHTML = a.concat(a).map(card).join('');
+    r2.innerHTML = b.concat(b).map(card).join('');
+  }
+
+  /* ---------- format videos play on hover, or when mostly in view on touch ---------- */
+  var touch = window.matchMedia && matchMedia('(hover: none)').matches;
+  [].forEach.call(document.querySelectorAll('video[data-hover]'), function (v) {
+    var card = v.closest('.fmt');
+    if (reduce) return;
+    if (touch && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.intersectionRatio > .6) { v.play().catch(function(){}); } else v.pause(); }); }, { threshold: [0, .6] }).observe(v);
+    } else if (card) {
+      card.addEventListener('mouseenter', function () { v.play().catch(function(){}); });
+      card.addEventListener('mouseleave', function () { v.pause(); });
+    }
   });
 })();
 </script>
-
 </body>
 </html>
