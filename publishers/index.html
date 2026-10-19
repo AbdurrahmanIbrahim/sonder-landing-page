@@ -108,7 +108,7 @@ h2 em.s{font-size:1.08em;color:var(--mint)}
   radial-gradient(40% 40% at 80% 30%, rgba(74,47,110,.55), transparent 70%)}
 .hero-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:44px;align-items:center}
 .hero h1{font-size:clamp(46px,6.8vw,92px);line-height:.95;letter-spacing:-.045em;font-weight:800;margin:18px 0 22px}
-.hero h1 em.s{display:inline-block;font-size:1.06em;background:linear-gradient(100deg,var(--mint) 10%,#A8F0FF 45%,var(--violet) 95%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.08em}
+.hero h1 em.s{display:inline-block;font-size:1.06em;line-height:1.08;background:linear-gradient(100deg,var(--mint) 10%,#A8F0FF 45%,var(--violet) 95%);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .12em .2em 0;margin-bottom:-.2em}
 .hero .lede{margin-bottom:30px}
 .ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:20px}
 .badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
@@ -296,6 +296,42 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
 .foot-in a{text-decoration:none}
 .foot-in a:hover{color:var(--paper)}
 
+
+/* hero slideshow phone */
+.flip{position:relative;aspect-ratio:9/16;border-radius:17px;overflow:hidden;background:#000}
+.flip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .6s ease,transform 2.2s ease}
+.flip img.on{opacity:1;transform:scale(1)}
+.phone .dots{position:absolute;top:14px;left:12px;right:12px;display:flex;gap:4px}
+.phone .dots i{flex:1;height:2px;border-radius:2px;background:rgba(255,255,255,.35)}
+.phone .dots i.on{background:#fff}
+
+/* the reel: real videos made with Sonder */
+.reel{padding-block:clamp(56px,7vw,96px) clamp(40px,5vw,70px);overflow:hidden}
+.reel-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px;margin-bottom:40px}
+.reel-head h2{max-width:16ch}
+.reel-head .lede{max-width:44ch}
+.reel-row{display:flex;gap:18px;width:max-content;animation:slide 70s linear infinite}
+.reel:hover .reel-row{animation-play-state:paused}
+.rphone{margin:0;position:relative;flex:0 0 auto;width:clamp(150px,15vw,200px);border-radius:24px;padding:6px;background:#1b1430;border:1px solid var(--line-2);box-shadow:0 30px 60px -28px rgba(0,0,0,.9)}
+.rphone:nth-child(odd){transform:translateY(22px)}
+.rphone video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:19px;background:#000}
+.rphone figcaption{position:absolute;left:12px;bottom:12px;font-size:11px;font-weight:600;padding:4px 9px;border-radius:999px;background:rgba(10,6,19,.78);backdrop-filter:blur(6px);border:1px solid var(--line-2)}
+.rphone .live{position:absolute;top:14px;right:14px;display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(10,6,19,.6);padding:3px 7px;border-radius:999px}
+.rphone .live::before{content:"";width:6px;height:6px;border-radius:50%;background:#ff4d6d;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.3}}
+.reel-note{margin-top:46px;padding-inline:20px;text-align:center;font-size:13px;color:var(--quiet)}
+
+/* example list covers */
+.tcover{height:92px;border-radius:4px;overflow:hidden;box-shadow:0 10px 20px -8px rgba(0,0,0,.8), inset 0 0 0 1px rgba(255,255,255,.08)}
+.tcover img{width:100%;height:100%;object-fit:cover}
+.tmeta i{display:block;font-style:normal;font-size:12.5px;color:var(--quiet);margin:-6px 0 8px}
+
+/* sticky call to action on phones */
+.mbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:60;display:none;transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.mbar.show{transform:none}
+.mbar a{display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;border-radius:999px;background:var(--mint);color:var(--ink);font-weight:700;font-size:16px;text-decoration:none;box-shadow:0 16px 40px -10px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.2) inset}
+.mbar small{font-weight:500;opacity:.75}
+
 /* reveal */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
@@ -305,7 +341,7 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
 .stagger>*{transition-delay:calc(var(--i,0)*90ms)}
 @media (prefers-reduced-motion:reduce){
   .rv{opacity:1;transform:none;transition:none}
-  .track,.trade-row,.trow,.orbit,.who,.scan,.float{animation:none}
+  .track,.trade-row,.trow,.orbit,.who,.scan,.float,.reel-row{animation:none}
 }
 .no-js .rv{opacity:1;transform:none}
 
@@ -318,6 +354,39 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
 }
 @media (max-width:760px){
   body{font-size:16px}
+  .mbar{display:block}
+  .xs-hide{display:none}
+  .phones{height:min(470px,118vw)!important}
+  .hero{padding-block:30px 70px}
+  .hero h1{font-size:clamp(44px,12.5vw,64px);margin:14px 0 18px}
+  .ctas .btn{width:100%}
+  .record{font-size:11px;padding:14px}
+  .mark small{display:none}
+  .nav-in{min-height:62px}
+  .nav-cta{padding:10px 14px;font-size:14px}
+  .sec{padding-block:64px}
+  .evidence-head{margin-bottom:32px;gap:16px}
+  .stat{padding:26px 22px}
+  .paper{border-radius:26px 26px 0 0}
+  .problem{gap:30px}
+  .shelf{margin-top:40px}
+  .shelf-cap{flex-direction:column;gap:4px}
+  .how-grid{margin-top:36px}
+  .formats{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin-inline:-20px;padding-inline:20px;padding-bottom:6px;scrollbar-width:none}
+  .formats::-webkit-scrollbar{display:none}
+  .fmt{flex:0 0 78%;scroll-snap-align:center}
+  .trust{margin-top:36px}
+  .trust div{padding:24px 22px}
+  .founders{gap:30px}
+  .fpic figcaption b{font-size:24px}
+  .offer{padding:32px 22px;border-radius:26px}
+  .offer-card .big{font-size:64px}
+  .faq summary{font-size:17px}
+  .final h2{font-size:clamp(40px,12vw,60px)}
+  .reel-head{margin-bottom:28px}
+  .rphone{width:150px}
+  .tcard{width:290px}
+  footer{padding-bottom:100px}
   .wall{grid-template-columns:repeat(4,1fr)}
   .stats,.how-grid,.trust{grid-template-columns:1fr}
   .machine{grid-template-columns:1fr}
@@ -329,8 +398,8 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
   .handoff{height:380px;transform:scale(.86)}
 }
 @media (max-width:520px){
-  .formats{grid-template-columns:1fr}
   .btn{width:100%}
+  .handoff{height:340px;transform:scale(.78);margin-block:-30px}
 }
 </style>
 </head>
@@ -374,7 +443,7 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
       <h1 id="h1">Every title on your list, <em class="s">on every feed.</em></h1>
       <p class="lede">Send us the ONIX you already send to retailers. Sonder turns every title into TikToks, Reels, slideshows and Amazon ad videos, frontlist and backlist, for your imprint and for every author you publish.</p>
       <div class="ctas">
-        <a class="btn btn-primary go" href="https://app.yousonder.com/signup?publisher=1">Upload your ONIX. First video free <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a class="btn btn-primary go" href="https://app.yousonder.com/signup?publisher=1"><span>Upload your ONIX<span class="xs-hide">. First video free</span></span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         <a class="btn btn-ghost" href="#how">See how it works</a>
       </div>
       <p class="under">
@@ -403,7 +472,7 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
       <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
       <div class="phones">
         <div class="phone" style="--fx:var(--coral)"><video src="/assets/formats/viral.mp4" poster="/assets/formats/viral.webp" muted loop playsinline autoplay preload="metadata"></video><span class="tag">Viral video</span></div>
-        <div class="phone" style="--fx:var(--violet)"><img src="/assets/slides/lmo-1.jpg" alt=""><span class="tag">Slideshow</span></div>
+        <div class="phone" style="--fx:var(--violet)"><div class="flip" data-flip><img src="/assets/slides/lmo-0.jpg" alt="" class="on"><img src="/assets/slides/lmo-1.jpg" alt=""><img src="/assets/slides/lmo-2.jpg" alt=""><img src="/assets/slides/lmo-3.jpg" alt=""><img src="/assets/slides/lmo-4.jpg" alt=""></div><span class="tag">Slideshow</span><span class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></span></div>
         <div class="phone" style="--fx:var(--gold)"><video src="/assets/formats/reaction.mp4" poster="/assets/formats/reaction.webp" muted loop playsinline autoplay preload="metadata"></video><span class="tag">Hook video</span></div>
       </div>
       <div class="float f1" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/></svg>Read in <b>seconds</b></div>
@@ -418,6 +487,17 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
     <span>Frontlist</span><span>Backlist</span><span>Midlist</span><span>Audiobooks</span><span>Picture books</span><span>Series</span><span>Debuts</span><span>Reissues</span><span>Non-fiction</span><span>Your authors</span>
   </div>
 </div>
+
+
+<!-- REEL: real videos made with Sonder -->
+<section class="reel" aria-labelledby="reel-h">
+  <div class="wrap reel-head">
+    <div class="rv"><p class="eyebrow">Made with Sonder</p><h2 id="reel-h">Real books. Real videos. <em class="s">Made in minutes.</em></h2></div>
+    <p class="lede rv">Every one of these was made by Sonder from a book, with no shoot and no editor. Memoir, business, health, parenting: the style follows the book.</p>
+  </div>
+  <div class="reel-row" id="reel" aria-hidden="true"><figure class="rphone"><video data-src="/assets/pub/reel/reel-1.mp4" poster="/assets/pub/reel/reel-1.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Mental health</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-4.mp4" poster="/assets/pub/reel/reel-4.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>WWII memoir</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-2.mp4" poster="/assets/pub/reel/reel-2.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Business</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-9.mp4" poster="/assets/pub/reel/reel-9.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Anxiety</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-3.mp4" poster="/assets/pub/reel/reel-3.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Self-help</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-10.mp4" poster="/assets/pub/reel/reel-10.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Parenting</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-5.mp4" poster="/assets/pub/reel/reel-5.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Preparedness</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-7.mp4" poster="/assets/pub/reel/reel-7.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Health</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-6.mp4" poster="/assets/pub/reel/reel-6.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Relationships</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-8.mp4" poster="/assets/pub/reel/reel-8.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Self-help</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-1.mp4" poster="/assets/pub/reel/reel-1.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Mental health</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-4.mp4" poster="/assets/pub/reel/reel-4.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>WWII memoir</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-2.mp4" poster="/assets/pub/reel/reel-2.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Business</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-9.mp4" poster="/assets/pub/reel/reel-9.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Anxiety</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-3.mp4" poster="/assets/pub/reel/reel-3.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Self-help</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-10.mp4" poster="/assets/pub/reel/reel-10.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Parenting</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-5.mp4" poster="/assets/pub/reel/reel-5.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Preparedness</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-7.mp4" poster="/assets/pub/reel/reel-7.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Health</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-6.mp4" poster="/assets/pub/reel/reel-6.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Relationships</figcaption></figure><figure class="rphone"><video data-src="/assets/pub/reel/reel-8.mp4" poster="/assets/pub/reel/reel-8.jpg" muted loop playsinline preload="none"></video><span class="live">Sonder</span><figcaption>Self-help</figcaption></figure></div>
+  <p class="reel-note">Videos Sonder made for authors' books, shown without sound.</p>
+</section>
 
 <!-- EVIDENCE -->
 <section class="sec" aria-labelledby="ev-h">
@@ -500,7 +580,7 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
     <div class="trow" id="row1"></div>
     <div class="trow rev" id="row2"></div>
   </div>
-  <p class="list-note">An example list, for illustration.</p>
+  <p class="list-note">An example list with example books and authors, for illustration.</p>
 </section>
 
 <!-- FORMATS -->
@@ -640,13 +720,15 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
     <h2 id="fi-h">Bring your <em class="s">whole list</em> to life.</h2>
     <p class="lede">Upload your ONIX file and watch your first video get made. It takes about as long as reading this page twice.</p>
     <div class="ctas">
-      <a class="btn btn-primary go" href="https://app.yousonder.com/signup?publisher=1">Upload your ONIX. First video free <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a class="btn btn-primary go" href="https://app.yousonder.com/signup?publisher=1"><span>Upload your ONIX<span class="xs-hide">. First video free</span></span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
     </div>
     <p class="under" style="justify-content:center">Already have an account? <a href="https://app.yousonder.com/login">Log in</a></p>
   </div>
 </section>
 
 </main>
+
+<div class="mbar" id="mbar"><a class="go" href="https://app.yousonder.com/signup?publisher=1">Upload your ONIX <small>· first video free</small> <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>
 
 <footer>
   <div class="wrap foot-in">
@@ -744,25 +826,55 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
 
   /* ---------- the example list: two drifting rows of titles with their videos ---------- */
   var T = [
-    ['Frontlist · Thriller','The Quiet Hour',['Viral','Slideshow','Amazon ad'],'#5a2e3a'],
-    ['Backlist · 2011','A House by the Sea',['Viral','Slideshow'],'#22394f'],
-    ['Audiobook','The Long Road North',['Viral','Hook'],'#2f4a3a'],
-    ['Picture book · 3–6','Fox Loses His Hat',['Gift video','Slideshow'],'#6b3fbf'],
-    ['Series · Book 4','Murder at the Mill',['Viral','Slideshow','Hook'],'#4a3b1f'],
-    ['Non-fiction','Sleep Like You Mean It',['Viral','Amazon ad'],'#25324f'],
-    ['Debut · Literary','What the River Kept',['Viral','Slideshow'],'#58315f'],
-    ['Reissue · Classic','The Lighthouse Year',['Slideshow','Amazon ad'],'#1f3f45'],
-    ['Memoir','Small Kitchen, Big Family',['Viral','Hook'],'#4b2a2a'],
-    ['Middle grade','The Map Room',['Viral','Slideshow'],'#3b2a5c']
+    ['Frontlist · Thriller','The Quiet Hour','Claire Mercer',['Viral','Slideshow','Amazon ad'],'quiet-hour'],
+    ['Backlist · 2011','A House by the Sea','Eleanor Hart',['Viral','Slideshow'],'house-sea'],
+    ['Audiobook','The Long Road North','Tom Callaway',['Viral','Hook'],'long-road'],
+    ['Picture book · 3–6','Fox Loses His Hat','Hannah Bell',['Gift video','Slideshow'],'fox-hat'],
+    ['Series · Book 4','Murder at the Mill','J. R. Penrose',['Viral','Slideshow','Hook'],'murder-mill'],
+    ['Non-fiction','Sleep Like You Mean It','Dr. Priya Raman',['Viral','Amazon ad'],'sleep'],
+    ['Debut · Literary','What the River Kept','Anna Kowalczyk',['Viral','Slideshow'],'river-kept'],
+    ['Reissue · Classic','The Lighthouse Year','Margaret Ellis',['Slideshow','Amazon ad'],'lighthouse'],
+    ['Memoir','Small Kitchen, Big Family','Rosa Delgado',['Viral','Hook'],'small-kitchen'],
+    ['Middle grade','The Map Room','Oliver Finch',['Viral','Slideshow'],'map-room']
   ];
   function card(t) {
-    return '<div class="tcard"><div class="tcover" style="background:linear-gradient(160deg,' + t[3] + ',#0f0a1c)"></div><div class="tmeta"><small>' + t[0] + '</small><b>' + t[1] + '</b><div class="chips">' + t[2].map(function (c) { return '<span>✓ ' + c + '</span>'; }).join('') + '</div></div></div>';
+    return '<div class="tcard"><div class="tcover"><img src="/assets/pub/covers/' + t[4] + '.jpg" alt="" loading="lazy" width="62" height="92"></div><div class="tmeta"><small>' + t[0] + '</small><b>' + t[1] + '</b><i>' + t[2] + '</i><div class="chips">' + t[3].map(function (c) { return '<span>✓ ' + c + '</span>'; }).join('') + '</div></div></div>';
   }
   var r1 = document.getElementById('row1'), r2 = document.getElementById('row2');
   if (r1 && r2) {
     var a = T.slice(0, 5).concat(T.slice(0, 5)), b = T.slice(5).concat(T.slice(5));
     r1.innerHTML = a.concat(a).map(card).join('');
     r2.innerHTML = b.concat(b).map(card).join('');
+  }
+
+  /* ---------- hero slideshow phone flips through its slides ---------- */
+  [].forEach.call(document.querySelectorAll('[data-flip]'), function (f) {
+    var imgs = f.querySelectorAll('img'), dots = f.parentNode.querySelectorAll('.dots i'), k = 0;
+    if (reduce || imgs.length < 2) return;
+    setInterval(function () {
+      imgs[k].classList.remove('on'); if (dots[k]) dots[k].classList.remove('on');
+      k = (k + 1) % imgs.length;
+      imgs[k].classList.add('on'); if (dots[k]) dots[k].classList.add('on');
+    }, 1700);
+  });
+
+  /* ---------- the reel: load and play only while it is on screen ---------- */
+  var reel = document.getElementById('reel');
+  if (reel && 'IntersectionObserver' in window) {
+    var vids = reel.querySelectorAll('video'), loaded = false;
+    new IntersectionObserver(function (es) {
+      var on = es[0].isIntersecting;
+      if (on && !loaded) { loaded = true; [].forEach.call(vids, function (v) { v.src = v.getAttribute('data-src'); }); }
+      [].forEach.call(vids, function (v) { if (on && !reduce) { v.play().catch(function(){}); } else { v.pause(); } });
+    }, { rootMargin: '200px 0px' }).observe(reel);
+  }
+
+  /* ---------- the sticky button on phones: after the hero, out of the way at the end ---------- */
+  var mbar = document.getElementById('mbar'), heroEl = document.querySelector('.hero'), finalEl = document.querySelector('.final');
+  if (mbar && heroEl && 'IntersectionObserver' in window) {
+    var pastHero = false, atEnd = false, sync = function () { mbar.classList.toggle('show', pastHero && !atEnd); };
+    new IntersectionObserver(function (es) { pastHero = !es[0].isIntersecting; sync(); }).observe(heroEl);
+    if (finalEl) new IntersectionObserver(function (es) { atEnd = es[0].isIntersecting; sync(); }).observe(finalEl);
   }
 
   /* ---------- format videos play on hover, or when mostly in view on touch ---------- */
