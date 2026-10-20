@@ -116,6 +116,34 @@ h2 em.s{font-size:1.08em;color:var(--mint)}
 .pill b{color:var(--paper);font-weight:600}
 .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 4px rgba(127,255,212,.15)}
 
+/* email capture: the one action on the page */
+.capture{max-width:580px;margin:0 0 18px}
+.capture label{display:block;font-size:15px;font-weight:600;color:var(--paper);margin-bottom:10px;letter-spacing:-.005em}
+.cap-row{display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:rgba(18,12,31,.78);border:1px solid var(--line-2);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 24px 60px -30px rgba(0,0,0,.9);transition:border-color .2s, box-shadow .2s}
+.cap-row:focus-within{border-color:rgba(127,255,212,.7);box-shadow:0 0 0 4px rgba(127,255,212,.14),0 24px 60px -30px rgba(0,0,0,.9)}
+.cap-row input{flex:1;min-width:0;height:52px;padding:0 8px 0 20px;border:0;background:transparent;color:var(--paper);font:inherit;font-size:16px;outline:none;border-radius:999px}
+.cap-row input::placeholder{color:#6f6a86}
+.cap-row .btn{min-height:52px;padding:0 22px;white-space:nowrap;border:0;cursor:pointer;font-family:inherit;position:relative}
+.cap-row .btn:hover{transform:none}
+.cap-row .btn[aria-busy=true]{cursor:progress}
+.cap-row .btn[aria-busy=true] svg{visibility:hidden}
+.spin{display:none;position:absolute;right:24px;top:50%;width:18px;height:18px;margin-top:-9px;border-radius:50%;border:2px solid rgba(15,10,26,.25);border-top-color:var(--ink);animation:spinr .8s linear infinite}
+.cap-row .btn[aria-busy=true] .spin{display:block}
+@keyframes spinr{to{transform:rotate(360deg)}}
+.cap-help{margin:12px 0 0;font-size:14px;line-height:1.45;color:var(--quiet);min-height:2.9em;text-wrap:pretty}
+.capture.bad .cap-row{border-color:var(--coral);box-shadow:0 0 0 4px rgba(255,138,122,.14)}
+.capture.bad .cap-help{color:var(--coral)}
+.capture.stack .cap-row{flex-direction:column;align-items:stretch;gap:10px;padding:0;background:none;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.capture.stack .cap-row input{flex:none;height:56px;background:rgba(10,6,19,.7);border:1px solid var(--line-2);padding:0 20px}
+.capture.stack .cap-row input:focus{border-color:rgba(127,255,212,.7);box-shadow:0 0 0 4px rgba(127,255,212,.14)}
+.capture.stack.bad .cap-row input{border-color:var(--coral);box-shadow:0 0 0 4px rgba(255,138,122,.14)}
+.capture.stack .cap-row .btn{width:100%;min-height:56px}
+.capture.center{margin:0 auto 18px;text-align:center}
+.capture.center .cap-row input{text-align:left}
+.creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.creds span{font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid var(--line-2);background:rgba(18,12,31,.6);color:var(--soft)}
+.creds b{color:var(--paper);font-weight:600}
+
 /* the machine: ONIX record -> videos */
 .machine{position:relative;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
 .record{position:relative;background:linear-gradient(180deg,#140d24,#0f0a1c);border:1px solid var(--line-2);border-radius:20px;padding:18px 18px 16px;font-family:var(--f-mono);font-size:12px;line-height:1.75;color:#a9a3c2;box-shadow:0 40px 80px -30px rgba(0,0,0,.8);overflow:hidden;min-width:0}
@@ -157,6 +185,8 @@ h2 em.s{font-size:1.08em;color:var(--mint)}
 @keyframes slide{to{transform:translateX(-50%)}}
 
 section{position:relative}
+/* Side-entering reveals must not widen the page on phones before they slide in. */
+main{overflow-x:clip}
 .sec{padding-block:clamp(64px,8vw,116px)}
 
 /* evidence */
@@ -270,9 +300,11 @@ section{position:relative}
 .offer h2{font-size:clamp(36px,5vw,64px)}
 .offer-card{background:rgba(10,6,19,.55);border:1px solid var(--line-2);border-radius:24px;padding:26px}
 .offer-card .big{font-family:var(--f-serif);font-size:84px;line-height:.85;color:var(--mint)}
-.offer-card ul{list-style:none;padding:0;margin:16px 0 22px;display:grid;gap:10px;font-size:15px;color:var(--soft)}
+.offer-card ul{list-style:none;padding:0;margin:16px 0 24px;display:grid;gap:10px;font-size:15px;color:var(--soft)}
 .offer-card li{display:flex;gap:10px}
 .offer-card li::before{content:"✓";color:var(--mint);font-weight:700}
+.offer-card .capture{margin:0}
+.offer-card .cap-help{margin-bottom:0}
 
 /* faq */
 .faq{max-width:860px;margin:50px auto 0}
@@ -399,6 +431,12 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
 }
 @media (max-width:520px){
   .btn{width:100%}
+  .capture .cap-row{flex-direction:column;align-items:stretch;gap:10px;padding:0;background:none;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .capture .cap-row input{flex:none;height:56px;background:rgba(18,12,31,.85);border:1px solid var(--line-2);padding:0 20px}
+  .capture .cap-row input:focus{border-color:rgba(127,255,212,.7);box-shadow:0 0 0 4px rgba(127,255,212,.14)}
+  .capture.bad .cap-row{box-shadow:none}
+  .capture.bad .cap-row input{border-color:var(--coral);box-shadow:0 0 0 4px rgba(255,138,122,.14)}
+  .capture .cap-row .btn{min-height:56px}
   .handoff{height:340px;transform:scale(.78);margin-block:-30px}
 }
 </style>
@@ -406,7 +444,7 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
 <body class="no-js">
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="announce" role="note"><a class="go" href="https://app.yousonder.com/signup?publisher=1">✦ For publishers: <b>your first 3 videos are free.</b> No card. No manuscript. →</a></div>
+<div class="announce" role="note"><a data-to-form href="#get">✦ For publishers: <b>your first 3 videos are free.</b> No card. No manuscript. →</a></div>
 
 <header class="nav" id="nav">
   <div class="wrap nav-in">
@@ -418,7 +456,7 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
       <a href="#trust" class="hide-s">Built for publishing</a>
       <a href="#faq" class="hide-s">FAQ</a>
       <a href="https://app.yousonder.com/login">Sign in</a>
-      <a class="nav-cta go" href="https://app.yousonder.com/signup?publisher=1">Upload your ONIX</a>
+      <a class="nav-cta" data-to-form href="#get">Get my free videos</a>
     </nav>
   </div>
 </header>
@@ -442,15 +480,10 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
       <p class="eyebrow">Sonder for publishers</p>
       <h1 id="h1">Every title on your list, <em class="s">on every feed.</em></h1>
       <p class="lede">Send us the ONIX you already send to retailers. Sonder turns every title into TikToks, Reels, slideshows and Amazon ad videos, frontlist and backlist, for your imprint and for every author you publish.</p>
-      <div class="ctas">
-        <a class="btn btn-primary go" href="https://app.yousonder.com/signup?publisher=1"><span>Upload your ONIX<span class="xs-hide">. First video free</span></span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-        <a class="btn btn-ghost" href="#how">See how it works</a>
-      </div>
+      <div id="get"><form class="capture" novalidate data-capture><label for="hero-email">Where should we send your videos?</label><div class="cap-row"><input id="hero-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" placeholder="you@yourpublisher.com" aria-describedby="hero-email-help" required><button class="btn btn-primary" type="submit"><span>Send me my free videos</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg><i class="spin" aria-hidden="true"></i></button></div><p class="cap-help" id="hero-email-help" aria-live="polite">We'll send your 3 videos here as soon as you've uploaded your ONIX. No card, no manuscript.</p></form></div>
       <p class="under">
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>3 videos free</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No card</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No manuscript needed</span>
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Never used to train AI</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Never shared or sold</span>
       </p>
     </div>
 
@@ -659,13 +692,14 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
 <section class="sec" aria-labelledby="fo-h">
   <div class="wrap founders">
     <div class="fpics rv rv-l">
-      <figure class="fpic"><img src="/assets/founders/mike.jpg" alt="Mike, co-founder of Sonder" loading="lazy"><figcaption><b>107,677</b>books sold across 56 titles</figcaption></figure>
+      <figure class="fpic"><img src="/assets/founders/mike.jpg" alt="Mike Langdon, co-founder of Sonder" loading="lazy"><figcaption><b>107,677</b>books sold across 56 titles</figcaption></figure>
       <figure class="fpic" style="margin-top:40px"><img src="/assets/founders/lexi.jpg" alt="Lexi, co-founder of Sonder" loading="lazy"><figcaption><b>$230k</b>of books in one month</figcaption></figure>
     </div>
     <div class="rv rv-r">
       <p class="eyebrow">Who built this</p>
-      <h2 id="fo-h">Made by people who <em class="s">sell books on social.</em></h2>
-      <p class="lede" style="margin-top:18px">Sonder was built by two authors and publishers who learned, title by title, that the books that get posted about every day are the books that sell. Sonder is that habit, automated, for a whole list.</p>
+      <h2 id="fo-h">Made by a video producer <em class="s">who sells books on social.</em></h2>
+      <p class="creds"><span><b>Multi-award-winning</b></span><span>Featured on <b>Channel 9</b> and the <b>BBC</b></span><span>Clients: <b>Speedo, Ring, TikTok</b></span></p>
+      <p class="lede" style="margin-top:20px">Sonder was built by Mike Langdon, a multi-award-winning video production expert featured on Channel 9 and the BBC, whose clients include Speedo, Ring and TikTok. He took everything he learned making videos for global brands, used it on his own books and sold 107,677 copies across 56 titles. Sonder is that playbook, automated, for a whole list.</p>
       <p class="fine">Founders' own results. They are not typical, and yours will vary.</p>
     </div>
   </div>
@@ -689,7 +723,7 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
           <li>Your whole catalogue loads, free</li>
           <li>Volume plans when your list is ready</li>
         </ul>
-        <a class="btn btn-primary go" style="width:100%" href="https://app.yousonder.com/signup?publisher=1">Upload your ONIX</a>
+        <form class="capture stack" novalidate data-capture><label for="offer-email">Where should we send your videos?</label><div class="cap-row"><input id="offer-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" placeholder="you@yourpublisher.com" aria-describedby="offer-email-help" required><button class="btn btn-primary" type="submit"><span>Send me my free videos</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg><i class="spin" aria-hidden="true"></i></button></div><p class="cap-help" id="offer-email-help" aria-live="polite">We'll send your 3 videos here as soon as you've uploaded your ONIX. No card, no manuscript.</p></form>
       </div>
     </div>
   </div>
@@ -719,16 +753,14 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
   <div class="wrap rv">
     <h2 id="fi-h">Bring your <em class="s">whole list</em> to life.</h2>
     <p class="lede">Upload your ONIX file and watch your first video get made. It takes about as long as reading this page twice.</p>
-    <div class="ctas">
-      <a class="btn btn-primary go" href="https://app.yousonder.com/signup?publisher=1"><span>Upload your ONIX<span class="xs-hide">. First video free</span></span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-    </div>
+    <form class="capture center" novalidate data-capture><label for="final-email">Where should we send your videos?</label><div class="cap-row"><input id="final-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" placeholder="you@yourpublisher.com" aria-describedby="final-email-help" required><button class="btn btn-primary" type="submit"><span>Send me my free videos</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg><i class="spin" aria-hidden="true"></i></button></div><p class="cap-help" id="final-email-help" aria-live="polite">We'll send your 3 videos here as soon as you've uploaded your ONIX. No card, no manuscript.</p></form>
     <p class="under" style="justify-content:center">Already have an account? <a href="https://app.yousonder.com/login">Log in</a></p>
   </div>
 </section>
 
 </main>
 
-<div class="mbar" id="mbar"><a class="go" href="https://app.yousonder.com/signup?publisher=1">Upload your ONIX <small>· first video free</small> <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>
+<div class="mbar" id="mbar"><a data-to-form href="#get">Get my free videos <small>· no card</small> <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>
 
 <footer>
   <div class="wrap foot-in">
@@ -747,23 +779,70 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
   document.body.classList.remove('no-js');
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- the sign-up links: carry tracking codes, consent-gated lead event ---------- */
+  /* ---------- email capture: every call to action asks where to send the videos ---------- */
   var APP = 'https://app.yousonder.com';
+  var LEAD_API = 'https://api.yousonder.com/api/public/publisher-lead';
   var CARRY = ['fbclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','ttclid','via','dub_id'];
-  var url = APP + '/signup?publisher=1';
-  try {
-    var here = new URL(location.href), u = new URL(url);
-    CARRY.forEach(function (k) { var v = here.searchParams.get(k); if (v) u.searchParams.set(k, v); });
-    url = u.toString();
-  } catch (e) {}
-  [].forEach.call(document.querySelectorAll('a.go'), function (a) {
-    a.href = url;
-    a.addEventListener('click', function (e) {
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  var BAD_EMAIL = "That email doesn't look right. Please check it and try again.";
+  function carried() {
+    var o = {};
+    try { var q = new URL(location.href).searchParams; CARRY.forEach(function (k) { var v = q.get(k); if (v) o[k] = v; }); } catch (e) {}
+    return o;
+  }
+  /* Our signup link plus the tracking codes the visitor arrived with. */
+  function withTracking(raw, email) {
+    var u;
+    try { u = new URL(raw && String(raw).indexOf(APP + '/') === 0 ? raw : APP + '/signup?publisher=1'); } catch (e) { u = new URL(APP + '/signup?publisher=1'); }
+    if (!u.searchParams.has('publisher')) u.searchParams.set('publisher', '1');
+    if (email && !u.searchParams.has('email')) u.searchParams.set('email', email);
+    var c = carried(); Object.keys(c).forEach(function (k) { if (!u.searchParams.has(k)) u.searchParams.set(k, c[k]); });
+    return u.toString();
+  }
+  [].forEach.call(document.querySelectorAll('form[data-capture]'), function (f) {
+    var input = f.querySelector('input'), btn = f.querySelector('button'), help = f.querySelector('.cap-help'), helpText = help.textContent, busy = false;
+    function setBad(msg) {
+      f.classList.toggle('bad', !!msg);
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      help.textContent = msg || helpText;
+    }
+    input.addEventListener('input', function () { if (f.classList.contains('bad') && EMAIL_RE.test(input.value.trim())) setBad(''); });
+    f.addEventListener('submit', function (e) {
       e.preventDefault();
-      /* fbq is consent.js's queue: nothing reaches Meta unless the visitor's consent allows it. */
-      try { if (window.fbq) fbq('trackCustom', 'PublisherLead', { content_name:'publisher_landing' }); } catch (err) {}
-      setTimeout(function () { location.href = url; }, 250);
+      if (busy) return;
+      var email = input.value.trim();
+      if (!EMAIL_RE.test(email)) { setBad(BAD_EMAIL); input.focus(); return; }
+      setBad(''); busy = true; btn.setAttribute('aria-busy', 'true'); btn.disabled = true;
+      var done = false;
+      function finish(next, ok) {
+        if (done) return; done = true;
+        if (!ok) { busy = false; btn.removeAttribute('aria-busy'); btn.disabled = false; return; }
+        /* fbq is consent.js's queue: nothing reaches Meta unless the visitor's consent allows it. */
+        try { if (window.fbq) fbq('trackCustom', 'PublisherLead', { content_name:'publisher_landing' }); } catch (err) {}
+        setTimeout(function () { location.href = next; }, 200);
+      }
+      /* If we can't save the lead in time, the publisher still goes on to sign up with their email. */
+      var fallback = withTracking(null, email);
+      var timer = setTimeout(function () { finish(fallback, true); }, 8000);
+      fetch(LEAD_API, { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ email: email, utm: carried() }) })
+        .then(function (r) { return r.json().catch(function () { return null; }).then(function (j) { return { status: r.status, j: j }; }); })
+        .then(function (res) {
+          clearTimeout(timer);
+          if (res.status === 400) { setBad(BAD_EMAIL); input.focus(); finish(null, false); return; }
+          var j = res.j;
+          finish(j && j.success && j.data && j.data.signupUrl ? withTracking(j.data.signupUrl, email) : fallback, true);
+        })
+        .catch(function () { clearTimeout(timer); finish(fallback, true); });
+    });
+  });
+  /* Nav button, announcement and the phone bar: take the visitor to the hero field. */
+  var heroInput = document.getElementById('hero-email');
+  [].forEach.call(document.querySelectorAll('[data-to-form]'), function (a) {
+    a.addEventListener('click', function (e) {
+      if (!heroInput) return;
+      e.preventDefault();
+      heroInput.closest('form').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      try { heroInput.focus({ preventScroll: true }); } catch (err) { heroInput.focus(); }
     });
   });
 
@@ -872,9 +951,15 @@ footer{border-top:1px solid var(--line);padding-block:34px 50px;font-size:14px;c
   /* ---------- the sticky button on phones: after the hero, out of the way at the end ---------- */
   var mbar = document.getElementById('mbar'), heroEl = document.querySelector('.hero'), finalEl = document.querySelector('.final');
   if (mbar && heroEl && 'IntersectionObserver' in window) {
-    var pastHero = false, atEnd = false, sync = function () { mbar.classList.toggle('show', pastHero && !atEnd); };
+    /* Also out of the way whenever an email form is on screen or being typed in, so it never covers one. */
+    var pastHero = false, atEnd = false, formsOn = 0, typing = false;
+    var sync = function () { mbar.classList.toggle('show', pastHero && !atEnd && !formsOn && !typing); };
     new IntersectionObserver(function (es) { pastHero = !es[0].isIntersecting; sync(); }).observe(heroEl);
     if (finalEl) new IntersectionObserver(function (es) { atEnd = es[0].isIntersecting; sync(); }).observe(finalEl);
+    var fo = new IntersectionObserver(function (es) { es.forEach(function (en) { formsOn += en.isIntersecting ? 1 : (en.target._seen ? -1 : 0); en.target._seen = en.isIntersecting; }); formsOn = Math.max(0, formsOn); sync(); });
+    [].forEach.call(document.querySelectorAll('form[data-capture]'), function (f) { f._seen = false; fo.observe(f); });
+    document.addEventListener('focusin', function (e) { if (e.target.closest && e.target.closest('form[data-capture]')) { typing = true; sync(); } });
+    document.addEventListener('focusout', function (e) { if (e.target.closest && e.target.closest('form[data-capture]')) { typing = false; sync(); } });
   }
 
   /* ---------- format videos play on hover, or when mostly in view on touch ---------- */
