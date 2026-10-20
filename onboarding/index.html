@@ -527,7 +527,7 @@ var SCREENS = {
       '<div class="field"><label for="f-email">Your email</label><input id="f-email" class="input" type="email" autocomplete="email" maxlength="254" value="' + esc(S.email) + '" placeholder="you@example.com"></div></div>' +
       (err ? '<div class="warn">' + esc(err) + '</div>' : '') +
       cta(busy ? 'Saving your plan…' : 'Show me my plan', busy || !okAccount(), 'submit', 'go') +
-      '<p class="fine">By continuing you agree to our <a href="/privacy.html">Privacy Policy</a> and Terms.</p>'; },
+      '<p class="fine">By continuing you agree to our <a href="https://app.yousonder.com/privacy">Privacy Policy</a> and <a href="https://app.yousonder.com/terms">Terms</a>.</p>'; },
   plan: function () { var q = S.quiz || {}; var three = q.firstThree || [];
     var chips = [KINDS[S.kind].label, genreLabel(), S.launch === 'soon' ? 'Launches ' + fmtDay(S.launchDate) : S.launch === 'writing' ? 'Still being written' : 'Out now'];
     return '<p class="eyebrow">Your plan</p><h1>' + esc(S.name.trim()) + ', here’s your plan</h1><div class="chips">' + chips.filter(Boolean).map(function (c) { return '<span class="chip">' + esc(c) + '</span>'; }).join('') + '</div>' +
