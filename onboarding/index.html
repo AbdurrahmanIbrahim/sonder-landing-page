@@ -128,23 +128,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 .demo li svg{flex:none;width:16px;height:16px;margin-top:1px;stroke:var(--mint-deep)}
 .phone{width:150px;flex:none;aspect-ratio:9/16;border-radius:22px;background:#0d0d10;padding:5px;box-shadow:0 18px 40px -18px rgba(20,11,34,.6)}
 .screen{position:relative;height:100%;border-radius:17px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:10px}
-.screen .dots{position:absolute;top:8px;left:10px;right:10px;display:flex;gap:3px}
-.screen .dots i{flex:1;height:2px;border-radius:2px;background:rgba(255,255,255,.35)}
-.screen .dots i.on{background:#fff}
 .capbox{position:relative;background:#fff;color:#111;font-weight:700;font-size:10.5px;line-height:1.3;padding:7px 8px;border-radius:6px;text-align:center}
 .s-fic{background:linear-gradient(175deg,#1f2c47 0%,#3b5172 38%,#9b8a7d 72%,#c79b6e 100%)}
 .s-fic .lh{position:absolute;left:58%;bottom:34%;width:14px;height:58px;background:linear-gradient(#e9e3da,#cfc6b8);border-radius:3px 3px 0 0}
 .s-fic .lh::before{content:"";position:absolute;left:-3px;top:-10px;width:20px;height:10px;background:#f6d38a;border-radius:3px;box-shadow:0 0 22px 8px rgba(246,211,138,.45)}
 .s-fic .sea{position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(#41566f,#202d40)}
-.s-non{background:radial-gradient(circle at 50% 30%,#3a2a52,#0d0816 75%);justify-content:center;align-items:center;text-align:center}
-.s-non .big{font-family:var(--f-display);font-weight:900;font-size:15px;line-height:1.15;color:#fff;letter-spacing:-.01em;text-shadow:0 2px 0 rgba(0,0,0,.4)}
-.s-non .big em{font-style:normal;color:var(--mint)}
-.s-non .face{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:84px;height:84px;border-radius:50% 50% 0 0;background:linear-gradient(#5c4878,#2a1d3e)}
-.s-act{background:#F3EFE6;padding:8px}
-.s-act .pages{position:absolute;inset:16px 8px 54px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.s-act .pg{background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.12);display:grid;place-items:center}
-.s-act .pg svg{width:70%;height:70%;fill:none;stroke:#2a2a2a;stroke-width:1.4}
-.s-act .capbox{background:#140B22;color:#fff}
 
 /* summary chips and lists */
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -161,6 +149,14 @@ button{font:inherit;color:inherit;cursor:pointer}
 .need li{display:flex;gap:10px;align-items:center;font-size:14.5px;color:var(--ink-2)}
 .need li span{width:24px;height:24px;border-radius:50%;background:var(--mint-tint);color:var(--mint-deep);display:grid;place-items:center;flex:none;font-family:var(--f-mono);font-size:12px;font-weight:500}
 .sect{display:flex;flex-direction:column;gap:10px}
+/* plan: how much to post + the automate offer */
+.pace h2 + .sub b{color:var(--ink)}
+.auto{background:var(--ink);color:#fff;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.auto b{font-weight:600;font-size:15.5px}
+.auto span{font-size:14px;color:#D9D4E3;line-height:1.5}
+.auto-btn{margin-top:8px;align-self:flex-start;border:0;border-radius:999px;background:var(--mint);color:var(--ink);font-weight:600;font-size:14.5px;padding:11px 18px;display:inline-flex;align-items:center;gap:8px;text-align:left}
+.auto-btn svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.auto-btn:hover{background:#9FFFE0}
 
 /* pricing */
 .offer{background:var(--ink);color:#fff;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
@@ -318,18 +314,12 @@ textarea.input{height:auto;min-height:96px;padding:12px 16px;line-height:1.45;re
 .vrow b{font-weight:600}
 .vrow .st{font-size:12.5px;font-family:var(--f-mono);color:var(--ink-3);text-align:right}
 .vrow .st.go{color:var(--mint-deep)}
-.s-period{background:radial-gradient(circle at 30% 30%,#c98a4a 0%,#6b3f1f 35%,#2a170c 75%);justify-content:flex-end;align-items:center;text-align:center}
-.s-period .fig,.s-ink .fig{position:absolute;left:50%;bottom:30%;transform:translateX(-50%);width:44px;height:70px}
-.s-period .fig::before,.s-ink .fig::before{content:"";position:absolute;left:12px;top:0;width:20px;height:22px;border-radius:50%;background:#1b0f08}
-.s-period .fig::after,.s-ink .fig::after{content:"";position:absolute;left:0;top:20px;width:44px;height:50px;border-radius:22px 22px 4px 4px;background:#1b0f08}
-.s-ink{background:repeating-linear-gradient(45deg,#ece6d8 0 3px,#d9d1bf 3px 4px);justify-content:flex-end;align-items:center;text-align:center}
-.s-ink .fig::before,.s-ink .fig::after{background:#1d1d1d}
+.s-photo{padding:0;background:#111;justify-content:flex-end;align-items:stretch}
+.s-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.s-photo::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,.72))}
+.s-photo .burn{z-index:1;margin:0 10px 18%;font-size:13px;text-align:center;text-shadow:0 1px 2px rgba(0,0,0,.8)}
 .burn{position:relative;font-family:var(--f-display);font-weight:900;font-size:14px;line-height:1.15;color:#fff;text-shadow:0 2px 0 #000,0 0 6px rgba(0,0,0,.6);margin-bottom:14%}
 .burn em{font-style:normal;color:#FFE27A}
-.s-ink .burn{color:#111;text-shadow:none;background:#fff;padding:5px 7px;border-radius:5px;font-size:12px}
-.s-stick{background:#fbfbf8;justify-content:flex-start;align-items:center;text-align:center;padding-top:28px}
-.s-stick .burn{color:#111;text-shadow:none;font-size:13px;margin:0 0 6px}
-.s-stick svg{width:78%;fill:none;stroke:#111;stroke-width:2.2;stroke-linecap:round}
 
 .foot{position:relative;z-index:1;margin:18px 0 0;font-size:13.5px;color:var(--quiet);text-align:center}
 .foot a,.fine a{color:inherit;text-decoration:underline;text-underline-offset:3px}
@@ -398,31 +388,27 @@ if (!window.SONDER_ONB_CONTROL) (function () {
 var I = {
   book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5c3-1 6-1 9 1 3-2 6-2 9-1v13c-3-1-6-1-9 1-3-2-6-2-9-1z"/><path d="M12 6.5v13"/></svg>',
   bulb:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg>',
+  quill:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c-6 0-11 4-13 11l-2 5"/><path d="M20 4c0 6-4 10-10 11"/><path d="M9 13l-2 2"/></svg>',
   crayon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/></svg>',
   arrow:'<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
   check:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
 };
-var PAGE_ART = [
-  '<svg viewBox="0 0 40 40"><ellipse cx="20" cy="22" rx="11" ry="7"/><circle cx="16" cy="20" r="1.2"/><circle cx="24" cy="20" r="1.2"/><path d="M9 18l-4-3M9 22l-5 0M31 18l4-3M31 22l5 0M17 25q3 2 6 0"/></svg>',
-  '<svg viewBox="0 0 40 40"><path d="M8 32V16l6-6 6 6 6-6 6 6v16z"/><path d="M17 32v-7h6v7"/><path d="M4 32h32"/></svg>',
-  '<svg viewBox="0 0 40 40"><circle cx="20" cy="18" r="9"/><path d="M14 30l6-3 6 3M11 18h-4M33 18h-4"/><path d="M16 8l-2-4M24 8l2-4"/></svg>',
-  '<svg viewBox="0 0 40 40"><path d="M6 30q7-8 14 0t14 0"/><path d="M6 22q7-8 14 0t14 0"/><circle cx="28" cy="10" r="4"/></svg>'
-];
-var STICK_ART = '<svg viewBox="0 0 120 90"><circle cx="40" cy="22" r="9"/><path d="M40 31v28M40 40l-13 10M40 40l14-6M40 59l-10 20M40 59l11 20"/><path d="M76 70h30M78 70V52h26v18"/><path d="M84 52v-6h14v6"/><circle cx="100" cy="16" r="7"/></svg>';
 var month = Number(new Intl.DateTimeFormat('en-US', { month:'numeric', timeZone:'America/New_York' }).format(new Date()));
 var GIFT_SEASON = month >= 10 && month <= 12;
 
 var KINDS = {
   fiction:{ label:'Novel', desc:'Romance, fantasy, thriller, literary, historical', icon:I.book,
-    note:{ tag:'How novels sell', title:'Novels sell on story, not advice.', body:'Readers buy a novel for a feeling. So your first video tells one scene from your book as if it really happened, keeps every twist locked away, and lets your cover be the reveal.', format:'Viral Script, story mode', len:'ABOUT 90 SECONDS · INKWELL LOOK', mock:'ink', points:['A video first. It impresses more than a slideshow','Every twist stays locked away','Then a slideshow, then an Amazon Ad'] } },
-  non_fiction:{ label:'Non-fiction', desc:'Self-help, how-to, memoir, true stories', icon:I.bulb,
-    note:{ tag:'How non-fiction sells', title:'Non-fiction sells two ways.', body:'How-to books sell on one surprising idea, taught in 90 seconds. Memoirs and true stories sell like novels, on the story itself. Your next answer tells us which way to go.', format:'Viral Script', len:'ABOUT 90 SECONDS', mock:'stick', points:['A video first, fully scripted','One real idea or story from your book','Then a slideshow, then an Amazon Ad'] } },
+    note:{ tag:'How novels sell', title:'Novels sell on story, not advice.', body:'Readers buy a novel for a feeling. So your first video tells one scene from your book as if it really happened, keeps every twist locked away, and lets your cover be the reveal.', format:'Viral Script, story mode', len:'ABOUT 90 SECONDS', mock:'ink', points:['A video first. It impresses more than a slideshow','Every twist stays locked away','Then a slideshow, then an Amazon Ad'] } },
+  memoir:{ label:'Memoir or true story', desc:'Your own life, or a real story', icon:I.quill,
+    note:{ tag:'How true stories sell', title:'True stories sell like novels.', body:'Readers buy a true story for the story itself. So your first video tells one real moment from your book as a story, not a lesson, and saves the ending for the book.', format:'Viral Script, story mode', len:'ABOUT 90 SECONDS', mock:'true', points:['A video first, told as a story','One real moment from your book','Then a slideshow, then an Amazon Ad'] } },
+  non_fiction:{ label:'Non-fiction', desc:'Self-help, how-to, health, money, faith', icon:I.bulb,
+    note:{ tag:'How non-fiction sells', title:'Non-fiction sells on one surprising idea.', body:'Readers stop for one idea they didn’t expect, taught in about 90 seconds. Then they want the rest of the book.', format:'Viral Script', len:'ABOUT 90 SECONDS', mock:'stick', points:['A video first, fully scripted','One real idea from your book','Then a slideshow, then an Amazon Ad'] } },
   kids:{ label:'Kids’ book, activity book or journal', desc:'Picture books, colouring, puzzles, guided journals', icon:I.crayon,
-    note:{ tag:'How these books sell', title:'These books sell to the person buying a gift.', body: (GIFT_SEASON ? 'Parents, grandparents and teachers buy them, and between now and Christmas your first video is a gift video. ' : 'Parents, grandparents and teachers buy them. ') + 'For activity books and journals we show your real pages, never AI drawings of them.', format:'A video first, then slideshows', len:'TOYBOX LOOK', mock:'pages', points:[GIFT_SEASON ? 'A gift video first' : 'A video first','Then slideshows of your pages','Then an Amazon Ad'] } }
+    note:{ tag:'How these books sell', title:'These books sell to the person buying a gift.', body: (GIFT_SEASON ? 'Parents, grandparents and teachers buy them, and between now and Christmas your first video is a gift video. ' : 'Parents, grandparents and teachers buy them. ') + 'For activity books and journals we show your real pages, never AI drawings of them.', format:'A video first, then slideshows', len:'GIFT BUYERS FIRST', mock:'pages', points:[GIFT_SEASON ? 'A gift video first' : 'A video first','Then slideshows of your pages','Then an Amazon Ad'] } }
 };
 var GENRES = {
   fiction:[['romance','Romance'],['fantasy_scifi','Fantasy & Sci-Fi'],['thriller_mystery','Thriller, Mystery & Horror'],['literary_historical','Literary & Historical']],
-  non_fiction:[['true_stories','Memoir & True Stories'],['money_retirement','Money & Retirement'],['health_ageing','Health & Ageing Well'],['emotional_health','Emotional Health & Relationships'],['parenting_family','Parenting & Family'],['faith_spirituality','Faith & Spirituality'],['practical_skills','Practical Skills & Hobbies'],['success_career','Success, Business & Career']],
+  non_fiction:[['money_retirement','Money & Retirement'],['health_ageing','Health & Ageing Well'],['emotional_health','Emotional Health & Relationships'],['parenting_family','Parenting & Family'],['faith_spirituality','Faith & Spirituality'],['practical_skills','Practical Skills & Hobbies'],['success_career','Success, Business & Career']],
   kids:[['childrens_stories','Children’s picture book or story'],['kids_activity','Kids’ activity or colouring book'],['guided_journal','Guided journal or planner'],['puzzle_other','Puzzle book or other']]
 };
 var CHANNELS = [['tiktok','TikTok'],['instagram','Instagram'],['facebook','Facebook'],['youtube','YouTube']];
@@ -436,10 +422,10 @@ var TIERS = [
 ];
 TIERS.forEach(function (t) { t.first = Math.ceil(t.price * 0.7); });
 
-var ORDER = ['kind','kind_note','genre','launch','channels','sell','books','proof','building','account','plan','pricing'];
-var CH = [['Your book',['kind','kind_note','genre','launch']],['Your readers',['channels','sell','books','proof']],['Your plan',['building','account','plan','pricing']]];
+var ORDER = ['kind','kind_note','genre','launch','channels','sell','books','goal','proof','building','account','plan','pricing'];
+var CH = [['Your book',['kind','kind_note','genre','launch']],['Your readers',['channels','sell','books','goal','proof']],['Your plan',['building','account','plan','pricing']]];
 
-function fresh() { return { kind:null, genre:null, genreOther:'', launch:null, launchDate:addDays(24), channels:[], none:false, sell:null, books:null, tier:null, name:'', email:'', quiz:null }; }
+function fresh() { return { kind:null, genre:null, genreOther:'', launch:null, launchDate:addDays(24), channels:[], none:false, sell:null, books:null, tier:null, goal:null, name:'', email:'', quiz:null }; }
 var saved = load('sonder_onb');
 var S = (saved && saved.S) || fresh(), cur = (saved && saved.cur) || 'kind', hist = (saved && saved.hist) || [], busy = false, err = '';
 if (cur === 'building') cur = 'books';
@@ -448,12 +434,12 @@ function addDays(n) { var d = new Date(); d.setDate(d.getDate() + n); return d.t
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
 function fmtDay(iso) { return new Intl.DateTimeFormat('en-GB', { weekday:'short', day:'numeric', month:'short', timeZone:'UTC' }).format(new Date(iso + 'T12:00:00Z')); }
 function daysUntil(iso) { return Math.max(0, Math.round((new Date(iso + 'T12:00:00') - new Date()) / 864e5)); }
-function genreLabel() { if (S.genre === 'other') return S.genreOther.trim() || 'Something else'; var g = (GENRES[S.kind] || []).filter(function (x) { return x[0] === S.genre; })[0]; return g ? g[1] : ''; }
+function genreLabel() { if (S.kind === 'memoir') return ''; if (S.genre === 'other') return S.genreOther.trim() || 'Something else'; var g = (GENRES[S.kind] || []).filter(function (x) { return x[0] === S.genre; })[0]; return g ? g[1] : ''; }
 function writing() { return S.launch === 'writing'; }
 function recTier() { return S.books === 3 ? 'studio' : 'author'; }
 function tier() { var id = S.tier || recTier(); return TIERS.filter(function (t) { return t.id === id; })[0]; }
 function endLine() {
-  if (writing()) return 'Coming soon. Comment TRUE if you’d like to be an early reader.';
+  if (writing() || S.launch === 'soon') return 'Coming soon. Comment TRUE if you want to be one of the first to read it.';
   if (S.sell === 'wide') return 'Find [your book] at your favourite bookstore.';
   if (S.sell === 'own') return 'The link is in my bio.';
   return 'Search [your book] on Amazon.';
@@ -467,11 +453,16 @@ function opt(o) {
     '<span class="ot"><span class="ol">' + esc(o.label) + '</span>' + (o.desc ? '<span class="od">' + esc(o.desc) + '</span>' : '') + '</span>' +
     '<span class="radio ' + (o.multi ? 'sq' : '') + '"></span></button>';
 }
+var PHOTO = {
+  ink:   ['/assets/onboarding/novel.jpg',  'She found a letter dated forty years in the future.'],
+  true:  ['/assets/onboarding/memoir.jpg', 'I was nineteen the night my father finally told me the truth.'],
+  stick: ['/assets/onboarding/nonfic.jpg', 'Waking at 3am isn’t always insomnia.'],
+  pages: ['/assets/onboarding/kids.jpg',   'Every page has a different axolotl to colour.']
+};
 function phone(kind) {
   var w = function (i) { return '<div class="phone">' + i + '</div>'; };
-  if (kind === 'ink') return w('<div class="screen s-ink"><div class="fig"></div><div class="burn">She found a letter dated forty years in the future.</div></div>');
-  if (kind === 'stick') return w('<div class="screen s-stick"><div class="burn">Waking at 3am isn’t always insomnia.</div>' + STICK_ART + '</div>');
-  return w('<div class="screen s-act"><div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="pages">' + PAGE_ART.map(function (a) { return '<div class="pg">' + a + '</div>'; }).join('') + '</div><div class="capbox">Every page has a different axolotl to colour.</div></div>');
+  var ph = PHOTO[kind] || PHOTO.pages;
+  return w('<div class="screen s-photo"><img src="' + ph[0] + '" alt="" width="480" height="860" decoding="async"><div class="burn">' + esc(ph[1]) + '</div></div>');
 }
 
 var SCREENS = {
@@ -509,14 +500,18 @@ var SCREENS = {
       opt({ label:'Two books', on:S.books === 2, attrs:'data-pick="books" data-val="2" data-auto' }) +
       opt({ label:'Three or more', on:S.books === 3, attrs:'data-pick="books" data-val="3" data-auto' }) + '</div>' +
       '<p class="fine">Publishing for a list of authors? <a href="/publishers">See Sonder for publishers</a></p>'; },
+  goal: function () {
+    var g = [['g500','$500 a month'],['g1000','$1,000 a month'],['g2500','$2,500 a month'],['g5000','$5,000 or more a month'],['unsure','I’m not sure yet']];
+    return '<h1>How much do you want this book to make each month?</h1><p class="sub">We’ll work out how much posting that takes.</p><div class="opts" role="radiogroup">' +
+      g.map(function (x) { return opt({ label:x[1], on:S.goal === x[0], attrs:'data-pick="goal" data-val="' + x[0] + '" data-auto' }); }).join('') + '</div>'; },
   proof: function () {
-    return '<p class="eyebrow">Built by authors</p><h1>Made by two authors who sell books on social media.</h1><div class="founders">' +
-      '<div class="founder"><span class="fn">Mike, co-founder</span><span class="fv">107,677</span><span class="fd">books sold across 56 titles</span></div>' +
-      '<div class="founder"><span class="fn">Lexi, co-founder</span><span class="fv">$230k</span><span class="fd">of books in one month, with under 1,500 followers</span></div></div>' +
+    return '<p class="eyebrow">Built by authors</p><h1>Made by authors who sell books on social media.</h1><div class="founders">' +
+      '<div class="founder"><span class="fn">Lexi, co-founder</span><span class="fv">$230k</span><span class="fd">of books in one month, with under 1,500 followers</span></div>' +
+      '<div class="founder"><span class="fn">Christine, Sonder author</span><span class="fv">#17,080</span><span class="fd">Amazon rank for <i>Assertive Kindness</i>, up from #1,101,449</span></div></div>' +
       '<p class="sub" style="margin:0">What we learned: the authors who win are the ones who post a lot and keep going. Sonder is built to make that easy.</p>' +
-      '<p class="fine">Founders’ own results. They are not typical, and yours will vary.</p>' + cta('Build my plan'); },
+      '<p class="fine">Lexi’s own results and one Sonder author’s. They are not typical, and yours will vary.</p>' + cta('Build my plan'); },
   building: function () {
-    var lines = ['Choosing the right first video for your ' + (genreLabel() || 'book').toLowerCase() + (S.kind === 'kids' ? '' : ' book'),
+    var lines = [S.kind === 'memoir' ? 'Choosing the right first video for your true story' : 'Choosing the right first video for your ' + (genreLabel() || 'book').toLowerCase() + (S.kind === 'kids' ? '' : ' book'),
       writing() ? 'Planning teasers that end on “Coming soon”' : 'Setting how every video ends',
       'Sizing your videos for ' + chanText()];
     return '<p class="eyebrow">One moment</p><h1>Building your plan</h1><div class="build"><div class="bigbar"><i></i></div><ul>' +
@@ -540,6 +535,7 @@ var SCREENS = {
           '</span><span class="cw">' + esc(why) + '</span></span></li>'; }).join('') + '</ol></div>' +
       '<div class="endline">Every video ends: <b>“' + esc(endLine()) + '”</b></div>' +
       '<div class="sect"><h2>Your free trial</h2><p class="sub" style="margin:0">Seven days and 5 videos. Start with the first two above, then try the other video types and find your favourites.</p></div>' +
+      paceBlock() +
       '<div class="note"><b>Post a lot, and keep going.</b> Views usually build in weeks 3 to 5, and sales follow. The authors who win are the ones who stay consistent.</div>' + cta('See my price'); },
   pricing: function () { var t = tier(); var q = S.quiz || {}; var exp = q.offerExpiresAt ? new Date(q.offerExpiresAt) : null; var live = exp && exp.getTime() > Date.now();
     var et = exp ? new Intl.DateTimeFormat('en-GB', { weekday:'short', day:'numeric', month:'short', hour:'numeric', minute:'2-digit', hour12:true, timeZone:'America/New_York' }).format(exp) : '';
@@ -557,6 +553,18 @@ var SCREENS = {
       '<p class="fine">You add a card to start and nothing is charged today. A temporary $49 hold checks the card is real, then it’s released. We email you before your first payment.</p>'; }
 };
 
+// "You need about X videos a day" (sonder-server lib/onboardingQuiz.ts paceFor,
+// returned with the plan). Hidden when the server sends no pace.
+function paceBlock() {
+  var pc = (S.quiz || {}).pace; if (!pc || !pc.videosPerDay) return '';
+  var goal = '$' + pc.goalUsd.toLocaleString('en-US') + ' a month';
+  var n = pc.videosPerDay, nTxt = n >= 30 ? '30 or more videos a day' : 'about ' + n + ' video' + (n === 1 ? '' : 's') + ' a day';
+  return '<div class="sect pace"><h2>How much to post</h2>' +
+    '<p class="sub" style="margin:0">' + (pc.goalUnsure ? 'A good first goal is <b>' + goal + '</b>. To aim for that, you need ' : 'To aim for <b>' + goal + '</b>, you need ') + '<b>' + nTxt + '</b> to build awareness, posted to all your accounts.</p>' +
+    '<p class="fine" style="text-align:left;margin:0">A rough guide from the average views our authors’ videos get. It’s not a promise: results vary.</p></div>' +
+    '<div class="auto"><b>Did you know Sonder can automate this?</b><span>Start your trial, connect your social media accounts, and we’ll post your videos for you.</span>' +
+    '<button class="auto-btn" data-act="automate">Connect my accounts and automate it' + I.arrow + '</button></div>';
+}
 function okAccount() { return S.name.trim().length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(S.email.trim()); }
 function countdown() { var q = S.quiz || {}; var ms = Math.max(0, (q.offerExpiresAt ? Date.parse(q.offerExpiresAt) : 0) - Date.now()); var s = Math.floor(ms / 1000);
   return [Math.floor(s / 3600), Math.floor(s % 3600 / 60), s % 60].map(function (v) { return String(v).padStart(2, '0'); }).join(':'); }
@@ -583,13 +591,28 @@ function mount() {
   if (cur === 'building') setTimeout(function () { if (cur === 'building') next(); }, 3600);
 }
 function go(id) { if (id !== cur) hist.push(cur); cur = id; err = ''; render(); }
-function next() { var i = ORDER.indexOf(cur); if (i < ORDER.length - 1) go(ORDER[i + 1]); }
+function next() {
+  countPick(cur);
+  if (cur === 'kind_note' && S.kind === 'memoir') { S.genre = 'true_stories'; go('launch'); return; }
+  var i = ORDER.indexOf(cur); if (i < ORDER.length - 1) go(ORDER[i + 1]);
+}
+// One anonymous count per answered screen (sonder-server onboarding_quiz_picks):
+// no id, no email. It also counts people who leave before the email step.
+var PICK_STEPS = { kind:1, genre:1, launch:1, sell:1, books:1, goal:1 }, picked = {};
+function countPick(step, val) {
+  if (!PICK_STEPS[step] && step !== 'automate') return;
+  var v = val !== undefined ? val : S[step];
+  if (v === null || v === undefined || v === '' || picked[step + ':' + v]) return;
+  picked[step + ':' + v] = 1;
+  try { fetch(API + '/api/public/onboarding-quiz/pick', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ step:step, answer:String(v) }), keepalive:true }).catch(function () {}); } catch (e) {}
+}
 function back() { if (!hist.length) return; cur = hist.pop(); if (cur === 'building') cur = hist.pop() || 'books'; err = ''; render(); }
 
 function submit() {
   if (busy || !okAccount()) return;
   busy = true; err = ''; render(false);
-  var answers = { kind:S.kind, genre:S.genre, genreOther:S.genre === 'other' ? S.genreOther : null, launch:S.launch, launchDate:S.launch === 'soon' ? S.launchDate : null, channels:S.none ? [] : S.channels, sell:S.sell, books:S.books };
+  var memoir = S.kind === 'memoir';
+  var answers = { kind:memoir ? 'non_fiction' : S.kind, genre:memoir ? 'true_stories' : S.genre, goal:S.goal, genreOther:S.genre === 'other' ? S.genreOther : null, launch:S.launch, launchDate:S.launch === 'soon' ? S.launchDate : null, channels:S.none ? [] : S.channels, sell:S.sell, books:S.books };
   fetch(API + '/api/public/onboarding-quiz', { method:'POST', headers:{ 'Content-Type':'application/json' },
     body: JSON.stringify({ cohort:'quiz', answers:answers, email:S.email.trim(), name:S.name.trim(), utm:carried() }) })
     .then(function (r) { return r.json(); })
@@ -633,7 +656,7 @@ document.addEventListener('click', function (e) {
     render(false); return; }
   var a = e.target.closest('[data-act]'); if (!a || a.disabled) return;
   var act = a.getAttribute('data-act');
-  if (act === 'next') next(); else if (act === 'back') back(); else if (act === 'submit') submit(); else if (act === 'start') start();
+  if (act === 'automate') { countPick('automate', 'clicked'); S.automate = true; next(); } else if (act === 'next') next(); else if (act === 'back') back(); else if (act === 'submit') submit(); else if (act === 'start') start();
 });
 setInterval(function () { if (cur === 'pricing') { var el = document.getElementById('cd'); if (el) el.textContent = countdown(); } }, 1000);
 if ((cur === 'plan' || cur === 'pricing') && !(S.quiz && S.quiz.id)) cur = 'account';
