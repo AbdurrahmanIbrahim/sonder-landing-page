@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script src="/consent.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0A0613" />
+<title>Sonder · Bring your list in with ONIX</title>
+<meta name="description" content="Drop the ONIX file you already send to retailers and watch Sonder read your whole list. No manuscript needed. Your first 3 videos are free." />
+<meta property="og:title" content="Sonder · Bring your list in with ONIX" />
+<meta property="og:description" content="The same ONIX 3.0 or 3.1 file you send to Amazon and Nielsen. Sonder reads every title and turns it into short videos." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.yousonder.com/onix" />
+<meta property="og:site_name" content="Sonder" />
+<meta name="twitter:card" content="summary" />
+<meta name="robots" content="noindex, nofollow" />
+<script>
+  window.SONDER_META_PIXEL_ID = '1999564797365444'; /* Sonder Web dataset, same as /publishers. consent.js above gates it. */
+  (function () {
+    var id = window.SONDER_META_PIXEL_ID;
+    if (!id) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', id);
+    fbq('track', 'PageView');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@900&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+<link rel="icon" type="image/svg+xml" href="/assets/sonder-logo-plum-flat.svg" />
+<script src="/visit.js" defer></script>
+<style>
+/* /onix (23 Oct 2026): a working demo for publisher meetings. The visitor drops their own ONIX file
+   and the page reads it in the browser, so they see their list come in before they sign up.
+   Same night world and type as /publishers. Nothing on this page uploads the file. */
+:root{
+  --plum:#0A0613; --plum-deep:#1A0F2E; --plum-mid:#2D1A48; --plum-glow:#4A2F6E;
+  --mint:#7FFFD4; --mint-2:#2DD4BF; --violet:#B794F4; --coral:#FF8A7A; --gold:#F5C46B;
+  --paper:#F5F5F7; --ink:#0F0A1A; --quiet:#8B8FA3; --soft:#C9CBD6; --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.16);
+  --card:#120C1F; --card-2:#17102A;
+  --f-body:"Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --f-serif:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --f-mark:"Nunito", "Avenir Next", system-ui, sans-serif;
+  --wrap:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--plum);color:var(--paper);font-family:var(--f-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:20px}
+@media (max-width:520px){.wrap{padding-inline:16px}}
+.skip{position:absolute;left:-999px;top:8px;background:var(--mint);color:var(--ink);padding:8px 14px;border-radius:8px;z-index:100}
+.skip:focus{left:8px}
+:focus-visible{outline:2px solid var(--mint);outline-offset:3px;border-radius:6px}
+em.s{font-family:var(--f-serif);font-style:italic;font-weight:400;letter-spacing:-.005em}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mint);margin:0}
+h1,h2,h3{margin:0;text-wrap:balance}
+h2{font-size:clamp(32px,4.6vw,56px);line-height:1.02;letter-spacing:-.035em;font-weight:700}
+h2 em.s{font-size:1.08em;color:var(--mint)}
+.lede{font-size:clamp(17px,1.6vw,20px);color:var(--soft);max-width:60ch;margin:0;text-wrap:pretty}
+code,.mono{font-family:var(--f-mono)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;cursor:pointer;border:0;font-family:inherit;transition:transform .15s ease, box-shadow .2s ease, background .2s}
+.btn svg{width:18px;height:18px}
+.btn-primary{background:var(--mint);color:var(--ink);box-shadow:0 10px 40px -10px rgba(127,255,212,.55)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 50px -12px rgba(127,255,212,.7)}
+.btn-ghost{background:transparent;color:var(--paper);border:1px solid var(--line-2)}
+.btn-ghost:hover{background:rgba(255,255,255,.05)}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;transition:background .25s, border-color .25s;border-bottom:1px solid transparent}
+.nav.is-scrolled{background:rgba(10,6,19,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:72px}
+.mark{display:inline-flex;align-items:baseline;gap:8px;text-decoration:none}
+.mark b{font-family:var(--f-mark);font-weight:900;font-size:26px;letter-spacing:-.045em}
+.mark i{font-style:normal;color:var(--mint);font-size:13px}
+.mark small{font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--quiet)}
+.nav-links{display:flex;align-items:center;gap:26px;font-size:15px;color:var(--soft)}
+.nav-links a{text-decoration:none}
+.nav-links a:hover{color:var(--paper)}
+.nav-cta{background:var(--mint);color:var(--ink)!important;padding:11px 18px;border-radius:999px;font-weight:600}
+@media (max-width:920px){.nav-links .hide-s{display:none}}
+@media (max-width:520px){.mark small{display:none}.nav-links{gap:14px}.nav-cta{padding:9px 14px;font-size:14px}}
+
+/* hero */
+.hero{position:relative;padding-block:48px 72px;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:-120px 0 0;z-index:-1;pointer-events:none;background:
+  radial-gradient(45% 50% at 85% 35%, rgba(74,47,110,.55), transparent 70%),
+  radial-gradient(35% 40% at 10% 10%, rgba(45,212,191,.10), transparent 70%)}
+.hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(42px,6vw,80px);line-height:.96;letter-spacing:-.045em;font-weight:800;margin:18px 0 22px}
+.hero h1 em.s{display:inline-block;font-size:1.06em;line-height:1.08;background:linear-gradient(100deg,var(--mint) 10%,#A8F0FF 45%,var(--violet) 95%);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .12em .2em 0;margin-bottom:-.2em}
+.ticks{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:10px;font-size:15.5px;color:var(--soft)}
+.ticks li{display:flex;gap:10px;align-items:flex-start}
+.ticks svg{flex:none;width:18px;height:18px;margin-top:3px;color:var(--mint)}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:34px}}
+
+/* the drop zone */
+.drop{position:relative;border-radius:28px;padding:34px 28px 28px;background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line-2);box-shadow:0 40px 90px -40px rgba(0,0,0,.9);overflow:hidden;text-align:center;transition:border-color .2s, box-shadow .2s, transform .2s}
+.drop::before{content:"";position:absolute;inset:12px;border:1.5px dashed rgba(127,255,212,.28);border-radius:20px;pointer-events:none;transition:border-color .2s}
+.drop.over{border-color:rgba(127,255,212,.7);box-shadow:0 0 0 6px rgba(127,255,212,.12),0 40px 90px -40px rgba(0,0,0,.9);transform:scale(1.01)}
+.drop.over::before{border-color:var(--mint)}
+.drop .xml{font-family:var(--f-mono);font-size:12.5px;line-height:1.7;text-align:left;color:#6f6a86;margin:0 auto 26px;max-width:380px;padding:16px 18px;border-radius:14px;background:rgba(10,6,19,.55);border:1px solid var(--line);white-space:pre;overflow:hidden}
+.drop .xml b{color:var(--violet);font-weight:500}
+.drop .xml i{font-style:normal;color:var(--paper)}
+.drop .xml .hl{background:rgba(127,255,212,.14);color:var(--mint);border-radius:4px}
+.drop h3{font-size:24px;letter-spacing:-.02em;margin-bottom:6px}
+.drop p{margin:0 auto;color:var(--quiet);font-size:15px;max-width:42ch}
+.drop .row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:22px;position:relative}
+.drop input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.drop .fine{margin-top:16px;font-size:13px}
+.drop .fine svg{width:14px;height:14px;vertical-align:-2px;color:var(--mint);margin-right:4px}
+.drop.busy{pointer-events:none}
+.drop .reading{display:none;align-items:center;justify-content:center;gap:12px;margin-top:22px;font-family:var(--f-mono);font-size:14px;color:var(--mint)}
+.drop.busy .reading{display:flex}
+.drop.busy .row{display:none}
+.spin{width:18px;height:18px;border-radius:50%;border:2px solid rgba(127,255,212,.25);border-top-color:var(--mint);animation:spinr .8s linear infinite}
+@keyframes spinr{to{transform:rotate(360deg)}}
+.drop .err{display:none;margin:18px auto 0;max-width:46ch;font-size:14.5px;color:var(--coral)}
+.drop.bad .err{display:block}
+
+/* results */
+.results{display:none;padding-block:10px 80px;scroll-margin-top:80px}
+.results.on{display:block}
+.res-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 24px;margin-bottom:22px}
+.res-head h2{font-size:clamp(28px,3.6vw,44px)}
+.res-head .file{font-family:var(--f-mono);font-size:13px;color:var(--quiet);margin-top:8px;word-break:break-all}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:26px}
+.stats div{background:var(--card);padding:16px 18px;min-width:0}
+.stats b{display:block;font-size:28px;letter-spacing:-.03em;line-height:1.1}
+.stats span{font-size:13px;color:var(--quiet)}
+@media (max-width:820px){.stats{grid-template-columns:repeat(2,1fr)}.stats div:first-child{grid-column:1/-1}}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+.title{display:grid;grid-template-columns:104px 1fr;gap:18px;padding:18px;border-radius:22px;background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);min-width:0;opacity:0;transform:translateY(10px);animation:land .45s ease forwards;animation-delay:calc(var(--i,0) * 60ms)}
+@keyframes land{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.title{animation:none;opacity:1;transform:none}}
+.cover{width:104px;aspect-ratio:2/3;border-radius:8px;overflow:hidden;background:linear-gradient(160deg,var(--plum-mid),var(--plum-deep));border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;text-align:center;font-size:11.5px;color:var(--quiet);padding:8px;box-shadow:0 14px 30px -14px rgba(0,0,0,.8)}
+.cover img{width:100%;height:100%;object-fit:cover}
+.cover.has{padding:0}
+.t-body{min-width:0}
+.t-body h3{font-size:19px;letter-spacing:-.015em;line-height:1.2}
+.t-body .sub{font-size:14px;color:var(--soft);margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.t-body .by{font-size:14px;color:var(--quiet);margin-top:6px}
+.t-body .by b{color:var(--paper);font-weight:500}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{font-size:12px;padding:3px 9px;border-radius:999px;border:1px solid var(--line-2);color:var(--soft);white-space:nowrap}
+.tag.m{font-family:var(--f-mono);font-size:11.5px}
+.desc{font-size:14px;color:var(--soft);margin:12px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.uses{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:12px;font-size:12.5px}
+.uses span{display:inline-flex;align-items:center;gap:5px;color:var(--quiet)}
+.uses span::before{content:"";width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18)}
+.uses span.y{color:var(--paper)}
+.uses span.y::before{background:var(--mint);box-shadow:0 0 0 3px rgba(127,255,212,.15)}
+.verdict{display:inline-flex;align-items:center;gap:7px;margin-top:12px;font-size:13px;font-weight:600;padding:5px 11px;border-radius:999px}
+.verdict.ok{background:rgba(127,255,212,.12);color:var(--mint)}
+.verdict.warn{background:rgba(245,196,107,.12);color:var(--gold)}
+.raw{grid-column:1/-1;margin-top:2px}
+.raw summary{cursor:pointer;font-family:var(--f-mono);font-size:12px;color:var(--quiet);list-style:none}
+.raw summary::-webkit-details-marker{display:none}
+.raw summary::before{content:"▸ ";color:var(--mint)}
+.raw[open] summary::before{content:"▾ "}
+.raw pre{margin:10px 0 0;max-height:260px;overflow:auto;font-family:var(--f-mono);font-size:11.5px;line-height:1.55;color:var(--soft);background:rgba(10,6,19,.6);border:1px solid var(--line);border-radius:12px;padding:12px 14px;white-space:pre-wrap;word-break:break-word}
+.more{margin-top:18px;text-align:center;color:var(--quiet);font-size:15px}
+.again{display:flex;flex-wrap:wrap;gap:12px}
+
+/* next step */
+.next{margin-top:34px;display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:center;padding:32px;border-radius:28px;background:radial-gradient(120% 140% at 0% 0%, rgba(74,47,110,.55), transparent 60%),var(--card);border:1px solid rgba(127,255,212,.25)}
+.next h3{font-size:clamp(24px,2.6vw,32px);letter-spacing:-.025em;line-height:1.1}
+.next p{margin:10px 0 0;color:var(--soft);font-size:15.5px}
+@media (max-width:860px){.next{grid-template-columns:1fr;padding:24px 20px}}
+
+/* email capture (same as /publishers) */
+.capture{margin:0}
+.capture label{display:block;font-size:15px;font-weight:600;color:var(--paper);margin-bottom:10px}
+.cap-row{display:flex;flex-direction:column;gap:10px}
+.cap-row input{height:54px;padding:0 20px;border-radius:999px;background:rgba(10,6,19,.7);border:1px solid var(--line-2);color:var(--paper);font:inherit;font-size:16px;outline:none}
+.cap-row input:focus{border-color:rgba(127,255,212,.7);box-shadow:0 0 0 4px rgba(127,255,212,.14)}
+.cap-row input::placeholder{color:#6f6a86}
+.cap-row .btn{width:100%;min-height:54px;position:relative}
+.cap-row .btn:hover{transform:none}
+.cap-row .btn[aria-busy=true]{cursor:progress}
+.cap-row .btn[aria-busy=true] svg{visibility:hidden}
+.cap-row .btn .spin{display:none;position:absolute;right:24px;top:50%;margin-top:-9px;border-color:rgba(15,10,26,.25);border-top-color:var(--ink)}
+.cap-row .btn[aria-busy=true] .spin{display:block}
+.cap-help{margin:12px 0 0;font-size:14px;line-height:1.45;color:var(--quiet);text-wrap:pretty}
+.capture.bad .cap-row input{border-color:var(--coral);box-shadow:0 0 0 4px rgba(255,138,122,.14)}
+.capture.bad .cap-help{color:var(--coral)}
+
+/* sections */
+.sec{padding-block:clamp(60px,7vw,100px);border-top:1px solid var(--line)}
+.sec-head{max-width:760px;margin-bottom:40px}
+.sec-head h2{margin:14px 0 16px}
+.map{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.map div{background:var(--plum);padding:24px 26px;min-width:0}
+.map code{display:inline-block;font-size:12.5px;color:var(--violet);background:rgba(183,148,244,.08);border:1px solid rgba(183,148,244,.2);padding:3px 9px;border-radius:7px;margin-bottom:12px}
+.map h3{font-size:18px;letter-spacing:-.01em;margin-bottom:6px}
+.map p{margin:0;font-size:15px;color:var(--soft)}
+@media (max-width:760px){.map{grid-template-columns:1fr}}
+.ways{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.way{padding:30px 28px;border-radius:24px;background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);min-width:0}
+.way .eyebrow{font-size:11.5px}
+.way h3{font-size:24px;letter-spacing:-.02em;margin:10px 0 10px}
+.way p{margin:0 0 14px;color:var(--soft);font-size:15.5px}
+.way ul{margin:0;padding-left:18px;color:var(--soft);font-size:15px;display:grid;gap:6px}
+.way code{font-size:13px;color:var(--mint)}
+@media (max-width:760px){.ways{grid-template-columns:1fr}}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.trust div{padding:22px 24px;border-radius:20px;border:1px solid var(--line);min-width:0}
+.trust svg{width:24px;height:24px;color:var(--mint);margin-bottom:12px}
+.trust h3{font-size:17px;margin-bottom:6px}
+.trust p{margin:0;color:var(--soft);font-size:14.5px}
+@media (max-width:760px){.trust{grid-template-columns:1fr}}
+
+.final{text-align:center;padding-block:clamp(70px,9vw,130px);border-top:1px solid var(--line);position:relative;overflow:hidden;isolation:isolate}
+.final::before{content:"";position:absolute;left:50%;top:50%;width:900px;height:900px;max-width:150vw;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(74,47,110,.55),transparent 65%);z-index:-1}
+.final h2{font-size:clamp(38px,6vw,76px);line-height:.98}
+.final .lede{margin:20px auto 30px}
+.final .capture{max-width:460px;margin:0 auto;text-align:left}
+
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--quiet);font-size:14px}
+.foot-in{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-between;align-items:center}
+.foot-in nav{display:flex;flex-wrap:wrap;gap:18px}
+.foot-in a{text-decoration:none}
+.foot-in a:hover{color:var(--paper)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="mark" href="/publishers" aria-label="Sonder for publishers"><b>Sonder</b><i aria-hidden="true">▸</i><small>ONIX</small></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#try" class="hide-s">Try it</a>
+      <a href="#reads" class="hide-s">What we read</a>
+      <a href="#ways" class="hide-s">File or feed</a>
+      <a href="https://app.yousonder.com/login">Sign in</a>
+      <a class="nav-cta" href="#start">Get my free videos</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="try" aria-labelledby="h1">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">For publishers · ONIX 3.0 and 3.1</p>
+      <h1 id="h1">Your ONIX file is <em class="s">all we need.</em></h1>
+      <p class="lede">The same file you already send to Amazon, Nielsen and your other retailers. Drop it here and watch Sonder read your list, title by title. Then we turn each one into short videos.</p>
+      <ul class="ticks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg><span>No manuscript. We write from your descriptions, subjects, reviews and any excerpt in the record.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg><span>One title or the whole catalogue. A zip is fine.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg><span>Paperback, ebook and audio of the same book become one title.</span></li>
+      </ul>
+    </div>
+
+    <div class="drop" id="drop">
+      <div class="xml" aria-hidden="true"><b>&lt;Product&gt;</b>
+  <b>&lt;TitleText&gt;</b><i data-hl>Your next bestseller</i><b>&lt;/TitleText&gt;</b>
+  <b>&lt;Contributor&gt;</b><i data-hl>Your author</i><b>&lt;/Contributor&gt;</b>
+  <b>&lt;Subject&gt;</b><i data-hl>Thema · BIC · BISAC</i><b>&lt;/Subject&gt;</b>
+  <b>&lt;TextContent&gt;</b><i data-hl>Description, reviews</i><b>…</b>
+  <b>&lt;SupportingResource&gt;</b><i data-hl>Front cover</i><b>…</b>
+<b>&lt;/Product&gt;</b></div>
+      <h3>Drop your ONIX file here</h3>
+      <p>.xml, .onx or .zip. It's read right here in your browser. Nothing is uploaded.</p>
+      <div class="row">
+        <label class="btn btn-primary" for="file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M20 16v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3"/></svg>Choose ONIX file</label>
+        <button class="btn btn-ghost" type="button" id="sample">See it with a sample</button>
+        <input type="file" id="file" accept=".xml,.onx,.onix,.zip,text/xml,application/xml,application/zip" />
+      </div>
+      <div class="reading" role="status" aria-live="polite"><span class="spin" aria-hidden="true"></span><span id="reading-text">Reading your file…</span></div>
+      <p class="err" id="err" role="alert"></p>
+      <p class="fine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Your file stays on this computer.</p>
+    </div>
+  </div>
+</section>
+
+<section class="results" id="results" aria-labelledby="res-h">
+  <div class="wrap">
+    <div class="res-head">
+      <div>
+        <p class="eyebrow">What Sonder found</p>
+        <h2 id="res-h" style="margin-top:10px">…</h2>
+        <p class="file" id="res-file"></p>
+      </div>
+      <div class="again">
+        <label class="btn btn-ghost" for="file">Try another file</label>
+      </div>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="grid" id="grid"></div>
+    <p class="more" id="more" hidden></p>
+
+    <div class="next" id="start">
+      <div>
+        <p class="eyebrow">Next</p>
+        <h3 style="margin-top:10px">Turn these into videos. <em class="s" style="color:var(--mint)">The first 3 are free.</em></h3>
+        <p>Sign up with your work email and upload this same file in Sonder. We make a viral video, a slideshow and an Amazon ad from your lead title, and email them to you. No card, no manuscript.</p>
+      </div>
+      <form class="capture" novalidate data-capture>
+        <label for="next-email">Where should we send your videos?</label>
+        <div class="cap-row"><input id="next-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" placeholder="you@yourpublisher.com" aria-describedby="next-email-help" required><button class="btn btn-primary" type="submit"><span>Send me my free videos</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg><i class="spin" aria-hidden="true"></i></button></div>
+        <p class="cap-help" id="next-email-help" aria-live="polite">We'll send your 3 videos here as soon as you've uploaded your ONIX.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="reads" aria-labelledby="reads-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">What we read</p>
+      <h2 id="reads-h">Your metadata already <em class="s">tells the story.</em></h2>
+      <p class="lede">You've written these fields for retailers. Sonder reads the same ones to write each video, so there's nothing new to fill in.</p>
+    </div>
+    <div class="map">
+      <div><code>TitleDetail</code><h3>Title and subtitle</h3><p>What the book is called, on the cover and in the hook.</p></div>
+      <div><code>Contributor</code><h3>Who wrote it</h3><p>The author name, and their biography when the record has one.</p></div>
+      <div><code>TextContent · 02, 03</code><h3>Your description</h3><p>The heart of every script. A longer description gives us more to work with.</p></div>
+      <div><code>TextContent · 06, 08, 09</code><h3>Reviews and endorsements</h3><p>Proof that readers and critics loved it, in their exact words.</p></div>
+      <div><code>TextContent · 14, 26</code><h3>Excerpt or introduction</h3><p>Real lines from the book, when you include them. Still no manuscript.</p></div>
+      <div><code>Subject</code><h3>Thema, BIC, BISAC and keywords</h3><p>The genre and the readers it's for, so each video speaks to the right people.</p></div>
+      <div><code>SupportingResource · 01</code><h3>Front cover</h3><p>Taken from your cover link and used in every video.</p></div>
+      <div><code>ProductForm</code><h3>Every edition, one title</h3><p>Paperback, hardback, ebook and audio of one book come in as a single title.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="ways" aria-labelledby="ways-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Two ways in</p>
+      <h2 id="ways-h">Upload it once, <em class="s">or let it flow.</em></h2>
+    </div>
+    <div class="ways">
+      <article class="way">
+        <p class="eyebrow">Upload a file</p>
+        <h3>Your ONIX export</h3>
+        <p>Export from your publishing system as ONIX 3.0 or 3.1 and upload it in Sonder.</p>
+        <ul>
+          <li>Reference or short tags</li>
+          <li>One title or your whole catalogue</li>
+          <li>A single <code>.xml</code> or a <code>.zip</code></li>
+        </ul>
+      </article>
+      <article class="way">
+        <p class="eyebrow">Send it automatically</p>
+        <h3>Add Sonder to your feed</h3>
+        <p>Add Sonder as a trading partner, the same way you added your retailers. New and updated titles then arrive by themselves, with their covers.</p>
+        <ul>
+          <li>Delivered over <code>SFTP</code> (not plain FTP)</li>
+          <li>Your own login, set up in Sonder in a minute</li>
+          <li>Only metadata comes in. No manuscript, ever.</li>
+        </ul>
+      </article>
+    </div>
+    <div class="trust">
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><h3>Never used to train AI</h3><p>Your metadata is only used to make your videos. Never shared or sold.</p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><h3>You approve every script</h3><p>Read and change any script before its video is made.</p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg><h3>Manuscripts are optional</h3><p>For your lead titles, add the book too and scripts can use real lines and moments.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="final" aria-labelledby="fi-h">
+  <div class="wrap">
+    <h2 id="fi-h">Bring your <em class="s" style="color:var(--mint)">whole list</em> in.</h2>
+    <p class="lede">Your first 3 videos are free. No card, no manuscript.</p>
+    <form class="capture" novalidate data-capture>
+      <label for="final-email">Where should we send your videos?</label>
+      <div class="cap-row"><input id="final-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" placeholder="you@yourpublisher.com" aria-describedby="final-email-help" required><button class="btn btn-primary" type="submit"><span>Send me my free videos</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg><i class="spin" aria-hidden="true"></i></button></div>
+      <p class="cap-help" id="final-email-help" aria-live="polite">We'll send your 3 videos here as soon as you've uploaded your ONIX.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <a class="mark" href="/" aria-label="Sonder home"><b>Sonder</b><i aria-hidden="true">▸</i></a>
+    <nav aria-label="Footer">
+      <a href="/publishers">For publishers</a>
+      <a href="/">For authors</a>
+      <a href="/privacy">Privacy</a>
+      <a href="https://app.yousonder.com/login">Sign in</a>
+    </nav>
+    <span>© 2026 Sonder</span>
+  </div>
+</footer>
+
+<!-- The sample: Mike's own two books, as ONIX 3.0 reference tags. Read by the "See it with a sample" button. -->
+<script type="text/plain" id="sample-onix">
+<?xml version="1.0" encoding="UTF-8"?>
+<ONIXMessage release="3.0" xmlns="http://ns.editeur.org/onix/3.0/reference">
+  <Header>
+    <Sender><SenderName>Mike Langdon (test file for Sonder)</SenderName></Sender>
+    <SentDateTime>20261019T1327Z</SentDateTime>
+  </Header>
+  <Product>
+    <RecordReference>levity.chalk66.pb</RecordReference>
+    <NotificationType>03</NotificationType>
+    <ProductIdentifier><ProductIDType>15</ProductIDType><IDValue>9798160265605</IDValue></ProductIdentifier>
+    <DescriptiveDetail>
+      <ProductComposition>00</ProductComposition>
+      <ProductForm>BC</ProductForm>
+      <TitleDetail>
+        <TitleType>01</TitleType>
+        <TitleElement><TitleElementLevel>01</TitleElementLevel><TitleText>Chalk 66</TitleText><Subtitle>The True Story of a Teenage Soldier, a Doomed D-Day Glider, and Eighty-Nine Days Behind Enemy Lines</Subtitle></TitleElement>
+      </TitleDetail>
+      <Contributor><SequenceNumber>1</SequenceNumber><ContributorRole>A01</ContributorRole><PersonName>Jim Fuller</PersonName></Contributor>
+      <Language><LanguageRole>01</LanguageRole><LanguageCode>eng</LanguageCode></Language>
+      <Extent><ExtentType>00</ExtentType><ExtentValue>196</ExtentValue><ExtentUnit>03</ExtentUnit></Extent>
+      <Subject><MainSubject/><SubjectSchemeIdentifier>93</SubjectSchemeIdentifier><SubjectCode>NHWR7</SubjectCode><SubjectHeadingText>Second World War</SubjectHeadingText></Subject>
+      <Subject><SubjectSchemeIdentifier>20</SubjectSchemeIdentifier><SubjectHeadingText>D-Day; Normandy; glider; 82nd Airborne; teenage soldier; behind enemy lines; WWII true story</SubjectHeadingText></Subject>
+    </DescriptiveDetail>
+    <CollateralDetail>
+      <TextContent><TextType>03</TextType><ContentAudience>00</ContentAudience><Text textformat="02">&lt;p&gt;He was nineteen. His glider hit the wrong field at eighty miles an hour, in the dark, in the first hour of D-Day. By first light he had held a dying man's hand, hidden from a German patrol, and been shot through the jaw.&lt;/p&gt;&lt;p&gt;That was day one of 89.&lt;/p&gt;&lt;p&gt;In the last days of May 1944, a warning reached the brigade about the field where Geoff Fuller's glider was meant to land: "The operation for landing zone V has only a limited chance of success." Nobody told the men.&lt;/p&gt;&lt;p&gt;On the night of 5 June he climbed into Chalk 66, a plywood Horsa glider carrying a jeep and twenty Bangalore torpedoes for the assault on the Merville Battery. On the bench beside him sat Ian Fyfe of the Daily Mirror, who had volunteered to be the first British journalist into France. He would be the only one killed on D-Day.&lt;/p&gt;&lt;p&gt;In March 1945, an Army captain wrote Geoff's whole war down for the War Office in a single line: "...and he was picked up by our troops later." Geoff read it upside down across the desk, and let it stand.&lt;/p&gt;&lt;p&gt;Those nine words went into the official record. This book is the 89 days they left out.&lt;/p&gt;&lt;p&gt;WHAT THE NINE WORDS LEFT OUT&lt;/p&gt;&lt;p&gt;Ten minutes in the wreck with the only British journalist killed on D-Day&lt;/p&gt;&lt;p&gt;Ten minutes in the wreck with the only British journalist killed on D-Day&lt;/p&gt;&lt;p&gt;A German surgeon, and why there could be no anaesthetic&lt;/p&gt;&lt;p&gt;A German surgeon, and why there could be no anaesthetic&lt;/p&gt;&lt;p&gt;The one word a Dutch nurse gave a boy who could not speak&lt;/p&gt;&lt;p&gt;The one word a Dutch nurse gave a boy who could not speak&lt;/p&gt;&lt;p&gt;A cart of cabbages, and a bayonet&lt;/p&gt;&lt;p&gt;A cart of cabbages, and a bayonet&lt;/p&gt;&lt;p&gt;An envelope on a mantelpiece at home that nobody could bring themselves to touch&lt;/p&gt;&lt;p&gt;An envelope on a mantelpiece at home that nobody could bring themselves to touch&lt;/p&gt;&lt;p&gt;TOLD ONCE. KEPT FOR 65 YEARS.&lt;/p&gt;&lt;p&gt;Geoff told the whole story only once, in 1961, sitting by his younger brother's hospital bed. He never spoke of it again. Jim Fuller, now ninety, has written it down in Geoff's voice, the way he heard it that night.&lt;/p&gt;&lt;p&gt;A code in the back of the book opens the family archive: the telegram, the Red Cross card with the prison-camp box left empty, the postcards the wounded men wrote their names on, and Ian Fyfe's last dispatch, printed the morning after he died.&lt;/p&gt;&lt;p&gt;If your grandfather, father or uncle came home from the war and never talked about it, this is what that silence was holding.&lt;/p&gt;</Text></TextContent>
+      <SupportingResource>
+        <ResourceContentType>01</ResourceContentType><ContentAudience>00</ContentAudience><ResourceMode>03</ResourceMode>
+        <ResourceVersion><ResourceForm>02</ResourceForm><ResourceLink>https://m.media-amazon.com/images/I/71uXGfe2WDL.jpg</ResourceLink></ResourceVersion>
+      </SupportingResource>
+    </CollateralDetail>
+    <PublishingDetail>
+      <Publisher><PublishingRole>01</PublishingRole><PublisherName>Independently published</PublisherName></Publisher>
+      <PublishingDate><PublishingDateRole>01</PublishingDateRole><Date dateformat="00">20261005</Date></PublishingDate>
+    </PublishingDetail>
+  </Product>
+  <Product>
+    <RecordReference>levity.lastmanout.pb</RecordReference>
+    <NotificationType>03</NotificationType>
+    <ProductIdentifier><ProductIDType>15</ProductIDType><IDValue>9798198537484</IDValue></ProductIdentifier>
+    <DescriptiveDetail>
+      <ProductComposition>00</ProductComposition>
+      <ProductForm>BC</ProductForm>
+      <TitleDetail>
+        <TitleType>01</TitleType>
+        <TitleElement><TitleElementLevel>01</TitleElementLevel><TitleText>Last Man Out</TitleText><Subtitle>An RAF Rear Gunner's True Story of Fire, Wire, and the Long Walk Home</Subtitle></TitleElement>
+      </TitleDetail>
+      <Contributor><SequenceNumber>1</SequenceNumber><ContributorRole>A01</ContributorRole><PersonName>Ronald M Wade</PersonName></Contributor>
+      <Language><LanguageRole>01</LanguageRole><LanguageCode>eng</LanguageCode></Language>
+      <Extent><ExtentType>00</ExtentType><ExtentValue>152</ExtentValue><ExtentUnit>03</ExtentUnit></Extent>
+      <Subject><MainSubject/><SubjectSchemeIdentifier>93</SubjectSchemeIdentifier><SubjectCode>NHWR7</SubjectCode><SubjectHeadingText>Second World War</SubjectHeadingText></Subject>
+      <Subject><SubjectSchemeIdentifier>20</SubjectSchemeIdentifier><SubjectHeadingText>RAF; Bomber Command; rear gunner; prisoner of war; Long March; WWII memoir; true story</SubjectHeadingText></Subject>
+    </DescriptiveDetail>
+    <CollateralDetail>
+      <TextContent><TextType>03</TextType><ContentAudience>00</ContentAudience><Text textformat="02">&lt;p&gt;His life. Or the man beside him. Sergeant Ron Wade had seven seconds to choose.&lt;/p&gt;&lt;p&gt;On the night of 16 January 1941, twenty-three-year-old Ron was about to jump from a burning Whitley bomber over the Dutch coast.&lt;/p&gt;&lt;p&gt;Then he saw his navigator coming up the fuselage. Parachute and harness in his hands. Unable to put them on.&lt;/p&gt;&lt;p&gt;The aircraft was on fire. The silk was on fire. The North Sea was below.&lt;/p&gt;&lt;p&gt;Ron turned back. He zipped the navigator's harness shut, pushed him out, and jumped after him.&lt;/p&gt;&lt;p&gt;He was the last man out of Z6462.&lt;/p&gt;&lt;p&gt;Of the 125,000 men who flew with RAF Bomber Command in the Second World War, 55,573 were killed. 9,838 were taken prisoner.&lt;/p&gt;&lt;p&gt;Ron was one of the 9,838.&lt;/p&gt;&lt;p&gt;And what came next was harder than the falling aircraft.&lt;/p&gt;&lt;p&gt;Last Man Out is the true story of the four and a half years that followed: four German prison camps, the camp the world would later know from The Great Escape, a 500 km forced winter march that killed men by the hundred, a homecoming that was harder than the wire, and a postwar Air Ministry that quietly stripped him of the rank he had earned behind it.&lt;/p&gt;&lt;p&gt;Inside Last Man Out you will discover:&lt;/p&gt;&lt;p&gt;The seven-second decision that defined a life, and the navigator who lived because of it.&lt;/p&gt;&lt;p&gt;The seven-second decision that defined a life, and the navigator who lived because of it.&lt;/p&gt;&lt;p&gt;Stalag Luft III, the camp Hollywood made famous, where Ron helped dig the first tunnels.&lt;/p&gt;&lt;p&gt;Stalag Luft III, the camp Hollywood made famous, where Ron helped dig the first tunnels.&lt;/p&gt;&lt;p&gt;The Long March of 1945: 500 kilometres on foot in the bitter winter, with dysentery, raw horsemeat, and SS troops shooting stragglers from behind.&lt;/p&gt;&lt;p&gt;The Long March of 1945: 500 kilometres on foot in the bitter winter, with dysentery, raw horsemeat, and SS troops shooting stragglers from behind.&lt;/p&gt;&lt;p&gt;The rescue Ron never talked about: how he organised the rota that carried failing men to safety, and the 25 to 40 prisoners who walked home because of him.&lt;/p&gt;&lt;p&gt;The rescue Ron never talked about: how he organised the rota that carried failing men to safety, and the 25 to 40 prisoners who walked home because of him.&lt;/p&gt;&lt;p&gt;15 April 1945, Ron's birthday, when RAF Typhoons mistook his column for retreating Germans. A man he had been carrying for a week was cut in two beside him. British tanks were 25 kilometres away, rolling into Bergen-Belsen. Ron didn't know.&lt;/p&gt;&lt;p&gt;15 April 1945, Ron's birthday, when RAF Typhoons mistook his column for retreating Germans. A man he had been carrying for a week was cut in two beside him. British tanks were 25 kilometres away, rolling into Bergen-Belsen. Ron didn't know.&lt;/p&gt;&lt;p&gt;The rank they took back: how the Air Ministry, after Ron came home half-deaf with a fractured skull, quietly demoted him from Warrant Officer to the lowest enlisted rank in the RAF.&lt;/p&gt;&lt;p&gt;The rank they took back: how the Air Ministry, after Ron came home half-deaf with a fractured skull, quietly demoted him from Warrant Officer to the lowest enlisted rank in the RAF.&lt;/p&gt;&lt;p&gt;The Caterpillar Club brooch, the one decoration nobody could take from him.&lt;/p&gt;&lt;p&gt;The Caterpillar Club brooch, the one decoration nobody could take from him.&lt;/p&gt;&lt;p&gt;Told in Ron's own plain, unflinching voice. Drawn from interviews, newspaper articles, and from a spiral-bound notebook his wife Amy kept for their grandchildren.&lt;/p&gt;&lt;p&gt;This is the story of a Master Grocer's son from the Potteries who flew, fell, walked, and came back. A man who, at the two worst moments of his war, turned back for people who could not walk out alone.&lt;/p&gt;&lt;p&gt;For readers of:&lt;/p&gt;&lt;p&gt;Make It Do by Ken Cam · First Light by Geoffrey Wellum · The Forgotten Highlander by Alistair Urquhart · Tail-End Charlies by John Nichol and Tony Rennell · Bomber Command by Max Hastings&lt;/p&gt;&lt;p&gt;This is one of the last memoirs of the generation of British aircrew who flew over Europe and lived to tell it. And one of the few places where Ron Wade's quiet heroism on the Long March is written down.&lt;/p&gt;&lt;p&gt;Order Last Man Out today, while there are still men like Ron to remember.&lt;/p&gt;</Text></TextContent>
+      <SupportingResource>
+        <ResourceContentType>01</ResourceContentType><ContentAudience>00</ContentAudience><ResourceMode>03</ResourceMode>
+        <ResourceVersion><ResourceForm>02</ResourceForm><ResourceLink>https://m.media-amazon.com/images/I/71YwUl78KjL.jpg</ResourceLink></ResourceVersion>
+      </SupportingResource>
+    </CollateralDetail>
+    <PublishingDetail>
+      <Publisher><PublishingRole>01</PublishingRole><PublisherName>Independently published</PublisherName></Publisher>
+      <PublishingDate><PublishingDateRole>01</PublishingDateRole><Date dateformat="00">20260525</Date></PublishingDate>
+    </PublishingDetail>
+  </Product>
+</ONIXMessage>
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+<script>
+(function () {
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- nav ---------- */
+  var nav = document.getElementById('nav');
+  var onScroll = function () { nav.classList.toggle('is-scrolled', window.scrollY > 10); };
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---------- the little record in the drop zone: fields light up in turn ---------- */
+  var hls = document.querySelectorAll('[data-hl]'), hi = 0;
+  if (!reduce && hls.length) setInterval(function () {
+    [].forEach.call(hls, function (h) { h.classList.remove('hl'); });
+    hls[hi % hls.length].classList.add('hl'); hi++;
+  }, 900);
+
+  /* ================= ONIX reader (in the browser; nothing is sent anywhere) ================= */
+  /* Short tags → reference names, so one reader handles both kinds of file. */
+  var SHORT = {
+    product:'Product', a001:'RecordReference', productidentifier:'ProductIdentifier', b221:'ProductIDType', b244:'IDValue',
+    descriptivedetail:'DescriptiveDetail', b012:'ProductForm', titledetail:'TitleDetail', b202:'TitleType', titleelement:'TitleElement',
+    x409:'TitleElementLevel', b203:'TitleText', b030:'TitlePrefix', b031:'TitleWithoutPrefix', b029:'Subtitle',
+    contributor:'Contributor', b035:'ContributorRole', b036:'PersonName', b037:'PersonNameInverted', b039:'NamesBeforeKey', b040:'KeyNames', b047:'CorporateName', b044:'BiographicalNote',
+    subject:'Subject', b067:'SubjectSchemeIdentifier', b069:'SubjectCode', b070:'SubjectHeadingText',
+    collateraldetail:'CollateralDetail', textcontent:'TextContent', x426:'TextType', d104:'Text',
+    supportingresource:'SupportingResource', x436:'ResourceContentType', resourceversion:'ResourceVersion', x435:'ResourceLink',
+    publishingdetail:'PublishingDetail', imprint:'Imprint', b079:'ImprintName', publisher:'Publisher', b081:'PublisherName',
+    publishingdate:'PublishingDate', x448:'PublishingDateRole', b306:'Date', extent:'Extent', b218:'ExtentType', b219:'ExtentValue'
+  };
+  function nm(el) { return SHORT[el.localName.toLowerCase()] || el.localName; }
+  function kids(el, name) { var out = []; if (!el) return out; for (var c = el.firstElementChild; c; c = c.nextElementSibling) if (nm(c) === name) out.push(c); return out; }
+  function kid(el, name) { return kids(el, name)[0] || null; }
+  function path(el, names) { for (var i = 0; el && i < names.length; i++) el = kid(el, names[i]); return el; }
+  function txt(el) { return el ? el.textContent.trim() : ''; }
+  function all(root, name) { var out = []; (function walk(e) { for (var c = e.firstElementChild; c; c = c.nextElementSibling) { if (nm(c) === name) out.push(c); else walk(c); } })(root); return out; }
+
+  /* Description text may be escaped HTML or XHTML children. Turn either into plain paragraphs. */
+  function plain(el) {
+    if (!el) return '';
+    var raw = el.firstElementChild ? [].map.call(el.childNodes, function (n) { return n.nodeType === 1 ? new XMLSerializer().serializeToString(n) : n.textContent; }).join('') : el.textContent;
+    var doc = new DOMParser().parseFromString('<body>' + raw + '</body>', 'text/html');
+    [].forEach.call(doc.body.querySelectorAll('br'), function (b) { b.replaceWith('\n'); });
+    [].forEach.call(doc.body.querySelectorAll('p,li,div,h1,h2,h3,h4,blockquote'), function (b) { b.append('\n'); });
+    var lines = doc.body.textContent.split('\n').map(function (s) { return s.replace(/\s+/g, ' ').trim(); }).filter(Boolean);
+    return lines.filter(function (l, i) { return l !== lines[i - 1]; }).join('\n');
+  }
+  function fmtLabel(code) {
+    code = (code || '').toUpperCase();
+    if (code === 'BB') return 'Hardback';
+    if (code === 'BC') return 'Paperback';
+    if (code[0] === 'B') return 'Print';
+    if (code[0] === 'E') return 'Ebook';
+    if (code[0] === 'A') return 'Audiobook';
+    return code ? 'Other' : '';
+  }
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function niceDate(d) {
+    var m = /^(\d{4})(\d{2})?(\d{2})?/.exec(d || ''); if (!m) return '';
+    return (m[3] ? +m[3] + ' ' : '') + (m[2] ? MONTHS[+m[2] - 1] + ' ' : '') + m[1];
+  }
+  function personName(c) {
+    var n = txt(kid(c, 'PersonName')) || txt(kid(c, 'CorporateName'));
+    if (!n) { var a = txt(kid(c, 'NamesBeforeKey')), b = txt(kid(c, 'KeyNames')); n = (a + ' ' + b).trim(); }
+    if (!n) { var inv = txt(kid(c, 'PersonNameInverted')); n = inv.indexOf(',') > 0 ? inv.split(',').slice(1).join(',').trim() + ' ' + inv.split(',')[0].trim() : inv; }
+    return n;
+  }
+
+  function readProduct(p) {
+    var r = { ref: txt(kid(p, 'RecordReference')), isbn: '', form: '', title: '', subtitle: '', authors: [], bio: '', subjects: [], codes: 0, desc: '', reviews: 0, excerpt: false, cover: '', imprint: '', date: '', pages: '' };
+    kids(p, 'ProductIdentifier').forEach(function (id) { var t = txt(kid(id, 'ProductIDType')); if ((t === '15' || (t === '03' && !r.isbn))) r.isbn = txt(kid(id, 'IDValue')); });
+    var dd = kid(p, 'DescriptiveDetail');
+    r.form = txt(kid(dd, 'ProductForm'));
+    var td = kids(dd, 'TitleDetail').filter(function (t) { return txt(kid(t, 'TitleType')) === '01'; })[0] || kid(dd, 'TitleDetail');
+    var te = td && (kids(td, 'TitleElement').filter(function (e) { return txt(kid(e, 'TitleElementLevel')) === '01'; })[0] || kid(td, 'TitleElement'));
+    if (te) {
+      r.title = txt(kid(te, 'TitleText')) || ((txt(kid(te, 'TitlePrefix')) + ' ' + txt(kid(te, 'TitleWithoutPrefix'))).trim());
+      r.subtitle = txt(kid(te, 'Subtitle'));
+    }
+    kids(dd, 'Contributor').forEach(function (c) {
+      var role = txt(kid(c, 'ContributorRole')), n = personName(c);
+      if (n && /^A0[1-9]|^A1|^B0[1-6]$/.test(role || 'A01') && r.authors.length < 3) r.authors.push(n);
+      if (!r.bio) r.bio = plain(kid(c, 'BiographicalNote'));
+    });
+    kids(dd, 'Subject').forEach(function (s) {
+      var head = txt(kid(s, 'SubjectHeadingText')), code = txt(kid(s, 'SubjectCode'));
+      if (head) head.split(/\s*;\s*/).forEach(function (h) { if (h && r.subjects.indexOf(h) < 0) r.subjects.push(h); });
+      else if (code) r.codes++;
+    });
+    var pages = kids(dd, 'Extent').filter(function (e) { return /^0?0$|^11$/.test(txt(kid(e, 'ExtentType'))); })[0];
+    r.pages = txt(kid(pages, 'ExtentValue'));
+    var cd = kid(p, 'CollateralDetail'), descBy = {};
+    kids(cd, 'TextContent').forEach(function (t) {
+      var type = txt(kid(t, 'TextType'));
+      if (type === '02' || type === '03' || type === '05' || type === '10') { if (!descBy[type]) descBy[type] = plain(kid(t, 'Text')); }
+      else if (type === '06' || type === '07' || type === '08' || type === '09') r.reviews++;
+      else if (type === '14' || type === '26') r.excerpt = true;
+      else if (type === '12' && !r.bio) r.bio = plain(kid(t, 'Text'));
+    });
+    r.desc = descBy['03'] || descBy['02'] || descBy['05'] || descBy['10'] || '';
+    kids(cd, 'SupportingResource').forEach(function (s) {
+      if (r.cover || txt(kid(s, 'ResourceContentType')) !== '01') return;
+      kids(s, 'ResourceVersion').some(function (v) { var u = txt(kid(v, 'ResourceLink')); if (/^https?:\/\//i.test(u)) { r.cover = u; return true; } return false; });
+    });
+    var pd = kid(p, 'PublishingDetail');
+    r.imprint = txt(path(pd, ['Imprint', 'ImprintName'])) || txt(path(pd, ['Publisher', 'PublisherName']));
+    var pubDate = kids(pd, 'PublishingDate').filter(function (d) { return txt(kid(d, 'PublishingDateRole')) === '01'; })[0] || kid(pd, 'PublishingDate');
+    r.date = txt(kid(pubDate, 'Date'));
+    r.xml = p;
+    return r;
+  }
+
+  /* Paperback, ebook and audio of one book → one title, keeping the best of each field. */
+  function group(products) {
+    var by = {}, order = [];
+    products.forEach(function (r) {
+      if (!r.title) return;
+      var key = (r.title + '|' + (r.authors[0] || '')).toLowerCase().replace(/[^a-z0-9|]+/g, '');
+      var w = by[key];
+      if (!w) { w = by[key] = { title: r.title, subtitle: r.subtitle, authors: r.authors, bio: r.bio, subjects: r.subjects.slice(), codes: r.codes, desc: r.desc, reviews: r.reviews, excerpt: r.excerpt, cover: r.cover, imprint: r.imprint, date: r.date, pages: r.pages, isbn: r.isbn, forms: [], records: [] }; order.push(w); }
+      else {
+        if (r.desc.length > w.desc.length) w.desc = r.desc;
+        if (!w.cover) w.cover = r.cover;
+        if (!w.subtitle) w.subtitle = r.subtitle;
+        if (!w.bio) w.bio = r.bio;
+        if (!w.imprint) w.imprint = r.imprint;
+        if (!w.pages) w.pages = r.pages;
+        w.reviews = Math.max(w.reviews, r.reviews);
+        w.codes += r.codes;
+        w.excerpt = w.excerpt || r.excerpt;
+        if (r.date && (!w.date || r.date < w.date)) w.date = r.date;
+        r.subjects.forEach(function (s) { if (w.subjects.indexOf(s) < 0) w.subjects.push(s); });
+      }
+      var f = fmtLabel(r.form); if (f && w.forms.indexOf(f) < 0) w.forms.push(f);
+      w.records.push(r);
+    });
+    /* Newest first, like the app's "Which book first?" */
+    return order.sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+  }
+
+  function parse(xmlText) {
+    var doc = new DOMParser().parseFromString(xmlText, 'application/xml');
+    if (doc.getElementsByTagName('parsererror').length) throw new Error("This file isn't valid XML, so it can't be ONIX. Is it the right export?");
+    var rootEl = doc.documentElement, root = rootEl.localName.toLowerCase();
+    if (root !== 'onixmessage') throw new Error("We couldn't find an ONIX message in this file. ONIX files start with <ONIXMessage>.");
+    var rel = rootEl.getAttribute('release') || '';
+    var products = all(rootEl, 'Product');
+    if (!products.length) throw new Error('This ONIX file has no products in it.');
+    if (!/^3\./.test(rel) && !products.some(function (p) { return kid(p, 'DescriptiveDetail'); }))
+      throw new Error('This looks like ONIX 2.1. Sonder reads ONIX 3.0 and 3.1, and most publishing systems can export 3.0 with one setting.');
+    return { release: rel || '3.0', products: products.map(readProduct) };
+  }
+
+  /* ---------- drawing the results ---------- */
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  var SHOW = 40;
+
+  function pretty(node) {
+    var s = new XMLSerializer().serializeToString(node).replace(/\sxmlns="[^"]*"/g, '');
+    var out = '', depth = 0;
+    s.replace(/>\s*</g, '><').split(/(?=<)/).forEach(function (tok) {
+      if (/^<\//.test(tok)) depth = Math.max(0, depth - 1);
+      var open = /^<[^\/!?][^>]*[^\/]>$/.test(tok) || /^<[^\/!?]>$/.test(tok);
+      out += (out && /^</.test(tok) ? '\n' + '  '.repeat(depth) : '') + tok;
+      if (open && !/<\/[^>]+>$/.test(tok)) depth++;
+      if (/^<[^\/][^>]*>[^<]+$/.test(tok)) depth++;
+    });
+    return out.length > 6000 ? out.slice(0, 6000) + '\n…' : out;
+  }
+
+  function card(w, i) {
+    var c = el('article', 'title'); c.style.setProperty('--i', Math.min(i, 12));
+    var cov = el('div', 'cover');
+    if (w.cover) {
+      var img = new Image(); img.alt = 'Cover of ' + w.title; img.loading = 'lazy'; img.referrerPolicy = 'no-referrer';
+      img.onload = function () { cov.classList.add('has'); };
+      img.onerror = function () { cov.textContent = 'Cover link didn\'t load. You can add one in Sonder.'; cov.classList.remove('has'); w.coverBroken = true; };
+      img.src = w.cover; cov.appendChild(img);
+    } else cov.textContent = 'No cover in the record. You can add one in Sonder.';
+    c.appendChild(cov);
+
+    var b = el('div', 't-body');
+    b.appendChild(el('h3', null, w.title));
+    if (w.subtitle) b.appendChild(el('p', 'sub', w.subtitle));
+    if (w.authors.length) { var by = el('p', 'by'); by.append('by '); by.appendChild(el('b', null, w.authors.join(', '))); if (w.imprint) by.append(' · ' + w.imprint); b.appendChild(by); }
+    var meta = el('div', 'meta');
+    w.forms.forEach(function (f) { meta.appendChild(el('span', 'tag', f)); });
+    if (w.date) meta.appendChild(el('span', 'tag', niceDate(w.date)));
+    if (w.isbn) meta.appendChild(el('span', 'tag m', w.isbn));
+    w.subjects.slice(0, 3).forEach(function (s) { meta.appendChild(el('span', 'tag', s)); });
+    b.appendChild(meta);
+    if (w.desc) b.appendChild(el('p', 'desc', w.desc.replace(/\n/g, ' ')));
+
+    var uses = el('div', 'uses');
+    [['Description', w.desc.length >= 150], ['Cover', !!w.cover], ['Subjects', w.subjects.length + w.codes > 0], ['Reviews' + (w.reviews ? ' (' + w.reviews + ')' : ''), w.reviews > 0], ['Excerpt', w.excerpt], ['Author bio', !!w.bio]]
+      .forEach(function (u) { uses.appendChild(el('span', u[1] ? 'y' : '', u[0])); });
+    b.appendChild(uses);
+
+    var ready = w.desc.length >= 150, v;
+    if (ready && w.cover) v = el('span', 'verdict ok', '✓ Ready for video');
+    else if (ready) v = el('span', 'verdict warn', 'Ready once it has a cover');
+    else v = el('span', 'verdict warn', 'Thin description. Add a manuscript or a few lines');
+    b.appendChild(v);
+    c.appendChild(b);
+
+    var d = el('details', 'raw'), s = el('summary', null, 'See the ONIX' + (w.records.length > 1 ? ' (' + w.records.length + ' records)' : ''));
+    d.appendChild(s);
+    d.addEventListener('toggle', function () {
+      if (!d.open || d.dataset.done) return; d.dataset.done = '1';
+      d.appendChild(el('pre', null, pretty(w.records[0].xml)));
+    });
+    c.appendChild(d);
+    return c;
+  }
+
+  function show(name, result, ms) {
+    var works = group(result.products);
+    if (!works.length) throw new Error('We read the file but found no titles in it.');
+    var n = works.length;
+    $('res-h').textContent = n === 1 ? '1 title, ready to go.' : n.toLocaleString() + ' titles, ready to go.';
+    $('res-file').textContent = name + ' · ONIX ' + result.release + ' · ' + result.products.length.toLocaleString() + ' record' + (result.products.length === 1 ? '' : 's') + ' read in ' + (ms < 1000 ? Math.max(1, Math.round(ms)) + ' ms' : (ms / 1000).toFixed(1) + ' s');
+    var count = function (f) { return works.filter(f).length; };
+    var stats = [
+      [n, n === 1 ? 'title' : 'titles'],
+      [count(function (w) { return !!w.cover; }), 'with a cover'],
+      [count(function (w) { return w.desc.length >= 150; }), 'with a full description'],
+      [count(function (w) { return w.reviews > 0; }), 'with reviews'],
+      [result.products.length - n, 'editions merged']
+    ];
+    var st = $('stats'); st.textContent = '';
+    stats.forEach(function (s) { var d = el('div'); d.appendChild(el('b', null, s[0].toLocaleString())); d.appendChild(el('span', null, s[1])); st.appendChild(d); });
+    var g = $('grid'); g.textContent = '';
+    works.slice(0, SHOW).forEach(function (w, i) { g.appendChild(card(w, i)); });
+    var more = $('more');
+    if (n > SHOW) { more.hidden = false; more.textContent = 'Showing the newest ' + SHOW + '. The other ' + (n - SHOW).toLocaleString() + ' come in the same way.'; }
+    else more.hidden = true;
+    var res = $('results'); res.classList.add('on');
+    res.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    try { if (window.fbq) fbq('trackCustom', 'OnixDemoRead', { titles: n }); } catch (e) {}
+  }
+
+  /* ---------- reading files ---------- */
+  var drop = $('drop'), input = $('file');
+  function fail(msg) { drop.classList.remove('busy'); drop.classList.add('bad'); $('err').textContent = msg; }
+  function readText(file) { return file.text ? file.text() : new Promise(function (ok, no) { var fr = new FileReader(); fr.onload = function () { ok(fr.result); }; fr.onerror = no; fr.readAsText(file); }); }
+
+  function go(name, getXml) {
+    drop.classList.remove('bad'); drop.classList.add('busy'); $('reading-text').textContent = 'Reading ' + name + '…';
+    var t0 = performance.now();
+    /* Let the spinner paint before a big file ties up the page. */
+    setTimeout(function () {
+      Promise.resolve().then(getXml).then(function (xmls) {
+        var merged = { release: '', products: [] }, errs = [];
+        xmls.forEach(function (x) { try { var r = parse(x); merged.release = merged.release || r.release; merged.products = merged.products.concat(r.products); } catch (e) { errs.push(e.message); } });
+        if (!merged.products.length) throw new Error(errs[0] || 'We found no ONIX in this file.');
+        show(name, merged, performance.now() - t0);
+        drop.classList.remove('busy');
+      }).catch(function (e) { fail(e && e.message ? e.message : "We couldn't read that file."); });
+    }, 60);
+  }
+
+  function handle(file) {
+    if (!file) return;
+    var isZip = /\.zip$/i.test(file.name) || /zip/.test(file.type);
+    go(file.name, function () {
+      if (!isZip) return readText(file).then(function (t) { return [t]; });
+      if (!window.JSZip) throw new Error("The zip reader didn't load. Unzip the file and drop the .xml instead.");
+      return JSZip.loadAsync(file).then(function (z) {
+        var files = Object.keys(z.files).filter(function (k) { return !z.files[k].dir && /\.(xml|onx|onix)$/i.test(k) && !/__MACOSX/.test(k); });
+        if (!files.length) throw new Error('There is no ONIX (.xml) file inside this zip.');
+        return Promise.all(files.map(function (k) { return z.files[k].async('string'); }));
+      });
+    });
+  }
+
+  input.addEventListener('change', function () { handle(input.files[0]); input.value = ''; });
+  ['dragenter', 'dragover'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('over'); }); });
+  ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); if (t === 'dragleave' && drop.contains(e.relatedTarget)) return; drop.classList.remove('over'); }); });
+  drop.addEventListener('drop', function (e) { var f = e.dataTransfer && e.dataTransfer.files[0]; handle(f); });
+  /* A file dropped anywhere else on the page shouldn't open in the tab. */
+  window.addEventListener('dragover', function (e) { e.preventDefault(); });
+  window.addEventListener('drop', function (e) { if (!drop.contains(e.target)) { e.preventDefault(); handle(e.dataTransfer && e.dataTransfer.files[0]); } });
+  $('sample').addEventListener('click', function () { go('Sample ONIX (2 titles)', function () { return [$('sample-onix').textContent.trim()]; }); });
+
+  /* ================= email capture: same flow and API as /publishers ================= */
+  var APP = 'https://app.yousonder.com';
+  var LEAD_API = 'https://api.yousonder.com/api/public/publisher-lead';
+  var CARRY = ['fbclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','ttclid','via','dub_id'];
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  var BAD_EMAIL = "That email doesn't look right. Please check it and try again.";
+  function carried() {
+    var o = {};
+    try { var q = new URL(location.href).searchParams; CARRY.forEach(function (k) { var v = q.get(k); if (v) o[k] = v; }); } catch (e) {}
+    if (!o.utm_content) o.utm_content = 'onix_page';
+    return o;
+  }
+  function withTracking(raw, email) {
+    var u;
+    try { u = new URL(raw && String(raw).indexOf(APP + '/') === 0 ? raw : APP + '/signup?publisher=1'); } catch (e) { u = new URL(APP + '/signup?publisher=1'); }
+    if (!u.searchParams.has('publisher')) u.searchParams.set('publisher', '1');
+    if (email && !u.searchParams.has('email')) u.searchParams.set('email', email);
+    var c = carried(); Object.keys(c).forEach(function (k) { if (!u.searchParams.has(k)) u.searchParams.set(k, c[k]); });
+    return u.toString();
+  }
+  [].forEach.call(document.querySelectorAll('form[data-capture]'), function (f) {
+    var inp = f.querySelector('input'), btn = f.querySelector('button'), help = f.querySelector('.cap-help'), helpText = help.textContent, busy = false;
+    function setBad(msg) { f.classList.toggle('bad', !!msg); inp.setAttribute('aria-invalid', msg ? 'true' : 'false'); help.textContent = msg || helpText; }
+    inp.addEventListener('input', function () { if (f.classList.contains('bad') && EMAIL_RE.test(inp.value.trim())) setBad(''); });
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (busy) return;
+      var email = inp.value.trim();
+      if (!EMAIL_RE.test(email)) { setBad(BAD_EMAIL); inp.focus(); return; }
+      setBad(''); busy = true; btn.setAttribute('aria-busy', 'true'); btn.disabled = true;
+      var done = false;
+      function finish(next, ok) {
+        if (done) return; done = true;
+        if (!ok) { busy = false; btn.removeAttribute('aria-busy'); btn.disabled = false; return; }
+        try { if (window.fbq) fbq('trackCustom', 'PublisherLead', { content_name:'onix_page' }); } catch (err) {}
+        setTimeout(function () { location.href = next; }, 200);
+      }
+      var fallback = withTracking(null, email);
+      var timer = setTimeout(function () { finish(fallback, true); }, 8000);
+      fetch(LEAD_API, { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ email: email, utm: carried() }) })
+        .then(function (r) { return r.json().catch(function () { return null; }).then(function (j) { return { status: r.status, j: j }; }); })
+        .then(function (res) {
+          clearTimeout(timer);
+          if (res.status === 400) { setBad(BAD_EMAIL); inp.focus(); finish(null, false); return; }
+          var j = res.j;
+          finish(j && j.success && j.data && j.data.signupUrl ? withTracking(j.data.signupUrl, email) : fallback, true);
+        })
+        .catch(function () { clearTimeout(timer); finish(fallback, true); });
+    });
+  });
+})();
+</script>
+</body>
+</html>
