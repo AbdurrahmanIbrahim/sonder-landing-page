@@ -439,7 +439,7 @@ function writing() { return S.launch === 'writing'; }
 function recTier() { return S.books === 3 ? 'studio' : 'author'; }
 function tier() { var id = S.tier || recTier(); return TIERS.filter(function (t) { return t.id === id; })[0]; }
 function endLine() {
-  if (writing()) return 'Coming soon. Comment TRUE if you’d like to be an early reader.';
+  if (writing() || S.launch === 'soon') return 'Coming soon. Comment TRUE if you want to be one of the first to read it.';
   if (S.sell === 'wide') return 'Find [your book] at your favourite bookstore.';
   if (S.sell === 'own') return 'The link is in my bio.';
   return 'Search [your book] on Amazon.';
