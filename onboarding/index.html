@@ -157,6 +157,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .auto-btn{margin-top:8px;align-self:flex-start;border:0;border-radius:999px;background:var(--mint);color:var(--ink);font-weight:600;font-size:14.5px;padding:11px 18px;display:inline-flex;align-items:center;gap:8px;text-align:left}
 .auto-btn svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .auto-btn:hover{background:#9FFFE0}
+.auto-done{margin-top:8px;display:flex;gap:8px;align-items:flex-start;font-size:14.5px;color:#fff;line-height:1.45}
+.auto-done svg{width:20px;height:20px;flex:none;stroke:var(--mint)}
 
 /* pricing */
 .offer{background:var(--ink);color:#fff;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
@@ -175,6 +177,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .plan .pl-n{font-weight:700;font-size:16.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .plan .pl-n em{font-style:normal;font-size:11px;font-weight:600;color:var(--mint-ink);background:var(--mint-tint);border:1px solid var(--mint-line);padding:1px 7px;border-radius:999px}
 .plan .pl-d{font-size:13px;color:var(--ink-3)}
+.plan .pl-why{display:block;margin-top:4px;font-size:13px;line-height:1.4;color:var(--ink-2)}
 .plan .pl-r{text-align:right;flex:none}
 .plan .pl-p{display:block;font-family:var(--f-display);font-weight:900;font-size:24px;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .plan .pl-s{font-size:12px;color:var(--ink-3)}
@@ -423,9 +426,9 @@ var SELL = { amazon:'Amazon only', wide:'Amazon and other bookshops', own:'My ow
 var TYPE_LABEL = { viral_script:'Viral Script', slideshow:'Slideshow', amazon_ad:'Amazon Ad' };
 var STYLE_LABEL = { inkwell:'Inkwell', stick_figure:'Stick Figure', toybox:'Toybox' };
 var TIERS = [
-  { id:'starter', name:'Starter', price:49, books:'1 book', videos:'5 videos a month, or 10 shorts' },
-  { id:'author', name:'Author', price:99, books:'2 books', videos:'12 videos a month, or 24 shorts' },
-  { id:'studio', name:'Studio', price:209, books:'3 books', videos:'30 videos a month, or 60 shorts' }
+  { id:'starter', name:'Starter', price:49, books:'1 book', videos:'5 videos a month, or 10 shorts', shorts:10 },
+  { id:'author', name:'Author', price:99, books:'2 books', videos:'12 videos a month, or 24 shorts', shorts:24 },
+  { id:'studio', name:'Studio', price:209, books:'3 books', videos:'30 videos a month, or 60 shorts', shorts:60 }
 ];
 TIERS.forEach(function (t) { t.first = Math.ceil(t.price * 0.7); });
 
@@ -443,15 +446,37 @@ function fmtDay(iso) { return new Intl.DateTimeFormat('en-GB', { weekday:'short'
 function daysUntil(iso) { return Math.max(0, Math.round((new Date(iso + 'T12:00:00') - new Date()) / 864e5)); }
 function genreLabel() { if (S.kind === 'memoir') return ''; if (S.genre === 'other') return S.genreOther.trim() || 'Something else'; var g = (GENRES[S.kind] || []).filter(function (x) { return x[0] === S.genre; })[0]; return g ? g[1] : ''; }
 function writing() { return S.launch === 'writing'; }
-function recTier() { return S.books === 3 ? 'studio' : S.books === 2 ? 'author' : 'starter'; }
-function tier() { var id = S.tier || recTier(); return TIERS.filter(function (t) { return t.id === id; })[0]; }
+// Not out yet: still being written, or launching on a day that hasn't come
+// (sonder-server lib/onboardingQuiz.ts notOutYet). From launch day it's out.
+function notOut() { return writing() || (S.launch === 'soon' && S.launchDate > addDays(0)); }
+// The recommended plan follows the money goal; the books answer is the floor
+// (Mike, 26 Oct 2026). The SAME table as sonder-server lib/onboardingQuiz.ts
+// GOAL_TIER, and the page prefers the plan the server returns with the quiz.
+var GOAL_TIER = { g500:'author', g1000:'studio', g2500:'studio', g5000:'studio', unsure:null };
+var RANK = { starter:0, author:1, studio:2 };
+function booksTier() { return S.books === 3 ? 'studio' : S.books === 2 ? 'author' : 'starter'; }
+function localRec() { var b = booksTier(), g = S.goal ? GOAL_TIER[S.goal] : null; return g && RANK[g] >= RANK[b] ? { id:g, by:'goal' } : { id:b, by:'books' }; }
+function recTier() { var q = S.quiz || {}; return q.recommendedWhy && RANK[q.recommendedTier] !== undefined ? q.recommendedTier : localRec().id; }
+function tierOf(id) { return TIERS.filter(function (t) { return t.id === id; })[0]; }
+function tier() { return tierOf(S.tier || recTier()); }
+// One plain line under "Best for you" saying why, in the goal's own terms
+// (sonder-server recommendedWhy, mirrored here for a server that doesn't send it).
+function recWhy() {
+  var q = S.quiz || {}; if (q.recommendedWhy) return q.recommendedWhy;
+  var r = localRec(), t = tierOf(r.id), pc = r.by === 'goal' ? q.pace : null;
+  if (!pc || !pc.videosPerDay) return t.name + ' covers ' + (S.books === 1 ? 'your book' : S.books === 2 ? 'your two books' : 'three books') + ', with up to ' + t.shorts + ' short videos a month.';
+  var n = pc.videosPerDay, m = n * 30, goal = '$' + pc.goalUsd.toLocaleString('en-US') + ' a month';
+  if (t.shorts >= m) return 'About ' + n + ' video' + (n === 1 ? '' : 's') + ' a day needs around ' + m + ' short videos a month. ' + t.name + ' covers that.';
+  if (t.shorts >= m * 0.75) return 'To aim for ' + goal + ', post about ' + (n === 1 ? 'once' : n + ' times') + ' a day. ' + t.name + ' gives you up to ' + t.shorts + ' short videos a month, enough to post most days.';
+  return 'To aim for ' + goal + ', post as much as you can. ' + t.name + ' gives you the most to start with: up to ' + t.shorts + ' short videos a month, and you can add more any time.';
+}
 // What the plan promises must be what the videos say. Viral Scripts end on
-// Link in bio (or Coming soon) until they get the Amazon and bookstore endings;
-// short videos already have every ending (sonder-server lib/onboardingQuiz.ts endingsFor).
-function videoEnd() { return (writing() || S.launch === 'soon') ? endLine() : 'Link in bio.'; }
-function shopWords() { return S.sell === 'wide' ? 'your favourite bookstore' : S.sell === 'own' ? 'your website' : 'your Amazon page'; }
+// Link in bio (or Coming soon); short videos have every ending; slideshows end
+// on a soft reveal of the cover, so the page never says "every video"
+// (sonder-server lib/onboardingQuiz.ts endingsFor).
+function videoEnd() { return notOut() ? endLine() : 'Link in bio.'; }
 function endLine() {
-  if (writing() || S.launch === 'soon') return 'Coming soon. Comment TRUE if you want to be one of the first to read it.';
+  if (notOut()) return 'Coming soon. Comment TRUE if you want to be one of the first to read it.';
   if (S.sell === 'wide') return 'Find [your book] at your favourite bookstore.';
   if (S.sell === 'own') return 'The link is in my bio.';
   return 'Search [your book] on Amazon.';
@@ -503,7 +528,7 @@ var SCREENS = {
       GENRES[k].map(function (g) { return opt({ label:g[1], on:S.genre === g[0], attrs:'data-pick="genre" data-val="' + g[0] + '" data-auto' }); }).join('') +
       opt({ label:'Something else', on:S.genre === 'other', attrs:'data-pick="genre" data-val="other"' }) + '</div>' +
       (S.genre === 'other' ? '<div class="field"><label for="g-other">Describe it in a few words</label><input id="g-other" class="input" maxlength="120" value="' + esc(S.genreOther) + '"></div>' + cta('Continue', !S.genreOther.trim(), 'next', 'go') : ''); },
-  launch: function () { var fb = { live:'Great. We’ll start selling the book you already have.', soon:'We’ll build up to launch day, so readers are waiting for it.', writing:'We’ll tease it now, so readers are waiting when it’s out. Every video ends with “Coming soon”.' }[S.launch];
+  launch: function () { var fb = { live:'Great. We’ll start selling the book you already have.', soon:'We’ll build up to launch day, so readers are waiting for it.', writing:'We’ll tease it now, so readers are waiting when it’s out. Your Viral Scripts and short videos end with “Coming soon”.' }[S.launch];
     return '<h1>Is your book out yet?</h1><div class="opts" role="radiogroup">' +
       opt({ label:'Yes, it’s out', on:S.launch === 'live', attrs:'data-pick="launch" data-val="live"' }) +
       opt({ label:'Launching soon', on:S.launch === 'soon', attrs:'data-pick="launch" data-val="soon"' }) +
@@ -511,7 +536,7 @@ var SCREENS = {
       (S.launch === 'soon' ? '<div class="field"><label for="ldate">Launch date</label><input id="ldate" type="date" class="input" value="' + esc(S.launchDate) + '" min="' + addDays(0) + '"></div>' : '') +
       (fb ? '<div class="note">' + esc(fb) + '</div>' : '') + cta('Continue', !S.launch); },
   channels: function () { var n = S.channels.length || S.none;
-    var fb = S.none ? 'No problem. Most authors start on TikTok and Instagram, and we’ll help you set them up.' : S.channels.length ? 'We’ll size and caption every video for ' + chanText() + '.' : '';
+    var fb = S.none ? 'No problem. Most authors start on TikTok and Instagram, and we’ll help you set them up.' : S.channels.length ? 'Your videos come ready for ' + chanText() + ': upright, with the words on screen.' : '';
     return '<h1>Where do you post today?</h1><p class="sub">Pick all that apply.</p><div class="opts">' +
       CHANNELS.map(function (c) { return opt({ label:c[1], multi:true, on:S.channels.indexOf(c[0]) >= 0, attrs:'data-toggle="' + c[0] + '"' }); }).join('') +
       opt({ label:'Nowhere yet', multi:true, on:S.none, attrs:'data-toggle="none"' }) + '</div>' + (fb ? '<div class="note">' + esc(fb) + '</div>' : '') + cta('Continue', !n); },
@@ -520,7 +545,7 @@ var SCREENS = {
       opt({ label:SELL.amazon, on:S.sell === 'amazon', attrs:'data-pick="sell" data-val="amazon"' }) +
       opt({ label:SELL.wide, desc:'Kobo, Barnes & Noble, Apple Books and others', on:S.sell === 'wide', attrs:'data-pick="sell" data-val="wide"' }) +
       opt({ label:SELL.own, on:S.sell === 'own', attrs:'data-pick="sell" data-val="own"' }) + '</div>' +
-      (S.sell ? '<div class="note">' + ((writing() || S.launch === 'soon') ? 'Until it\u2019s out, every video ends: \u201C' + esc(endLine()) + '\u201D' : 'Every video sends readers to ' + esc(shopWords()) + '.') + '</div>' : '') + cta('Continue', !S.sell); },
+      (S.sell ? '<div class="note">' + (notOut() ? 'Until it\u2019s out, your Viral Scripts and short videos end: \u201C' + esc(endLine()) + '\u201D' : 'Your short videos end: \u201C' + esc(endLine()) + '\u201D') + '</div>' : '') + cta('Continue', !S.sell); },
   books: function () {
     return '<h1>How many books do you want to promote?</h1><p class="sub">You can add more later.</p><div class="opts" role="radiogroup">' +
       opt({ label:'Just this one', on:S.books === 1, attrs:'data-pick="books" data-val="1" data-auto' }) +
@@ -540,7 +565,7 @@ var SCREENS = {
   building: function () {
     var lines = [S.kind === 'memoir' ? 'Choosing the right first video for your true story' : 'Choosing the right first video for your ' + (genreLabel() || 'book').toLowerCase() + (S.kind === 'kids' ? '' : ' book'),
       writing() ? 'Planning teasers that end on “Coming soon”' : 'Setting how every video ends',
-      'Sizing your videos for ' + chanText()];
+      'Getting your videos ready for ' + chanText()];
     return '<p class="eyebrow">One moment</p><h1>Building your plan</h1><div class="build"><div class="bigbar"><i></i></div><ul>' +
       lines.map(function (b) { return '<li>' + I.check + '<span>' + esc(b) + '</span></li>'; }).join('') + '</ul></div>'; },
   account: function () {
@@ -560,7 +585,7 @@ var SCREENS = {
         return '<li class="' + (s.paidOnly ? 'paid' : '') + '"><span class="n">' + (i + 1) + '</span><span><span class="ct">' + esc(TYPE_LABEL[s.type]) +
           (s.style ? '<em>' + esc(STYLE_LABEL[s.style] || s.style) + '</em>' : '') + (s.gift ? '<em class="gift">Gift video</em>' : '') + (s.paidOnly ? '<em class="lock">When your plan starts</em>' : '') +
           '</span><span class="cw">' + esc(why) + '</span></span></li>'; }).join('') + '</ol></div>' +
-      ((writing() || S.launch === 'soon') ? '<div class="endline">Every video ends: <b>\u201C' + esc(endLine()) + '\u201D</b></div>' : '<div class="endline">Viral Scripts end: <b>\u201C' + esc(videoEnd()) + '\u201D</b> Short videos end: <b>\u201C' + esc(endLine()) + '\u201D</b></div>') +
+      (notOut() ? '<div class="endline">Until it\u2019s out, Viral Scripts and short videos end: <b>\u201C' + esc(endLine()) + '\u201D</b></div>' : '<div class="endline">Viral Scripts end: <b>\u201C' + esc(videoEnd()) + '\u201D</b> Short videos end: <b>\u201C' + esc(endLine()) + '\u201D</b></div>') +
       '<div class="sect"><h2>Your free trial</h2><p class="sub" style="margin:0">Seven days and 5 videos. Start with the first two above, then try the other video types and find your favourites.</p></div>' +
       paceBlock() +
       '<div class="note"><b>Post a lot, and keep going.</b> Views usually build in weeks 3 to 5, and sales follow. The authors who win are the ones who stay consistent.</div>' + cta('See my price'); },
@@ -572,7 +597,7 @@ var SCREENS = {
       (dl !== null ? '<p class="launchline"><span>Your launch is <strong>' + dl + ' day' + (dl === 1 ? '' : 's') + ' away</strong>. ' + (wk >= 1 ? 'Start today and you’ll have ' + (wk === 1 ? 'a week' : wk + ' weeks') + ' of videos posted before launch day.' : 'Start today to have videos posting before launch day.') + '</span></p>' : '') +
       (live ? '<div class="offer"><div class="o-top"><span class="o-l">30% off if you start today</span><span class="cd" id="cd">' + countdown() + '</span></div><p>Start your trial before <b>' + esc(et) + ' ET</b> (' + esc(pt) + ' PT) and your first paid month is <b>$' + t.first + '</b> instead of $' + t.price + '. This price is held for you only. It won’t come back.</p></div>' : '') +
       '<div class="plans" role="radiogroup">' + TIERS.map(function (x) {
-        return '<button class="plan ' + (x.id === t.id ? 'on' : '') + '" data-pick="tier" data-val="' + x.id + '" role="radio" aria-checked="' + (x.id === t.id) + '"><span class="pl-l"><span class="pl-n">' + x.name + (x.id === recTier() ? '<em>Best for you</em>' : x.id === 'author' ? '<em class="alt">About 3 posts a week</em>' : '') + '</span><span class="pl-d">' + x.books + ' · ' + x.videos + '</span></span>' +
+        return '<button class="plan ' + (x.id === t.id ? 'on' : '') + '" data-pick="tier" data-val="' + x.id + '" role="radio" aria-checked="' + (x.id === t.id) + '"><span class="pl-l"><span class="pl-n">' + x.name + (x.id === recTier() ? '<em>Best for you</em>' : x.id === 'author' ? '<em class="alt">About 3 posts a week</em>' : '') + '</span><span class="pl-d">' + x.books + ' · ' + x.videos + '</span>' + (x.id === recTier() ? '<span class="pl-why">' + esc(recWhy()) + '</span>' : '') + '</span>' +
           '<span class="pl-r"><span class="pl-p">$' + (live ? x.first : x.price) + '</span><span class="pl-s">' + (live ? 'first month, then $' + x.price : 'a month') + '</span></span></button>'; }).join('') + '</div>' +
       (t.id === 'starter' ? '<div class="note"><b>Posting a lot is what works.</b> Author gives you 12 videos a month, about 3 posts a week. On Starter, get the most from your plan with 10 shorts a month: mostly slideshows, plus Quick Reaction Hooks and POV videos, and one Viral Script.</div>' : '') +
       '<ul class="terms"><li><b>Today</b><span>$0. Seven days free, with 5 videos.</span></li><li><b>' + fmtDay(addDays(7)) + '</b><span>$' + (live ? t.first : t.price) + (live ? ' for your first month' : ' a month') + ' on ' + t.name + '</span></li><li><b>After that</b><span>$' + t.price + ' a month. Cancel any time in Settings.</span></li></ul>' +
@@ -586,11 +611,17 @@ function paceBlock() {
   var pc = (S.quiz || {}).pace; if (!pc || !pc.videosPerDay) return '';
   var goal = '$' + pc.goalUsd.toLocaleString('en-US') + ' a month';
   var n = pc.videosPerDay, nTxt = n >= 30 ? '30 or more videos a day' : 'about ' + n + ' video' + (n === 1 ? '' : 's') + ' a day';
+  // "Not sure yet": the plan follows their books, so no daily number for a goal they didn't pick.
+  var says = pc.goalUnsure
+    ? 'Not sure yet is fine. The more you post, the faster views build. Start with the videos your plan gives you, and post more once you see what works.'
+    : 'To aim for <b>' + goal + '</b>, you need <b>' + nTxt + '</b> to build awareness, posted to all your accounts.';
   return '<div class="sect pace"><h2>How much to post</h2>' +
-    '<p class="sub" style="margin:0">' + (pc.goalUnsure ? 'A good first goal is <b>' + goal + '</b>. To aim for that, you need ' : 'To aim for <b>' + goal + '</b>, you need ') + '<b>' + nTxt + '</b> to build awareness, posted to all your accounts.</p>' +
-    '<p class="fine" style="text-align:left;margin:0">A rough guide from the average views our authors’ videos get. It’s not a promise: results vary.</p></div>' +
-    '<div class="auto"><b>Did you know Sonder can automate this?</b><span>Start your trial, connect your social media accounts, and we’ll post your videos for you.</span>' +
-    '<button class="auto-btn" data-act="automate">Connect my accounts and automate it' + I.arrow + '</button></div>';
+    '<p class="sub" style="margin:0">' + says + '</p>' +
+    (pc.goalUnsure ? '' : '<p class="fine" style="text-align:left;margin:0">A rough guide from the average views our authors’ videos get. It’s not a promise: results vary.</p>') + '</div>' +
+    '<div class="auto"><b>Did you know Sonder can automate this?</b><span>Start your trial, connect your social media accounts, and we’ll make and post your videos for you.</span>' +
+    (S.automate
+      ? '<p class="auto-done" role="status">' + I.check + '<span>Done. Right after your trial starts, we’ll help you connect your accounts and switch on Autopilot.</span></p>'
+      : '<button class="auto-btn" data-act="automate">Connect my accounts and automate it' + I.arrow + '</button>') + '</div>';
 }
 function okAccount() { return S.name.trim().length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(S.email.trim()); }
 function countdown() { var q = S.quiz || {}; var ms = Math.max(0, (q.offerExpiresAt ? Date.parse(q.offerExpiresAt) : 0) - Date.now()); var s = Math.floor(ms / 1000);
@@ -659,6 +690,16 @@ function submit() {
     })
     .catch(function () { busy = false; err = 'We couldn’t reach Sonder. Check your connection and try again.'; render(false); });
 }
+// "Connect my accounts and automate it": kept on their quiz, so Autopilot is
+// ready for them once the trial starts (sonder-server POST
+// /api/public/onboarding-quiz/:id/automate), and carried on the signup link too.
+function automate() {
+  countPick('automate', 'clicked');
+  S.automate = true;
+  var q = S.quiz || {};
+  if (q.id) { try { fetch(API + '/api/public/onboarding-quiz/' + q.id + '/automate', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ automate:true }), keepalive:true }).catch(function () {}); } catch (e) {} }
+  render(false);
+}
 function start() {
   var t = tier(), q = S.quiz || {};
   if (q.id) { try { fetch(API + '/api/public/onboarding-quiz/' + q.id + '/tier', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ tier:t.id }), keepalive:true }); } catch (e) {} }
@@ -670,6 +711,7 @@ function start() {
   u.searchParams.set('name', S.name.trim());
   u.searchParams.set('book_ready', writing() ? 'no' : 'yes');
   if (q.id) u.searchParams.set('quiz', q.id);
+  if (q.id && S.automate) u.searchParams.set('automate', '1');
   var o = carried(); Object.keys(o).forEach(function (k) { u.searchParams.set(k, o[k]); });
   // A short pause so the plan choice reaches us before the page changes.
   setTimeout(function () { location.href = u.toString(); }, 250);
@@ -693,7 +735,7 @@ document.addEventListener('click', function (e) {
     render(false); return; }
   var a = e.target.closest('[data-act]'); if (!a || a.disabled) return;
   var act = a.getAttribute('data-act');
-  if (act === 'automate') { countPick('automate', 'clicked'); S.automate = true; next(); } else if (act === 'next') next(); else if (act === 'back') back(); else if (act === 'submit') submit(); else if (act === 'start') start();
+  if (act === 'automate') { automate(); } else if (act === 'next') next(); else if (act === 'back') back(); else if (act === 'submit') submit(); else if (act === 'start') start();
 });
 setInterval(function () { if (cur === 'pricing') { var el = document.getElementById('cd'); if (el) el.textContent = countdown(); } }, 1000);
 if ((cur === 'plan' || cur === 'pricing') && !(S.quiz && S.quiz.id)) cur = 'account';
