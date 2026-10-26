@@ -577,7 +577,7 @@ var SCREENS = {
       (t.id === 'starter' ? '<div class="note"><b>Posting a lot is what works.</b> Author gives you 12 videos a month, about 3 posts a week. On Starter, get the most from your plan with 10 shorts a month: mostly slideshows, plus Quick Reaction Hooks and POV videos, and one Viral Script.</div>' : '') +
       '<ul class="terms"><li><b>Today</b><span>$0. Seven days free, with 5 videos.</span></li><li><b>' + fmtDay(addDays(7)) + '</b><span>$' + (live ? t.first : t.price) + (live ? ' for your first month' : ' a month') + ' on ' + t.name + '</span></li><li><b>After that</b><span>$' + t.price + ' a month. Cancel any time in Settings.</span></li></ul>' +
       cta('Start my free trial', false, 'start') +
-      '<p class="fine">You add a card to start and nothing is charged today. A temporary $49 hold checks the card is real, then it’s released. We email you before your first payment.</p>'; }
+      '<p class="fine">You add a card to start and nothing is charged today. A temporary hold checks the card is real, then it’s released straight away. We email you before your first payment.</p>'; }
 };
 
 // "You need about X videos a day" (sonder-server lib/onboardingQuiz.ts paceFor,
