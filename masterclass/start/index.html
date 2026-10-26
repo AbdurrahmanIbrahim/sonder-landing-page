@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script src="/consent.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FFFFFF" />
+<title>You're in | Sonder</title>
+<meta name="robots" content="noindex, nofollow" />
+
+<!-- yousonder.com/masterclass/start: page 3 of 3 (26 Oct 2026).
+     The end of the checkout. It confirms what they bought (the masterclass,
+     and the challenge if they said yes on page 2) and makes one ask: start the
+     free 7-day Sonder trial, the same card trial as /f, with the ad tags the
+     course page saw. ?challenge=1 and ?starts=YYYY-MM-DD come from page 2;
+     the checkout tool should send buyers here with them. -->
+
+<script>
+  window.SONDER_META_PIXEL_ID = '1999564797365444';
+  (function () {
+    var id = window.SONDER_META_PIXEL_ID;
+    if (!id) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', id); fbq('track', 'PageView');
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" />
+<link rel="icon" type="image/svg+xml" href="/assets/sonder-logo-plum-flat.svg" />
+<link rel="stylesheet" href="/masterclass/mc.css" />
+<style>
+.bar-in .steps{margin-left:auto}
+@media (max-width:640px){.bar-in{flex-wrap:wrap;padding-block:10px;gap:8px}.bar-in .steps{margin-left:0;width:100%}}
+.preview-note{background:#FFF6E0;border-bottom:1px solid #F1D9A0;color:#6A4A00;font-size:13.5px;text-align:center;padding:8px var(--gut)}
+
+/* ---------- what they bought ---------- */
+.top{background:linear-gradient(180deg,var(--wash),var(--paper));border-bottom:1px solid var(--rule);padding:clamp(32px,5vw,56px) 0 clamp(30px,4vw,44px)}
+.top h1{font-size:clamp(2rem,5vw,3rem)}
+.top .lede{margin-top:12px}
+.orders{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:26px}
+@media (max-width:760px){.orders{grid-template-columns:1fr}}
+.order{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;background:var(--paper);
+  border:1.5px solid var(--rule-2);border-radius:16px;padding:16px 18px}
+.order .tick{width:28px;height:28px;border-radius:50%;background:var(--mint-deep);display:grid;place-items:center;margin-top:2px}
+.order .tick svg{width:16px;height:16px}
+.order b{display:block;font-size:17px;line-height:1.35}
+.order p{font-size:15.5px;color:var(--ink-2);margin-top:4px;line-height:1.5}
+.order .cal{font-size:15px;margin-top:8px}
+.order .cal a{color:var(--violet);font-weight:600}
+
+/* ---------- the trial ---------- */
+.trial{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,52px);align-items:start}
+@media (max-width:880px){.trial{grid-template-columns:1fr}}
+.trial h2{margin-top:6px}
+.trial .lede{margin-top:14px}
+.how{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:14px;counter-reset:how}
+.how li{display:grid;grid-template-columns:38px minmax(0,1fr);gap:12px;align-items:start;color:var(--ink-2);font-size:16.5px}
+.how li::before{counter-increment:how;content:counter(how);width:34px;height:34px;border-radius:50%;background:var(--plum);color:var(--mint);
+  display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:1.05rem}
+.how li b{display:block;color:var(--ink);font-size:17px}
+.trialcard{background:var(--paper);border:2px solid var(--plum);border-radius:24px;box-shadow:0 6px 0 0 var(--plum);padding:clamp(20px,3.4vw,30px)}
+.trialcard .demo{border-radius:14px;overflow:hidden;background:var(--plum);aspect-ratio:9/16;max-height:420px;margin:0 auto;width:min(100%,236px)}
+.trialcard .demo video{width:100%;height:100%;object-fit:cover}
+.trialcard .pc-name{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-top:18px}
+.trialcard h3{margin-top:6px;font-size:clamp(1.3rem,2.6vw,1.55rem)}
+.trialcard .ticks{margin-top:14px}
+.trialcard .ticks li{font-size:16px}
+.trialcard .btn{margin-top:20px}
+.terms{margin-top:14px;font-size:14px;color:var(--ink-2);line-height:1.55;background:var(--wash);border-radius:12px;padding:12px 14px}
+.terms b{color:var(--ink)}
+.later{display:block;text-align:center;margin-top:14px;font-size:15.5px;color:var(--ink-2)}
+.timeline{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;position:relative}
+.timeline::before{content:"";position:absolute;left:8px;right:8px;top:9px;height:2px;background:var(--rule-2)}
+.timeline li{position:relative;padding-top:24px;font-size:13.5px;line-height:1.4;color:var(--ink-2);padding-right:8px}
+.timeline li::before{content:"";position:absolute;left:0;top:2px;width:16px;height:16px;border-radius:50%;background:var(--paper);border:2px solid var(--plum)}
+.timeline li:first-child::before{background:var(--mint)}
+.timeline b{display:block;font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.tip{margin-top:14px;font-size:14.5px;line-height:1.55;color:var(--ink-2);border:1.5px solid #BDEFDD;background:var(--mint-wash);border-radius:12px;padding:12px 14px}
+.tip b{color:var(--ink)}
+.tip a{color:var(--violet);font-weight:600}
+.order .cal b{color:var(--ink);font-weight:600}
+.later a{color:var(--ink-2)}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap bar-in">
+    <span class="mark" aria-label="Sonder">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
+      <b>Sonder<i>.</i></b></span>
+    <ol class="steps" aria-label="Your order">
+      <li class="done"><span class="dot" aria-hidden="true">&#10003;</span><span class="lbl">Masterclass</span></li>
+      <li class="done" data-step-challenge><span class="dot" aria-hidden="true">&#10003;</span><span class="lbl">Live challenge</span></li>
+      <li class="now" aria-current="step"><span class="dot" aria-hidden="true">3</span><span class="lbl">Free trial</span></li>
+    </ol>
+  </div>
+</header>
+<div class="preview-note" id="preview-note" hidden>Preview: nothing was charged. This is what buyers will see after checkout.</div>
+
+<main>
+<section class="top" data-note="st_top">
+  <div class="wrap">
+    <span class="eyebrow">Order complete</span>
+    <h1 id="in-title">You're in.</h1>
+    <p class="lede">A receipt and your login are on their way to your inbox. If they're not there in a few minutes, check your spam folder.</p>
+    <div class="orders">
+      <div class="order">
+        <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><b>The Faceless Book Marketing Masterclass</b>
+          <p>Six lessons and three templates. Start with lesson 1: your first video. Your login is in the email.</p>
+          <p class="cal" id="course-link" hidden><a href="#">Go to my lessons &rarr;</a></p></div>
+      </div>
+      <div class="order" id="order-challenge" hidden>
+        <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><b>The 3-Day Book Video Challenge</b>
+          <p id="challenge-when">Monday to Wednesday, 12pm ET / 9am PT. Your Zoom link arrives by email.</p>
+          <p class="cal"><b id="where-q">Where will you be on Monday at 12pm ET?</b> Decide now and put it in your calendar: <a id="cal-google" href="https://calendar.google.com/" target="_blank" rel="noopener">Google</a> &middot; <a id="cal-ics" href="#" download="sonder-challenge.ics">Apple / Outlook</a></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" data-note="st_trial">
+  <div class="wrap trial">
+    <div>
+      <span class="eyebrow">Step 3 of 3 &middot; optional</span>
+      <h2>Now let Sonder make your first videos while you watch the lessons.</h2>
+      <p class="lede">Lesson 1 has you make your first video, and by hand that's an afternoon. With Sonder, the tool Lexi co-founded, you upload your book once and it writes, voices and edits videos from your own pages in minutes.</p>
+      <ol class="how">
+        <li><span><b>Upload your book</b>A PDF of the manuscript and your cover. That's the whole setup.</span></li>
+        <li><span><b>Pick a style</b>Slideshows, stick figures, voiceover stories and more. Sonder writes the script from your pages.</span></li>
+        <li><span><b>Post it</b>Download it, or post straight to TikTok, Instagram, YouTube and Facebook.</span></li>
+      </ol>
+      <div class="quote" style="margin-top:28px">
+        <p>&ldquo;It really isn't my thing.&rdquo;</p>
+        <cite><b>Jared</b> had sold over 800 books on TikTok Shop, then stopped posting. Now he posts every day again. His post in our community: &ldquo;As a lazy TikToker, I love Sonder.&rdquo;</cite>
+      </div>
+    </div>
+    <div class="trialcard">
+      <div class="demo"><video src="/assets/lp/demo.mp4" poster="/assets/lp/demo-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-label="A book being turned into a video in Sonder"></video></div>
+      <span class="pc-name">Sonder free trial</span>
+      <h3>7 days free. Make your first 5 videos.</h3>
+      <ul class="ticks">
+        <li><b>5 videos</b> to make in your first week, from your own pages</li>
+        <li><b>Every style and every voice</b>, no filming, no editing</li>
+        <li><b>Post to all four apps</b> from one place</li>
+      </ul>
+      <ol class="timeline" aria-label="How the free trial works">
+        <li><b>Today</b><span>$0. Upload your book and make videos.</span></li>
+        <li><b id="t-remind">Day 6</b><span>We email you a reminder.</span></li>
+        <li><b id="t-pay">Day 8</b><span>$49 a month starts, unless you've cancelled.</span></li>
+      </ol>
+      <p class="terms"><b>Free for 7 days, then $49 a month on the Starter plan</b> until you cancel. Cancel <span id="t-before">before day 8</span> and you pay nothing; it takes two clicks in your settings. To check the card is real, Stripe places a temporary $49 hold on it. We release it straight away, though your bank may show it as pending for a few days. It is never taken. Debit or credit cards only, not prepaid.</p>
+      <p class="tip" id="trial-tip" hidden></p>
+      <a class="btn big block" id="trial" href="https://app.yousonder.com/signup?offer=trial">Start my free trial <span aria-hidden="true">&rarr;</span></a>
+      <p class="later"><a href="#" id="later">Not now, I'll start with the lessons</a></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <span class="mark" aria-label="Sonder">
+        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
+        <b>Sonder<i>.</i></b></span>
+      <span><a href="https://app.yousonder.com/terms">Terms</a> &nbsp;&middot;&nbsp; <a href="https://app.yousonder.com/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="mailto:hello@yousonder.com">hello@yousonder.com</a></span>
+    </div>
+    <div class="disc">
+      <p>Jared uses Sonder and shared his post with permission. Results vary from author to author.</p>
+      <p>&copy; 2026 YouSonder O&Uuml; &middot; All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/masterclass/mc.js"></script>
+<script>
+(function () {
+  "use strict";
+  /* ===== The settings =====
+     COURSE_URL: where "Not now" goes, the masterclass login (SamCart's course
+     portal, or wherever the lessons live). Empty = it just closes the ask. */
+  var COURSE_URL = '';
+  var TRIAL_URL = 'https://app.yousonder.com/signup';
+  var CAL_TITLE = 'The 3-Day Book Video Challenge (Sonder)';
+  var CAL_DETAILS = 'Live on Zoom with Lexi and Michael, 12pm ET each day. Your Zoom link is in your confirmation email. Bring your book.';
+
+  var MC = window.SonderMC;
+  var $ = function (id) { return document.getElementById(id); };
+  var here; try { here = new URL(window.location.href); } catch (e) { here = null; }
+  var q = function (k) { return here ? (here.searchParams.get(k) || '') : ''; };
+
+  if (q('preview') === '1') $('preview-note').hidden = false;
+
+  var first = q('name').trim().split(/\s+/)[0];
+  if (first && first.length < 40) $('in-title').textContent = 'You’re in, ' + first + '.';
+
+  /* The challenge, if they took it on page 2. */
+  var tookChallenge = q('challenge') === '1';
+  var stepC = document.querySelector('[data-step-challenge]');
+  if (tookChallenge) {
+    $('order-challenge').hidden = false;
+    var iso = MC && MC.isChallenge(q('starts')) ? q('starts') : (MC ? MC.nextChallenge() : null);
+    if (iso) {
+      var s = MC.sessions(iso);
+      var day = { weekday: 'long', month: 'long', day: 'numeric' };
+      $('challenge-when').textContent = MC.fmt(s[0], day) + ' to ' + MC.fmt(s[2], day) + ', 12pm ET / 9am PT. ' +
+        MC.localLine(s[0]) + ' Your Zoom link arrives by email.';
+      $('cal-google').href = MC.googleCal(iso, CAL_TITLE, CAL_DETAILS);
+      $('cal-ics').href = MC.icsHref(iso, CAL_TITLE, CAL_DETAILS);
+    }
+  } else if (stepC) {
+    stepC.classList.remove('done'); stepC.classList.add('skip');
+    stepC.querySelector('.dot').textContent = '2';
+  }
+
+  /* The trial's dates, if they start today, in their own time zone. */
+  var DAY = 86400000;
+  if (MC) {
+    var tzHere; try { tzHere = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) { tzHere = undefined; }
+    var onDay = function (n) { return MC.fmt(new Date(Date.now() + n * DAY), { weekday: 'short', month: 'short', day: 'numeric' }, tzHere); };
+    $('t-remind').textContent = onDay(5);
+    $('t-pay').textContent = onDay(7);
+    $('t-before').textContent = 'before ' + onDay(7);
+  }
+
+  /* Challenge buyers: if the challenge is days away, a free week started now
+     would end before Day 3. Say so, and offer a calendar reminder for the
+     Friday before, rather than letting them find out from a charge. */
+  if (tookChallenge && iso && MC) {
+    var d1At = MC.sessions(iso)[0].getTime();
+    if (d1At - Date.now() > 4 * DAY) {
+      var fri = MC.sessions(iso)[0];
+      var friAt = new Date(fri.getTime() - 3 * DAY);
+      var friLabel = MC.fmt(friAt, { weekday: 'long', month: 'short', day: 'numeric' });
+      var remind = new URLSearchParams({ action: 'TEMPLATE', text: 'Start my free Sonder trial',
+        dates: friAt.toISOString().slice(0, 10).replace(/-/g, '') + '/' + new Date(friAt.getTime() + DAY).toISOString().slice(0, 10).replace(/-/g, ''),
+        details: 'Start the 7-day trial today so it covers the whole challenge: https://www.yousonder.com/masterclass/start/?challenge=1&starts=' + iso });
+      var tip = $('trial-tip');
+      tip.innerHTML = '<b>Joining the challenge?</b> Your free week starts the day you sign up. Start it on ' + friLabel +
+        ' or later and it covers all three live days. <a target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?' + remind.toString() + '">Remind me on ' + friLabel.split(',')[0] + '</a>';
+      tip.hidden = false;
+    }
+  }
+
+  /* The trial link: the card trial, their email filled in, the ad's tags kept
+     so the trial is credited to whatever sent them to the masterclass. */
+  var tags = MC ? MC.readTags() : {};
+  var u = new URL(TRIAL_URL);
+  u.searchParams.set('offer', 'trial');
+  if (q('email')) u.searchParams.set('email', q('email'));
+  if (q('name')) u.searchParams.set('name', q('name'));
+  (MC ? MC.CARRY : []).forEach(function (k) { if (tags[k]) u.searchParams.set(k, tags[k]); });
+  if (!u.searchParams.get('utm_source')) u.searchParams.set('utm_source', 'masterclass');
+  if (!u.searchParams.get('utm_medium')) u.searchParams.set('utm_medium', 'funnel');
+  if (!u.searchParams.get('utm_campaign')) u.searchParams.set('utm_campaign', 'masterclass');
+  u.searchParams.set('utm_content', tookChallenge ? 'mc_start_challenge' : 'mc_start');
+  $('trial').href = u.toString();
+  $('trial').addEventListener('click', function () {
+    if (typeof window.fbq === 'function') window.fbq('track', 'InitiateCheckout', { content_name: 'mc_trial' });
+  });
+
+  if (COURSE_URL) {
+    $('course-link').querySelector('a').href = COURSE_URL;
+    $('course-link').hidden = false;
+  }
+
+  /* "Not now": to the lessons if we know where they are, otherwise just a
+     quiet note, since the login is already in their inbox. */
+  $('later').addEventListener('click', function (e) {
+    if (COURSE_URL) { this.href = COURSE_URL; return; }
+    e.preventDefault();
+    this.parentNode.textContent = 'No problem. Your login is in your inbox, and the trial will still be here when you want it.';
+  });
+})();
+</script>
+</body>
+</html>
