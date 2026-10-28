@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script src="/consent.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0A0613" />
+<title>Sonder trusted partners</title>
+<meta name="description" content="Tools we use ourselves and recommend to Sonder authors. BookReverb for real readers and reviews, Adigy for Amazon ads and Publisher Champ for sales reporting." />
+<meta property="og:title" content="Sonder trusted partners" />
+<meta property="og:description" content="Tools we use ourselves and recommend to Sonder authors. BookReverb for real readers and reviews, Adigy for Amazon ads and Publisher Champ for sales reporting." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.yousonder.com/partners" />
+<meta property="og:site_name" content="Sonder" />
+<meta name="twitter:card" content="summary" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+<link rel="icon" type="image/svg+xml" href="/assets/sonder-logo-plum-flat.svg" />
+<script src="/visit.js" defer></script>
+<style>
+
+/* Same visual system as /onboarding and /publishers: Plum Black stage, Sonder halo, white cards. */
+:root{
+  color-scheme:dark;
+  --canvas:#0A0613; --deep:#1A0F2E; --mid:#2D1A48; --glow:#4A2F6E;
+  --mint:#7FFFD4; --mint-deep:#0E8F68; --mint-tint:#ECFBF5; --mint-ink:#0B3D2E;
+  --paper:#F5F5F7; --quiet:#8B8FA3;
+  --card:#FFFFFF; --ink:#140B22; --ink-2:#4A4458; --ink-3:#857F93; --hair:#E8E5EE;
+  --f-display:'Nunito', ui-rounded, 'SF Pro Rounded', system-ui, sans-serif;
+  --f-body:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono:'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--paper);font-family:var(--f-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+.card :focus-visible{outline-color:var(--ink)}
+
+.stage{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding-inline:16px;padding-block:0 48px;min-height:100dvh}
+.ring{position:absolute;left:50%;top:30px;width:min(780px,140vw);transform:translateX(-50%);pointer-events:none;z-index:0}
+.top{position:relative;z-index:1;width:100%;max-width:640px;display:flex;justify-content:center;padding-top:20px}
+.wm{font-family:var(--f-display);font-weight:900;font-size:25px;letter-spacing:-.045em;color:var(--paper);display:inline-flex;align-items:baseline;gap:3px;text-decoration:none}
+.wm svg{width:7px;height:9px}
+.wm small{font-family:var(--f-mono);font-weight:500;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);margin-left:8px;align-self:center}
+
+.intro{position:relative;z-index:1;width:100%;max-width:560px;text-align:center;padding-top:56px}
+.eyebrow{margin:0 0 10px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mint)}
+.intro h1{font-family:var(--f-display);font-weight:800;font-size:clamp(28px,6.6vw,38px);line-height:1.1;letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
+.intro p{margin:0;color:#C9C6D3;font-size:16px;text-wrap:pretty}
+
+.cardwrap{position:relative;z-index:1;width:100%;max-width:560px;padding-top:32px;display:flex;flex-direction:column;gap:16px}
+.card{background:var(--card);color:var(--ink);color-scheme:light;border-radius:28px;padding:28px 26px 24px;box-shadow:0 40px 90px -40px rgba(74,47,110,.9);display:flex;flex-direction:column;gap:16px;animation:rise .35s ease both}
+@keyframes rise{from{opacity:.35;transform:translateY(10px)}to{opacity:1;transform:none}}
+.head{display:flex;align-items:center;gap:14px}
+.mono{width:52px;height:52px;border-radius:14px;flex:none;display:grid;place-items:center;background:var(--ink);color:#fff;font-family:var(--f-display);font-weight:900;font-size:19px;letter-spacing:-.03em}
+.head h2{font-family:var(--f-display);font-weight:800;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1.1}
+.tag{display:inline-block;margin-top:4px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mint-deep);background:var(--mint-tint);border-radius:999px;padding:3px 9px}
+.card p{margin:0;color:var(--ink-2);font-size:15.5px;text-wrap:pretty}
+
+.points{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.points li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--ink);line-height:1.45}
+.ico{width:34px;height:34px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--mint-tint);color:var(--mint-deep)}
+.ico svg{width:18px;height:18px}
+.points li span:last-child{padding-top:6px}
+
+.why{border-top:1px solid var(--hair);padding-top:14px}
+.offer{background:var(--mint-tint);border:1px solid #A9EAD3;border-radius:14px;padding:12px 14px;color:var(--mint-ink)!important}
+.offer strong{color:var(--mint-ink)}
+.why strong{color:var(--ink)}
+
+.cta{width:100%;min-height:58px;border-radius:999px;border:0;background:var(--ink);color:#fff;font-weight:600;font-size:16.5px;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 24px;transition:background .15s,transform .1s;text-decoration:none}
+.cta:hover{background:#26183A}
+.cta:active{transform:scale(.99)}
+.cta svg{width:20px;height:20px;fill:none;stroke:var(--mint);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+.more{position:relative;z-index:1;width:100%;max-width:560px;margin-top:28px;text-align:center;color:var(--quiet);font-size:14px;display:flex;flex-direction:column;gap:8px}
+.more a{color:var(--paper);text-decoration:underline;text-underline-offset:3px}
+.fine{font-size:12.5px;color:var(--quiet)}
+
+@media(max-width:420px){
+  .card{padding:24px 18px 20px;border-radius:24px}
+  .wm small{display:none}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition:none!important}}
+
+</style>
+</head>
+<body>
+<div class="stage">
+  <svg class="ring" viewBox="0 0 600 600" aria-hidden="true">
+    <defs><radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#4A2F6E" stop-opacity=".62"/>
+      <stop offset=".55" stop-color="#2D1A48" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#1A0F2E" stop-opacity="0"/>
+    </radialGradient></defs>
+    <circle cx="300" cy="300" r="300" fill="url(#halo)"/>
+  </svg>
+  <div class="top">
+    <a class="wm" href="/">Sonder<svg viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0 L10 6 L0 12Z" fill="#7FFFD4"/></svg><small>Partners</small></a>
+  </div>
+
+  <header class="intro">
+    <p class="eyebrow">Trusted partners</p>
+    <h1>Tools we trust for the rest of your book launch</h1>
+    <p>Sonder gets your book seen. These partners help with what comes next. We only list tools our own team uses and recommends to our authors.</p>
+  </header>
+
+  <main class="cardwrap">
+    <article class="card" id="bookreverb">
+      <div class="head">
+        <span class="mono" aria-hidden="true">BR</span>
+        <div>
+          <h2>BookReverb</h2>
+          <span class="tag">Real readers · real reviews</span>
+        </div>
+      </div>
+      <p>BookReverb puts your advance copy in front of independent readers who choose to read it. You see their progress, and any reviews, in one dashboard.</p>
+      <ul class="points">
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>Add your book from its Amazon link and upload your advance copy.</span></li>
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>Real, independent readers pick it up because it interests them.</span></li>
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>Honest reviews from real readers, with no review swaps.</span></li>
+      </ul>
+      <p class="why"><strong>Why we recommend it.</strong> Videos bring readers to your book page. Reviews help them decide to buy once they get there.</p>
+      <a class="cta" id="go-bookreverb" href="https://bookreverb.com/?utm_source=yousonder&amp;utm_medium=partner&amp;utm_campaign=trusted_partners" target="_blank" rel="noopener">Visit BookReverb<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </article>
+    <article class="card" id="adigy">
+      <div class="head">
+        <span class="mono" aria-hidden="true">AD</span>
+        <div>
+          <h2>Adigy</h2>
+          <span class="tag">Amazon ads, run for you</span>
+        </div>
+      </div>
+      <p>Adigy runs your Amazon ads around the clock. It adjusts bids, budgets, search terms and placements every hour, across all your books and Amazon markets.</p>
+      <ul class="points">
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>Connects with your own Amazon login. No need to rebuild your campaigns.</span></li>
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>Shows your royalties minus ad spend, so you see real profit per book.</span></li>
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>You stay in control, and any change can be undone.</span></li>
+      </ul>
+      <p class="why"><strong>Why we recommend it.</strong> Sonder makes your Amazon video ads. Adigy keeps the campaigns that show them running well.</p>
+      <a class="cta" id="go-adigy" href="https://adigy.ai/?utm_source=yousonder&amp;utm_medium=partner&amp;utm_campaign=trusted_partners" target="_blank" rel="noopener">Visit Adigy<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </article>
+    <article class="card" id="publisher-champ">
+      <div class="head">
+        <span class="mono" aria-hidden="true">PC</span>
+        <div>
+          <h2>Publisher Champ</h2>
+          <span class="tag">All your book sales in one place</span>
+        </div>
+      </div>
+      <p>Publisher Champ pulls your royalties, orders and page reads from more than 25 platforms into one dashboard, next to what you spend on ads.</p>
+      <ul class="points">
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>Covers Amazon KDP, Kobo, Apple Books, Draft2Digital, IngramSpark and more.</span></li>
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>Tracks your Amazon ads spend against your royalties automatically.</span></li>
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>Profit by book and by series, with no spreadsheets.</span></li>
+      </ul>
+      <p class="offer"><strong>Your discount.</strong> Join through our link and get 10% off the Standard plan: your first 3 months on monthly, or your whole first year on annual.</p>
+      <p class="why"><strong>Why we recommend it.</strong> Post your videos with Sonder, then check Publisher Champ to see your sales move.</p>
+      <a class="cta" id="go-publisher-champ" href="https://www.publisherchamp.com/referral/8596/" target="_blank" rel="noopener">Visit Publisher Champ<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </article>
+  </main>
+
+  <div class="more">
+    <span>New to Sonder? <a href="/onboarding">Try it free for 7 days</a></span>
+    <span class="fine">Some partner links may earn Sonder a small commission. It never changes what we recommend.</span>
+  </div>
+</div>
+</body>
+</html>
