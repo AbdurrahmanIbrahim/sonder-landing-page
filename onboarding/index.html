@@ -282,6 +282,19 @@ select.input{appearance:auto;height:48px;font-size:15px}
 .founder .fv{font-family:var(--f-display);font-weight:900;font-size:26px;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .founder .fd{font-size:13.5px;color:var(--ink-2);line-height:1.4}
 
+/* photos (28 Oct 2026, Lexi: "more stimulating visuals"). House-style pictures from the app redesign, one per step. */
+.hero{position:relative;margin:-30px -24px -2px;height:158px;border-radius:28px 28px 0 0;overflow:hidden;background:#EEEBF3;flex:none}
+.hero img{display:block;width:100%;height:100%;object-fit:cover;animation:heroin .6s cubic-bezier(.32,.72,0,1) both}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:36px;background:linear-gradient(rgba(255,255,255,0),#fff)}
+@keyframes heroin{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:none}}
+.cardwrap.has-hero{padding-top:36px}
+.founder .fh{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.founder .av{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none;background:var(--mint-tint)}
+.founder .av.mono{display:grid;place-items:center;color:var(--mint-deep);font-family:var(--f-display);font-weight:900;font-size:15px}
+.receipt{margin:0;display:flex;flex-direction:column;gap:6px}
+.receipt img{display:block;width:100%;height:auto;border-radius:14px}
+.receipt figcaption{font-size:12.5px;color:var(--ink-3);text-align:center}
+@media(max-width:420px){.hero{margin:-26px -18px -2px;height:138px;border-radius:24px 24px 0 0}}
 
 @media(max-width:420px){
   .card{padding:26px 18px 20px;border-radius:24px}
@@ -493,6 +506,10 @@ function opt(o) {
     '<span class="ot"><span class="ol">' + esc(o.label) + '</span>' + (o.desc ? '<span class="od">' + esc(o.desc) + '</span>' : '') + '</span>' +
     '<span class="radio ' + (o.multi ? 'sq' : '') + '"></span></button>';
 }
+// One picture per step (assets/onboarding/q/<step>.jpg). kind_note keeps its phone.
+var HERO = { kind:1, genre:1, launch:1, channels:1, sell:1, books:1, goal:1, proof:1, building:1, account:1, plan:1, pricing:1 };
+function hero(step) { return HERO[step] ? '<figure class="hero" aria-hidden="true"><img src="/assets/onboarding/q/' + step + '.jpg" alt="" decoding="async"></figure>' : ''; }
+function preloadNext() { var n = ORDER[ORDER.indexOf(cur) + 1]; if (n && HERO[n]) { var i = new Image(); i.src = '/assets/onboarding/q/' + n + '.jpg'; } }
 var PHOTO = {
   ink:   ['/assets/onboarding/novel.jpg',  'She found a letter dated forty years in the future.'],
   true:  ['/assets/onboarding/memoir.jpg', 'I was nineteen the night my father finally told me the truth.'],
@@ -558,8 +575,9 @@ var SCREENS = {
       g.map(function (x) { return opt({ label:x[1], on:S.goal === x[0], attrs:'data-pick="goal" data-val="' + x[0] + '" data-auto' }); }).join('') + '</div>'; },
   proof: function () {
     return '<p class="eyebrow">Built by authors</p><h1>Made by authors who sell books on social media.</h1><div class="founders">' +
-      '<div class="founder"><span class="fn">Lexi, co-founder</span><span class="fv">$230k</span><span class="fd">of books in one month, with under 1,500 followers</span></div>' +
-      '<div class="founder"><span class="fn">Christine, Sonder author</span><span class="fv">#17,080</span><span class="fd">Amazon rank for <i>Assertive Kindness</i>, up from #1,101,449</span></div></div>' +
+      '<div class="founder"><span class="fh"><img class="av" src="/assets/founders/lexi.jpg" alt="Lexi" width="34" height="34"><span class="fn">Lexi, co-founder</span></span><span class="fv">$230k</span><span class="fd">of books in one month, with under 1,500 followers</span></div>' +
+      '<div class="founder"><span class="fh"><span class="av mono" aria-hidden="true">C</span><span class="fn">Christine, Sonder author</span></span><span class="fv">#17,080</span><span class="fd">Amazon rank for <i>Assertive Kindness</i>, up from #1,101,449</span></div></div>' +
+      '<figure class="receipt"><img src="/assets/live/christine-bsr.jpg" alt="Christine’s message: Today’s BSR for Assertive Kindness is #17,080. On Sept 6 it was as low as #1,101,449." width="820" height="255" loading="lazy"><figcaption>Christine’s message to us</figcaption></figure>' +
       '<p class="sub" style="margin:0">What we learned: the authors who win are the ones who post a lot and keep going. Sonder is built to make that easy.</p>' +
       '<p class="fine">Lexi’s own results and one Sonder author’s. They are not typical, and yours will vary.</p>' + cta('Build my plan'); },
   building: function () {
@@ -630,7 +648,8 @@ function countdown() { var q = S.quiz || {}; var ms = Math.max(0, (q.offerExpire
 function persist() { store('sonder_onb', { S:S, cur:cur, hist:hist }); }
 function render(scroll) {
   var card = document.getElementById('card');
-  card.innerHTML = SCREENS[cur]();
+  card.innerHTML = hero(cur) + SCREENS[cur]();
+  card.parentNode.classList.toggle('has-hero', !!HERO[cur]); preloadNext();
   if (card.getAttribute('data-screen') !== cur) { card.style.animation = 'none'; void card.offsetWidth; card.style.animation = ''; card.setAttribute('data-screen', cur); }
   mount();
   document.getElementById('back').classList.toggle('off', !hist.length || cur === 'building' || cur === 'plan');
