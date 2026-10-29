@@ -490,9 +490,10 @@ function recWhy() {
 function videoEnd() { return notOut() ? endLine() : 'Link in bio.'; }
 function endLine() {
   if (notOut()) return 'Coming soon. Comment TRUE if you want to be one of the first to read it.';
-  if (S.sell === 'wide') return 'Find [your book] at your favourite bookstore.';
+  // Amazon sellers end on the bookstore line too: no ending names Amazon since
+  // 28 Oct 2026 (TikTok strikes videos that send buyers to Amazon). US spelling.
   if (S.sell === 'own') return 'The link is in my bio.';
-  return 'Search [your book] on Amazon.';
+  return 'Find [your book] at your favorite bookstore.';
 }
 function chanText() { return S.none ? 'TikTok and Instagram' : S.channels.map(function (c) { return CHANNELS.filter(function (x) { return x[0] === c; })[0][1]; }).join(' and ').replace(/ and (?=.* and )/g, ', '); }
 
@@ -604,7 +605,7 @@ var SCREENS = {
           (s.style ? '<em>' + esc(STYLE_LABEL[s.style] || s.style) + '</em>' : '') + (s.gift ? '<em class="gift">Gift video</em>' : '') + (s.paidOnly ? '<em class="lock">When your plan starts</em>' : '') +
           '</span><span class="cw">' + esc(why) + '</span></span></li>'; }).join('') + '</ol></div>' +
       (notOut() ? '<div class="endline">Until it\u2019s out, Viral Scripts and short videos end: <b>\u201C' + esc(endLine()) + '\u201D</b></div>' : '<div class="endline">Viral Scripts end: <b>\u201C' + esc(videoEnd()) + '\u201D</b> Short videos end: <b>\u201C' + esc(endLine()) + '\u201D</b></div>') +
-      '<div class="sect"><h2>Your free trial</h2><p class="sub" style="margin:0">Seven days and 5 videos. Start with the first two above, then try the other video types and find your favourites.</p></div>' +
+      '<div class="sect"><h2>Your free trial</h2><p class="sub" style="margin:0">Seven days and 5 videos. Start with the first two above, then try the other video types and find your favorites.</p></div>' +
       paceBlock() +
       '<div class="note"><b>Post a lot, and keep going.</b> Views usually build in weeks 3 to 5, and sales follow. The authors who win are the ones who stay consistent.</div>' + cta('See my price'); },
   pricing: function () { var t = tier(); var q = S.quiz || {}; var exp = q.offerExpiresAt ? new Date(q.offerExpiresAt) : null; var live = exp && exp.getTime() > Date.now();
