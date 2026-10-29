@@ -98,7 +98,7 @@
   });
   if (!found) return;
 
-  document.querySelectorAll('a[href*="app.yousonder.com"]').forEach(function (a) {
+  document.querySelectorAll('a[href*="app.yousonder.com"], a[href^="/onboarding"]').forEach(function (a) {
     var u;
     try { u = new URL(a.href); } catch (e) { return; }   // leave unparseable links alone
     Object.keys(carry).forEach(function (k) {
@@ -545,7 +545,7 @@
 
   // -------- Exit-intent modal --------
   // Safety-net reminder of the 7-day trial for leavers. One direct link
-  // (signup?offer=trial) and no email capture: the offer is already all over
+  // (the /onboarding quiz since Mike moved the homepage there) and no email capture: the offer is already all over
   // the page, so the shortest path wins.
   const exitModal = document.querySelector('[data-exit-modal]');
   const exitClose = document.querySelector('[data-exit-close]');
