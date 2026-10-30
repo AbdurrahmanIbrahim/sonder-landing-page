@@ -13,7 +13,7 @@
    Never throws: every page works without it. */
 (function () {
   "use strict";
-  var CHALLENGES = ['2026-11-02', '2026-11-16', '2026-11-30', '2026-12-14', '2027-01-04', '2027-01-18'];
+  var CHALLENGES = ['2026-11-16', '2026-11-30', '2026-12-14', '2027-01-04', '2027-01-18'];
   var LEAD_HOURS = 36;
   var SESSION_MIN = 90;
   var CARRY = ['fbclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','ttclid','via','dub_id'];
