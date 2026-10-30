@@ -53,6 +53,8 @@
 .order p{font-size:15.5px;color:var(--ink-2);margin-top:4px;line-height:1.5}
 .order .cal{font-size:15px;margin-top:8px}
 .order .cal a{color:var(--violet);font-weight:600}
+.order.next{border-color:var(--plum);box-shadow:0 4px 0 0 var(--plum)}
+.order.next .tick{background:var(--mint);border:1.5px solid var(--plum)}
 
 /* ---------- the trial ---------- */
 .trial{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,52px);align-items:start}
@@ -112,8 +114,8 @@
     <div class="orders">
       <div class="order">
         <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <div><b>The Faceless Book Marketing Masterclass</b>
-          <p>Six lessons and three templates. Start with lesson 1: your first video. Your login is in the email.</p>
+        <div><b>The Book Marketing Masterclass</b>
+          <p>Six courses and 58 lessons. Your classroom login is in the email from Kajabi.</p>
           <p class="cal" id="course-link" hidden><a href="#">Go to my lessons &rarr;</a></p></div>
       </div>
       <div class="order" id="order-challenge" hidden>
@@ -121,6 +123,12 @@
         <div><b>The 3-Day Book Video Challenge</b>
           <p id="challenge-when">Monday to Wednesday, 12pm ET / 9am PT. Your Zoom link arrives by email.</p>
           <p class="cal"><b id="where-q">Where will you be on Monday at 12pm ET?</b> Decide now and put it in your calendar: <a id="cal-google" href="https://calendar.google.com/" target="_blank" rel="noopener">Google</a> &middot; <a id="cal-ics" href="#" download="sonder-challenge.ics">Apple / Outlook</a></p></div>
+      </div>
+      <div class="order next">
+        <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="#05261C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><b>Join the Sonder author community</b>
+          <p>Free, on Skool: where authors using the method share what's working and ask questions. The invite is in your welcome email too.</p>
+          <p class="cal"><a href="https://www.skool.com/sonder-6045" target="_blank" rel="noopener">Join the community &rarr;</a></p></div>
       </div>
     </div>
   </div>
@@ -131,7 +139,7 @@
     <div>
       <span class="eyebrow">Step 3 of 3 &middot; optional</span>
       <h2>Now let Sonder make your first videos while you watch the lessons.</h2>
-      <p class="lede">Lesson 1 has you make your first video, and by hand that's an afternoon. With Sonder, the tool Lexi co-founded, you upload your book once and it writes, voices and edits videos from your own pages in minutes.</p>
+      <p class="lede">The masterclass shows you how to get creators and AI making your videos. Sonder, the tool Lexi co-founded, makes them from your own book: upload it once and it writes, voices and edits videos from your pages in minutes.</p>
       <ol class="how">
         <li><span><b>Upload your book</b>A PDF of the manuscript and your cover. That's the whole setup.</span></li>
         <li><span><b>Pick a style</b>Slideshows, stick figures, voiceover stories and more. Sonder writes the script from your pages.</span></li>
@@ -185,8 +193,8 @@
 (function () {
   "use strict";
   /* ===== The settings =====
-     COURSE_URL: where "Not now" goes, the masterclass login (SamCart's course
-     portal, or wherever the lessons live). Empty = it just closes the ask. */
+     COURSE_URL: where "Not now" goes, the masterclass login (the Kajabi
+     classroom). Empty = it just closes the ask. */
   var COURSE_URL = '';
   var TRIAL_URL = 'https://app.yousonder.com/signup';
   var CAL_TITLE = 'The 3-Day Book Video Challenge (Sonder)';

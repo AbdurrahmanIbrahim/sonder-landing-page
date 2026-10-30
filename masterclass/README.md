@@ -4,7 +4,7 @@ Three pages, one path:
 
 | Step | Page | Sells | Price |
 |---|---|---|---|
-| 1 | `/masterclass` | The Book Marketing Masterclass (recorded, Lexi): six courses, 58 lessons, delivered in Kajabi | $47 once (launch price; $97 from 17 Nov) |
+| 1 | `/masterclass` | The Book Marketing Masterclass (recorded, Lexi): six courses, 58 lessons, delivered in Kajabi | $47 once (launch price; $97 from 24 Nov) |
 | 2 | `/masterclass/challenge` | The 3-Day Book Video Challenge (live, Mon–Wed 12pm ET), one click after checkout | $147 |
 | 3 | `/masterclass/start` | Order confirmed + the free 7-day Sonder trial (the same card trial as `/f`) | $0 today |
 
@@ -17,10 +17,10 @@ Each page keeps its settings in one block at the foot of its script.
 | Where | Setting | What it is |
 |---|---|---|
 | `index.html` | `CHECKOUT_URL` | The $47 checkout (the Kajabi offer's checkout link). Empty = preview mode: buttons walk to step 2 without charging. |
-| `index.html` | `LAUNCH_ENDS` | When the launch price ends (end of 16 Nov, New York). After it, the crossed-out $97 lines disappear by themselves. On that day raise the checkout to $97 and change the $47s on the page, or move the date. |
+| `index.html` | `LAUNCH_ENDS` | When the launch price ends (end of 23 Nov, New York, the first live challenge). After it, the crossed-out $97 lines disappear by themselves. On that day raise the checkout to $97 and change the $47s on the page, or move the date. |
 | `challenge/index.html` | `ACCEPT_URL`, `DECLINE_URL` | The one-click accept and decline links for the $147 add-on. Empty = preview mode. |
 | `challenge/index.html` | `LEXI_VIDEO_URL` | Lexi's short video for the upgrade page. Empty = no video block. |
-| `start/index.html` | `COURSE_URL` | Where "Not now, I'll start with the lessons" goes (the course login). |
+| `start/index.html` | `COURSE_URL` | Where "Not now, I'll start with the lessons" goes (the Kajabi classroom login). The page also invites every buyer to the free Sonder community, skool.com/sonder-6045 (never Lexi's bookmarketing group). |
 | `mc.js` | `CHALLENGES`, `LEAD_HOURS` | The Monday each challenge starts. A buyer joins the first one at least 36 hours away. The confirmation emails must follow the same rule. |
 
 Step 3 reads `?challenge=1`, `?starts=YYYY-MM-DD`, `?email=` and `?name=` from its URL, so the checkout tool should send buyers there with them when it can.
