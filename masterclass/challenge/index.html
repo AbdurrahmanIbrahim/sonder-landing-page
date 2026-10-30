@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script src="/consent.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FFFFFF" />
+<title>Your order is complete. One more thing | Sonder</title>
+<meta name="robots" content="noindex, nofollow" />
+
+<!-- yousonder.com/masterclass/challenge: page 2 of 3 (26 Oct 2026).
+     Shown straight after the $47 checkout. It offers one thing, the $147 live
+     3-day challenge, as a one-click add-on charged to the card they just used.
+     Yes and No both end on /masterclass/start. The accept and decline links
+     come from the checkout tool and are set at the foot of the page. -->
+
+<script>
+  window.SONDER_META_PIXEL_ID = '1999564797365444';
+  (function () {
+    var id = window.SONDER_META_PIXEL_ID;
+    if (!id) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', id); fbq('track', 'PageView');
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" />
+<link rel="icon" type="image/svg+xml" href="/assets/sonder-logo-plum-flat.svg" />
+<link rel="stylesheet" href="/masterclass/mc.css" />
+<style>
+.bar-in .steps{margin-left:auto}
+@media (max-width:640px){.bar-in{flex-wrap:wrap;padding-block:10px;gap:8px}.bar-in .steps{margin-left:0;width:100%}}
+
+/* the confirmation strip: the purchase is done, and says so first */
+.paid{background:var(--mint-wash);border-bottom:1px solid #BDEFDD}
+.paid-in{display:flex;align-items:center;gap:12px;padding-block:12px;font-size:15.5px;color:var(--ink-2)}
+.paid-in b{color:var(--ink)}
+.paid .tick{width:26px;height:26px;border-radius:50%;background:var(--mint-deep);display:grid;place-items:center;flex-shrink:0}
+.paid .tick svg{width:15px;height:15px}
+
+.preview-note{background:#FFF6E0;border-bottom:1px solid #F1D9A0;color:#6A4A00;font-size:13.5px;text-align:center;padding:8px var(--gut)}
+
+/* ---------- top ---------- */
+.top{padding:clamp(34px,5vw,60px) 0 clamp(28px,4vw,44px);text-align:center}
+.top .kicker{margin-inline:auto}
+.top h1{margin:18px auto 0;max-width:20ch;font-size:clamp(2rem,5.2vw,3.2rem)}
+.top .lede{margin:18px auto 0;max-width:58ch}
+.top .actions{margin:28px auto 0;max-width:520px}
+
+/* the yes / no pair */
+.actions{display:flex;flex-direction:column;align-items:stretch;gap:0}
+.actions .btn{width:100%}
+.actions .charge{font-size:14px;color:var(--ink-3);text-align:center;margin-top:12px;line-height:1.5}
+.actions .charge b{color:var(--ink-2)}
+.actions .no{display:block;margin:18px auto 0;font-size:16px;color:var(--ink-2);text-align:center;text-decoration:underline;
+  text-underline-offset:3px;background:none;border:0;cursor:pointer;font-family:var(--body);padding:6px 8px}
+.actions .no:hover{color:var(--ink)}
+
+/* the dates, above the fold */
+.when{margin:22px auto 0;display:inline-flex;flex-direction:column;align-items:center;gap:2px;background:var(--wash);
+  border:1.5px solid var(--rule-2);border-radius:14px;padding:12px 18px;max-width:100%}
+.when b{font-family:var(--display);font-weight:900;font-size:1.12rem;letter-spacing:-.02em}
+.when span{font-family:var(--mono);font-size:13px;color:var(--ink-2)}
+.when .here{color:var(--mint-deep);font-weight:600}
+
+/* the three worries */
+.worries{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,18px);margin-top:clamp(18px,3vw,26px)}
+@media (max-width:820px){.worries{grid-template-columns:1fr}}
+.worries div{background:var(--wash);border-radius:16px;padding:16px 18px}
+.worries b{display:block;font-size:16.5px}
+.worries span{display:block;font-size:15.5px;color:var(--ink-2);margin-top:4px}
+
+/* Mike's quote, with his cover */
+.quote.withcover{display:grid;grid-template-columns:96px minmax(0,1fr);gap:18px;align-items:start;margin:0}
+.quote.withcover img{width:96px;height:auto;border-radius:4px;box-shadow:0 6px 16px rgba(23,17,31,.18)}
+@media (max-width:480px){.quote.withcover{grid-template-columns:1fr}.quote.withcover img{width:84px}}
+
+.notfor{max-width:620px;margin:22px auto 0;font-size:15px;color:var(--ink-2);text-align:center;line-height:1.55}
+.notfor b{color:var(--ink)}
+
+/* Lexi's short video, only shown once a URL is set */
+.vsl{max-width:760px;margin:clamp(26px,4vw,40px) auto 0}
+.vsl video{width:100%;border-radius:18px;background:#000;aspect-ratio:16/9}
+
+/* ---------- the three days ---------- */
+.days{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,18px)}
+@media (max-width:820px){.days{grid-template-columns:1fr}}
+.day{position:relative;background:var(--paper);border:2px solid var(--plum);border-radius:20px;padding:0;overflow:hidden;
+  box-shadow:0 5px 0 0 var(--plum);display:flex;flex-direction:column}
+.day-head{background:var(--plum);color:#FFFFFF;padding:16px 20px 14px;display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.day-head b{font-family:var(--display);font-weight:900;font-size:1.35rem;letter-spacing:-.02em}
+.day-head span{font-family:var(--mono);font-size:12.5px;color:var(--mint);white-space:nowrap}
+.day-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.day-body h3{font-size:1.18rem}
+.day-body p{font-size:16px;color:var(--ink-2)}
+.day-body .hw{margin-top:auto;padding-top:12px;border-top:1px dashed var(--rule-2);font-size:14.5px;color:var(--ink-2)}
+.day-body .hw b{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint-deep);display:block;margin-bottom:2px}
+.when-local{text-align:center;margin-top:18px;font-size:15px;color:var(--ink-2)}
+.when-local b{color:var(--ink)}
+
+/* ---------- map vs doing it ---------- */
+.versus{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2.4vw,22px)}
+@media (max-width:700px){.versus{grid-template-columns:1fr}}
+.versus .panel h3{display:flex;align-items:center;gap:10px}
+.versus .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:4px 10px;font-weight:600}
+.versus .t1{background:var(--wash-2);color:var(--ink-2)}
+.versus .t2{background:var(--mint);color:var(--mint-ink);border:1.5px solid var(--plum)}
+.versus .panel.pick{border-color:var(--plum);box-shadow:0 5px 0 0 var(--plum)}
+
+/* ---------- the ask ---------- */
+.ask{max-width:620px;margin:0 auto;background:var(--paper);border:2px solid var(--plum);border-radius:24px;box-shadow:0 6px 0 0 var(--plum);
+  padding:clamp(22px,4vw,34px)}
+.ask .pc-name{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--violet);font-weight:600}
+.ask h2{font-size:clamp(1.5rem,3.4vw,2rem);margin-top:8px}
+.ask .ticks{margin-top:18px}
+.ask .ticks li{font-size:16px}
+.ask .price{display:flex;align-items:baseline;gap:12px;margin:22px 0 4px;padding-top:18px;border-top:1px solid var(--rule)}
+.ask .price b{font-family:var(--display);font-weight:900;font-size:clamp(2.6rem,6vw,3.3rem);letter-spacing:-.05em;line-height:1}
+.ask .price span{font-size:15px;color:var(--ink-2);line-height:1.35}
+.ask .actions{margin-top:16px}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap bar-in">
+    <span class="mark" aria-label="Sonder">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
+      <b>Sonder<i>.</i></b></span>
+    <ol class="steps" aria-label="Your order">
+      <li class="done"><span class="dot" aria-hidden="true">&#10003;</span><span class="lbl">Masterclass</span></li>
+      <li class="now" aria-current="step"><span class="dot" aria-hidden="true">2</span><span class="lbl">Live challenge</span></li>
+      <li><span class="dot" aria-hidden="true">3</span><span class="lbl">Your access</span></li>
+    </ol>
+  </div>
+</header>
+<div class="preview-note" id="preview-note" hidden>Preview: no checkout is connected yet, so nothing has been charged and nothing will be.</div>
+<div class="paid">
+  <div class="wrap paid-in">
+    <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <p><b>Payment received.</b> The masterclass is yours and your login is on its way. The offer below is optional.</p>
+  </div>
+</div>
+
+<main>
+<section class="top" data-note="ch_top">
+  <div class="wrap">
+    <span class="kicker"><span class="pip" aria-hidden="true"></span><span>Live on Zoom &middot; starts <span data-d1-short>Monday</span></span></span>
+    <h1>Post your first book videos in 3 days, <span class="hl">live with Lexi.</span></h1>
+    <p class="lede">You have the method. Now do it with us: three live sessions where Lexi and Michael help you turn your book into videos and post them. No camera, no tech skills.</p>
+    <div class="when" data-when>
+      <b data-range-short>Monday to Wednesday</b>
+      <span data-zones>12pm ET &middot; 9am PT &middot; 5pm London</span>
+      <span class="here" data-here hidden></span>
+    </div>
+    <div class="actions">
+      <button class="btn big" type="button" data-yes>Yes, add the live challenge for $147 <span aria-hidden="true">&rarr;</span></button>
+      <p class="charge">One click. <b>$147 once, charged to the card you just used.</b> No subscription, and nothing to type again.</p>
+      <a class="no" href="/masterclass/start/" data-no>No thanks, I'll work through the masterclass on my own</a>
+    </div>
+    <div class="vsl" id="vsl" hidden></div>
+  </div>
+</section>
+
+<section class="sec wash" data-note="ch_days">
+  <div class="wrap">
+    <div class="sechead center">
+      <span class="eyebrow">The three days</span>
+      <h2>Monday, your first video. Wednesday, a plan for the next 90 days.</h2>
+      <p class="lede">Each session is live with Lexi and Michael, then questions until they run out. The homework takes under 20 minutes, so you arrive at the next session further on.</p>
+    </div>
+    <div class="days">
+      <article class="day">
+        <div class="day-head"><b>Day 1</b><span data-day="0">Monday</span></div>
+        <div class="day-body">
+          <h3>Your book's first video</h3>
+          <p>Lexi shows why short video sells non-fiction, with honest expectations. Then everyone makes a video from their own book alongside her, on the call, while Michael fixes tech in the chat.</p>
+          <p class="hw"><b>You leave with</b>Your first video, posted or ready to post.</p>
+        </div>
+      </article>
+      <article class="day">
+        <div class="day-head"><b>Day 2</b><span data-day="1">Tuesday</span></div>
+        <div class="day-body">
+          <h3>A week of videos</h3>
+          <p>Pull five more hooks from your book and make them in one sitting. Lexi reviews Day 1 videos live and shows what to change, and why small early numbers are normal.</p>
+          <p class="hw"><b>You leave with</b>A week of videos, ready to go out.</p>
+        </div>
+      </article>
+      <article class="day">
+        <div class="day-head"><b>Day 3</b><span data-day="2">Wednesday</span></div>
+        <div class="day-body">
+          <h3>Your 90-day plan</h3>
+          <p>What your first numbers mean, and a 90-day posting plan built from your own chapters, so this keeps going after the challenge ends.</p>
+          <p class="hw"><b>You leave with</b>Three months planned, chapter by chapter.</p>
+        </div>
+      </article>
+    </div>
+    <p class="when-local">Can't make those dates? Join the next challenge instead, <b data-fallback>two weeks later</b>. Just reply to your confirmation email.</p>
+  </div>
+</section>
+
+<section class="sec" data-note="ch_why">
+  <div class="wrap">
+    <div class="sechead center">
+      <span class="eyebrow">Why live</span>
+      <h2>Most people who buy a course never finish it. Three fixed afternoons change that.</h2>
+      <p class="lede">You have the map. The challenge is three afternoons where you sit down with Lexi and actually walk it, with everyone else doing the same thing at the same time.</p>
+    </div>
+    <div class="versus">
+      <div class="panel">
+        <h3><span class="tag t1">On your own</span></h3>
+        <ul class="ticks no">
+          <li>Watch the lessons whenever you get round to it</li>
+          <li>Guess which of your ideas is the strong one</li>
+          <li>Wonder whether your first video is any good</li>
+          <li>Questions wait for an email reply</li>
+        </ul>
+      </div>
+      <div class="panel pick">
+        <h3><span class="tag t2">The live challenge</span></h3>
+        <ul class="ticks">
+          <li><b>Your first video made on the call</b>, on Monday</li>
+          <li><b>Lexi picks your strongest ideas</b> with you, live</li>
+          <li><b>Your videos reviewed</b> before you post more</li>
+          <li><b>Your questions answered</b> on the spot, every day</li>
+        </ul>
+      </div>
+    </div>
+    <div class="worries">
+      <div><b>&ldquo;I don't want to be on camera.&rdquo;</b><span>You won't be, on the call or in your videos. Every video we make is faceless.</span></div>
+      <div><b>&ldquo;I'm not technical.&rdquo;</b><span>We click through every step together, on screen, and Michael fixes problems in the chat as they happen.</span></div>
+      <div><b>&ldquo;I'm busy.&rdquo;</b><span>About 90 minutes a day for three days, and under 20 minutes of homework.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec wash" data-note="ch_quote">
+  <div class="wrap narrow">
+    <div class="hosts" style="margin-bottom:22px">
+      <span class="pics"><img src="/assets/founders/lexi.jpg" alt="" width="48" height="48" /><img src="/assets/founders/mike.jpg" alt="" width="48" height="48" /></span>
+      <p>Hosted live by <b>Lexi Kaz</b>, whose own faceless videos reach millions of viewers, and <b>Michael Langdon</b>, twenty years in video and 50+ books published. They co-founded Sonder.</p>
+    </div>
+    <figure class="quote withcover">
+      <img src="/assets/mc/sobola-drone-cover.webp" alt="Cover of How to Make Money with a Drone by Mike Sobola" width="600" height="908" loading="lazy" />
+      <div>
+        <p>&ldquo;I'm an old guy who is still figuring out this social media thing. Sonder has helped me put it all in one place so I can make the videos, post them and keep track of what's working, quickly and easily.&rdquo;</p>
+        <cite><b>Mike Sobola</b>, author of How to Make Money with a Drone. He's made 44 videos since mid-September.</cite>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section class="sec" id="ask" data-note="ch_ask">
+  <div class="wrap">
+    <div class="ask">
+      <span class="pc-name">The 3-Day Book Video Challenge</span>
+      <h2>Add it to your order</h2>
+      <ul class="ticks">
+        <li><b>Three live sessions</b> with Lexi and Michael, <span data-range>Monday to Wednesday</span>, 12pm ET</li>
+        <li><b>Your first video made on the call</b>, then a week of them, then a 90-day plan</li>
+        <li><b>Your videos reviewed live</b> and hooks written for books in the room</li>
+        <li><b>Replays</b> of each day, up until the Sunday after</li>
+        <li><b>Day 1 guarantee:</b> if it isn't for you, tell us before Day 2 starts and we refund the $147</li>
+      </ul>
+      <div class="price"><b class="num">$147</b><span>one payment,<br />added to today's order</span></div>
+      <div class="actions">
+        <button class="btn big" type="button" data-yes>Yes, add the live challenge <span aria-hidden="true">&rarr;</span></button>
+        <p class="charge"><b>$147 once, charged to the card you just used.</b> No subscription, no second checkout.</p>
+        <a class="no" href="/masterclass/start/" data-no>No thanks, I'll work through the masterclass on my own</a>
+      </div>
+    </div>
+    <div class="notfor">
+      <b>Probably not for you if&hellip;</b>
+      <span>you write novels (it's built for non-fiction, memoir and children's books), you're hoping for overnight virality, or you won't post what you make.</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec wash" data-note="ch_faq">
+  <div class="wrap narrow">
+    <div class="sechead">
+      <span class="eyebrow">Straight answers</span>
+      <h2>Before you decide</h2>
+    </div>
+    <div class="faq">
+      <details><summary>What if I can't make 12pm Eastern?</summary>
+        <div class="a"><p>Each session's replay is in your inbox the same evening and stays up until the Sunday after. Come live if you can, though: the video reviews and hook-writing only happen for people in the room. Or move to the next challenge by replying to your confirmation email.</p></div></details>
+      <details><summary>Do I need any software?</summary>
+        <div class="a"><p>You can make every video by hand with free apps, and we'll show you how. Lexi makes hers on the call in Sonder, the tool she and Michael co-founded, which writes and makes the videos from your book. The next page lets you start a free 7-day trial if you'd like to follow along in it.</p></div></details>
+      <details><summary>Will I be on camera on the call?</summary>
+        <div class="a"><p>Only if you want to be. It's a Zoom session you can watch with your camera off, and you can ask questions in the chat.</p></div></details>
+      <details><summary>Is this a sales pitch in disguise?</summary>
+        <div class="a"><p>No, it's three working sessions. We'll be straight with you, though: at the end of Day 3 we explain Sonder's annual plan, for anyone who wants their videos made for them from then on. You're free to ignore it, and everything before it is yours either way.</p></div></details>
+      <details><summary>What if it's not for me?</summary>
+        <div class="a"><p>Come to Day 1. If it isn't what you hoped, email hello@yousonder.com before Day 2 starts and we'll refund the $147. You keep the masterclass either way.</p></div></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <span class="mark" aria-label="Sonder">
+        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
+        <b>Sonder<i>.</i></b></span>
+      <span><a href="https://app.yousonder.com/terms">Terms</a> &nbsp;&middot;&nbsp; <a href="https://app.yousonder.com/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="mailto:hello@yousonder.com">hello@yousonder.com</a></span>
+    </div>
+    <div class="disc">
+      <p>The challenge is education about marketing. It is not a promise that you will sell books or earn money. Results vary from author to author; across every video posted through Sonder, the median video gets about 106 views. Mike Sobola uses Sonder, which the hosts own.</p>
+      <p>&copy; 2026 YouSonder O&Uuml; &middot; All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/masterclass/mc.js"></script>
+<script>
+(function () {
+  "use strict";
+  /* ===== The settings =====
+     ACCEPT_URL / DECLINE_URL: the one-click links from the checkout tool
+     (SamCart's upsell accept and decline links, or our own endpoint). Until
+     ACCEPT_URL is set the page runs in preview mode: Yes and No walk on to
+     /masterclass/start without charging anything.
+     LEXI_VIDEO_URL: her short video for this page, once it exists.
+     The challenge dates live in /masterclass/mc.js. */
+  var ACCEPT_URL = '';
+  var DECLINE_URL = '';
+  var START_URL = '/masterclass/start/';
+  var LEXI_VIDEO_URL = '';
+
+  var MC = window.SonderMC;
+  var page; try { page = new URL(window.location.href); } catch (e) { page = null; }
+  var preview = !ACCEPT_URL;
+  if (preview) { var pn = document.getElementById('preview-note'); if (pn) pn.hidden = false; }
+
+  /* The dates of the challenge this buyer would join, and the one after. */
+  var d1 = MC ? MC.nextChallenge() : null;
+  if (d1) {
+    var s = MC.sessions(d1);
+    var longDay = { weekday: 'long', month: 'long', day: 'numeric' };
+    var shortDay = { weekday: 'short', month: 'short', day: 'numeric' };
+    var each = function (sel, fn) { Array.prototype.forEach.call(document.querySelectorAll(sel), fn); };
+    each('[data-day]', function (el) { el.textContent = MC.fmt(s[Number(el.getAttribute('data-day'))], shortDay); });
+    each('[data-range]', function (el) { el.textContent = MC.fmt(s[0], longDay) + ' to ' + MC.fmt(s[2], longDay); });
+    each('[data-range-short]', function (el) { el.textContent = MC.fmt(s[0], shortDay) + ' to ' + MC.fmt(s[2], shortDay); });
+    each('[data-d1-short]', function (el) { el.textContent = MC.fmt(s[0], shortDay); });
+    each('[data-zones]', function (el) {
+      el.textContent = MC.clock(s[0], 'America/New_York') + ' ET \u00b7 ' + MC.clock(s[0], 'America/Los_Angeles') + ' PT \u00b7 ' +
+        MC.clock(s[0], 'Europe/London') + ' London';
+    });
+    var here = document.querySelector('[data-here]'), line = MC.localLine(s[0]);
+    if (here && line) { here.textContent = line; here.hidden = false; }
+    var next = MC.nextChallenge(s[0]);
+    if (next) {
+      var n = MC.sessions(next);
+      each('[data-fallback]', function (el) { el.textContent = MC.fmt(n[0], shortDay) + ' to ' + MC.fmt(n[2], shortDay); });
+    }
+  }
+
+  /* Lexi's short video, once there is one. */
+  if (LEXI_VIDEO_URL) {
+    var box = document.getElementById('vsl');
+    var v = document.createElement('video');
+    v.src = LEXI_VIDEO_URL; v.controls = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'metadata';
+    box.appendChild(v); box.hidden = false;
+  }
+
+  /* Step 3, carrying what it needs to say the right thing. */
+  function onward(accepted) {
+    var u = new URL(START_URL, window.location.href);
+    if (accepted) u.searchParams.set('challenge', '1');
+    if (d1) u.searchParams.set('starts', d1);
+    if (preview) u.searchParams.set('preview', '1');
+    ['email', 'name'].forEach(function (k) { var v = page && page.searchParams.get(k); if (v) u.searchParams.set(k, v); });
+    return u.toString();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-no]'), function (a) {
+    a.setAttribute('href', DECLINE_URL || onward(false));
+  });
+
+  /* Yes: one click. In preview it simply walks on. */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-yes]'), function (b) {
+    b.addEventListener('click', function () {
+      if (typeof window.fbq === 'function') window.fbq('track', 'AddToCart', { content_name: 'challenge', value: 147, currency: 'USD' });
+      Array.prototype.forEach.call(document.querySelectorAll('[data-yes]'), function (x) { x.disabled = true; });
+      window.location.href = preview ? onward(true) : ACCEPT_URL;
+    });
+  });
+})();
+</script>
+</body>
+</html>
