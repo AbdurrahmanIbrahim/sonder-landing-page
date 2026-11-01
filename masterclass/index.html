@@ -11,7 +11,7 @@
 <title>The Book Marketing Masterclass | Lexi Kaz</title>
 <meta name="description" content="Lexi Kaz's recorded masterclass for authors: how she gets TikTok creators, AI avatars and proven scripts to make the videos that sell her books. 58 lessons, $47." />
 <meta property="og:title" content="What if other people made the videos that sell your book?" />
-<meta property="og:description" content="Lexi Kaz's recorded masterclass: TikTok Shop creators, AI avatar videos, the 95/5 rule and a bonus course on Amazon ads. 58 lessons, $47, 30-day money-back guarantee." />
+<meta property="og:description" content="Lexi Kaz's recorded masterclass: TikTok Shop creators, AI avatar videos, the 95/5 rule and a bonus course on Amazon ads. 58 lessons, $47 launch price, 30-day money-back guarantee." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.yousonder.com/masterclass" />
 
@@ -73,6 +73,12 @@
 .hero .ticks.row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin-top:22px}
 .hero .ticks.row li{font-size:16px;text-align:left}
 @media (max-width:640px){.hero .cta-row .btn{width:100%}}
+
+/* the launch price: $97 struck through, no date (Abdul, 1 Nov 2026). The
+   lines remove themselves when the server's price switch goes to $97. */
+.launch{margin-top:14px;font-size:15.5px;color:var(--ink-2)}
+.launch s,.price s{font-family:var(--mono);font-weight:600;color:var(--ink-3);text-decoration-color:var(--error);text-decoration-thickness:2px}
+.launch b{font-family:var(--mono);font-weight:600;color:var(--ink)}
 
 
 /* the product shot: the courses on a laptop, two tablets and two phones */
@@ -251,6 +257,7 @@
     <p class="proof">It&rsquo;s how I sell my own books: 95% of my TikTok Shop sales came from other people&rsquo;s videos, and my first book reached #152 of every book on Amazon US.</p>
     <div class="cta-row">
       <a class="btn big" href="#buy" data-buy="hero"><span>Get instant access for <span data-price>$47</span></span> <span aria-hidden="true">&rarr;</span></a>
+      <p class="launch" data-launch><s>$97</s> <b data-price>$47</b> launch price</p>
       <p class="under">One payment &middot; lifetime access &middot; <b>30-day money-back guarantee</b></p>
     </div>
     <ul class="ticks row">
@@ -542,7 +549,7 @@
         <li><b>The Sonder author community</b> on Skool, where authors share what's working</li>
         <li><b>30-day money-back guarantee</b></li>
       </ul>
-      <div class="price"><b class="num" data-price>$47</b><span>one payment, no subscription</span></div>
+      <div class="price"><s data-launch>$97</s><b class="num" data-price>$47</b><span>one payment, no subscription<em data-launch><br />Launch price</em></span></div>
       <a class="btn big block" href="#buy" data-buy="offer">Get instant access <span aria-hidden="true">&rarr;</span></a>
       <p class="under">Your invite to the course arrives by email straight away. Not for you? Email us within 30 days for a full refund, no questions.</p>
     </div>
@@ -600,6 +607,7 @@
     <p class="lede">Six courses, 58 lessons, and the 95/5 method I use on my own books. <span data-price>$47</span> once, with a 30-day guarantee.</p>
     <div class="btn-stack">
       <a class="btn big" href="#buy" data-buy="final"><span>Get instant access for <span data-price>$47</span></span> <span aria-hidden="true">&rarr;</span></a>
+      <p class="launch" data-launch><s>$97</s> <b data-price>$47</b> launch price</p>
       <p class="under">Lifetime access &middot; <b>30-day money-back guarantee</b></p>
     </div>
   </div>
@@ -620,7 +628,7 @@
     </div>
     <div class="disc">
       <p><b>Results disclaimer.</b> My figures on this page are my own results and are not typical: I'd been publishing for over two years, with a team helping. The authors' stories are individual results, shared with their permission, and those authors make their videos with Sonder. Results vary from author to author. Across every video posted through Sonder, the median video gets about 106 views. Sonder is owned by Michael Langdon and me. Mike Sobola and Nancy Dove each received 10 free Sonder video credits for recording a video, whatever they said. Michael Langdon is my co-founder; his TikTok Shop figure is the gross value of books sold, not profit.</p>
-      <p>The masterclass is education about marketing. It is not a promise that you will sell books or earn money, and it is not financial, legal or tax advice. Some tool links inside the lessons are affiliate links, and I may earn a commission if you sign up. Refunds: email hello@yousonder.com within 30 days of buying for a full refund.</p>
+      <p>The masterclass is education about marketing. It is not a promise that you will sell books or earn money, and it is not financial, legal or tax advice. Some tool links inside the lessons are affiliate links, and I may earn a commission if you sign up. <span data-launch>Launch price: $47 for now. The regular price will be $97.</span> Refunds: email hello@yousonder.com within 30 days of buying for a full refund.</p>
       <p>TikTok, TikTok Shop, Instagram, Facebook, YouTube, Amazon, BookBub, HeyGen and Claude are trademarks of their owners. Sonder is not affiliated with or endorsed by any of them.</p>
       <p>&copy; 2026 YouSonder O&Uuml; &middot; All rights reserved.</p>
     </div>
@@ -639,19 +647,21 @@
      THE PRICE is $47 until the founders change it (MASTERCLASS_FULL_PRICE on
      Railway; Abdul, 1 Nov 2026: never by date). Every [data-price] takes the
      live price from the server, so this page and the checkout always agree.
-     No crossed-out price and no "until" date: a launch line like that is only
-     honest with a real date on which the price goes up. */
+     The [data-launch] lines show $97 struck through as the launch price, with
+     no date, and remove themselves once the server says the price is $97. */
   var PREVIEW_NEXT = '/masterclass/challenge/?preview=1';
 
   var MC = window.SonderMC;
   var each = function (sel, fn) { Array.prototype.forEach.call(document.querySelectorAll(sel), fn); };
 
   var price = 47;
-  function paintPrice(usd) {
+  function paintPrice(usd, launch) {
     price = usd;
     each('[data-price]', function (el) { el.textContent = '$' + usd; });
+    // At the full price there is nothing to strike through.
+    if (!launch) each('[data-launch]', function (el) { if (el.parentNode) el.parentNode.removeChild(el); });
   }
-  if (MC) MC.config().then(function (c) { if (c && c.course && c.course.usd) paintPrice(c.course.usd); });
+  if (MC) MC.config().then(function (c) { if (c && c.course && c.course.usd) paintPrice(c.course.usd, c.course.launch !== false); });
 
   /* Remember the ad tags: they ride to the checkout (so the sale is credited
      to the ad that sent it) and on to the trial link on /masterclass/start. */
