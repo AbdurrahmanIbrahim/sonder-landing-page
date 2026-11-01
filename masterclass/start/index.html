@@ -88,7 +88,21 @@
 .tip a{color:var(--violet);font-weight:600}
 .order .cal b{color:var(--ink);font-weight:600}
 .later a{color:var(--ink-2)}
+.steps-in{margin:8px 0 0;padding-left:20px;display:grid;gap:6px;color:var(--ink-2);font-size:15.5px;line-height:1.5}
+.steps-in b,.invite b{display:inline;font-size:inherit;color:var(--ink);margin:0}
+.invite{margin-top:12px;font-size:15px;color:var(--ink-2);display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.linkbtn{appearance:none;background:none;border:0;padding:0;font:inherit;font-weight:600;color:var(--violet);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.linkbtn:focus-visible{outline:2px solid var(--violet);outline-offset:3px;border-radius:4px}
+#other{flex-basis:100%;display:grid;gap:6px;margin-top:4px}
+#other[hidden]{display:none}
+#other label{font-size:14px;font-weight:600;color:var(--ink)}
+.other-row{display:flex;flex-wrap:wrap;gap:8px}
+.other-row input{flex:1 1 220px;min-width:0;font:inherit;padding:10px 12px;border:1.5px solid var(--rule-2);border-radius:10px;background:var(--paper);color:var(--ink)}
+.other-row input:focus-visible{outline:2px solid var(--violet);outline-offset:1px}
+.invite-msg{flex-basis:100%;margin:2px 0 0;font-size:14.5px;color:var(--ink)}
+.invite-msg:empty{display:none}
 </style>
+<script src="/visit.js" defer></script>
 </head>
 <body>
 <header class="bar">
@@ -110,25 +124,39 @@
   <div class="wrap">
     <span class="eyebrow">Order complete</span>
     <h1 id="in-title">You're in.</h1>
-    <p class="lede">A receipt and your login are on their way to your inbox. If they're not there in a few minutes, check your spam folder.</p>
+    <p class="lede">A receipt and your invite to the Sonder community are on their way to your inbox<span data-to></span>. If they're not there in a few minutes, check Promotions or Spam.</p>
     <div class="orders">
       <div class="order">
         <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <div><b>The Book Marketing Masterclass</b>
-          <p>Six courses and 58 lessons. Your classroom login is in the email from Kajabi.</p>
-          <p class="cal" id="course-link" hidden><a href="#">Go to my lessons &rarr;</a></p></div>
+          <p>Six courses and 58 lessons, in the Sonder community on Skool.</p></div>
       </div>
       <div class="order" id="order-challenge" hidden>
         <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <div><b>The 3-Day Book Video Challenge</b>
-          <p id="challenge-when">Monday to Wednesday, 12pm ET / 9am PT. Your Zoom link arrives by email.</p>
+          <p id="challenge-when">Monday to Wednesday, 12pm ET / 9am PT. Your Zoom link is in your confirmation email.</p>
           <p class="cal"><b id="where-q">Where will you be on Monday at 12pm ET?</b> Decide now and put it in your calendar: <a id="cal-google" href="https://calendar.google.com/" target="_blank" rel="noopener">Google</a> &middot; <a id="cal-ics" href="#" download="sonder-challenge.ics">Apple / Outlook</a></p></div>
       </div>
-      <div class="order next">
+      <div class="order next" id="access">
         <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="#05261C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <div><b>Join the Sonder author community</b>
-          <p>Free, on Skool: where authors using the method share what's working and ask questions. The invite is in your welcome email too.</p>
-          <p class="cal"><a href="https://www.skool.com/sonder-6045" target="_blank" rel="noopener">Join the community &rarr;</a></p></div>
+        <div><b>Open your masterclass</b>
+          <ol class="steps-in">
+            <li>Look for an email from <b>Skool</b><span data-to-short></span>. It usually takes a few minutes.</li>
+            <li>Click <b>Join now</b>. Sign in to Skool, or make a free Skool account. Any email address works for it.</li>
+            <li>Open <b>Classroom</b> and start with the first course. The Sonder community is in there too: authors sharing what's working.</li>
+          </ol>
+          <div class="invite" id="invite" hidden>
+            <button class="linkbtn" type="button" id="resend">Send my invite again</button>
+            <span aria-hidden="true">&middot;</span>
+            <button class="linkbtn" type="button" id="other-toggle">I use a different email on Skool</button>
+            <form id="other" hidden novalidate>
+              <label for="other-email">Your Skool email</label>
+              <span class="other-row"><input id="other-email" name="other-email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com" />
+              <button class="btn sm" type="submit">Send it there</button></span>
+            </form>
+            <p class="invite-msg" id="invite-msg" role="status"></p>
+          </div>
+          <p class="cal"><a href="https://www.skool.com/sonder-6045/classroom" target="_blank" rel="noopener">Already joined? Open the classroom &rarr;</a></p></div>
       </div>
     </div>
   </div>
@@ -193,9 +221,13 @@
 (function () {
   "use strict";
   /* ===== The settings =====
-     COURSE_URL: where "Not now" goes, the masterclass login (the Kajabi
-     classroom). Empty = it just closes the ask. */
-  var COURSE_URL = '';
+     COURSE_URL: where "Not now" goes, the Sonder classroom on Skool.
+     The order comes from sonder-server (GET /api/public/masterclass/order?s=):
+     the buyer's email, the challenge dates and calendar links if they took it,
+     and the Purchase ids the server reported to Meta, so the pixel below counts
+     each sale once. With no ?s= (a preview) the page reads ?challenge=1 and
+     ?starts= instead, as before. */
+  var COURSE_URL = 'https://www.skool.com/sonder-6045/classroom';
   var TRIAL_URL = 'https://app.yousonder.com/signup';
   var CAL_TITLE = 'The 3-Day Book Video Challenge (Sonder)';
   var CAL_DETAILS = 'Live on Zoom with Lexi and Michael, 12pm ET each day. Your Zoom link is in your confirmation email. Bring your book.';
@@ -204,30 +236,105 @@
   var $ = function (id) { return document.getElementById(id); };
   var here; try { here = new URL(window.location.href); } catch (e) { here = null; }
   var q = function (k) { return here ? (here.searchParams.get(k) || '') : ''; };
+  var sid = MC ? MC.sid() : '';
 
-  if (q('preview') === '1') $('preview-note').hidden = false;
+  $('preview-note').hidden = q('preview') !== '1';
 
-  var first = q('name').trim().split(/\s+/)[0];
-  if (first && first.length < 40) $('in-title').textContent = 'You’re in, ' + first + '.';
+  function greet(name) {
+    var first = String(name || '').trim().split(/\s+/)[0];
+    if (first && first.length < 40) $('in-title').textContent = 'You\u2019re in, ' + first + '.';
+  }
+  greet(q('name'));
 
   /* The challenge, if they took it on page 2. */
   var tookChallenge = q('challenge') === '1';
   var stepC = document.querySelector('[data-step-challenge]');
-  if (tookChallenge) {
+  var iso = null;
+  function showChallenge(monday, links) {
+    if (!MC || !monday) return;
+    iso = monday;
     $('order-challenge').hidden = false;
-    var iso = MC && MC.isChallenge(q('starts')) ? q('starts') : (MC ? MC.nextChallenge() : null);
-    if (iso) {
-      var s = MC.sessions(iso);
-      var day = { weekday: 'long', month: 'long', day: 'numeric' };
-      $('challenge-when').textContent = MC.fmt(s[0], day) + ' to ' + MC.fmt(s[2], day) + ', 12pm ET / 9am PT. ' +
-        MC.localLine(s[0]) + ' Your Zoom link arrives by email.';
-      $('cal-google').href = MC.googleCal(iso, CAL_TITLE, CAL_DETAILS);
-      $('cal-ics').href = MC.icsHref(iso, CAL_TITLE, CAL_DETAILS);
-    }
-  } else if (stepC) {
-    stepC.classList.remove('done'); stepC.classList.add('skip');
-    stepC.querySelector('.dot').textContent = '2';
+    var ss = MC.sessions(monday);
+    var day = { weekday: 'long', month: 'long', day: 'numeric' };
+    $('challenge-when').textContent = MC.fmt(ss[0], day) + ' to ' + MC.fmt(ss[2], day) + ', 12pm ET / 9am PT. ' +
+      MC.localLine(ss[0]) + ' Your Zoom link is in your confirmation email.';
+    $('cal-google').href = (links && links.googleUrl) || MC.googleCal(monday, CAL_TITLE, CAL_DETAILS);
+    $('cal-ics').href = (links && links.icsUrl) || MC.icsHref(monday, CAL_TITLE, CAL_DETAILS);
+    if (links && links.icsUrl) $('cal-ics').removeAttribute('download');
   }
+  function noChallenge() {
+    if (stepC) {
+      stepC.classList.remove('done'); stepC.classList.add('skip');
+      stepC.querySelector('.dot').textContent = '2';
+    }
+  }
+  if (!sid) {
+    if (tookChallenge) showChallenge(MC && MC.isChallenge(q('starts')) ? q('starts') : (MC ? MC.nextChallenge() : null), null);
+    else noChallenge();
+  } else if (!tookChallenge) {
+    noChallenge();
+  }
+
+  /* Meta: one Purchase per sale, with the same id the server sent, so the
+     two reports are counted once. Once per order, even on a reload. */
+  function reportPurchases(p) {
+    if (typeof window.fbq !== 'function' || !p) return;
+    [p.course, p.challenge].forEach(function (x) {
+      if (!x || !x.eventId) return;
+      var key = 'sonder.mc.px.' + x.eventId;
+      try { if (sessionStorage.getItem(key)) return; sessionStorage.setItem(key, '1'); } catch (e) {}
+      window.fbq('track', 'Purchase', { value: x.valueUsd, currency: 'USD', content_name: x.eventId.indexOf('mc_challenge') === 0 ? 'challenge' : 'masterclass' }, { eventID: x.eventId });
+    });
+  }
+
+  /* The real order. */
+  var buyerEmail = q('email');
+  if (sid && MC) {
+    MC.order(sid).then(function (o) {
+      if (!o || !o.ok) return;
+      buyerEmail = o.email || buyerEmail;
+      if (o.firstName) greet(o.firstName);
+      Array.prototype.forEach.call(document.querySelectorAll('[data-to]'), function (el) { if (o.email) el.textContent = ' at ' + o.email; });
+      Array.prototype.forEach.call(document.querySelectorAll('[data-to-short]'), function (el) { if (o.email) el.textContent = ', sent to ' + o.email; });
+      if (o.challenge && o.challenge.monday) {
+        tookChallenge = true;
+        if (stepC) { stepC.classList.add('done'); stepC.classList.remove('skip'); stepC.querySelector('.dot').textContent = '\u2713'; }
+        showChallenge(o.challenge.monday, o.challenge);
+        trialTip();
+      } else {
+        noChallenge();
+      }
+      $('invite').hidden = false;
+      reportPurchases(o.purchases);
+      trialLink();
+    });
+  }
+
+  /* Send the Skool invite again, or to the email they use on Skool. */
+  function inviteSay(t) { $('invite-msg').textContent = t; }
+  function sendInvite(email, btn) {
+    if (!sid || !MC) return;
+    btn.disabled = true;
+    inviteSay('Sending\u2026');
+    MC.resendInvite(sid, email).then(function (r) {
+      btn.disabled = false;
+      if (r && r.ok) { inviteSay('Sent to ' + r.email + '. It can take a few minutes, and it sometimes lands in Promotions or Spam.'); return; }
+      if (r && r.error === 'too_soon') { inviteSay('We sent one a few minutes ago. Give it ' + Math.max(1, Math.ceil((r.retryAfterSec || 60) / 60)) + ' more minute(s), and check Promotions and Spam.'); return; }
+      if (r && r.error === 'contact_us') { inviteSay('Email hello@yousonder.com and we will get you in by hand.'); return; }
+      inviteSay('That did not go through. Please try again, or email hello@yousonder.com.');
+    });
+  }
+  $('resend').addEventListener('click', function () { sendInvite('', this); });
+  $('other-toggle').addEventListener('click', function () {
+    $('other').hidden = !$('other').hidden;
+    if (!$('other').hidden) $('other-email').focus();
+  });
+  $('other').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = $('other-email').value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) { inviteSay('That email address does not look right.'); $('other-email').focus(); return; }
+    sendInvite(v, this.querySelector('button'));
+  });
 
   /* The trial's dates, if they start today, in their own time zone. */
   var DAY = 86400000;
@@ -242,50 +349,50 @@
   /* Challenge buyers: if the challenge is days away, a free week started now
      would end before Day 3. Say so, and offer a calendar reminder for the
      Friday before, rather than letting them find out from a charge. */
-  if (tookChallenge && iso && MC) {
+  function trialTip() {
+    if (!(tookChallenge && iso && MC)) return;
     var d1At = MC.sessions(iso)[0].getTime();
-    if (d1At - Date.now() > 4 * DAY) {
-      var fri = MC.sessions(iso)[0];
-      var friAt = new Date(fri.getTime() - 3 * DAY);
-      var friLabel = MC.fmt(friAt, { weekday: 'long', month: 'short', day: 'numeric' });
-      var remind = new URLSearchParams({ action: 'TEMPLATE', text: 'Start my free Sonder trial',
-        dates: friAt.toISOString().slice(0, 10).replace(/-/g, '') + '/' + new Date(friAt.getTime() + DAY).toISOString().slice(0, 10).replace(/-/g, ''),
-        details: 'Start the 7-day trial today so it covers the whole challenge: https://www.yousonder.com/masterclass/start/?challenge=1&starts=' + iso });
-      var tip = $('trial-tip');
-      tip.innerHTML = '<b>Joining the challenge?</b> Your free week starts the day you sign up. Start it on ' + friLabel +
-        ' or later and it covers all three live days. <a target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?' + remind.toString() + '">Remind me on ' + friLabel.split(',')[0] + '</a>';
-      tip.hidden = false;
-    }
+    if (d1At - Date.now() <= 4 * DAY) return;
+    var fri = MC.sessions(iso)[0];
+    var friAt = new Date(fri.getTime() - 3 * DAY);
+    var friLabel = MC.fmt(friAt, { weekday: 'long', month: 'short', day: 'numeric' });
+    var back = 'https://www.yousonder.com/masterclass/start/?' + (sid ? 's=' + encodeURIComponent(sid) + '&' : '') + 'challenge=1&starts=' + iso;
+    var remind = new URLSearchParams({ action: 'TEMPLATE', text: 'Start my free Sonder trial',
+      dates: friAt.toISOString().slice(0, 10).replace(/-/g, '') + '/' + new Date(friAt.getTime() + DAY).toISOString().slice(0, 10).replace(/-/g, ''),
+      details: 'Start the 7-day trial today so it covers the whole challenge: ' + back });
+    var tip = $('trial-tip');
+    tip.innerHTML = '<b>Joining the challenge?</b> Your free week starts the day you sign up. Start it on ' + friLabel +
+      ' or later and it covers all three live days. <a target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?' + remind.toString() + '">Remind me on ' + friLabel.split(',')[0] + '</a>';
+    tip.hidden = false;
   }
+  trialTip();
 
   /* The trial link: the card trial, their email filled in, the ad's tags kept
      so the trial is credited to whatever sent them to the masterclass. */
-  var tags = MC ? MC.readTags() : {};
-  var u = new URL(TRIAL_URL);
-  u.searchParams.set('offer', 'trial');
-  if (q('email')) u.searchParams.set('email', q('email'));
-  if (q('name')) u.searchParams.set('name', q('name'));
-  (MC ? MC.CARRY : []).forEach(function (k) { if (tags[k]) u.searchParams.set(k, tags[k]); });
-  if (!u.searchParams.get('utm_source')) u.searchParams.set('utm_source', 'masterclass');
-  if (!u.searchParams.get('utm_medium')) u.searchParams.set('utm_medium', 'funnel');
-  if (!u.searchParams.get('utm_campaign')) u.searchParams.set('utm_campaign', 'masterclass');
-  u.searchParams.set('utm_content', tookChallenge ? 'mc_start_challenge' : 'mc_start');
-  $('trial').href = u.toString();
+  function trialLink() {
+    var tags = MC ? MC.readTags() : {};
+    var u = new URL(TRIAL_URL);
+    u.searchParams.set('offer', 'trial');
+    if (buyerEmail) u.searchParams.set('email', buyerEmail);
+    if (q('name')) u.searchParams.set('name', q('name'));
+    (MC ? MC.CARRY : []).forEach(function (k) { if (tags[k]) u.searchParams.set(k, tags[k]); });
+    if (!u.searchParams.get('utm_source')) u.searchParams.set('utm_source', 'masterclass');
+    if (!u.searchParams.get('utm_medium')) u.searchParams.set('utm_medium', 'funnel');
+    if (!u.searchParams.get('utm_campaign')) u.searchParams.set('utm_campaign', 'masterclass');
+    // The admin's Funnel tab counts trials from this page by these two values.
+    u.searchParams.set('utm_content', tookChallenge ? 'mc_start_challenge' : 'mc_start');
+    $('trial').href = u.toString();
+  }
+  trialLink();
   $('trial').addEventListener('click', function () {
     if (typeof window.fbq === 'function') window.fbq('track', 'InitiateCheckout', { content_name: 'mc_trial' });
   });
 
-  if (COURSE_URL) {
-    $('course-link').querySelector('a').href = COURSE_URL;
-    $('course-link').hidden = false;
-  }
-
-  /* "Not now": to the lessons if we know where they are, otherwise just a
-     quiet note, since the login is already in their inbox. */
+  /* "Not now": to the classroom on Skool. */
   $('later').addEventListener('click', function (e) {
-    if (COURSE_URL) { this.href = COURSE_URL; return; }
+    if (COURSE_URL) { this.href = COURSE_URL; this.target = '_blank'; this.rel = 'noopener'; return; }
     e.preventDefault();
-    this.parentNode.textContent = 'No problem. Your login is in your inbox, and the trial will still be here when you want it.';
+    this.parentNode.textContent = 'No problem. Your Skool invite is in your inbox, and the trial will still be here when you want it.';
   });
 })();
 </script>

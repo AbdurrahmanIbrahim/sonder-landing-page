@@ -125,6 +125,7 @@
 .ask .price span{font-size:15px;color:var(--ink-2);line-height:1.35}
 .ask .actions{margin-top:16px}
 </style>
+<script src="/visit.js" defer></script>
 </head>
 <body>
 <header class="bar">
@@ -143,7 +144,7 @@
 <div class="paid">
   <div class="wrap paid-in">
     <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-    <p><b>Payment received.</b> The masterclass is yours and your login is on its way. The offer below is optional.</p>
+    <p><b>Payment received.</b> The masterclass is yours, and your invite to the Sonder community is on its way<span data-to></span>. The offer below is optional.</p>
   </div>
 </div>
 
@@ -323,45 +324,50 @@
 (function () {
   "use strict";
   /* ===== The settings =====
-     ACCEPT_URL / DECLINE_URL: the one-click links from the checkout tool
-     (SamCart's upsell accept and decline links, or our own endpoint). Until
-     ACCEPT_URL is set the page runs in preview mode: Yes and No walk on to
+     The yes is ONE CLICK on Sonder's own Stripe: POST
+     /api/public/masterclass/challenge with the checkout id Stripe sent the
+     buyer back with (?s=cs_...). The server charges the card they just used,
+     once (sonder-server lib/masterclassStripe.ts chargeChallenge). With no ?s=
+     (a preview, or the server's switch off) Yes and No just walk on to
      /masterclass/start without charging anything.
      LEXI_VIDEO_URL: her short video for this page, once it exists.
-     The challenge dates live in /masterclass/mc.js. */
-  var ACCEPT_URL = '';
-  var DECLINE_URL = '';
+     The challenge dates come from the server (the cohort a yes right now joins). */
   var START_URL = '/masterclass/start/';
   var LEXI_VIDEO_URL = '';
 
   var MC = window.SonderMC;
   var page; try { page = new URL(window.location.href); } catch (e) { page = null; }
-  var preview = !ACCEPT_URL;
+  var s = MC ? MC.sid() : '';
+  var preview = !s;
+  var each = function (sel, fn) { Array.prototype.forEach.call(document.querySelectorAll(sel), fn); };
   if (preview) { var pn = document.getElementById('preview-note'); if (pn) pn.hidden = false; }
 
-  /* The dates of the challenge this buyer would join, and the one after. */
-  var d1 = MC ? MC.nextChallenge() : null;
-  if (d1) {
-    var s = MC.sessions(d1);
+  /* The dates of the challenge a yes joins now, and the one after. */
+  var d1 = null;
+  function paintDates(iso) {
+    if (!MC || !iso) return;
+    d1 = iso;
+    var ss = MC.sessions(iso);
     var longDay = { weekday: 'long', month: 'long', day: 'numeric' };
     var shortDay = { weekday: 'short', month: 'short', day: 'numeric' };
-    var each = function (sel, fn) { Array.prototype.forEach.call(document.querySelectorAll(sel), fn); };
-    each('[data-day]', function (el) { el.textContent = MC.fmt(s[Number(el.getAttribute('data-day'))], shortDay); });
-    each('[data-range]', function (el) { el.textContent = MC.fmt(s[0], longDay) + ' to ' + MC.fmt(s[2], longDay); });
-    each('[data-range-short]', function (el) { el.textContent = MC.fmt(s[0], shortDay) + ' to ' + MC.fmt(s[2], shortDay); });
-    each('[data-d1-short]', function (el) { el.textContent = MC.fmt(s[0], shortDay); });
+    each('[data-day]', function (el) { el.textContent = MC.fmt(ss[Number(el.getAttribute('data-day'))], shortDay); });
+    each('[data-range]', function (el) { el.textContent = MC.fmt(ss[0], longDay) + ' to ' + MC.fmt(ss[2], longDay); });
+    each('[data-range-short]', function (el) { el.textContent = MC.fmt(ss[0], shortDay) + ' to ' + MC.fmt(ss[2], shortDay); });
+    each('[data-d1-short]', function (el) { el.textContent = MC.fmt(ss[0], shortDay); });
     each('[data-zones]', function (el) {
-      el.textContent = MC.clock(s[0], 'America/New_York') + ' ET \u00b7 ' + MC.clock(s[0], 'America/Los_Angeles') + ' PT \u00b7 ' +
-        MC.clock(s[0], 'Europe/London') + ' London';
+      el.textContent = MC.clock(ss[0], 'America/New_York') + ' ET \u00b7 ' + MC.clock(ss[0], 'America/Los_Angeles') + ' PT \u00b7 ' +
+        MC.clock(ss[0], 'Europe/London') + ' London';
     });
-    var here = document.querySelector('[data-here]'), line = MC.localLine(s[0]);
+    var here = document.querySelector('[data-here]'), line = MC.localLine(ss[0]);
     if (here && line) { here.textContent = line; here.hidden = false; }
-    var next = MC.nextChallenge(s[0]);
+    var next = MC.nextChallenge(new Date(ss[0].getTime() + 1));
     if (next) {
       var n = MC.sessions(next);
       each('[data-fallback]', function (el) { el.textContent = MC.fmt(n[0], shortDay) + ' to ' + MC.fmt(n[2], shortDay); });
     }
   }
+  paintDates(MC ? MC.nextChallenge() : null);
+  if (MC) MC.config().then(function () { if (!s) paintDates(MC.nextChallenge()); });
 
   /* Lexi's short video, once there is one. */
   if (LEXI_VIDEO_URL) {
@@ -371,26 +377,74 @@
     box.appendChild(v); box.hidden = false;
   }
 
-  /* Step 3, carrying what it needs to say the right thing. */
+  /* Step 3. With a real order the server's link carries the order key;
+     in preview it carries the dates instead. */
   function onward(accepted) {
     var u = new URL(START_URL, window.location.href);
+    if (s) u.searchParams.set('s', s);
     if (accepted) u.searchParams.set('challenge', '1');
-    if (d1) u.searchParams.set('starts', d1);
+    if (!s && d1) u.searchParams.set('starts', d1);
     if (preview) u.searchParams.set('preview', '1');
-    ['email', 'name'].forEach(function (k) { var v = page && page.searchParams.get(k); if (v) u.searchParams.set(k, v); });
     return u.toString();
   }
+  each('[data-no]', function (a) { a.setAttribute('href', onward(false)); });
 
-  Array.prototype.forEach.call(document.querySelectorAll('[data-no]'), function (a) {
-    a.setAttribute('href', DECLINE_URL || onward(false));
-  });
+  /* The buyer's order: their email for the banner, the cohort a yes joins
+     right now, and whether the offer is still open for them. */
+  if (s && MC) {
+    MC.order(s).then(function (o) {
+      if (!o || !o.ok) return;
+      if (o.challenge) { window.location.replace(onward(true)); return; }
+      if (!o.offerOpen) { window.location.replace(onward(false)); return; }
+      var to = document.querySelector('[data-to]');
+      if (to && o.email) to.textContent = ' to ' + o.email;
+      if (o.offerCohort && o.offerCohort.monday) paintDates(o.offerCohort.monday);
+    });
+  }
+
+  function message(html) {
+    each('[data-yes]', function (b) {
+      var box = b.parentNode.querySelector('.yes-msg');
+      if (!box) {
+        box = document.createElement('div');
+        box.className = 'yes-msg';
+        box.setAttribute('role', 'status');
+        box.style.cssText = 'margin:14px 0 0;padding:12px 14px;border-radius:12px;background:#FFF4F0;border:1.5px solid #F1C6B8;font-size:15.5px;line-height:1.5;color:#3A1020';
+        b.parentNode.insertBefore(box, b.nextSibling);
+      }
+      box.innerHTML = html;
+    });
+  }
+  function setBusy(on) {
+    each('[data-yes]', function (x) {
+      x.disabled = on;
+      if (on) { x.setAttribute('data-label', x.innerHTML); x.textContent = 'Adding it to your order\u2026'; }
+      else if (x.getAttribute('data-label')) x.innerHTML = x.getAttribute('data-label');
+    });
+  }
 
   /* Yes: one click. In preview it simply walks on. */
-  Array.prototype.forEach.call(document.querySelectorAll('[data-yes]'), function (b) {
+  each('[data-yes]', function (b) {
     b.addEventListener('click', function () {
       if (typeof window.fbq === 'function') window.fbq('track', 'AddToCart', { content_name: 'challenge', value: 147, currency: 'USD' });
-      Array.prototype.forEach.call(document.querySelectorAll('[data-yes]'), function (x) { x.disabled = true; });
-      window.location.href = preview ? onward(true) : ACCEPT_URL;
+      if (preview || !MC) { window.location.href = onward(true); return; }
+      setBusy(true);
+      MC.acceptChallenge(s).then(function (r) {
+        if (r && r.result === 'paid') { window.location.href = r.next || onward(true); return; }
+        if (r && r.result === 'closed') { window.location.href = r.next || onward(false); return; }
+        setBusy(false);
+        var skip = '<a href="' + onward(false) + '" style="color:inherit">skip it and go to my masterclass</a>';
+        if (r && r.result === 'authentication_required' && r.payUrl) {
+          message('<b>Your bank wants you to confirm this payment.</b> Nothing has been taken yet. <a href="' + r.payUrl + '" style="color:#00795C;font-weight:700">Confirm the $147 on Stripe\u2019s secure page</a>, or ' + skip + '.');
+        } else if (r && r.result === 'declined') {
+          message('<b>Your card was declined for this one.</b> Nothing has been taken. ' +
+            (r.payUrl ? '<a href="' + r.payUrl + '" style="color:#00795C;font-weight:700">Pay with another card on Stripe\u2019s secure page</a>, or ' : '') + skip + '.');
+        } else if (r && r.result === 'busy') {
+          message('Still working on it. Give it a few seconds.');
+        } else {
+          message('<b>That did not go through, and you have not been charged.</b> Please try again, or ' + skip + '.');
+        }
+      });
     });
   });
 })();
