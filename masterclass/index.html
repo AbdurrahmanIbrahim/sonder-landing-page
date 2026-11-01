@@ -58,6 +58,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" />
 <link rel="icon" type="image/svg+xml" href="/assets/sonder-logo-plum-flat.svg" />
 <link rel="stylesheet" href="/masterclass/mc.css" />
+<link rel="prefetch" href="/masterclass/checkout/" />
 <style>
 /* ---------- hero: Jenny Hansen Lane's layout, a question and then the whole course on screen ---------- */
 .hero{background:linear-gradient(180deg,var(--wash),var(--paper));border-bottom:1px solid var(--rule);
@@ -637,8 +638,12 @@
 (function () {
   "use strict";
   /* ===== The settings =====
-     Payment is Sonder's own Stripe checkout, opened by sonder-server
-     (POST /api/public/masterclass/checkout). While the server's funnel switch
+     Every buy button opens our own checkout page, /masterclass/checkout (a
+     two-step order form with Stripe's card fields in it), carrying this page's
+     ad tags. If the server says the page is switched off
+     (MASTERCLASS_CHECKOUT_PAGE=false), the button opens Stripe's hosted
+     checkout instead (POST /api/public/masterclass/checkout), as it did before
+     1 Nov 2026. Either way payment is Sonder's own Stripe. While the server's funnel switch
      is off (MASTERCLASS_FUNNEL_ENABLED), every buy button walks the funnel in
      preview mode instead, so the three pages can be reviewed end to end.
      THE PRICE is $47 until the founders change it (MASTERCLASS_FULL_PRICE on
@@ -647,6 +652,7 @@
      The [data-launch] lines show $97 struck through as the launch price, with
      no date, and remove themselves once the server says the price is $97. */
   var PREVIEW_NEXT = '/masterclass/challenge/?preview=1';
+  var CHECKOUT_PAGE = '/masterclass/checkout/';
 
   var MC = window.SonderMC;
   var each = function (sel, fn) { Array.prototype.forEach.call(document.querySelectorAll(sel), fn); };
@@ -681,18 +687,23 @@
     a.addEventListener('click', function (e) {
       e.preventDefault();
       if (busy) return;
-      if (typeof window.fbq === 'function') {
-        window.fbq('track', 'InitiateCheckout', { content_name: 'masterclass', value: price, currency: 'USD', content_category: a.getAttribute('data-buy') });
-      }
       if (!MC) { window.location.href = PREVIEW_NEXT; return; }
       busy = true;
       var label = a.innerHTML;
+      a.setAttribute('data-label', label);
       a.setAttribute('aria-busy', 'true');
       a.textContent = 'Opening the secure checkout\u2026';
       /* Real checkout only once the server says the funnel is on; until then
          (or if it can't be reached at all) the page stays in preview mode. */
       MC.config().then(function (c) {
         if (!c || !c.enabled) { window.location.href = PREVIEW_NEXT; return; }
+        /* Our checkout page fires InitiateCheckout itself when it opens. The
+           query string rides along so the ad tags reach it even where session
+           storage is blocked. */
+        if (c.checkout && c.checkout.page) { window.location.href = CHECKOUT_PAGE + window.location.search; return; }
+        if (typeof window.fbq === 'function') {
+          window.fbq('track', 'InitiateCheckout', { content_name: 'masterclass', value: price, currency: 'USD', content_category: a.getAttribute('data-buy') });
+        }
         return MC.checkout().then(function (r) {
           if (r && r.ok && r.url) { window.location.href = r.url; return; }
           busy = false;
@@ -702,6 +713,17 @@
           say(a, 'The checkout did not open. Please try again in a moment, or email hello@yousonder.com and we will help.');
         });
       });
+    });
+  });
+
+  /* Back from the checkout (the browser's back button keeps this page as it
+     was): the buttons work again. */
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    busy = false;
+    each('[data-buy][aria-busy]', function (el) {
+      el.removeAttribute('aria-busy');
+      if (el.getAttribute('data-label')) el.innerHTML = el.getAttribute('data-label');
     });
   });
 
