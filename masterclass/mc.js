@@ -6,7 +6,9 @@
       the real list (GET /api/public/masterclass/config, which also knows any
       dropped dates); the rule below is only the fallback while that loads.
    3. The server: checkout, the buyer's order, the one-click challenge and the
-      Skool invite all go through sonder-server (routes/masterclass.ts).
+      Skool invite all go through sonder-server (routes/masterclass.ts). The
+      buy buttons open our own checkout page (/masterclass/checkout) unless the
+      server's config says to use Stripe's hosted one.
    2. Attribution. The course page stores the ad and affiliate tags it was
       opened with; the trial link on /masterclass/start sends them on to the
       app, so a trial is credited to the ad that paid for the visit. Session
@@ -187,8 +189,10 @@
     }
     return configP;
   }
-  /* Open the $47 checkout. Resolves { ok, url } or { ok: false, error }. */
-  function checkout() {
+  /* Open the $47 checkout. Resolves { ok, url } (Stripe's page) or, from our
+     own checkout page with extra = { ui: 'page', name, email },
+     { ok, clientSecret }; or { ok: false, error }. */
+  function checkout(extra) {
     var here = {};
     try {
       var u = new URL(window.location.href);
@@ -196,13 +200,13 @@
     } catch (e) {}
     var tags = Object.assign({}, readTags(), here);
     var ok = adConsent();
-    return call('POST', '/checkout', {
+    return call('POST', '/checkout', Object.assign({
       tags: tags,
       vid: cookie('sonder_vid'),
       consent: ok,
       fbc: ok ? cookie('_fbc') : '',
       fbp: ok ? cookie('_fbp') : ''
-    });
+    }, extra || {}));
   }
   function order(s) { return call('GET', '/order?s=' + encodeURIComponent(s)); }
   function acceptChallenge(s) { return call('POST', '/challenge', { s: s }); }

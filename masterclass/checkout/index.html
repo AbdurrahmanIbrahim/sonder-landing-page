@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script src="/consent.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FFFFFF" />
+<title>Checkout: The Book Marketing Masterclass | Sonder</title>
+<meta name="robots" content="noindex, nofollow" />
+<!-- yousonder.com/masterclass/checkout: the order form between the course page
+     and the challenge page (1 Nov 2026). Built on the ClickFunnels checkout
+     page: a two-step order form (details first, so someone who stops at the
+     card still left us their email), the order summary and the guarantee next
+     to the button, what they get and what other authors say beside it, and no
+     links out. The card fields are Stripe's (Checkout Sessions in "elements"
+     mode, Stripe.js dahlia, matching sonder-server's API version), so tax, the
+     receipt, the saved card for the one-click challenge and the webhook all
+     work exactly as they did on Stripe's own page. If Stripe.js can't load, or
+     the server says the page is switched off (MASTERCLASS_CHECKOUT_PAGE=false),
+     step 1 sends the buyer to Stripe's hosted checkout instead, with their
+     email already filled in. Add ?notes=1 to see why each part is here. -->
+
+<!-- Meta Pixel: Sonder Web dataset, the same id as the other /masterclass pages. -->
+<script>
+  window.SONDER_META_PIXEL_ID = '1999564797365444';
+  (function () {
+    var id = window.SONDER_META_PIXEL_ID;
+    if (!id) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', id); fbq('track', 'PageView');
+  })();
+</script>
+
+<!-- Stripe.js must load from js.stripe.com (PCI). Same release train as the server's API version. -->
+<link rel="preconnect" href="https://js.stripe.com" />
+<link rel="preconnect" href="https://api.stripe.com" />
+<script src="https://js.stripe.com/dahlia/stripe.js" async onload="window.__stripeJs='ok'" onerror="window.__stripeJs='failed'"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" />
+<link rel="icon" type="image/svg+xml" href="/assets/sonder-logo-plum-flat.svg" />
+<link rel="stylesheet" href="/masterclass/mc.css" />
+<style>
+.bar-in .steps{margin-left:auto}
+.bar .secure{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:12.5px;color:var(--ink-2);white-space:nowrap}
+.bar .secure svg{width:14px;height:14px}
+@media (max-width:760px){.bar .secure{display:none}}
+@media (max-width:640px){.bar-in{flex-wrap:wrap;padding-block:10px;gap:8px}.bar-in .steps{margin-left:0;width:100%}}
+.preview-note{background:#FFF6E0;border-bottom:1px solid #F1D9A0;color:#6A4A00;font-size:13.5px;text-align:center;padding:8px var(--gut)}
+
+/* ---------- headline: where they are and what happens next ---------- */
+.cohead{background:linear-gradient(180deg,var(--wash),var(--paper));border-bottom:1px solid var(--rule);
+  padding:clamp(20px,4vw,40px) 0 clamp(18px,3vw,28px);text-align:center}
+.cohead .kicker{margin-inline:auto}
+.cohead h1{font-size:clamp(1.65rem,4.4vw,2.6rem);max-width:21ch;margin:14px auto 0}
+.cohead .lede{margin:10px auto 0;max-width:50ch;font-size:clamp(1rem,2vw,1.14rem)}
+.cohead .ticks.row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;margin-top:16px}
+.cohead .ticks.row li{font-size:15px;text-align:left}
+@media (max-width:520px){.cohead .ticks.row{display:none}}
+
+/* ---------- the page: order form on the right, what they get on the left ---------- */
+.co{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,470px);gap:clamp(24px,4.4vw,52px);align-items:start;
+  padding-block:clamp(22px,4vw,44px) clamp(48px,7vw,84px)}
+.co .formcol{grid-column:2;grid-row:1;min-width:0}
+.co .info{grid-column:1;grid-row:1;min-width:0}
+@media (max-width:920px){.co{grid-template-columns:minmax(0,1fr)}.co .formcol,.co .info{grid-column:1;grid-row:auto}}
+
+/* ---------- the order box ---------- */
+.box{background:var(--paper);border:2px solid var(--plum);border-radius:22px;box-shadow:0 6px 0 0 var(--plum);overflow:hidden;scroll-margin-top:96px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--plum);list-style:none;margin:0;padding:0}
+.tab{display:flex;gap:10px;align-items:center;width:100%;padding:14px 16px 12px;border:0;border-bottom:4px solid transparent;
+  background:transparent;color:var(--on-plum-2);font:inherit;text-align:left;cursor:default}
+.tab .n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-family:var(--mono);
+  font-weight:600;font-size:13px;color:var(--on-plum);border:1.5px solid rgba(255,255,255,.38)}
+.tab b{display:block;font-family:var(--display);font-weight:900;font-size:16.5px;letter-spacing:-.02em;line-height:1.2;color:#FFFFFF}
+.tab small{display:block;font-size:12.5px;line-height:1.3;margin-top:2px}
+.tab[aria-current="step"]{background:var(--plum-2);border-bottom-color:var(--mint)}
+.tab[aria-current="step"] .n{background:var(--mint);border-color:var(--mint);color:var(--mint-ink)}
+.tab.done{cursor:pointer}
+.tab.done .n{background:var(--mint-deep);border-color:var(--mint-deep);color:#FFFFFF}
+.tab.done:hover b,.tab.done:focus-visible b{text-decoration:underline;text-underline-offset:3px}
+@media (max-width:400px){.tab{padding:12px 12px 10px;gap:8px}.tab small{display:none}}
+.step{padding:clamp(18px,3.4vw,26px)}
+.step h2{font-size:clamp(1.2rem,2.6vw,1.4rem);letter-spacing:-.02em}
+.step .stephint{font-size:15px;color:var(--ink-2);margin-top:4px}
+
+/* fields, styled to match Stripe's card fields beside them */
+.fields{display:grid;gap:14px;margin-top:16px}
+.field{display:grid;gap:6px}
+.field label{font-weight:600;font-size:15.5px;color:var(--ink)}
+.field input{width:100%;font-family:var(--body);font-size:17px;line-height:1.3;padding:13px 14px;color:var(--ink);background:var(--paper);
+  border:1.5px solid var(--rule-2);border-radius:12px;transition:border-color .15s ease,box-shadow .15s ease}
+.field input::placeholder{color:#9A93AA}
+.field input:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 3px rgba(107,63,160,.22)}
+.field input[aria-invalid="true"]{border-color:var(--error)}
+.field .hint{font-size:13.5px;color:var(--ink-3);line-height:1.45}
+.field .err{font-size:14px;color:var(--error);font-weight:600;line-height:1.4}
+
+/* the big button and what sits under it */
+.step .btn.big{margin-top:20px}
+@media (max-width:520px){.step .btn.big{padding:16px 14px;font-size:18px}}
+.btn .lbl{display:flex;flex-direction:column;align-items:center}
+.btn .lbl .sub{display:block;font-weight:500;font-size:13.5px;opacity:.85;margin-top:3px}
+.btn .spin{width:18px;height:18px;border-radius:50%;border:2.5px solid rgba(5,38,28,.25);border-top-color:var(--mint-ink);animation:spin .8s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.safe{display:flex;align-items:flex-start;justify-content:center;gap:8px;font-size:13.5px;color:var(--ink-3);margin-top:12px;line-height:1.45;text-align:center}
+.safe svg{width:15px;height:15px;flex-shrink:0;margin-top:2px}
+.fine{font-size:13.5px;color:var(--ink-3);line-height:1.5;margin-top:12px;text-align:center}
+.msg{margin-top:14px;padding:12px 14px;border-radius:12px;background:#FFF5F4;border:1.5px solid #F2C4BF;color:#7A1F2B;font-weight:600;font-size:15px;line-height:1.45}
+.msg a{color:inherit}
+
+/* step 2 */
+.who{display:flex;justify-content:space-between;align-items:baseline;gap:6px 12px;flex-wrap:wrap;font-size:14.5px;color:var(--ink-2);
+  padding:10px 14px;background:var(--wash);border-radius:12px;margin-bottom:16px}
+.who b{color:var(--ink);font-weight:600;overflow-wrap:anywhere}
+.linkbtn{appearance:none;background:none;border:0;padding:0;font:inherit;font-weight:600;color:var(--violet);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.summary{border:1.5px solid var(--rule);border-radius:14px;padding:4px 16px;margin-bottom:20px}
+.sum-hd{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;padding:10px 0 8px;border-bottom:1px solid var(--rule)}
+.sum-row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:11px 0;border-bottom:1px solid var(--rule)}
+.sum-row:last-child{border-bottom:0}
+.sum-row .what{min-width:0}
+.sum-row .what b{display:block;font-weight:700;font-size:16px;line-height:1.3;color:var(--ink)}
+.sum-row .what span{display:block;font-size:13.5px;color:var(--ink-3);margin-top:2px}
+.sum-row .amt{font-family:var(--mono);font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink);text-align:right}
+.sum-row .amt s{color:var(--ink-3);font-weight:500;margin-right:7px;text-decoration-color:var(--error);text-decoration-thickness:2px}
+.sum-row.tax .what b{font-weight:500;color:var(--ink-2);font-size:15px}
+.sum-row.tax .amt{font-weight:500;color:var(--ink-2);font-size:14.5px;white-space:normal;max-width:15ch}
+.sum-row.total .what b{font-family:var(--display);font-weight:900;font-size:18px;letter-spacing:-.02em}
+.sum-row.total .amt{font-size:18px}
+.paylabel{display:block;font-weight:600;font-size:15.5px;color:var(--ink);margin-bottom:8px}
+.payel{min-height:130px}
+.payel.preview{display:grid;place-items:center;border:1.5px dashed var(--rule-2);border-radius:12px;color:var(--ink-3);font-size:14.5px;padding:24px;text-align:center}
+.terms{display:grid;grid-template-columns:auto minmax(0,1fr);gap:11px;align-items:start;margin-top:18px;padding:13px 14px;
+  border:1.5px solid var(--rule-2);border-radius:12px;font-size:14.5px;line-height:1.5;color:var(--ink-2);cursor:pointer}
+.terms input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--plum);cursor:pointer}
+.terms a{color:var(--ink);font-weight:600}
+.terms.bad{border-color:var(--error);background:#FFF5F4}
+.terms-err{font-size:14px;color:var(--error);font-weight:600;margin-top:8px}
+
+/* the guarantee, next to the button */
+.formcol .guarantee{margin-top:22px;padding:18px 20px;gap:16px;border-radius:18px}
+.formcol .seal{width:86px}
+.formcol .seal b{font-size:1.7rem}
+.formcol .guarantee h3{font-size:1.12rem}
+.formcol .guarantee p{font-size:15px}
+
+/* ---------- what they get ---------- */
+.info > section + section{margin-top:clamp(30px,4.4vw,44px)}
+.info h2{font-size:clamp(1.35rem,3vw,1.85rem)}
+.info .eyebrow{margin-bottom:8px}
+.bundle{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.bundle li{background:var(--paper);border:1.5px solid var(--rule-2);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.bundle img{width:100%;aspect-ratio:960/494;object-fit:cover;background:var(--wash-2)}
+.bundle span{display:block;padding:8px 10px 10px;font-size:12.5px;line-height:1.35;color:var(--ink-3)}
+.bundle span b{display:block;color:var(--ink);font-weight:700;font-size:13.5px;line-height:1.3;margin-bottom:2px}
+@media (max-width:560px){.bundle{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.bundle-total{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:12px;font-family:var(--mono);font-size:13px;color:var(--ink-2)}
+.bundle-total b{color:var(--ink);font-weight:600}
+.teacher{display:flex;align-items:center;gap:12px;margin-top:16px;font-size:15px;color:var(--ink-2);line-height:1.45}
+.teacher img{width:46px;height:46px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--paper);box-shadow:0 1px 4px rgba(23,17,31,.18)}
+.teacher b{color:var(--ink)}
+.info .ticks{margin-top:16px}
+.info .ticks li{font-size:16.5px}
+.saying{display:grid;gap:12px;margin-top:16px}
+.saying blockquote{margin:0;background:var(--mint-wash);border:1.5px solid #BDEFDD;border-radius:16px;padding:15px 17px}
+.saying p{font-family:var(--display);font-weight:800;font-size:1.06rem;line-height:1.4;letter-spacing:-.01em;color:var(--ink)}
+.saying cite{display:block;font-style:normal;font-size:13.5px;color:var(--ink-2);margin-top:8px}
+.saying cite b{color:var(--ink)}
+.saying-note{font-size:13.5px;color:var(--ink-3);margin-top:10px;line-height:1.5}
+.info .faq{margin-top:10px}
+.info .faq summary{font-size:16.5px;padding-block:16px}
+.info .faq .a{font-size:15.5px;padding-bottom:18px}
+</style>
+<script src="/visit.js" defer></script>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap bar-in">
+    <span class="mark" aria-label="Sonder">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
+      <b>Sonder<i>.</i></b></span>
+    <ol class="steps" aria-label="Your order">
+      <li class="now" aria-current="step"><span class="dot" aria-hidden="true">1</span><span class="lbl">Masterclass</span></li>
+      <li><span class="dot" aria-hidden="true">2</span><span class="lbl">Live challenge</span></li>
+      <li><span class="dot" aria-hidden="true">3</span><span class="lbl">Your access</span></li>
+    </ol>
+    <span class="secure"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.2" stroke="#00795C" stroke-width="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" stroke="#00795C" stroke-width="2"/></svg> Secure checkout</span>
+  </div>
+</header>
+<div class="preview-note" id="preview-note" hidden>Preview: payments are switched off, so nothing will be charged. Buyers see the card form here.</div>
+
+<main>
+<section class="cohead" data-note="co_head">
+  <div class="wrap">
+    <span class="kicker"><span class="pip" aria-hidden="true"></span> Almost there</span>
+    <h1>You're two short steps from <span class="hl">the masterclass</span>.</h1>
+    <p class="lede">Tell us where to send your access, then pay once. Your invite to the course arrives by email a minute later.</p>
+    <ul class="ticks row">
+      <li><b>Instant access</b></li>
+      <li>One payment, no subscription</li>
+      <li><b>30-day money-back guarantee</b></li>
+    </ul>
+  </div>
+</section>
+
+<div class="wrap co">
+  <div class="formcol">
+    <div class="box" data-note="co_form">
+      <ol class="tabs" aria-label="Checkout steps">
+        <li><button type="button" class="tab" id="tab1" aria-current="step">
+          <span class="n" aria-hidden="true">1</span><span><b>Your details</b><small>Where we send your access</small></span></button></li>
+        <li><button type="button" class="tab" id="tab2" disabled>
+          <span class="n" aria-hidden="true">2</span><span><b>Payment</b><small>Pay once, by card</small></span></button></li>
+      </ol>
+
+      <!-- Step 1: who they are. Someone who stops here is still a lead. -->
+      <form class="step" id="step1" novalidate>
+        <h2>Where should we send your access?</h2>
+        <p class="stephint">Your invite to the course goes to this email.</p>
+        <div class="fields">
+          <div class="field">
+            <label for="co-name">Full name</label>
+            <input id="co-name" name="name" type="text" autocomplete="name" autocapitalize="words" maxlength="120" placeholder="Jane Smith" required />
+            <p class="err" id="co-name-err" hidden></p>
+          </div>
+          <div class="field">
+            <label for="co-email">Email address</label>
+            <input id="co-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" maxlength="254" placeholder="jane@example.com" required aria-describedby="co-email-hint" />
+            <p class="hint" id="co-email-hint">Use the email you want for the course community on Skool.</p>
+            <p class="err" id="co-email-err" hidden></p>
+          </div>
+        </div>
+        <button class="btn big block" type="submit" id="go2"><span class="lbl"><span>Continue to payment <span aria-hidden="true">&rarr;</span></span><span class="sub">Step 2 of 2: your card</span></span></button>
+        <p class="msg" id="err1" role="alert" hidden></p>
+        <p class="safe"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.2" stroke="currentColor" stroke-width="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" stroke="currentColor" stroke-width="2"/></svg>Nothing is charged until you complete step 2.</p>
+      </form>
+
+      <!-- Step 2: the order, the card, the box to tick, the button. -->
+      <form class="step" id="step2" novalidate hidden>
+        <h2 class="vh" id="step2-h" tabindex="-1">Step 2: payment</h2>
+        <div class="who" id="who"><span>Access goes to <b id="who-email"></b></span><button type="button" class="linkbtn" id="change">Change</button></div>
+
+        <div class="summary" aria-label="Your order">
+          <div class="sum-hd"><span>Your order</span><span>Price</span></div>
+          <div class="sum-row">
+            <div class="what"><b>The Book Marketing Masterclass</b><span>6 courses &middot; 58 lessons &middot; lifetime access</span></div>
+            <div class="amt"><s data-launch>$97</s><span data-price>$47</span></div>
+          </div>
+          <div class="sum-row tax" id="sum-tax-row">
+            <div class="what"><b id="sum-tax-label">Tax</b></div>
+            <div class="amt" id="sum-tax">Added if it applies where you live</div>
+          </div>
+          <div class="sum-row total">
+            <div class="what"><b>Total today</b></div>
+            <div class="amt" id="sum-total"><span data-price>$47</span></div>
+          </div>
+        </div>
+
+        <span class="paylabel" id="paylabel">Card details</span>
+        <div class="payel" id="payel"></div>
+
+        <label class="terms" id="terms" for="co-terms">
+          <input type="checkbox" id="co-terms" name="terms" />
+          <span>I agree to the <a href="https://app.yousonder.com/terms" target="_blank" rel="noopener">Terms</a> and <a href="https://app.yousonder.com/refunds" target="_blank" rel="noopener">Refund policy</a>. I ask for my access to start straight away. The 30-day money-back guarantee still applies.</span>
+        </label>
+        <p class="terms-err" id="terms-err" role="alert" hidden>Please tick the box to agree to the terms.</p>
+
+        <button class="btn big block" type="submit" id="paybtn"><span class="lbl"><span>Complete my order &middot; <span id="pay-total"><span data-price>$47</span></span></span><span class="sub">Instant access &middot; 30-day guarantee</span></span></button>
+        <p class="msg" id="err2" role="alert" hidden></p>
+        <p class="fine">Your card is saved so the next page can add the live challenge in one click. Nothing else is charged unless you say yes.</p>
+        <p class="safe"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.2" stroke="currentColor" stroke-width="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" stroke="currentColor" stroke-width="2"/></svg>Payments are processed securely by Stripe. Your card details never reach our servers.</p>
+      </form>
+    </div>
+
+    <div class="guarantee" data-note="co_guarantee">
+      <div class="seal"><span><b>30</b>day<br />guarantee</span></div>
+      <div>
+        <h3>Watch it, use it, then decide.</h3>
+        <p>If you don't think the masterclass was worth <span data-price>$47</span>, email <a href="mailto:hello@yousonder.com">hello@yousonder.com</a> within 30 days and we'll refund every cent. No forms, no questions.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="info">
+    <section data-note="co_get">
+      <span class="eyebrow">What you get today</span>
+      <h2>Six courses, 58 lessons, yours to keep.</h2>
+      <ul class="bundle">
+        <li><img src="/assets/mc/courses/published-to-profitable.jpg" alt="" loading="lazy" /><span><b>Book Marketing Masterclass</b>12 lessons &middot; 1h 57m</span></li>
+        <li><img src="/assets/mc/courses/book-to-bestseller.jpg" alt="" loading="lazy" /><span><b>TikTok Shop Bestseller Academy</b>13 lessons &middot; 2h 16m</span></li>
+        <li><img src="/assets/mc/courses/tiktok-tactics.jpg" alt="" loading="lazy" /><span><b>Next Level TikTok Hacks</b>16 lessons &middot; 2h 28m</span></li>
+        <li><img src="/assets/mc/courses/ai-book-marketing.jpg" alt="" loading="lazy" /><span><b>Leveraging AI to Market Your Books</b>6 lessons &middot; 1h 18m</span></li>
+        <li><img src="/assets/mc/courses/blue-ocean.jpg" alt="" loading="lazy" /><span><b>Bonus: Blue Ocean Demand</b>2 lessons &middot; 27m</span></li>
+        <li><img src="/assets/mc/courses/amazon-ads.jpg" alt="" loading="lazy" /><span><b>Bonus: Amazon Ads 101</b>9 lessons &middot; 2h 50m</span></li>
+      </ul>
+      <p class="bundle-total"><span><b>58 video lessons</b> &middot; about 11 hours</span><span>Watch on any device</span></p>
+      <ul class="ticks">
+        <li><b>TikTok Shop, creators and AI avatars</b>, step by step on Lexi's screen</li>
+        <li><b>Her viral hook scanner</b>, the 95/5 document and her script framework</li>
+        <li><b>The Sonder author community</b> on Skool, where authors share what's working</li>
+        <li><b>Lifetime access</b>: one payment, no subscription</li>
+      </ul>
+      <p class="teacher"><img src="/assets/founders/lexi.jpg" alt="" /><span>Taught by <b>Lexi Kaz</b>. It's how she sells her own books: 95% of her TikTok Shop sales came from other people's videos.</span></p>
+    </section>
+
+    <section data-note="co_proof">
+      <span class="eyebrow">What authors sent us</span>
+      <h2>When authors start posting.</h2>
+      <div class="saying">
+        <blockquote><p>&ldquo;Today's BSR for Assertive Kindness is #17,080. On Sept 6 it was as low as #1,101,449.&rdquo;</p><cite><b>Christine</b>, after posting short, faceless videos every day</cite></blockquote>
+        <blockquote><p>&ldquo;It took only one Spanish video to sell out all 45 copies I had. I'm now confident in ordering another 300.&rdquo;</p><cite><b>Rich</b>, Spanish edition</cite></blockquote>
+        <blockquote><p>&ldquo;I started Sonder videos 5 days ago and have made 10 sales. These stick figures are a huge hit.&rdquo;</p><cite><b>Lynn</b>, children's books</cite></blockquote>
+      </div>
+      <p class="saying-note">Shared with their permission. These authors make their videos with Sonder, the video tool Lexi co-founded, so read them as what happens when authors post, not as results of the masterclass alone. Results vary.</p>
+    </section>
+
+    <section data-note="co_faq">
+      <span class="eyebrow">Before you pay</span>
+      <h2>Quick answers</h2>
+      <div class="faq">
+        <details><summary>When do I get the lessons?</summary>
+          <div class="a"><p>Straight away. The lessons live in the Sonder community on Skool, and your invite arrives by email a minute after you pay. Watch them as often as you like, on your phone, tablet or computer.</p></div></details>
+        <details><summary>Is this a subscription?</summary>
+          <div class="a"><p>No. It's <span data-price>$47</span> once, plus tax where it applies, and the lessons are yours to keep. On the next page you can add the live 3-day challenge in one click, or skip it.</p></div></details>
+        <details><summary>What if it isn't for me?</summary>
+          <div class="a"><p>Email <a href="mailto:hello@yousonder.com">hello@yousonder.com</a> within 30 days and we'll refund every cent. No forms, no questions.</p></div></details>
+        <details><summary>Is my card safe?</summary>
+          <div class="a"><p>Yes. The card fields on this page are Stripe's, and your card details go straight to Stripe. We never see or store your card number.</p></div></details>
+      </div>
+    </section>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <span class="mark" aria-label="Sonder">
+        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
+        <b>Sonder<i>.</i></b></span>
+      <span><a href="https://app.yousonder.com/terms">Terms</a> &nbsp;&middot;&nbsp; <a href="https://app.yousonder.com/refunds">Refunds</a> &nbsp;&middot;&nbsp; <a href="https://app.yousonder.com/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="mailto:hello@yousonder.com">hello@yousonder.com</a></span>
+    </div>
+    <div class="disc">
+      <p><b>Results disclaimer.</b> Lexi's figures are her own results and are not typical: she'd been publishing for over two years, with a team helping. The authors' messages are individual results, shared with their permission, and those authors make their videos with Sonder. Results vary from author to author. Across every video posted through Sonder, the median video gets about 106 views. Lexi co-founded Sonder.</p>
+      <p>The masterclass is education about marketing. It is not a promise that you will sell books or earn money, and it is not financial, legal or tax advice. <span data-launch>Launch price: $47 for now. The regular price will be $97.</span> Refunds: email hello@yousonder.com within 30 days of buying for a full refund.</p>
+      <p>&copy; 2026 YouSonder O&Uuml; &middot; All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/masterclass/mc.js"></script>
+<script>
+(function () {
+  "use strict";
+  /* ===== How this page pays =====
+     Step 1 asks the server for a checkout (POST /api/public/masterclass/checkout
+     with ui:'page', the name and the email). The server opens a Stripe Checkout
+     Session in "elements" mode and returns its client secret; Stripe.js draws
+     the card fields here and confirm() takes the payment. Stripe then sends the
+     buyer to /masterclass/challenge/?s=cs_..., exactly as its own page did.
+
+     Every way this can fail ends at a working checkout: no Stripe.js, no key,
+     the page switched off on the server (MASTERCLASS_CHECKOUT_PAGE=false), or
+     Stripe refusing to draw the fields. Then step 1 opens Stripe's hosted
+     checkout with their email already in it.
+
+     The tick box is ours: in this mode Stripe draws no terms box, so the pay
+     button refuses until it is ticked. Its wording must match
+     FUNNEL_CONSENT_MESSAGE in sonder-server lib/masterclassStripe.ts. */
+  var PREVIEW_NEXT = '/masterclass/challenge/?preview=1';
+  var MC = window.SonderMC;
+  var $ = function (id) { return document.getElementById(id); };
+  var each = function (sel, fn) { Array.prototype.forEach.call(document.querySelectorAll(sel), fn); };
+
+  var cfg = null;          // the server's config, once it arrives
+  var preview = false;     // payments switched off: walk the pages, charge nothing
+  var price = 47;
+  var stripe = null;       // Stripe.js, once loaded
+  var co = null;           // { key, checkout, element, actions, ready }
+  var busy = false;
+
+  /* ----- prices: the server's, so this page and Stripe always agree ----- */
+  function paintPrice(usd, launch) {
+    price = usd;
+    each('[data-price]', function (el) { el.textContent = '$' + usd; });
+    if (!launch) each('[data-launch]', function (el) { if (el.parentNode) el.parentNode.removeChild(el); });
+  }
+
+  var cfgP = MC ? MC.config() : Promise.resolve(null);
+  cfgP.then(function (c) {
+    cfg = c;
+    if (c && c.course && c.course.usd) paintPrice(c.course.usd, c.course.launch !== false);
+    if (!c || !c.enabled) { preview = true; $('preview-note').hidden = false; }
+    if (!preview && typeof window.fbq === 'function') {
+      window.fbq('track', 'InitiateCheckout', { content_name: 'masterclass', value: price, currency: 'USD', num_items: 1 });
+    }
+  });
+  if (MC) MC.saveTags();
+
+  /* ----- Stripe.js: loaded in the head; wait for it a little ----- */
+  function stripeJs() {
+    return new Promise(function (resolve) {
+      var waited = 0;
+      (function check() {
+        if (typeof window.Stripe === 'function') return resolve(window.Stripe);
+        if (window.__stripeJs === 'failed' || waited > 8000) return resolve(null);
+        waited += 100; setTimeout(check, 100);
+      })();
+    });
+  }
+
+  /* ----- the two steps ----- */
+  function show(n) {
+    $('step1').hidden = n !== 1;
+    $('step2').hidden = n !== 2;
+    var t1 = $('tab1'), t2 = $('tab2');
+    if (n === 1) { t1.setAttribute('aria-current', 'step'); t1.classList.remove('done'); t2.removeAttribute('aria-current'); }
+    else { t2.setAttribute('aria-current', 'step'); t2.disabled = false; t1.removeAttribute('aria-current'); t1.classList.add('done'); }
+    t1.querySelector('.n').textContent = n === 2 ? '\u2713' : '1';
+    if (n === 2) { try { $('step2-h').focus({ preventScroll: true }); } catch (e) { $('step2-h').focus(); } }
+    var box = document.querySelector('.box');
+    if (box && box.getBoundingClientRect().top < 0) box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  $('tab1').addEventListener('click', function () { if (!$('step2').hidden && !busy) { show(1); $('co-name').focus(); } });
+  $('change').addEventListener('click', function () { if (!busy) { show(1); $('co-email').focus(); } });
+  $('tab2').addEventListener('click', function () { if (!$('step1').hidden && !busy) $('go2').click(); });
+
+  function fieldError(id, text) {
+    var input = $(id), err = $(id + '-err');
+    if (text) { input.setAttribute('aria-invalid', 'true'); err.textContent = text; err.hidden = false; }
+    else { input.removeAttribute('aria-invalid'); err.hidden = true; }
+  }
+  function say(id, html) {
+    var box = $(id);
+    if (!html) { box.hidden = true; box.textContent = ''; return; }
+    box.innerHTML = html; box.hidden = false;
+  }
+  var HELP = ' If it keeps happening, email <a href="mailto:hello@yousonder.com">hello@yousonder.com</a> and we’ll sort it out.';
+
+  function setBusy(btn, on, text) {
+    busy = on;
+    if (on) {
+      btn.dataset.label = btn.dataset.label || btn.innerHTML;
+      btn.disabled = true; btn.setAttribute('aria-busy', 'true');
+      btn.innerHTML = '<span class="spin" aria-hidden="true"></span><span>' + text + '</span>';
+    } else {
+      btn.disabled = false; btn.removeAttribute('aria-busy');
+      if (btn.dataset.label) btn.innerHTML = btn.dataset.label;
+      delete btn.dataset.label;
+    }
+  }
+
+  function validEmail(v) { return /^[^\s@<>()]+@[^\s@<>()]+\.[^\s@<>()]{2,}$/.test(v); }
+
+  /* ----- step 1 ----- */
+  $('step1').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (busy) return;
+    say('err1', '');
+    var name = $('co-name').value.replace(/\s+/g, ' ').trim();
+    var email = $('co-email').value.trim();
+    var ok = true;
+    if (!/[A-Za-zÀ-￿]/.test(name)) { fieldError('co-name', 'Please enter your name.'); ok = false; } else fieldError('co-name', '');
+    if (!validEmail(email)) { fieldError('co-email', 'Please check your email address.'); ok = false; } else fieldError('co-email', '');
+    if (!ok) { var bad = document.querySelector('[aria-invalid="true"]'); if (bad) bad.focus(); return; }
+    $('who-email').textContent = email;
+
+    var key = name + '\n' + email.toLowerCase();
+    if (co && co.key === key) { show(2); return; }   // same details: same checkout
+    if (preview) { co = { key: key, preview: true }; previewCard(); show(2); return; }
+
+    setBusy($('go2'), true, 'Opening secure payment…');
+    cfgP.then(function (c) {
+      if (!c || !c.enabled) { preview = true; $('preview-note').hidden = false; co = { key: key, preview: true }; previewCard(); show(2); return; }
+      var pageOn = !!(c.checkout && c.checkout.page && c.checkout.key);
+      return (pageOn ? stripeJs() : Promise.resolve(null)).then(function (S) {
+        if (!S) return hosted(email);
+        if (!stripe) stripe = S(c.checkout.key);
+        return MC.checkout({ ui: 'page', name: name, email: email }).then(function (r) {
+          if (r && r.ok && r.clientSecret) return mount(key, r.clientSecret);
+          if (r && r.ok && r.url) { window.location.href = r.url; return; }   // the server sent Stripe's page instead
+          return step1Failed(r);
+        });
+      });
+    }).catch(function () { return hosted(email); });
+  });
+
+  function step1Failed(r) {
+    setBusy($('go2'), false);
+    var err = r && r.error;
+    if (err === 'bad_email') { fieldError('co-email', 'That email address doesn’t look right. Please check it.'); $('co-email').focus(); return; }
+    if (err === 'off') { window.location.href = PREVIEW_NEXT; return; }
+    if (err === 'too_many') { say('err1', 'Too many tries from this connection. Please wait a few minutes and try again.' + HELP); return; }
+    if (err === 'network') { say('err1', 'We couldn’t reach the checkout. Please check your connection and try again.'); return; }
+    say('err1', 'The checkout didn’t open. Please try again in a moment.' + HELP);
+  }
+
+  /* Stripe's own checkout, as before: for when the card fields can't be drawn here. */
+  function hosted(email) {
+    return MC.checkout({ email: email }).then(function (r) {
+      if (r && r.ok && r.url) { window.location.href = r.url; return; }
+      step1Failed(r);
+    });
+  }
+
+  /* ----- the card fields ----- */
+  var APPEARANCE = {
+    theme: 'stripe',
+    variables: {
+      colorPrimary: '#2D1A48', colorText: '#17111F', colorTextSecondary: '#4F4860', colorTextPlaceholder: '#9A93AA',
+      colorDanger: '#B42318', colorBackground: '#FFFFFF', fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
+      fontSizeBase: '16px', borderRadius: '12px', spacingUnit: '4px', gridRowSpacing: '14px'
+    },
+    rules: {
+      '.Label': { fontWeight: '600', fontSize: '15.5px', color: '#17111F', marginBottom: '6px' },
+      '.Input': { border: '1.5px solid #CFC7DE', boxShadow: 'none', padding: '13px 14px', fontSize: '17px' },
+      '.Input:focus': { border: '1.5px solid #6B3FA0', boxShadow: '0 0 0 3px rgba(107,63,160,.22)' },
+      '.Input--invalid': { border: '1.5px solid #B42318', boxShadow: 'none' },
+      '.Error': { fontWeight: '600', fontSize: '14px' },
+      '.Tab': { border: '1.5px solid #CFC7DE', boxShadow: 'none' },
+      '.Tab--selected': { border: '1.5px solid #2D1A48', boxShadow: '0 0 0 1px #2D1A48' }
+    }
+  };
+  var FONTS = [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap' }];
+
+  function mount(key, clientSecret) {
+    if (co && co.element) { try { co.element.destroy(); } catch (e) {} }
+    var checkout;
+    try {
+      checkout = stripe.initCheckoutElementsSdk({ clientSecret: clientSecret, elementsOptions: { appearance: APPEARANCE, fonts: FONTS } });
+    } catch (e) {
+      return hosted($('co-email').value.trim());
+    }
+    var here = co = { key: key, checkout: checkout, element: null, actions: null };
+    checkout.on('change', paintSession);
+    here.element = checkout.createPaymentElement();
+    $('payel').innerHTML = '';
+    $('payel').classList.remove('preview');
+    here.element.mount('#payel');
+    setBusy($('go2'), false);
+    show(2);
+    here.ready = checkout.loadActions().then(function (res) {
+      if (co !== here) return null;
+      if (!res || res.type !== 'success') {
+        // Stripe couldn't open this session here: hand over to its own page.
+        co = null;
+        show(1);
+        setBusy($('go2'), true, 'Opening secure payment…');
+        return hosted($('co-email').value.trim()).then(function () { return null; });
+      }
+      here.actions = res.actions;
+      try { paintSession(res.actions.getSession()); } catch (e) {}
+      return res.actions;
+    });
+  }
+
+  /* Totals straight from Stripe (it requires that the page shows them). */
+  function paintSession(s) {
+    if (!s || !s.total) return;
+    var t = s.total;
+    if (t.total && t.total.amount) { $('sum-total').textContent = t.total.amount; $('pay-total').textContent = t.total.amount; }
+    var ready = s.tax && s.tax.status === 'ready';
+    var label = (s.taxAmounts && s.taxAmounts[0] && s.taxAmounts[0].displayName) || 'Tax';
+    $('sum-tax-label').textContent = label;
+    if (ready) {
+      $('sum-tax').textContent = t.taxExclusive && t.taxExclusive.amount ? t.taxExclusive.amount : '$0.00';
+    } else {
+      $('sum-tax').textContent = 'Added if it applies where you live';
+    }
+  }
+
+  function previewCard() {
+    var el = $('payel');
+    el.classList.add('preview');
+    el.textContent = 'Card fields appear here when payments are on.';
+  }
+
+  /* ----- step 2: pay ----- */
+  $('co-terms').addEventListener('change', function () {
+    if (this.checked) { $('terms').classList.remove('bad'); $('terms-err').hidden = true; }
+  });
+  $('step2').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (busy) return;
+    say('err2', '');
+    if (!$('co-terms').checked) {
+      $('terms').classList.add('bad'); $('terms-err').hidden = false; $('co-terms').focus();
+      return;
+    }
+    if (typeof window.fbq === 'function' && !preview) window.fbq('track', 'AddPaymentInfo', { content_name: 'masterclass', value: price, currency: 'USD' });
+    if (!co || co.preview || preview) { window.location.href = PREVIEW_NEXT; return; }
+    var btn = $('paybtn');
+    setBusy(btn, true, 'Processing your payment…');
+    var here = co;
+    Promise.resolve(here.ready).then(function (actions) {
+      if (!actions) { setBusy(btn, false); return; }
+      return actions.confirm().then(function (r) {
+        // A success redirects to the challenge page; we only get here on an error.
+        if (r && r.type === 'error') {
+          setBusy(btn, false);
+          say('err2', (r.error && r.error.message ? escapeHtml(r.error.message) : 'Your payment didn’t go through.') + ' Please check your card details or try another card.');
+        }
+      });
+    }).catch(function () {
+      setBusy(btn, false);
+      say('err2', 'Your payment didn’t go through. Please try again.' + HELP);
+    });
+  });
+
+  /* Back here from the challenge page or Stripe: start from a fresh page, since
+     the card fields and the session behind them belong to the visit that left. */
+  window.addEventListener('pageshow', function (e) { if (e.persisted) window.location.reload(); });
+
+  function escapeHtml(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+})();
+</script>
+</body>
+</html>
