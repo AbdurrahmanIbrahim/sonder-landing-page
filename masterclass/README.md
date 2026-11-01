@@ -4,7 +4,7 @@ Three pages, one path:
 
 | Step | Page | Sells | Price |
 |---|---|---|---|
-| 1 | `/masterclass` | The Book Marketing Masterclass (recorded, Lexi): six courses, 58 lessons, in the Sonder community on Skool | $47 once (launch price; $97 from 24 Nov) |
+| 1 | `/masterclass` | The Book Marketing Masterclass (recorded, Lexi): six courses, 58 lessons, in the Sonder community on Skool | $47 once (until the founders change it) |
 | 2 | `/masterclass/challenge` | The 3-Day Book Video Challenge (live, Mon–Wed 12pm ET, every other week), one click after checkout | $147 |
 | 3 | `/masterclass/start` | Order confirmed + the free 7-day Sonder trial (the same card trial as `/f`) | $0 today |
 
@@ -26,8 +26,7 @@ Every payment is on **Sonder's own Stripe**, through sonder-server (`routes/mast
 |---|---|---|
 | Railway (sonder-server) | `MASTERCLASS_FUNNEL_ENABLED` | `true` takes real payments. Off = the pages run in preview mode (buttons walk the three pages, nothing is charged). |
 | Railway | `STRIPE_PRICE_MASTERCLASS_LAUNCH`, `STRIPE_PRICE_MASTERCLASS`, `STRIPE_PRICE_MASTERCLASS_CHALLENGE` | The $47, $97 and $147 prices (`scripts/create-masterclass-prices.ts` makes them). The server refuses to charge if a price differs from what the page shows. |
-| Railway | `MASTERCLASS_LAUNCH_ENDS` | Optional. Defaults to the end of 23 Nov New York time; the server switches $47 → $97 then. |
-| `index.html` | `LAUNCH_ENDS` | The same moment, for the page: every `[data-price]` turns to $97 and the crossed-out `[data-launch]` lines disappear. The page also reads the live price from the server, so nothing needs editing that day. |
+| Railway | `MASTERCLASS_FULL_PRICE` | Off: the course is $47, whatever the date. `true`: $97, on the page (within a minute) and at checkout together. Nothing changes it automatically. |
 | Railway + Trigger | `SKOOL_INVITE_WEBHOOK_URL` | Skool → Settings → Plugins → Webhook. Secret: anyone with it can invite anyone. |
 | Railway + Trigger | `BOOTCAMP_ZOOM_URL` | The challenge's Zoom link (one per cohort can be set in the `bootcamp_cohorts` table instead). |
 | Railway + Trigger | `BOOTCAMP_SKIP_DATES` | Cohort Mondays to drop, e.g. `2026-12-21`. |
