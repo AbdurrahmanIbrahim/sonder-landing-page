@@ -59,13 +59,30 @@
       try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { return ''; }
     }
 
+    // The /masterclass funnel's later pages are reached from Stripe, with no
+    // tags on the URL: they use the tags the course page was opened with
+    // (masterclass/mc.js keeps them for the tab), so a buyer's whole path is
+    // credited to the ad that started it.
+    function funnelTags() {
+      try {
+        if (location.pathname.indexOf('/masterclass/') !== 0) return {};
+        var t = JSON.parse(sessionStorage.getItem('sonder.mc.tags') || 'null');
+        return t && typeof t === 'object' ? t : {};
+      } catch (e) { return {}; }
+    }
+
     function post(ping) {
       var q = new URLSearchParams(location.search);
+      var own = q.has('utm_source') || q.has('utm_campaign') || q.has('fbclid');
+      var t = own ? {} : funnelTags();
       var data = {
         p: location.pathname,
         r: document.referrer || '',
-        u: q.get('utm_source') || '',
-        a: q.has('fbclid') ? 1 : 0,
+        u: q.get('utm_source') || t.utm_source || '',
+        // The ad's campaign: with it, "from an ad" means a paid click, not just
+        // a Facebook link (Facebook adds fbclid to organic clicks too).
+        c: q.get('utm_campaign') || t.utm_campaign || '',
+        a: q.has('fbclid') || t.fbclid ? 1 : 0,
         v: visitorId(),
         tz: timeZone()
       };

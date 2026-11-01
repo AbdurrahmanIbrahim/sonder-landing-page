@@ -1,10 +1,12 @@
 /* /masterclass funnel — the bits the three pages share.
 
    1. The challenge schedule. Every live challenge runs Monday to Wednesday at
-      12pm New York time. A buyer joins the first one that starts at least
-      LEAD_HOURS after they buy, so nobody pays on a Sunday night for a Monday
-      they can't prepare for. /masterclass/challenge and /masterclass/start both
-      read this list, and the confirmation emails must use the same rule.
+      12pm New York time, every other week from 23 Nov 2026. Anyone can buy
+      until Day 1 starts and joins that one (Abdul, 1 Nov 2026). The SERVER owns
+      the real list (GET /api/public/masterclass/config, which also knows any
+      dropped dates); the rule below is only the fallback while that loads.
+   3. The server: checkout, the buyer's order, the one-click challenge and the
+      Skool invite all go through sonder-server (routes/masterclass.ts).
    2. Attribution. The course page stores the ad and affiliate tags it was
       opened with; the trial link on /masterclass/start sends them on to the
       app, so a trial is credited to the ad that paid for the visit. Session
@@ -13,8 +15,11 @@
    Never throws: every page works without it. */
 (function () {
   "use strict";
-  var CHALLENGES = ['2026-11-23', '2026-12-07', '2027-01-04', '2027-01-18', '2027-02-01', '2027-02-15'];
-  var LEAD_HOURS = 36;
+  var FIRST = '2026-11-23';
+  var CADENCE_DAYS = 14;
+  /* Set from the server's config once it arrives: its cohorts are the truth. */
+  var serverCohorts = null;
+  var API = 'https://sonder-server-production.up.railway.app/api/public/masterclass';
   var SESSION_MIN = 90;
   var CARRY = ['fbclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','ttclid','via','dub_id'];
   var TAGS_KEY = 'sonder.mc.tags';
@@ -35,14 +40,29 @@
     var p = iso.split('-').map(Number);
     return [0, 1, 2].map(function (n) { return fromNY(p[0], p[1], p[2] + n, 12, 0); });
   }
+  function addDays(iso, n) {
+    var p = iso.split('-').map(Number);
+    return new Date(Date.UTC(p[0], p[1] - 1, p[2] + n)).toISOString().slice(0, 10);
+  }
+  /* The first challenge whose Day 1 has not started at `now`. */
   function nextChallenge(now) {
     now = now || new Date();
-    for (var i = 0; i < CHALLENGES.length; i++) {
-      if (sessions(CHALLENGES[i])[0].getTime() - now.getTime() >= LEAD_HOURS * 3600000) return CHALLENGES[i];
+    var list = serverCohorts;
+    if (list && list.length) {
+      for (var j = 0; j < list.length; j++) if (sessions(list[j])[0].getTime() > now.getTime()) return list[j];
+    }
+    var iso = FIRST;
+    for (var i = 0; i < 400; i++) {
+      if (sessions(iso)[0].getTime() > now.getTime()) return iso;
+      iso = addDays(iso, CADENCE_DAYS);
     }
     return null;
   }
-  function isChallenge(iso) { return CHALLENGES.indexOf(iso) !== -1; }
+  function isChallenge(iso) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(iso))) return false;
+    var diff = (Date.parse(iso + 'T00:00:00Z') - Date.parse(FIRST + 'T00:00:00Z')) / 86400000;
+    return diff >= 0 && diff % CADENCE_DAYS === 0;
+  }
 
   function fmt(d, opts, tz) {
     try { return new Intl.DateTimeFormat('en-US', Object.assign({ timeZone: tz || 'America/New_York' }, opts)).format(d); }
@@ -127,9 +147,72 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', showNotes); else showNotes();
 
+  /* ----- The server ----- */
+
+  function cookie(name) {
+    try { var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)')); return m ? decodeURIComponent(m[1]) : ''; }
+    catch (e) { return ''; }
+  }
+  /* Ads cookies allowed? consent.js decides (opt-in where the law asks for it,
+     GPC and DNT everywhere); without it, the GPC/DNT rule alone. */
+  function adConsent() {
+    var c = window.sonderConsent;
+    if (c && typeof c.allowed === 'function') return !!c.allowed();
+    return !(navigator.globalPrivacyControl === true || navigator.doNotTrack === '1' || window.doNotTrack === '1');
+  }
+  /* The buyer's key: the Stripe checkout id Stripe sends them back with. */
+  function sid() {
+    try { var v = new URL(window.location.href).searchParams.get('s') || ''; return /^cs_(live|test)_[A-Za-z0-9]{10,200}$/.test(v) ? v : ''; }
+    catch (e) { return ''; }
+  }
+  function call(method, path, body) {
+    return fetch(API + path, {
+      method: method,
+      headers: body ? { 'content-type': 'application/json' } : {},
+      body: body ? JSON.stringify(body) : undefined,
+      credentials: 'omit'
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { j.httpStatus = r.status; return j; });
+    }).catch(function () { return { ok: false, error: 'network' }; });
+  }
+  var configP = null;
+  /* Price, launch and the next cohorts. Null when the server can't be reached:
+     every page then falls back to its own copy and the rule above. */
+  function config() {
+    if (!configP) {
+      configP = call('GET', '/config').then(function (c) {
+        if (c && c.cohorts && c.cohorts.length) serverCohorts = c.cohorts.map(function (x) { return x.monday; });
+        return c && c.course ? c : null;
+      });
+    }
+    return configP;
+  }
+  /* Open the $47 checkout. Resolves { ok, url } or { ok: false, error }. */
+  function checkout() {
+    var here = {};
+    try {
+      var u = new URL(window.location.href);
+      CARRY.forEach(function (k) { var v = u.searchParams.get(k); if (v) here[k] = v.slice(0, 200); });
+    } catch (e) {}
+    var tags = Object.assign({}, readTags(), here);
+    var ok = adConsent();
+    return call('POST', '/checkout', {
+      tags: tags,
+      vid: cookie('sonder_vid'),
+      consent: ok,
+      fbc: ok ? cookie('_fbc') : '',
+      fbp: ok ? cookie('_fbp') : ''
+    });
+  }
+  function order(s) { return call('GET', '/order?s=' + encodeURIComponent(s)); }
+  function acceptChallenge(s) { return call('POST', '/challenge', { s: s }); }
+  function resendInvite(s, email) { return call('POST', '/skool-invite', email ? { s: s, email: email } : { s: s }); }
+
   window.SonderMC = {
     CARRY: CARRY, sessions: sessions, nextChallenge: nextChallenge, isChallenge: isChallenge,
     fmt: fmt, clock: clock, localLine: localLine, googleCal: googleCal, icsHref: icsHref,
-    saveTags: saveTags, readTags: readTags
+    saveTags: saveTags, readTags: readTags,
+    config: config, checkout: checkout, order: order, acceptChallenge: acceptChallenge, resendInvite: resendInvite,
+    sid: sid, adConsent: adConsent
   };
 })();

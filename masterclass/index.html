@@ -5,8 +5,8 @@
 <script src="/consent.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#FFFFFF" />
-<!-- Live before it can take payment (CHECKOUT_URL empty = preview mode), so
-     search engines stay out until launch. Remove this line at launch. -->
+<!-- Live before it can take payment (the server's funnel switch off = preview
+     mode), so search engines stay out until launch. Remove this line at launch. -->
 <meta name="robots" content="noindex, nofollow" />
 <title>The Book Marketing Masterclass | Lexi Kaz</title>
 <meta name="description" content="Lexi Kaz's recorded masterclass for authors: how she gets TikTok creators, AI avatars and proven scripts to make the videos that sell her books. 58 lessons, $47." />
@@ -20,13 +20,15 @@
        2. /masterclass/challenge  shown after checkout: the $147 live challenge
        3. /masterclass/start      order confirmed + the free Sonder trial
      Paid Meta traffic and Lexi's posts land here. The page sells one thing,
-     the masterclass; Sonder appears only where the method needs it. The
-     checkout link is set in CHECKOUT_URL at the foot of the page.
+     the masterclass; Sonder appears only where the method needs it. Payment
+     is on Sonder's Stripe (sonder-server routes/masterclass.ts), and the
+     lessons live in the Sonder community on Skool, which every buyer is
+     invited into (1 Nov 2026).
      30 Oct: rewritten in Lexi's voice from the transcripts of the lessons
-     that go into Kajabi (58 of the 78 in her Skool classroom), with the
+     that go into the course (58 of the 78 in her Skool classroom), with the
      hero modelled on jennyhansenlanehq.com/amazonpays. Every lesson count,
      length and claim here comes from those recordings or from the webinar
-     pages; if the Kajabi build changes, change the numbers here too. -->
+     pages; if the course build changes, change the numbers here too. -->
 
 <!-- Dub Partners affiliate tracking, as on every page of the site. -->
 <script
@@ -226,8 +228,8 @@
     <a class="mark" href="#top" aria-label="Sonder">
       <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
       <b>Sonder<i>.</i></b></a>
-    <span class="bar-note">The Book Marketing Masterclass &middot; <b>$47</b></span>
-    <a class="btn sm" href="#buy" data-buy="bar">Get it for $47</a>
+    <span class="bar-note">The Book Marketing Masterclass &middot; <b data-price>$47</b></span>
+    <a class="btn sm" href="#buy" data-buy="bar">Get it for <span data-price>$47</span></a>
   </div>
 </header>
 
@@ -252,7 +254,7 @@
     </ul>
     <p class="proof">It&rsquo;s how I sell my own books: 95% of my TikTok Shop sales came from other people&rsquo;s videos, and my first book reached #152 of every book on Amazon US.</p>
     <div class="cta-row">
-      <a class="btn big" href="#buy" data-buy="hero">Get instant access for $47 <span aria-hidden="true">&rarr;</span></a>
+      <a class="btn big" href="#buy" data-buy="hero">Get instant access for <span data-price>$47</span> <span aria-hidden="true">&rarr;</span></a>
       <p class="launch" data-launch><s>$97</s> <b>$47</b> launch price until 23 November</p>
       <p class="under">One payment &middot; lifetime access &middot; <b>30-day money-back guarantee</b></p>
     </div>
@@ -359,7 +361,7 @@
         <div><b>#152</b><span>peak rank, all books on Amazon US</span></div>
       </div>
       <p class="mikequote">In December 2025, <b>Michael Langdon paid for my course</b> and sold <b>$30,000 of books on TikTok Shop</b> off the back of it. He's now my co-founder at Sonder, so count his story as a disclosed fan.</p>
-      <div class="cta-inline"><a class="btn" href="#buy" data-buy="teacher">Learn my method for $47 <span aria-hidden="true">&rarr;</span></a></div>
+      <div class="cta-inline"><a class="btn" href="#buy" data-buy="teacher">Learn my method for <span data-price>$47</span> <span aria-hidden="true">&rarr;</span></a></div>
     </div>
     <figure class="shot">
       <img src="/assets/mc/lexi-insights-crop.jpg" alt="My Instagram insights: 2.9 million views, 474,500 interactions and 11,700 new followers in 30 days" width="900" height="551" loading="lazy" />
@@ -424,7 +426,7 @@
       <div class="extra"><b>The 95/5 rule, written down</b><span>The document behind my core method: what to keep from a proven video, and the one thing to change.</span></div>
       <div class="extra"><b>My eight-part script framework</b><span>The &ldquo;Anatomy of VEBM&rdquo; document I train Claude with to write scripts.</span></div>
     </div>
-    <div class="cta-inline center"><a class="btn" href="#buy" data-buy="inside">Get all six courses for $47 <span aria-hidden="true">&rarr;</span></a></div>
+    <div class="cta-inline center"><a class="btn" href="#buy" data-buy="inside">Get all six courses for <span data-price>$47</span> <span aria-hidden="true">&rarr;</span></a></div>
   </div>
 </section>
 
@@ -488,7 +490,7 @@
       </div>
     </div>
     <p class="under">Mike and Nancy each got 10 free Sonder video credits for recording a video for us, whatever they said in it.</p>
-    <div class="cta-inline center"><a class="btn" href="#buy" data-buy="stories">Start the masterclass for $47 <span aria-hidden="true">&rarr;</span></a></div>
+    <div class="cta-inline center"><a class="btn" href="#buy" data-buy="stories">Start the masterclass for <span data-price>$47</span> <span aria-hidden="true">&rarr;</span></a></div>
   </div>
 </section>
 
@@ -531,12 +533,12 @@
         <div class="row"><span>One BookBub Featured Deal, one day</span><b>$199&ndash;$3,552</b></div>
         <div class="row"><span>A freelancer, per video</span><b>about $150</b></div>
         <div class="row"><span>A marketing agency, per month</span><b>$500&ndash;$2,500</b></div>
-        <div class="row us"><span>The masterclass, once, yours to keep</span><b>$47</b></div>
+        <div class="row us"><span>The masterclass, once, yours to keep</span><b data-price>$47</b></div>
       </div>
     </div>
     <div class="pricecard">
       <span class="pc-name">The Book Marketing Masterclass</span>
-      <h3>Lifetime access, $47 once.</h3>
+      <h3>Lifetime access, <span data-price>$47</span> once.</h3>
       <ul class="ticks">
         <li><b>Six courses, 58 video lessons</b>, about 11 hours, on any device</li>
         <li><b>TikTok Shop, creators and AI avatars</b>, step by step on my screen</li>
@@ -545,9 +547,9 @@
         <li><b>The Sonder author community</b> on Skool, where authors share what's working</li>
         <li><b>30-day money-back guarantee</b></li>
       </ul>
-      <div class="price"><s data-launch>$97</s><b class="num">$47</b><span>one payment, no subscription<em data-launch><br />Launch price until 23 November</em></span></div>
+      <div class="price"><s data-launch>$97</s><b class="num" data-price>$47</b><span>one payment, no subscription<em data-launch><br />Launch price until 23 November</em></span></div>
       <a class="btn big block" href="#buy" data-buy="offer">Get instant access <span aria-hidden="true">&rarr;</span></a>
-      <p class="under">Your login arrives by email straight away. Not for you? Email us within 30 days for a full refund, no questions.</p>
+      <p class="under">Your invite to the course arrives by email straight away. Not for you? Email us within 30 days for a full refund, no questions.</p>
     </div>
   </div>
 </section>
@@ -558,7 +560,7 @@
       <div class="seal"><span><b>30</b>day<br />guarantee</span></div>
       <div>
         <h3>Watch it, use it, then decide.</h3>
-        <p>If you go through the masterclass and don't think it was worth $47, email <a href="mailto:hello@yousonder.com">hello@yousonder.com</a> within 30 days and we'll refund every cent. No forms, no questions.</p>
+        <p>If you go through the masterclass and don't think it was worth <span data-price>$47</span>, email <a href="mailto:hello@yousonder.com">hello@yousonder.com</a> within 30 days and we'll refund every cent. No forms, no questions.</p>
       </div>
     </div>
   </div>
@@ -572,7 +574,7 @@
     </div>
     <div class="faq">
       <details><summary>Is it live or recorded? When do I get it?</summary>
-        <div class="a"><p>Recorded. Your login arrives by email a minute after you pay, and the lessons are yours to watch as often as you like, on your phone, tablet or computer.</p></div></details>
+        <div class="a"><p>Recorded. The lessons live in the Sonder community on Skool, and your invite arrives by email a minute after you pay. They are yours to watch as often as you like, on your phone (Skool has an app), tablet or computer.</p></div></details>
       <details><summary>Do I have to show my face or use my voice?</summary>
         <div class="a"><p>No. The masterclass shows three ways round it: creators who film themselves with your book, AI avatars that do the talking, and videos of just your hands and the book. The one thing a TikTok Shop video does need is the book itself on screen.</p></div></details>
       <details><summary>What do I need?</summary>
@@ -600,9 +602,9 @@
   <div class="wrap">
     <span class="eyebrow">The Book Marketing Masterclass</span>
     <h2>Your book deserves readers. Let's go and find them.</h2>
-    <p class="lede">Six courses, 58 lessons, and the 95/5 method I use on my own books. $47 once, with a 30-day guarantee.</p>
+    <p class="lede">Six courses, 58 lessons, and the 95/5 method I use on my own books. <span data-price>$47</span> once, with a 30-day guarantee.</p>
     <div class="btn-stack">
-      <a class="btn big" href="#buy" data-buy="final">Get instant access for $47 <span aria-hidden="true">&rarr;</span></a>
+      <a class="btn big" href="#buy" data-buy="final">Get instant access for <span data-price>$47</span> <span aria-hidden="true">&rarr;</span></a>
       <p class="launch" data-launch><s>$97</s> <b>$47</b> launch price until 23 November</p>
       <p class="under">Lifetime access &middot; <b>30-day money-back guarantee</b></p>
     </div>
@@ -611,7 +613,7 @@
 </main>
 
 <div class="stickycta" id="sticky" aria-hidden="true">
-  <a class="btn" href="#buy" data-buy="sticky" tabindex="-1">Get the masterclass for $47 <span aria-hidden="true">&rarr;</span></a>
+  <a class="btn" href="#buy" data-buy="sticky" tabindex="-1">Get the masterclass for <span data-price>$47</span> <span aria-hidden="true">&rarr;</span></a>
 </div>
 
 <footer>
@@ -636,43 +638,73 @@
 (function () {
   "use strict";
   /* ===== The settings =====
-     CHECKOUT_URL: the $47 checkout (the Kajabi offer's checkout link).
-     Until it's set, every buy button walks the funnel in preview mode instead,
-     so the three pages can be reviewed end to end before launch.
-     LAUNCH_ENDS: when the launch price ends (end of 23 Nov, New York time, the first live challenge).
-     After it, every [data-launch] line disappears by itself, so the page never
-     shows an expired "launch price". That day, raise the checkout to $97 and
-     change the $47s on this page, or move the date. */
-  var CHECKOUT_URL = '';
+     Payment is Sonder's own Stripe checkout, opened by sonder-server
+     (POST /api/public/masterclass/checkout). While the server's funnel switch
+     is off (MASTERCLASS_FUNNEL_ENABLED), every buy button walks the funnel in
+     preview mode instead, so the three pages can be reviewed end to end.
+     LAUNCH_ENDS: when the launch price ends (end of 23 Nov, New York time, the
+     first live challenge). The server switches the Stripe price at the same
+     moment; this page swaps every [data-price] to the full price and drops the
+     [data-launch] lines by itself, so nothing needs editing that day. */
   var PREVIEW_NEXT = '/masterclass/challenge/?preview=1';
   var LAUNCH_ENDS = '2026-11-24T05:00:00Z';
+  var FULL_PRICE = 97, LAUNCH_PRICE = 47;
 
-  if (Date.now() >= Date.parse(LAUNCH_ENDS)) {
-    Array.prototype.forEach.call(document.querySelectorAll('[data-launch]'), function (el) { el.parentNode.removeChild(el); });
+  var MC = window.SonderMC;
+  var each = function (sel, fn) { Array.prototype.forEach.call(document.querySelectorAll(sel), fn); };
+
+  /* The price on the page always matches the price at checkout. */
+  var price = Date.now() >= Date.parse(LAUNCH_ENDS) ? FULL_PRICE : LAUNCH_PRICE;
+  function paintPrice(usd, launch) {
+    price = usd;
+    each('[data-price]', function (el) { el.textContent = '$' + usd; });
+    if (!launch) each('[data-launch]', function (el) { if (el.parentNode) el.parentNode.removeChild(el); });
+  }
+  paintPrice(price, price === LAUNCH_PRICE);
+  if (MC) MC.config().then(function (c) { if (c && c.course && c.course.usd) paintPrice(c.course.usd, !!c.course.launch); });
+
+  /* Remember the ad tags: they ride to the checkout (so the sale is credited
+     to the ad that sent it) and on to the trial link on /masterclass/start. */
+  if (MC) MC.saveTags();
+
+  function say(btn, text) {
+    var box = btn.parentNode.querySelector('.buy-msg');
+    if (!box) {
+      box = document.createElement('p');
+      box.className = 'buy-msg';
+      box.setAttribute('role', 'status');
+      box.style.cssText = 'margin:10px 0 0;font-size:15px;color:#7A1F2B;font-weight:600';
+      btn.parentNode.insertBefore(box, btn.nextSibling);
+    }
+    box.textContent = text;
   }
 
-  /* Ad and affiliate parameters ride through to the checkout, so the sale is
-     credited to the ad or partner that sent it (the list lives in mc.js). */
-  var CARRY = (window.SonderMC && window.SonderMC.CARRY) || [];
-  var here; try { here = new URL(window.location.href); } catch (e) { here = null; }
-
-  function checkoutHref() {
-    if (!CHECKOUT_URL) return PREVIEW_NEXT;
-    var u; try { u = new URL(CHECKOUT_URL); } catch (e) { return CHECKOUT_URL; }
-    if (here) CARRY.forEach(function (k) { var v = here.searchParams.get(k); if (v && !u.searchParams.has(k)) u.searchParams.set(k, v); });
-    return u.toString();
-  }
-
-  /* Remember the ad tags for the trial link on /masterclass/start. */
-  if (window.SonderMC) window.SonderMC.saveTags();
-
-  var href = checkoutHref();
-  Array.prototype.forEach.call(document.querySelectorAll('[data-buy]'), function (a) {
-    a.setAttribute('href', href);
-    a.addEventListener('click', function () {
+  var busy = false;
+  each('[data-buy]', function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (busy) return;
       if (typeof window.fbq === 'function') {
-        window.fbq('track', 'InitiateCheckout', { content_name: 'masterclass', value: 47, currency: 'USD', content_category: a.getAttribute('data-buy') });
+        window.fbq('track', 'InitiateCheckout', { content_name: 'masterclass', value: price, currency: 'USD', content_category: a.getAttribute('data-buy') });
       }
+      if (!MC) { window.location.href = PREVIEW_NEXT; return; }
+      busy = true;
+      var label = a.innerHTML;
+      a.setAttribute('aria-busy', 'true');
+      a.textContent = 'Opening the secure checkout\u2026';
+      /* Real checkout only once the server says the funnel is on; until then
+         (or if it can't be reached at all) the page stays in preview mode. */
+      MC.config().then(function (c) {
+        if (!c || !c.enabled) { window.location.href = PREVIEW_NEXT; return; }
+        return MC.checkout().then(function (r) {
+          if (r && r.ok && r.url) { window.location.href = r.url; return; }
+          busy = false;
+          a.removeAttribute('aria-busy');
+          a.innerHTML = label;
+          if (r && r.error === 'off') { window.location.href = PREVIEW_NEXT; return; }
+          say(a, 'The checkout did not open. Please try again in a moment, or email hello@yousonder.com and we will help.');
+        });
+      });
     });
   });
 
