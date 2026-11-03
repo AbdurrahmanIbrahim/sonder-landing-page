@@ -146,13 +146,18 @@
 .belief .truth b{color:var(--ink)}
 
 /* ---------- Lexi ---------- */
-.teacher{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(26px,4vw,52px);align-items:start}
+/* Lexi's portrait gets a column of its own, as big as the proof screenshot (Abdul, 3 Nov 2026).
+   It reads assets/mc/lexi.jpg; a sharp photo of at least 1000 x 1250 px fills it properly. */
+.teacher{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(28px,4.5vw,60px);align-items:start}
 @media (max-width:880px){.teacher{grid-template-columns:1fr}}
-.teacher-head{display:flex;align-items:center;gap:20px;margin-bottom:20px}
-.teacher-head img{width:120px;height:120px;flex-shrink:0;border-radius:50%;object-fit:cover;border:3px solid var(--mint);box-shadow:0 0 0 2px var(--plum)}
-@media (max-width:640px){.teacher-head img{width:96px;height:96px}}
-.teacher-head b{display:block;font-family:var(--display);font-weight:900;font-size:1.4rem;letter-spacing:-.02em;color:#FFFFFF}
-.teacher-head span{font-size:14.5px;color:var(--on-plum-2)}
+.portrait{margin:0;position:sticky;top:88px}
+.portrait img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:60% 30%;
+  border-radius:22px;border:3px solid var(--mint);box-shadow:10px 10px 0 0 var(--mint);background:var(--plum-2)}
+.portrait figcaption{position:absolute;left:16px;right:16px;bottom:16px;background:var(--paper);border-radius:14px;
+  padding:12px 16px;box-shadow:0 12px 26px -14px rgba(0,0,0,.5)}
+.portrait figcaption b{display:block;font-family:var(--display);font-weight:900;font-size:1.35rem;letter-spacing:-.02em;color:var(--ink);line-height:1.2}
+.portrait figcaption span{display:block;font-size:14.5px;line-height:1.4;color:var(--ink-2);margin-top:2px}
+@media (max-width:880px){.portrait{position:relative;top:auto;max-width:460px}}
 .teacher .prose p{color:var(--on-plum-2)}
 .teacher .prose p strong{color:#FFFFFF}
 .figures{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:26px}
@@ -161,8 +166,7 @@
 .figures span{display:block;font-size:13px;color:var(--on-plum-2);line-height:1.4;margin-top:4px}
 .mikequote{margin-top:26px;border-left:3px solid var(--mint);padding:4px 0 4px 18px;color:var(--on-plum-2);font-size:16.5px}
 .mikequote b{color:#FFFFFF}
-.teacher .shot{background:#000000;position:sticky;top:88px}
-@media (max-width:880px){.teacher .shot{position:static}}
+.teacher .shot{background:#000000;margin-top:28px}
 
 /* ---------- everything inside: each course on its own screen, like Jenny's module cards ---------- */
 .mods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2.4vw,22px)}
@@ -348,12 +352,12 @@
 
 <section class="sec on-dark" data-note="teacher">
   <div class="wrap teacher">
+    <figure class="portrait">
+      <img src="/assets/mc/lexi.jpg" alt="Lexi Kaz" width="800" height="1000" loading="lazy" />
+      <figcaption><b>Lexi Kaz</b><span>Author, publisher and co-founder of Sonder</span></figcaption>
+    </figure>
     <div>
       <span class="eyebrow">Your teacher</span>
-      <div class="teacher-head">
-        <img src="/assets/mc/lexi.jpg" alt="Lexi Kaz" width="120" height="120" />
-        <div><b>Lexi Kaz</b><span>Author, publisher and co-founder of Sonder</span></div>
-      </div>
       <h2>My first book took seven months and earned $1,700 in its first month.</h2>
       <div class="prose" style="margin-top:18px">
         <p>Then I published nothing for a year, waiting for it to reach a hundred reviews. When I finally went looking for readers, I found them on TikTok, where almost nobody else was selling books.</p>
@@ -365,13 +369,13 @@
         <div><b>&lt;1,500</b><span>followers of my own when it took off</span></div>
         <div><b>#152</b><span>peak rank, all books on Amazon US</span></div>
       </div>
+      <figure class="shot">
+        <img src="/assets/mc/lexi-insights-crop.jpg" alt="My Instagram insights: 2.9 million views, 474,500 interactions and 11,700 new followers in 30 days" width="900" height="551" loading="lazy" />
+        <figcaption>My own Instagram, 30 days: 2.9M views, 11.7K new followers. My result, not a typical one.</figcaption>
+      </figure>
       <p class="mikequote">In December 2025, <b>Michael Langdon paid for my course</b> and sold <b>$30,000 of books on TikTok Shop</b> off the back of it. He's now my co-founder at Sonder, so count his story as a disclosed fan.</p>
       <div class="cta-inline"><a class="btn" href="#buy" data-buy="teacher"><span>Learn my method for <span data-price>$47</span></span> <span aria-hidden="true">&rarr;</span></a></div>
     </div>
-    <figure class="shot">
-      <img src="/assets/mc/lexi-insights-crop.jpg" alt="My Instagram insights: 2.9 million views, 474,500 interactions and 11,700 new followers in 30 days" width="900" height="551" loading="lazy" />
-      <figcaption>My own Instagram, 30 days: 2.9M views, 11.7K new followers. My result, not a typical one.</figcaption>
-    </figure>
   </div>
 </section>
 
