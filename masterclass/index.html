@@ -63,8 +63,10 @@
 /* ---------- hero: Jenny Hansen Lane's layout, a question and then the whole course on screen ---------- */
 .hero{background:linear-gradient(180deg,var(--wash),var(--paper));border-bottom:1px solid var(--rule);
   padding:clamp(28px,5vw,60px) 0 clamp(40px,5vw,64px);text-align:center}
-.hero h1{margin:18px auto 0;max-width:19ch}
-.hero .lede{margin:18px auto 0;max-width:54ch}
+/* Set wide, as on Jenny's page (Lexi, 4 Nov 2026): two lines for the question on a computer or tablet,
+   three for the intro. "the&nbsp;videos" in the h1 keeps the break after "made". Phones are unchanged. */
+.hero h1{margin:18px auto 0;max-width:34ch}
+.hero .lede{margin:18px auto 0;max-width:60ch;text-wrap:pretty}
 .hero .proof{margin:clamp(30px,4vw,42px) auto 0;max-width:38ch;font-family:var(--display);font-weight:800;
   font-size:clamp(1.12rem,2.4vw,1.32rem);line-height:1.35;letter-spacing:-.015em;color:var(--ink)}
 .hero .cta-row{margin-top:22px;display:flex;flex-direction:column;align-items:center}
@@ -251,7 +253,7 @@
 <section class="hero" data-note="hero">
   <div class="wrap">
     <span class="kicker"><span class="pip" aria-hidden="true"></span> My masterclass for authors</span>
-    <h1>What if other people made the videos that <span class="hl">sell your book</span>?</h1>
+    <h1>What if other people made the&nbsp;videos that <span class="hl">sell your book</span>?</h1>
     <p class="lede">Most authors think selling a book on TikTok means filming yourself every day. I sell mine through creators who film themselves with my books, AI avatars that do the talking, and videos that show nothing but my hands.</p>
     <div class="stack" aria-hidden="true">
       <div class="dev tab l"><img src="/assets/mc/courses/book-to-bestseller.jpg" alt="" /></div>
