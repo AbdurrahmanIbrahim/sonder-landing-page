@@ -98,6 +98,11 @@
 .phone img,.phone video{border-radius:clamp(9px,2vw,20px)}
 .phone.l{left:3%;transform:rotate(-3deg)}
 .phone.r{right:3%;transform:rotate(3deg)}
+/* Lexi stands behind the laptop, centred on the whole stack (Abdul, 4 Nov 2026): a cut-out of her photo,
+   head and raised fist above the laptop, the rest hidden by it. The stack's top margin makes room for her. */
+.stack{margin-top:calc(clamp(24px,4vw,38px) + 12%)}
+.lexi-back{position:absolute;left:50%;top:-21.7%;width:44%;height:auto;transform:translateX(-50%);
+  filter:drop-shadow(0 18px 26px rgba(45,26,72,.35))}
 .teach{position:absolute;left:50%;bottom:-2%;transform:translateX(-50%);z-index:4;display:flex;align-items:center;gap:10px;
   background:var(--paper);border:1.5px solid var(--rule-2);border-radius:999px;padding:6px 16px 6px 6px;white-space:nowrap;
   box-shadow:0 12px 26px -14px rgba(45,26,72,.5);font-size:clamp(13px,1.6vw,15px);color:var(--ink-2)}
@@ -115,6 +120,8 @@
   .phone.l{left:-1%}
   .phone.r{right:-1%}
   .teach{bottom:-6%}
+  .stack{margin-top:calc(clamp(24px,4vw,38px) + 3%)}
+  .lexi-back{width:50%;top:-2%}
 }
 
 /* ---------- what they've tried ---------- */
@@ -142,12 +149,20 @@
 .belief .truth b{color:var(--ink)}
 
 /* ---------- Lexi ---------- */
-.teacher{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(26px,4vw,52px);align-items:start}
+/* Lexi's portrait gets a column of its own, as big as the proof screenshot (Abdul, 3 Nov 2026).
+   assets/mc/lexi.jpg is Lexi's photo from Abdul (3 Nov 2026, 768 x 1024 from WhatsApp), upscaled 2x with
+   Topaz (Standard V2, no generative redraw) and cropped to 960 x 1200. lexi-cutout.webp (the hero,
+   background removed) and lexi-avatar.jpg (the "Taught by" pill) are the same photo. */
+.teacher{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(28px,4.5vw,60px);align-items:start}
 @media (max-width:880px){.teacher{grid-template-columns:1fr}}
-.teacher-head{display:flex;align-items:center;gap:16px;margin-bottom:18px}
-.teacher-head img{width:76px;height:76px;border-radius:50%;object-fit:cover;border:3px solid var(--mint);box-shadow:0 0 0 2px var(--plum)}
-.teacher-head b{display:block;font-family:var(--display);font-weight:900;font-size:1.4rem;letter-spacing:-.02em;color:#FFFFFF}
-.teacher-head span{font-size:14.5px;color:var(--on-plum-2)}
+.portrait{margin:0;position:sticky;top:88px}
+.portrait img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:60% 30%;
+  border-radius:22px;border:3px solid var(--mint);box-shadow:10px 10px 0 0 var(--mint);background:var(--plum-2)}
+.portrait figcaption{position:absolute;left:16px;right:16px;bottom:16px;background:var(--paper);border-radius:14px;
+  padding:12px 16px;box-shadow:0 12px 26px -14px rgba(0,0,0,.5)}
+.portrait figcaption b{display:block;font-family:var(--display);font-weight:900;font-size:1.35rem;letter-spacing:-.02em;color:var(--ink);line-height:1.2}
+.portrait figcaption span{display:block;font-size:14.5px;line-height:1.4;color:var(--ink-2);margin-top:2px}
+@media (max-width:880px){.portrait{position:relative;top:auto;max-width:460px}}
 .teacher .prose p{color:var(--on-plum-2)}
 .teacher .prose p strong{color:#FFFFFF}
 .figures{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:26px}
@@ -156,8 +171,7 @@
 .figures span{display:block;font-size:13px;color:var(--on-plum-2);line-height:1.4;margin-top:4px}
 .mikequote{margin-top:26px;border-left:3px solid var(--mint);padding:4px 0 4px 18px;color:var(--on-plum-2);font-size:16.5px}
 .mikequote b{color:#FFFFFF}
-.teacher .shot{background:#000000;position:sticky;top:88px}
-@media (max-width:880px){.teacher .shot{position:static}}
+.teacher .shot{background:#000000;margin-top:28px}
 
 /* ---------- everything inside: each course on its own screen, like Jenny's module cards ---------- */
 .mods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2.4vw,22px)}
@@ -242,10 +256,11 @@
     <div class="stack" aria-hidden="true">
       <div class="dev tab l"><img src="/assets/mc/courses/book-to-bestseller.jpg" alt="" /></div>
       <div class="dev tab r"><img src="/assets/mc/courses/ai-book-marketing.jpg" alt="" /></div>
+      <img class="lexi-back" src="/assets/mc/lexi-cutout.webp" alt="" width="900" height="1140" />
       <div class="dev laptop"><div class="scr"><img src="/assets/mc/courses/published-to-profitable.jpg" alt="" /></div><div class="base"></div></div>
       <div class="dev phone l"><video src="/assets/formats/viral.mp4" poster="/assets/formats/viral.webp" muted loop playsinline autoplay preload="metadata"></video></div>
       <div class="dev phone r"><img src="/assets/mosaic/stick-figure.jpg" alt="" /></div>
-      <div class="teach"><img src="/assets/founders/lexi.jpg" alt="" /><span>Taught by <b>Lexi Kaz</b></span></div>
+      <div class="teach"><img src="/assets/mc/lexi-avatar.jpg" alt="" /><span>Taught by <b>Lexi Kaz</b></span></div>
     </div>
     <ul class="shelf" aria-label="Also inside">
       <li><img src="/assets/mc/courses/tiktok-tactics.jpg" alt="" /><span>Next Level TikTok Hacks</span></li>
@@ -343,12 +358,12 @@
 
 <section class="sec on-dark" data-note="teacher">
   <div class="wrap teacher">
+    <figure class="portrait">
+      <img src="/assets/mc/lexi.jpg" alt="Lexi Kaz" width="960" height="1200" loading="lazy" />
+      <figcaption><b>Lexi Kaz</b><span>Author, publisher and co-founder of Sonder</span></figcaption>
+    </figure>
     <div>
       <span class="eyebrow">Your teacher</span>
-      <div class="teacher-head">
-        <img src="/assets/founders/lexi.jpg" alt="Lexi Kaz" width="76" height="76" />
-        <div><b>Lexi Kaz</b><span>Author, publisher and co-founder of Sonder</span></div>
-      </div>
       <h2>My first book took seven months and earned $1,700 in its first month.</h2>
       <div class="prose" style="margin-top:18px">
         <p>Then I published nothing for a year, waiting for it to reach a hundred reviews. When I finally went looking for readers, I found them on TikTok, where almost nobody else was selling books.</p>
@@ -360,13 +375,13 @@
         <div><b>&lt;1,500</b><span>followers of my own when it took off</span></div>
         <div><b>#152</b><span>peak rank, all books on Amazon US</span></div>
       </div>
+      <figure class="shot">
+        <img src="/assets/mc/lexi-insights-crop.jpg" alt="My Instagram insights: 2.9 million views, 474,500 interactions and 11,700 new followers in 30 days" width="900" height="551" loading="lazy" />
+        <figcaption>My own Instagram, 30 days: 2.9M views, 11.7K new followers. My result, not a typical one.</figcaption>
+      </figure>
       <p class="mikequote">In December 2025, <b>Michael Langdon paid for my course</b> and sold <b>$30,000 of books on TikTok Shop</b> off the back of it. He's now my co-founder at Sonder, so count his story as a disclosed fan.</p>
       <div class="cta-inline"><a class="btn" href="#buy" data-buy="teacher"><span>Learn my method for <span data-price>$47</span></span> <span aria-hidden="true">&rarr;</span></a></div>
     </div>
-    <figure class="shot">
-      <img src="/assets/mc/lexi-insights-crop.jpg" alt="My Instagram insights: 2.9 million views, 474,500 interactions and 11,700 new followers in 30 days" width="900" height="551" loading="lazy" />
-      <figcaption>My own Instagram, 30 days: 2.9M views, 11.7K new followers. My result, not a typical one.</figcaption>
-    </figure>
   </div>
 </section>
 
