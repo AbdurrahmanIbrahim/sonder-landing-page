@@ -11,6 +11,8 @@ Four pages, one path:
 
 Buyers who say no on step 2 still land on step 3. Add `?notes=1` to any page to see why each section is there.
 
+**No Sonder before step 3 (Abdul and Lexi, 5 Nov 2026).** Steps 1, 1b and 2 are about the course alone: no logo, no Sonder testimonials, no product name. Three things stay because they have to: the legal company name and email address in the footers, the Terms and Privacy links, and the checkout's answer about the card statement (the charge shows SONDER). Step 2 still discloses, without the name, that the tool Lexi uses on the call is one she co-founded and that Day 3 ends with its annual plan. Step 1 is modelled on jennyhansenlanehq.com/amazonpays: model it, don't copy it.
+
 ## How it works (since 1 Nov 2026)
 
 Every payment is on **Sonder's own Stripe**, through sonder-server (`routes/masterclass.ts`, rules in `lib/masterclassRules.ts`), so revenue and conversion live in one place. Nothing is paid on Skool.
