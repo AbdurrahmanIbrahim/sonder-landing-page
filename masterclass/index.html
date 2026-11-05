@@ -4,10 +4,10 @@
 <meta charset="utf-8" />
 <script src="/consent.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#FFFFFF" />
+<meta name="theme-color" content="#FF2D52" />
 <title>The Book Marketing Masterclass | Lexi Kaz</title>
 <meta name="description" content="Lexi Kaz's recorded masterclass for authors: how she gets TikTok creators, AI avatars and proven scripts to make the videos that sell her books. 58 lessons, $47." />
-<meta property="og:title" content="What if other people made the videos that sell your book?" />
+<meta property="og:title" content="What if TikTok sold your book for you, even from videos you never had to film?" />
 <meta property="og:description" content="Lexi Kaz's recorded masterclass: TikTok Shop creators, AI avatar videos, the 95/5 rule and a bonus course on Amazon ads. 58 lessons, $47 launch price, 30-day money-back guarantee." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.yousonder.com/masterclass" />
@@ -17,15 +17,17 @@
        2. /masterclass/challenge  shown after checkout: the $147 live challenge
        3. /masterclass/start      order confirmed + the free Sonder trial
      Paid Meta traffic and Lexi's posts land here. The page sells one thing,
-     the masterclass; Sonder appears only where the method needs it. Payment
-     is on Sonder's Stripe (sonder-server routes/masterclass.ts), and the
-     lessons live in the Sonder community on Skool, which every buyer is
-     invited into (1 Nov 2026).
+     the masterclass. Payment is on Sonder's Stripe (sonder-server
+     routes/masterclass.ts), and the lessons live in the Sonder community on
+     Skool, which every buyer is invited into (1 Nov 2026).
      30 Oct: rewritten in Lexi's voice from the transcripts of the lessons
-     that go into the course (58 of the 78 in her Skool classroom), with the
-     hero modelled on jennyhansenlanehq.com/amazonpays. Every lesson count,
-     length and claim here comes from those recordings or from the webinar
-     pages; if the course build changes, change the numbers here too. -->
+     that go into the course (58 of the 78 in her Skool classroom). Every
+     lesson count, length and claim here comes from those recordings or from
+     the webinar pages; if the course build changes, change the numbers here too.
+     5 Nov (Abdul and Lexi): rebuilt on the whole of
+     jennyhansenlanehq.com/amazonpays. Model it, don't copy it. Nothing about
+     Sonder until the last page of the funnel, /masterclass/start, so its name
+     is left only in the legal company name and the email address in the footer. -->
 
 <!-- Dub Partners affiliate tracking, as on every page of the site. -->
 <script
@@ -55,100 +57,160 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" />
-<link rel="icon" type="image/svg+xml" href="/assets/sonder-logo-plum-flat.svg" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&family=Oswald:wght@500;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" />
+<link rel="icon" type="image/svg+xml" href="/assets/mc/favicon.svg" />
 <link rel="stylesheet" href="/masterclass/mc.css" />
 <link rel="prefetch" href="/masterclass/checkout/" />
 <style>
-/* ---------- hero: Jenny Hansen Lane's layout, a question and then the whole course on screen ---------- */
-.hero{background:linear-gradient(180deg,var(--wash),var(--paper));border-bottom:1px solid var(--rule);
-  padding:clamp(28px,5vw,60px) 0 clamp(40px,5vw,64px);text-align:center}
-/* Set wide, as on Jenny's page (Lexi, 4 Nov 2026): two lines for the question on a computer or tablet,
-   three for the intro. "the&nbsp;videos" in the h1 keeps the break after "made". Phones are unchanged. */
-.hero h1{margin:18px auto 0;max-width:34ch}
-.hero .lede{margin:18px auto 0;max-width:60ch;text-wrap:pretty}
-.hero .proof{margin:clamp(30px,4vw,42px) auto 0;max-width:38ch;font-family:var(--display);font-weight:800;
-  font-size:clamp(1.12rem,2.4vw,1.32rem);line-height:1.35;letter-spacing:-.015em;color:var(--ink)}
-.hero .cta-row{margin-top:22px;display:flex;flex-direction:column;align-items:center}
-.hero .ticks.row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin-top:22px}
-.hero .ticks.row li{font-size:16px;text-align:left}
-@media (max-width:640px){.hero .cta-row .btn{width:100%}}
+/* ======================================================================
+   /masterclass, rebuilt 5 Nov 2026 on the structure of Jenny Hansen Lane's lander
+   (jennyhansenlanehq.com/amazonpays): an announcement bar, a question, a two-part
+   sub-headline, the course on screen, then alternating bands that each end on the
+   price and a button. This page alone swaps the funnel's plum and Nunito for
+   near-black, Montserrat, Oswald and a serif, by redefining mc.css's tokens here.
+   Type stays large because most buyers are 45+.
+   ====================================================================== */
+:root{
+  --display:'Montserrat',system-ui,-apple-system,sans-serif;
+  --tall:'Oswald','Arial Narrow',system-ui,sans-serif;
+  --serif:'Playfair Display',Georgia,'Times New Roman',serif;
+  --mono:var(--body);
+  --ink:#111114;--ink-2:#3A3A44;--ink-3:#5E5E6A;--rule:#E4E4EA;--rule-2:#CDCDD6;
+  --plum:#141317;--plum-2:#26242C;--on-plum:#F4F4F6;--on-plum-2:#C9F5EA;--wash:#F5F5F7;
+  --red:#FF2D52;--crimson:#C4004C;--tint:#CCFBED;--cream:#FFF8EE;--btn:#2BE3C2;--btn-hover:#1FCFAF;
+}
+h1,h2,h3{font-weight:800;letter-spacing:-.02em}
+.band{padding:clamp(44px,6vw,68px) 0;text-align:center}
+.band.dark{background:var(--plum);color:var(--on-plum)}
+.band.dark h2{color:#FFFFFF}
+.band.tint{background:var(--tint)}
+.band.cream{background:var(--cream)}
+.band h2{font-size:clamp(1.5rem,3.2vw,2.25rem);line-height:1.2}
+.col{max-width:860px}
+.red-head{font-family:var(--tall);font-weight:600;color:var(--red);font-size:clamp(1.9rem,3.6vw,2.6rem);line-height:1.15;letter-spacing:.005em}
+.band h2.red-head{font-size:clamp(1.9rem,3.6vw,2.6rem)}
+.strong{font-family:var(--display);font-weight:700;font-size:clamp(1.08rem,2vw,1.35rem);line-height:1.32;color:var(--ink);text-wrap:balance}
+.dark .strong{color:#FFFFFF}
+.strong.it{font-style:italic}
+.serif{font-family:var(--serif);font-size:clamp(1.12rem,2vw,1.4rem);line-height:1.5;text-wrap:balance}
+.serif>*+*{margin-top:1em}
+.serif .tight p+p{margin-top:.2em}
+.dark .serif{color:var(--on-plum-2)}
+.fineprint{font-size:14.5px;line-height:1.5;color:var(--ink-3);margin:18px auto 0;max-width:72ch}
 
-/* the launch price: $97 struck through, no date (Abdul, 1 Nov 2026). The
-   lines remove themselves when the server's price switch goes to $97. */
-.launch{margin-top:14px;font-size:15.5px;color:var(--ink-2)}
-.launch s,.price s{font-family:var(--mono);font-weight:600;color:var(--ink-3);text-decoration-color:var(--error);text-decoration-thickness:2px}
-.launch b{font-family:var(--mono);font-weight:600;color:var(--ink)}
+/* ---------- announcement bar: Jenny's, in her red, instead of a logo and button (Abdul, 5 Nov 2026) ----------
+   It scrolls away with the page. White on this red needs large bold type to stay readable, so it never goes below 19px. */
+.promo{background:var(--red);color:#FFFFFF;text-align:center;padding:14px 0}
+.promo p{font-family:var(--display);font-weight:700;font-size:clamp(19px,2vw,20px);line-height:1.25;letter-spacing:-.01em;text-wrap:balance}
 
+/* ---------- the button: flat and rectangular like hers, with the price underneath ---------- */
+.btn,.on-dark .btn{background:var(--btn);color:#06231C;border:0;border-radius:4px;box-shadow:none;font-family:var(--display);font-weight:700}
+.btn:hover,.on-dark .btn:hover{background:var(--btn-hover);transform:none;box-shadow:none}
+.btn:active{transform:none;box-shadow:none}
+.btn.big{padding:13px 38px;font-size:clamp(17px,2vw,19px);min-width:min(100%,330px)}
+.btn-in{display:flex;flex-direction:column;align-items:center;gap:1px}
+.btn-top{display:inline-flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:.01em}
+.btn-top svg{width:19px;height:19px;fill:currentColor;flex-shrink:0}
+.btn .sub{font-family:var(--body);font-weight:600;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;opacity:1;margin:0}
+.oneliner{margin-top:12px;font-size:clamp(15px,1.7vw,18px);line-height:1.4;color:var(--ink-2)}
+.dark .oneliner,.on-dark .oneliner{color:var(--on-plum-2)}
+@media (max-width:640px){.btn.big{width:100%}}
 
-/* the product shot: the courses on a laptop, two tablets and two phones */
-.stack{position:relative;width:100%;max-width:940px;margin:clamp(24px,4vw,38px) auto 0;aspect-ratio:16/9.2}
-.dev{position:absolute;background:#1B1424;box-shadow:0 34px 60px -30px rgba(45,26,72,.6),0 10px 22px -12px rgba(45,26,72,.4)}
-.dev img,.dev video{width:100%;height:100%;object-fit:cover;display:block;background:var(--plum)}
+/* ---------- the price block that closes each band ---------- */
+.pb{margin-top:clamp(22px,3vw,32px);display:flex;flex-direction:column;align-items:center}
+.pb-was{font-family:var(--tall);font-weight:500;font-size:clamp(1.05rem,1.9vw,1.3rem);color:#0B7F7A;text-decoration:line-through;text-decoration-thickness:2px}
+.dark .pb-was{color:#7FE6D6}
+.pb-now{font-family:var(--tall);font-weight:600;font-size:clamp(1.9rem,3.6vw,2.5rem);color:var(--red);line-height:1.2;margin:4px 0 12px}
+
+/* ---------- hero ---------- */
+.hero{background:#FFFFFF;text-align:center;padding:clamp(26px,3.4vw,38px) 0 clamp(36px,5vw,56px)}
+.hero .wrap{max-width:1180px}
+.hero h1{font-size:clamp(1.7rem,3.9vw,3rem);line-height:1.18;margin:0 auto}
+.hero .lede{font-family:var(--serif);font-size:clamp(1.12rem,2vw,1.45rem);line-height:1.45;color:#2F2F35;max-width:62ch;margin:14px auto 0;text-wrap:balance}
+.hero .proof{margin:clamp(30px,4vw,42px) auto 0;max-width:46ch}
+.proof-note{font-size:14.5px;line-height:1.5;color:var(--ink-3);margin-top:8px}
+.hero .buy{margin-top:22px;display:flex;flex-direction:column;align-items:center}
+.checks{list-style:none;margin:20px 0 0;padding:0;font-family:var(--serif);font-size:clamp(1.12rem,2vw,1.35rem);line-height:1.6;color:#2F2F35}
+.checks li::before{content:"\2714\FE0E\00A0"}
+.hero .checks+.strong{margin-top:18px}
+
+/* the product shot: the courses on a laptop, two tablets and two phones, with Lexi behind the laptop */
+.stack{position:relative;width:100%;max-width:940px;margin:calc(clamp(24px,4vw,38px) + 12%) auto 0;aspect-ratio:16/9.2}
+.dev{position:absolute;background:#1B1424;box-shadow:0 34px 60px -30px rgba(20,19,23,.6),0 10px 22px -12px rgba(20,19,23,.4)}
+.dev img,.dev video{width:100%;height:100%;object-fit:cover;display:block;background:#1B1424}
 .tab{width:41%;aspect-ratio:1.94;padding:1.15%;border-radius:clamp(8px,1.6vw,16px);top:4%}
 .tab img{border-radius:clamp(4px,.8vw,8px)}
 .tab.l{left:0;transform:rotate(-6deg)}
 .tab.r{right:0;transform:rotate(6deg)}
 .laptop{left:19%;width:62%;top:21%;background:none;box-shadow:none}
 .laptop .scr{background:#1B1424;padding:1.2% 1.2% 1.6%;border-radius:clamp(8px,1.4vw,14px) clamp(8px,1.4vw,14px) 3px 3px;
-  aspect-ratio:1.94;box-shadow:0 34px 60px -30px rgba(45,26,72,.6)}
+  aspect-ratio:1.94;box-shadow:0 34px 60px -30px rgba(20,19,23,.6)}
 .laptop .scr img{border-radius:3px}
 .laptop .base{height:clamp(7px,1.5vw,15px);margin:0 -6.5%;border-radius:0 0 16px 16px;position:relative;
-  background:linear-gradient(180deg,#E9E5F0,#B9B1C9);box-shadow:0 18px 30px -16px rgba(45,26,72,.55)}
-.laptop .base::before{content:"";position:absolute;left:42%;right:42%;top:0;height:40%;background:#9A92AD;border-radius:0 0 8px 8px}
+  background:linear-gradient(180deg,#E9E9EE,#B9B9C6);box-shadow:0 18px 30px -16px rgba(20,19,23,.55)}
+.laptop .base::before{content:"";position:absolute;left:42%;right:42%;top:0;height:40%;background:#9A9AA8;border-radius:0 0 8px 8px}
 .phone{width:15.5%;aspect-ratio:9/19;padding:.9%;border-radius:clamp(12px,2.6vw,26px);top:36%;z-index:3}
 .phone img,.phone video{border-radius:clamp(9px,2vw,20px)}
 .phone.l{left:3%;transform:rotate(-3deg)}
 .phone.r{right:3%;transform:rotate(3deg)}
 /* Lexi stands behind the laptop, centred on the whole stack (Abdul, 4 Nov 2026): a cut-out of her photo,
    head and raised fist above the laptop, the rest hidden by it. The stack's top margin makes room for her. */
-.stack{margin-top:calc(clamp(24px,4vw,38px) + 12%)}
 .lexi-back{position:absolute;left:50%;top:-21.7%;width:44%;height:auto;transform:translateX(-50%);
-  filter:drop-shadow(0 18px 26px rgba(45,26,72,.35))}
+  filter:drop-shadow(0 18px 26px rgba(20,19,23,.35))}
 .teach{position:absolute;left:50%;bottom:-2%;transform:translateX(-50%);z-index:4;display:flex;align-items:center;gap:10px;
-  background:var(--paper);border:1.5px solid var(--rule-2);border-radius:999px;padding:6px 16px 6px 6px;white-space:nowrap;
-  box-shadow:0 12px 26px -14px rgba(45,26,72,.5);font-size:clamp(13px,1.6vw,15px);color:var(--ink-2)}
+  background:#FFFFFF;border:1.5px solid var(--rule-2);border-radius:999px;padding:6px 16px 6px 6px;white-space:nowrap;
+  box-shadow:0 12px 26px -14px rgba(20,19,23,.5);font-size:clamp(13px,1.6vw,15px);color:var(--ink-2)}
 .teach img{width:clamp(30px,4vw,40px);height:clamp(30px,4vw,40px);border-radius:50%;object-fit:cover}
 .teach b{color:var(--ink)}
-.shelf{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:clamp(30px,4vw,40px) auto 0;padding:0;list-style:none}
-.shelf li{width:clamp(100px,18vw,160px)}
-.shelf img{width:100%;aspect-ratio:1.94;object-fit:cover;border-radius:8px;border:1.5px solid var(--rule)}
-.shelf span{display:block;font-size:clamp(12px,1.4vw,13px);line-height:1.35;color:var(--ink-2);margin-top:6px}
 @media (max-width:640px){
-  .stack{aspect-ratio:4/3.5}
+  .stack{aspect-ratio:4/3.5;margin-top:calc(clamp(24px,4vw,38px) + 3%)}
   .tab{width:50%;top:2%}
   .laptop{left:9%;width:82%;top:30%}
   .phone{width:21%;top:47%}
   .phone.l{left:-1%}
   .phone.r{right:-1%}
   .teach{bottom:-6%}
-  .stack{margin-top:calc(clamp(24px,4vw,38px) + 3%)}
   .lexi-back{width:50%;top:-2%}
 }
 
-/* ---------- what they've tried ---------- */
-.tried{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:26px}
-@media (max-width:640px){.tried{grid-template-columns:1fr}}
-.tried li{list-style:none;background:var(--paper);border:1.5px solid var(--rule-2);border-radius:14px;padding:16px 18px;color:var(--ink-2);font-size:16.5px}
-.tried li b{display:block;color:var(--ink);font-size:17px;margin-bottom:2px}
-.tried{padding:0;margin-bottom:0}
-.turn{margin-top:30px;font-family:var(--display);font-weight:900;font-size:clamp(1.3rem,3vw,1.8rem);line-height:1.2;letter-spacing:-.025em;max-width:30ch}
+/* ---------- black band: what most authors don't know ---------- */
+.reveal .serif{margin-top:clamp(18px,2.6vw,26px)}
+.reveal .strong{margin-top:clamp(24px,3.4vw,36px)}
 
-/* ---------- faceless proof ---------- */
-.faceless{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:center}
-@media (max-width:880px){.faceless{grid-template-columns:1fr}}
-.shot{margin:0;background:#0F0A18;border-radius:18px;padding:10px;box-shadow:0 14px 34px rgba(23,17,31,.18)}
-.shot img{border-radius:11px;width:100%;height:auto}
-.shot figcaption{font-size:13px;color:#BFB6D2;padding:10px 6px 4px;line-height:1.45}
+/* ---------- check lists ---------- */
+.inc{list-style:none;margin:clamp(20px,3vw,30px) auto 0;padding:0;max-width:980px;text-align:left;display:grid;gap:12px}
+.inc.short{max-width:680px}
+.inc li{position:relative;padding-left:32px;font-size:clamp(16px,1.6vw,17.5px);line-height:1.5;color:var(--ink-2)}
+.inc li b{color:var(--ink);font-weight:600}
+.inc li::before{content:"";position:absolute;left:2px;top:.22em;width:20px;height:20px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12.5l5.5 5.5L20 6.5' fill='none' stroke='%23111114' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.inc+.strong{margin-top:clamp(20px,3vw,28px)}
+.aside{font-size:14.5px;font-style:italic;line-height:1.5;color:var(--ink-2);margin-top:10px}
+.hinge{margin-top:18px}
+.hinge+.strong{margin-top:6px}
+.tall-head{font-family:var(--tall);font-weight:500;font-size:clamp(1.5rem,2.8vw,2rem);line-height:1.2;color:var(--ink);margin-top:clamp(22px,3vw,30px);letter-spacing:0}
+.tall-head+.inc{margin-top:16px}
 
-/* ---------- beliefs ---------- */
-.beliefs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2.4vw,22px)}
-@media (max-width:700px){.beliefs{grid-template-columns:1fr}}
-.belief{background:var(--paper);border:1.5px solid var(--rule-2);border-radius:18px;padding:clamp(18px,2.6vw,24px)}
-.belief .myth{font-family:var(--display);font-weight:900;font-size:1.2rem;letter-spacing:-.02em;color:var(--ink-3);
-  text-decoration:line-through;text-decoration-color:rgba(180,35,24,.55);text-decoration-thickness:2px}
-.belief .truth{margin-top:10px;color:var(--ink-2);font-size:16.5px}
-.belief .truth b{color:var(--ink)}
+/* ---------- what students say: their screenshots, one above the other. Each image keeps the same scale, so the
+   text in every screenshot is the same size. Her words sit above it, as phones shrink the screenshots. ---------- */
+.says{display:grid;gap:clamp(22px,3vw,30px);max-width:860px;margin:clamp(24px,3.5vw,36px) auto 0;text-align:left}
+.say{margin:0}
+.say figcaption{margin-bottom:8px}
+.say figcaption b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.25;color:var(--ink);letter-spacing:-.015em}
+.say figcaption span{display:block;font-size:14.5px;color:var(--ink-2);margin-top:1px}
+.say .shot-card{border-radius:10px;overflow:hidden;box-shadow:0 14px 30px -18px rgba(20,19,23,.6)}
+.say img{width:calc(var(--w) / 1438 * 100%);height:auto}
+@media (max-width:700px){.say img{width:100%}}
+
+/* ---------- Lexi's own books ---------- */
+.cases{display:grid;grid-template-columns:minmax(0,.6fr) minmax(0,1fr);gap:clamp(14px,2.4vw,24px);max-width:1040px;margin:clamp(24px,3.5vw,36px) auto 0;text-align:left;align-items:start}
+.cases .stacked{display:grid;gap:clamp(14px,2.4vw,24px)}
+.case{margin:0;background:#FFFFFF;border:1px solid var(--rule-2);border-radius:10px;overflow:hidden;box-shadow:0 14px 30px -22px rgba(20,19,23,.5)}
+.case img{width:100%;height:auto}
+.case figcaption{padding:12px 16px;font-size:15px;color:var(--ink-2);border-top:1px solid var(--rule);line-height:1.45}
+.case figcaption b{color:var(--ink)}
+@media (max-width:760px){.cases{grid-template-columns:1fr}.case.tallcase{max-width:420px;margin-inline:auto}}
+.cta-only{margin-top:clamp(22px,3vw,30px);display:flex;flex-direction:column;align-items:center}
 
 /* ---------- Lexi ---------- */
 /* Lexi's portrait gets a column of its own, as big as the proof screenshot (Abdul, 3 Nov 2026).
@@ -157,104 +219,86 @@
    background removed) and lexi-avatar.jpg (the "Taught by" pill) are the same photo. */
 .teacher{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(28px,4.5vw,60px);align-items:start}
 @media (max-width:880px){.teacher{grid-template-columns:1fr}}
-.portrait{margin:0;position:sticky;top:88px}
+.portrait{margin:0;position:sticky;top:24px}
 .portrait img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:60% 30%;
   border-radius:22px;border:3px solid var(--mint);box-shadow:10px 10px 0 0 var(--mint);background:var(--plum-2)}
-.portrait figcaption{position:absolute;left:16px;right:16px;bottom:16px;background:var(--paper);border-radius:14px;
+.portrait figcaption{position:absolute;left:16px;right:16px;bottom:16px;background:#FFFFFF;border-radius:14px;
   padding:12px 16px;box-shadow:0 12px 26px -14px rgba(0,0,0,.5)}
-.portrait figcaption b{display:block;font-family:var(--display);font-weight:900;font-size:1.35rem;letter-spacing:-.02em;color:var(--ink);line-height:1.2}
+.portrait figcaption b{display:block;font-family:var(--display);font-weight:800;font-size:1.3rem;letter-spacing:-.02em;color:var(--ink);line-height:1.2}
 .portrait figcaption span{display:block;font-size:14.5px;line-height:1.4;color:var(--ink-2);margin-top:2px}
 @media (max-width:880px){.portrait{position:relative;top:auto;max-width:460px}}
 .teacher .prose p{color:var(--on-plum-2)}
 .teacher .prose p strong{color:#FFFFFF}
 .figures{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:26px}
 .figures div{border-top:2px solid rgba(127,255,212,.5);padding-top:10px}
-.figures b{display:block;font-family:var(--mono);font-weight:600;font-size:clamp(1.2rem,3vw,1.6rem);color:var(--mint);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-.figures span{display:block;font-size:13px;color:var(--on-plum-2);line-height:1.4;margin-top:4px}
-.mikequote{margin-top:26px;border-left:3px solid var(--mint);padding:4px 0 4px 18px;color:var(--on-plum-2);font-size:16.5px}
-.mikequote b{color:#FFFFFF}
-.teacher .shot{background:#000000;margin-top:28px}
+.figures b{display:block;font-family:var(--tall);font-weight:600;font-size:clamp(1.4rem,3vw,1.9rem);color:var(--mint);font-variant-numeric:tabular-nums}
+.figures span{display:block;font-size:13.5px;color:var(--on-plum-2);line-height:1.4;margin-top:4px}
+.shot{margin:0;background:#000000;border-radius:14px;padding:10px;box-shadow:0 14px 34px rgba(20,19,23,.18)}
+.shot img{border-radius:8px;width:100%;height:auto}
+.shot figcaption{font-size:13.5px;color:#C9C9D2;padding:10px 6px 4px;line-height:1.45}
+.teacher .shot{margin-top:28px}
+.teacher .cta-only{align-items:flex-start}
 
-/* ---------- everything inside: each course on its own screen, like Jenny's module cards ---------- */
-.mods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2.4vw,22px)}
-@media (max-width:900px){.mods{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:600px){.mods{grid-template-columns:1fr}}
-.mod{background:var(--paper);border:1.5px solid var(--rule-2);border-radius:18px;display:flex;flex-direction:column;
-  padding:clamp(16px,2.4vw,22px) clamp(16px,2.4vw,22px) clamp(14px,2vw,18px)}
-.mod .scr{background:#1B1424;border-radius:10px 10px 3px 3px;padding:5px;aspect-ratio:1.94;box-shadow:0 16px 28px -18px rgba(45,26,72,.6)}
-.mod .scr img{width:100%;height:100%;object-fit:cover;border-radius:4px}
-.mod .base{height:8px;margin:0 -5%;border-radius:0 0 10px 10px;background:linear-gradient(180deg,#E9E5F0,#B9B1C9)}
-.mod .tag{margin-top:18px;font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--violet);font-weight:600}
-.mod h3{margin-top:6px}
-.mod p{margin-top:8px;font-size:16px;color:var(--ink-2);line-height:1.55}
-.mod .meta{margin-top:auto;padding-top:14px;font-family:var(--mono);font-size:12.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
-.mod .meta::before{content:"";display:block;border-top:1px solid var(--rule);margin-bottom:10px}
-.extras{margin-top:26px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-@media (max-width:820px){.extras{grid-template-columns:1fr}}
-.extra{border:1.5px solid var(--rule-2);border-radius:14px;padding:14px 15px;background:var(--wash)}
-.extra b{display:block;font-size:15.5px;line-height:1.3}
-.extra span{display:block;font-size:13.5px;color:var(--ink-2);margin-top:4px;line-height:1.45}
+/* ---------- everything you get: each course on its own screen ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.8vw,20px);margin-top:clamp(24px,3.5vw,36px)}
+@media (max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.cards{grid-template-columns:1fr}}
+.card{background:var(--cream);padding:clamp(18px,2.4vw,26px) clamp(14px,2vw,22px);display:flex;flex-direction:column;align-items:center}
+.card .scr{width:84%;background:#1B1424;border-radius:8px 8px 2px 2px;padding:4px;aspect-ratio:1.94}
+.card .scr img{width:100%;height:100%;object-fit:cover;border-radius:3px}
+.card .base{width:96%;height:8px;border-radius:0 0 8px 8px;background:linear-gradient(180deg,#E9E9EE,#B9B9C6)}
+.card h3{font-family:var(--tall);font-weight:600;color:var(--crimson);text-transform:uppercase;font-size:clamp(1.15rem,1.9vw,1.4rem);letter-spacing:.01em;margin-top:16px;line-height:1.2}
+.card p{font-size:16px;line-height:1.5;color:var(--ink-2);margin-top:8px}
+.card .meta{margin-top:auto;padding-top:14px;font-family:var(--display);font-weight:800;font-size:14px;color:var(--ink)}
+.card .scr.txt{display:grid;place-items:center;padding:10px;background:linear-gradient(135deg,#0E7C7B,#17B3A3);border:4px solid #1B1424;
+  color:#FFFFFF;font-family:var(--display);font-weight:800;font-size:clamp(14px,1.5vw,17px);line-height:1.15;text-transform:uppercase}
+.bonus-frame{border:1px solid var(--plum);padding:clamp(10px,1.4vw,14px);margin-top:clamp(20px,3vw,30px)}
+.bonus-frame .cards{margin-top:0}
 
-/* ---------- the offer ---------- */
-.offer{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.86fr);gap:clamp(24px,4vw,48px);align-items:start}
-@media (max-width:880px){.offer{grid-template-columns:1fr}}
-.pricecard{background:var(--paper);border:2px solid var(--plum);border-radius:24px;box-shadow:0 6px 0 0 var(--plum);
-  padding:clamp(22px,3.4vw,32px);color:var(--ink)}
-.pricecard .pc-name{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--violet);font-weight:600}
-.pricecard h3{margin-top:8px;font-size:clamp(1.3rem,2.6vw,1.6rem)}
-.pricecard .ticks{margin-top:18px}
-.pricecard .ticks li{font-size:16px}
-.price{display:flex;align-items:baseline;gap:12px;margin-top:22px;padding-top:18px;border-top:1px solid var(--rule)}
-.price b{font-family:var(--display);font-weight:900;font-size:clamp(2.8rem,6vw,3.6rem);letter-spacing:-.05em;line-height:1}
-.price span{font-size:15px;color:var(--ink-2);line-height:1.35}
-.price s{font-size:clamp(1.2rem,2.6vw,1.5rem)}
-.price em{font-style:normal;font-weight:600;color:var(--ink)}
-.pricecard .btn{margin-top:18px}
-.pricecard .under{text-align:center}
-/* the card is white on the plum section, so it takes the light ink back */
-.on-dark .pricecard h3{color:var(--ink)}
-.on-dark .pricecard .ticks li{color:var(--ink-2)}
-.on-dark .pricecard .ticks li b{color:var(--ink)}
-.on-dark .pricecard .under{color:var(--ink-3)}
-.on-dark .pricecard .btn{border-color:var(--plum);box-shadow:0 4px 0 0 var(--plum)}
-.on-dark .pricecard .btn:hover{box-shadow:0 2px 0 0 var(--plum)}
-.compare{display:grid;gap:12px}
-.compare .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.14)}
-.compare .row span{color:var(--on-plum-2);font-size:16px}
-.compare .row b{font-family:var(--mono);font-weight:600;color:#FFFFFF;font-variant-numeric:tabular-nums;white-space:nowrap}
-.compare .row.us b{color:var(--mint)}
-.compare .row.us span{color:#FFFFFF;font-weight:600}
+/* ---------- what it costs any other way: real rate cards, in place of her made-up "value" figures ---------- */
+.vs{max-width:600px;margin:0 auto;text-align:left}
+.vs p{font-size:15.5px;color:var(--ink-3);text-align:center;margin-bottom:6px}
+.vs .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:16px;color:var(--ink-2)}
+.vs .row b{font-weight:600;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
 
-/* ---------- a buy button between sections ---------- */
-.cta-inline{margin-top:clamp(28px,4vw,40px);display:flex;flex-direction:column;align-items:flex-start}
-.cta-inline.center{align-items:center;text-align:center}
-@media (max-width:640px){.cta-inline .btn{width:100%}}
+/* ---------- why short videos ---------- */
+.lines{margin-top:clamp(18px,2.6vw,26px);display:grid;gap:14px;font-family:var(--tall);font-weight:500;font-size:clamp(1.05rem,1.9vw,1.28rem);line-height:1.35;color:var(--ink);text-wrap:balance}
+.why-band .shot{max-width:760px;margin:clamp(22px,3vw,30px) auto 0}
+.why-band .shot figcaption{text-align:left}
+.dash{background:#FFFFFF;max-width:760px;margin:clamp(22px,3vw,30px) auto 0;padding:clamp(16px,2.6vw,26px) clamp(18px,3vw,30px);display:grid;gap:18px;text-align:left}
+.dash div{display:grid;grid-template-columns:minmax(0,9.5rem) minmax(0,1fr);gap:16px;align-items:center}
+.dash div+div{border-top:1px solid var(--rule);padding-top:18px}
+.dash b{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1;color:var(--ink);font-variant-numeric:lining-nums}
+.dash span{font-size:15.5px;line-height:1.4;color:var(--ink-2);border-left:1px solid var(--rule-2);padding-left:16px}
 
-/* ---------- final ---------- */
-.final{text-align:center}
-.final h2{max-width:22ch;margin-inline:auto}
-.final .lede{margin:16px auto 0}
-.final .btn-stack{margin-top:28px}
+/* ---------- FAQ and the guarantee ---------- */
+.faq-head{text-align:center;margin-bottom:clamp(20px,3vw,30px)}
+.guarantee-c{margin:clamp(26px,3.6vw,38px) auto 0;max-width:620px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.seal{width:clamp(112px,14vw,124px);background:#F5B82E;color:#141317;border-color:#141317;box-shadow:0 0 0 4px #F5B82E;font-size:10.5px;letter-spacing:.08em}
+.seal b{color:#141317}
+.guarantee-c h3{font-size:clamp(1.15rem,2.2vw,1.4rem)}
+.guarantee-c p{font-size:16.5px;color:var(--ink-2)}
+
+/* ---------- footer ---------- */
+footer{background:var(--plum);border-top:0;color:#BDBDC8;text-align:center}
+.foot-top{justify-content:center;color:#E6E6EC}
+.foot-top a{color:#E6E6EC}
+.disc{margin-inline:auto}
+.disc b{color:#FFFFFF}
 </style>
 <script src="/visit.js" defer></script>
 </head>
 <body>
-<header class="bar">
-  <div class="wrap bar-in">
-    <a class="mark" href="#top" aria-label="Sonder">
-      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
-      <b>Sonder<i>.</i></b></a>
-    <span class="bar-note">The Book Marketing Masterclass &middot; <b data-price>$47</b></span>
-    <a class="btn sm" href="#buy" data-buy="bar"><span>Get it for <span data-price>$47</span></span></a>
-  </div>
+<header class="promo">
+  <p class="wrap">Introducing: The Book Marketing Masterclass For ONLY <span data-price>$47</span></p>
 </header>
 
 <main id="top">
 <section class="hero" data-note="hero">
   <div class="wrap">
-    <span class="kicker"><span class="pip" aria-hidden="true"></span> My masterclass for authors</span>
-    <h1>What if other people made the&nbsp;videos that <span class="hl">sell your book</span>?</h1>
-    <p class="lede">Most authors think selling a book on TikTok means filming yourself every day. I sell mine through creators who film themselves with my books, AI avatars that do the talking, and videos that show nothing but my hands.</p>
+    <h1>What if TikTok sold your book for you, even from videos you never had to film?</h1>
+    <p class="lede"><em>Most authors think marketing a book means paying for ads.</em></p>
+    <p class="lede">But thousands of books sell every day from short videos, and those authors never film, edit or post a thing themselves.</p>
     <div class="stack" aria-hidden="true">
       <div class="dev tab l"><img src="/assets/mc/courses/book-to-bestseller.jpg" alt="" /></div>
       <div class="dev tab r"><img src="/assets/mc/courses/ai-book-marketing.jpg" alt="" /></div>
@@ -264,97 +308,161 @@
       <div class="dev phone r"><img src="/assets/mosaic/stick-figure.jpg" alt="" /></div>
       <div class="teach"><img src="/assets/mc/lexi-avatar.jpg" alt="" /><span>Taught by <b>Lexi Kaz</b></span></div>
     </div>
-    <ul class="shelf" aria-label="Also inside">
-      <li><img src="/assets/mc/courses/tiktok-tactics.jpg" alt="" /><span>Next Level TikTok Hacks</span></li>
-      <li><img src="/assets/mc/courses/blue-ocean.jpg" alt="" /><span>Bonus: Blue Ocean Demand</span></li>
-      <li><img src="/assets/mc/courses/amazon-ads.jpg" alt="" /><span>Bonus: Amazon Ads 101</span></li>
-    </ul>
-    <p class="proof">It&rsquo;s how I sell my own books: 95% of my TikTok Shop sales came from other people&rsquo;s videos, and my first book reached #152 of every book on Amazon US.</p>
-    <div class="cta-row">
-      <a class="btn big" href="#buy" data-buy="hero"><span>Get instant access for <span data-price>$47</span></span> <span aria-hidden="true">&rarr;</span></a>
-      <p class="launch" data-launch><s>$97</s> <b data-price>$47</b> launch price</p>
-      <p class="under">One payment &middot; lifetime access &middot; <b>30-day money-back guarantee</b></p>
+    <p class="proof strong">That&rsquo;s how I sell my own books: 95% of my TikTok Shop sales came from other people&rsquo;s videos, and my first book reached #152 of every book on Amazon US.</p>
+    <p class="proof-note">My results, not typical ones: I&rsquo;d been publishing for over two years and had a team helping.</p>
+    <div class="buy">
+      <a class="btn big" href="#buy" data-buy="hero"><span class="btn-in"><span class="btn-top">Get the masterclass <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM5.2 5l-.6-3H1v2h2l3.2 13h13v-2H7.8l-.4-2H19l3-8H5.2z"/></svg></span><span class="sub">One-time payment of <span data-price>$47</span></span></span></a>
+      <p class="oneliner">One-time payment &middot; Lifetime access &middot; 30-day money-back guarantee</p>
     </div>
-    <ul class="ticks row">
-      <li><b>58 video lessons</b>, about 11 hours</li>
+    <ul class="checks">
       <li>Your face never has to be on camera</li>
-      <li>Watch on any device</li>
+      <li>No big following needed</li>
+      <li>Creators make the videos and earn a commission</li>
     </ul>
+    <p class="strong">Learn my process once, then use it on every book you publish.</p>
   </div>
 </section>
 
-<section class="proofband" aria-label="My numbers" data-note="proof">
+<section class="band dark reveal" data-note="shift">
+  <div class="wrap col">
+    <h2>Most authors don&rsquo;t know this about TikTok Shop</h2>
+    <div class="serif">
+      <p>Every day, people buy books on TikTok without ever going looking for one.</p>
+      <div class="tight">
+        <p>They&rsquo;re just scrolling.</p>
+        <p>A creator holds up a book and talks about why it helped.</p>
+        <p>They tap the link, and it&rsquo;s on its way.</p>
+      </div>
+      <p>Those creators aren&rsquo;t the authors.<br />They earn a commission on every copy they sell.</p>
+      <p>The creators handle:</p>
+      <div class="tight">
+        <p>filming</p>
+        <p>editing</p>
+        <p>posting</p>
+        <p>bringing their own followers</p>
+      </div>
+      <p>You list your book and invite them to sell it.</p>
+      <p>Most authors never try this. Not because they couldn&rsquo;t, but because nobody told them it was an option.</p>
+    </div>
+    <p class="strong">The Book Marketing Masterclass exists to show authors how this works, step by step on my screen, the way I do it with my own books.</p>
+    <div class="pb">
+      <p class="pb-was" data-launch>Price after launch: $97</p>
+      <p class="pb-now">Today&rsquo;s Price: <span data-price>$47</span></p>
+      <a class="btn big" href="#buy" data-buy="shift"><span class="btn-in"><span class="btn-top">Get the masterclass <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM5.2 5l-.6-3H1v2h2l3.2 13h13v-2H7.8l-.4-2H19l3-8H5.2z"/></svg></span><span class="sub">One-time payment of <span data-price>$47</span></span></span></a>
+      <p class="oneliner">One-time payment &middot; Lifetime access &middot; 30-day money-back guarantee</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" data-note="included">
   <div class="wrap">
-    <div class="grid">
-      <div><b>#152</b><span>My first book's peak rank of every book on Amazon US, June 2026</span></div>
-      <div><b>5,200</b><span>TikTok affiliates selling my books, March 2025</span></div>
-      <div><b>95%</b><span>Of my TikTok Shop sales from affiliates' videos, early 2025</span></div>
-      <div><b>1.7M</b><span>Views on one of my own faceless videos</span></div>
-    </div>
-    <p class="proofline">My results, not typical ones: I&rsquo;d been publishing for over two years and had a team helping. Most videos get far fewer views. Across every video posted through Sonder, the median gets about 106. See the note at the foot of the page.</p>
-  </div>
-</section>
-
-<section class="sec" data-note="problem">
-  <div class="wrap narrow">
-    <div class="sechead">
-      <span class="eyebrow">Sound familiar?</span>
-      <h2>You wrote a good book. Almost nobody knows it exists.</h2>
-    </div>
-    <div class="prose">
-      <p>The book is finished. It's on Amazon. Friends and family bought a copy, a few strangers left lovely reviews, and then it went quiet. You've probably already tried some of these:</p>
-    </div>
-    <ul class="tried">
-      <li><b>Amazon ads</b>Easy to switch on, and easy to lose money on if nobody shows you how to read them.</li>
-      <li><b>BookBub and promo sites</b>A one-day spike, and a BookBub Featured Deal runs $199 to $3,552.</li>
-      <li><b>Posting it yourself</b>One decent video eats a day, and the apps want one a day.</li>
-      <li><b>A freelancer or agency</b>About $150 a video, or $500 to $2,500 a month, and they never read the book.</li>
+    <h2 class="red-head">WHAT&rsquo;S INCLUDED?</h2>
+    <ul class="inc">
+      <li><b>Book Marketing Masterclass:</b> my daily routine for finding what&rsquo;s working in your niche, and the 95/5 rule I use to remake proven videos for my books.</li>
+      <li><b>TikTok Shop Bestseller Academy:</b> get your book selling in TikTok Shop, then find the creators who&rsquo;ll sell it, with my DM routine.</li>
+      <li><b>Next Level TikTok Hacks:</b> build an affiliate army with my 3-2-1 outreach method, set up 2- and 3-pack bundles, and repost every video everywhere automatically.</li>
+      <li><b>Leveraging AI to Market Your Books:</b> AI avatar videos with nobody on camera, and the script framework I use to write them.</li>
+      <li><b>BONUS: How to Find Blue Ocean Demand:</b> find niches with real demand and few competitors for your next book.</li>
+      <li><b>BONUS: Amazon Ads 101:</b> taught by Gerald, who runs my Amazon ads. Run ads that aim to break even while organic sales bring the profit.</li>
+      <li><b>A private author community on Skool:</b> where authors share what&rsquo;s working.</li>
     </ul>
-    <p class="turn">None of that is a writing problem. It's an attention problem, and attention has moved to short video.</p>
-  </div>
-</section>
-
-<section class="sec wash" data-note="shift">
-  <div class="wrap faceless">
-    <div>
-      <span class="eyebrow">The new way books get found</span>
-      <h2>Readers find books on TikTok, Reels and Shorts now. The videos selling them don't show the author.</h2>
-      <div class="prose" style="margin-top:18px">
-        <p>Look at the three videos on the right. They're mine, and none of them shows my face. Most of the videos selling my books aren't even mine: creators make them, and TikTok pays them a commission on every copy they sell.</p>
-        <p><strong>That's the whole method:</strong> find the videos already working in your niche, remake them for your book (I call it the 95/5 rule), and get creators and AI to make far more of them than you ever could on your own. That's what the masterclass teaches.</p>
-      </div>
+    <p class="strong">Learn How to Get Creators Selling Your Book (Even If You&rsquo;ve Never Posted a Video Before)</p>
+    <div class="pb">
+      <p class="pb-was" data-launch>Price after launch: $97</p>
+      <p class="pb-now">Today&rsquo;s Price: <span data-price>$47</span></p>
+      <a class="btn big" href="#buy" data-buy="included"><span class="btn-in"><span class="btn-top">Get the masterclass <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM5.2 5l-.6-3H1v2h2l3.2 13h13v-2H7.8l-.4-2H19l3-8H5.2z"/></svg></span><span class="sub">One-time payment of <span data-price>$47</span></span></span></a>
+      <p class="oneliner">One-time payment &middot; Lifetime access &middot; 30-day money-back guarantee</p>
     </div>
-    <figure class="shot">
-      <img src="/assets/mc/lexi-videos-crop.jpg" alt="Three of my faceless videos on Instagram, with 103,000, 869,000 and 1.7 million views" width="900" height="537" loading="lazy" />
-      <figcaption>Three of my own faceless videos: 103K, 869K and 1.7M views. Screenshot from my Instagram.</figcaption>
-    </figure>
   </div>
 </section>
 
-<section class="sec" data-note="beliefs">
+<section class="band tint" data-note="fit">
+  <div class="wrap col">
+    <h2>This is perfect for you if&hellip;</h2>
+    <ul class="inc short">
+      <li>You have a book on Amazon, or one coming out, and it sells far less than it should</li>
+      <li>You&rsquo;d rather other people, or AI, were on camera than you</li>
+      <li>You&rsquo;ve never sold a book on TikTok before</li>
+      <li>You can keep printed copies on hand to sell through TikTok Shop, or you&rsquo;re happy to start with videos and Amazon ads</li>
+      <li>You can give it time most days (my routine is 90 minutes; start with 30)</li>
+    </ul>
+    <p class="strong">Whether you write about parenting, health, faith or money, the examples come from books like yours.</p>
+    <p class="aside">(Mine are a pregnancy guide for first-time dads, a gut-health book and a fill-in journal for mums. Fiction isn&rsquo;t covered.)</p>
+  </div>
+</section>
+
+<section class="band" data-note="helps">
+  <div class="wrap col">
+    <h2 class="red-head">What the Book Marketing Masterclass helps you do:</h2>
+    <p class="strong hinge">Instead of burying you in marketing theory, this course focuses on one thing:</p>
+    <p class="strong it">&rarr; getting other people&rsquo;s videos to sell your book</p>
+    <h3 class="tall-head">Inside You&rsquo;ll Learn:</h3>
+    <ul class="inc short">
+      <li>Find the videos already working in your niche, and remake them with my 95/5 rule</li>
+      <li>Set up your book in TikTok Shop, with the right listing, pricing and bundles</li>
+      <li>Find creators, brief them and keep them selling your book</li>
+      <li>Make AI avatar videos with nobody on camera</li>
+    </ul>
+    <p class="strong it">This is a marketing skill you learn and keep, not an overnight result.</p>
+    <div class="pb">
+      <p class="pb-was" data-launch>Price after launch: $97</p>
+      <p class="pb-now">Today&rsquo;s Price: <span data-price>$47</span></p>
+      <a class="btn big" href="#buy" data-buy="helps"><span class="btn-in"><span class="btn-top">Get the masterclass <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM5.2 5l-.6-3H1v2h2l3.2 13h13v-2H7.8l-.4-2H19l3-8H5.2z"/></svg></span><span class="sub">One-time payment of <span data-price>$47</span></span></span></a>
+      <p class="oneliner">One-time payment &middot; Lifetime access &middot; 30-day money-back guarantee</p>
+    </div>
+  </div>
+</section>
+
+<section class="band tint" data-note="stories">
   <div class="wrap">
-    <div class="sechead">
-      <span class="eyebrow">What's really stopping you</span>
-      <h2>Four beliefs keep most authors invisible. All four are wrong.</h2>
+    <h2>WHAT MY STUDENTS ARE SAYING:</h2>
+    <div class="says">
+      <figure class="say">
+        <figcaption><b>&ldquo;You called it the other day....its hit 1M!!&rdquo;</b><span>Lisa, Books by Visionary Press</span></figcaption>
+        <div class="shot-card" style="background:#1a191e"><img style="--w:862" src="/assets/mc/proof/student-1m.jpg" alt="Lisa, Books by Visionary Press, in my community: You called it the other day, it's hit 1M. My reply: made my morning." width="862" height="334" loading="lazy" /></div>
+      </figure>
+      <figure class="say">
+        <figcaption><b>&ldquo;I&rsquo;ve proven I can do it. 180k views and climbing.&rdquo;</b><span>Lisa Whall, Lakefront Capital</span></figcaption>
+        <div class="shot-card" style="background:#251f1f"><img style="--w:1438" src="/assets/mc/proof/student-180k.jpg" alt="Lisa Whall, Lakefront Capital, in my community: had my first viral video. Unfortunately, not really converting on sales but I've proven I can do it. 180k views and climbing." width="1438" height="204" loading="lazy" /></div>
+      </figure>
+      <figure class="say">
+        <figcaption><b>&ldquo;I just noticed I sold my first 2 pack yesterday!&rdquo;</b><span>Miranda</span></figcaption>
+        <div class="shot-card" style="background:#1a191e"><img style="--w:1438" src="/assets/mc/proof/student-2pack.jpg" alt="Miranda, in my community: I made a point of creating bundles at the end of last week and I just noticed I sold my first 2 pack yesterday!" width="1450" height="326" loading="lazy" /></div>
+      </figure>
+      <figure class="say">
+        <figcaption><b>&ldquo;Went from 53K views last night to 96K views today&rdquo;</b><span>Gwen, Enlighten Press</span></figcaption>
+        <div class="shot-card" style="background:#1a191e"><img style="--w:1000" src="/assets/mc/proof/student-96k.jpg" alt="Gwen, Enlighten Press, in my community: Went from 53K views last night to 96K views today." width="1000" height="172" loading="lazy" /></div>
+      </figure>
+      <figure class="say">
+        <figcaption><b>&ldquo;I finally got a video to reach more than 30K views. Yea!!!&rdquo;</b><span>SAJI Publishing</span></figcaption>
+        <div class="shot-card" style="background:#242328"><img style="--w:1100" src="/assets/mc/proof/student-30k.jpg" alt="SAJI Publishing, in my community: I finally got a video to reach more than 30K views. Yea! With a link to the TikTok video." width="1100" height="928" loading="lazy" /></div>
+      </figure>
     </div>
-    <div class="beliefs">
-      <div class="belief">
-        <p class="myth">&ldquo;Short videos sell novels, not books like mine.&rdquo;</p>
-        <p class="truth">My own books are a pregnancy guide for first-time dads, a gut-health book and a fill-in journal for mums. <b>None of them is a novel.</b></p>
-      </div>
-      <div class="belief">
-        <p class="myth">&ldquo;I'm not a social media person.&rdquo;</p>
-        <p class="truth">You don't have to be. On TikTok Shop, <b>creators who are already good at it make the videos</b> and earn a commission on every copy they sell. I show you how I find them, brief them and keep them.</p>
-      </div>
-      <div class="belief">
-        <p class="myth">&ldquo;I'd have to be on camera.&rdquo;</p>
-        <p class="truth">You don't. Creators film themselves with your book, <b>AI avatars do the talking</b>, and the videos you post yourself can show nothing but your hands.</p>
-      </div>
-      <div class="belief">
-        <p class="myth">&ldquo;I've no followers and no time.&rdquo;</p>
-        <p class="truth">I had fewer than 1,500 followers of my own when it took off. Time is the honest part: <b>my routine is 30 minutes each of training, research and review</b>. Start with 10 minutes of each.</p>
+    <p class="fineprint">Posted by authors in my community, in their own words. Individual results, not typical. Results vary.</p>
+  </div>
+</section>
+
+<section class="band" data-note="cases">
+  <div class="wrap">
+    <p class="strong">The Book Marketing Masterclass takes you behind the scenes of how I got my own books here:</p>
+    <div class="cases">
+      <figure class="case tallcase">
+        <img src="/assets/mc/proof/case-dad.jpg" alt="You Will Rock As a Dad on Amazon: number 199 in Books, with an estimated 284 to 513 sales a day." width="556" height="1062" loading="lazy" />
+        <figcaption><b>You Will Rock As a Dad!</b> #199 of every book on Amazon when I took this. The sales figure is a book research tool&rsquo;s estimate.</figcaption>
+      </figure>
+      <div class="stacked">
+        <figure class="case">
+          <img src="/assets/mc/proof/case-mom.jpg" alt="You Will Rock As a Mom on Amazon, with the number 1 Best Seller badge in its category." width="1410" height="598" loading="lazy" />
+          <figcaption><b>You Will Rock As a Mom!</b> #1 Best Seller in its Amazon category when I took this.</figcaption>
+        </figure>
+        <figure class="case">
+          <img src="/assets/mc/proof/case-mama-es.jpg" alt="The Spanish edition, Vas a Ser una Gran Mama, on Amazon, with the number 1 Best Seller badge in its category." width="790" height="322" loading="lazy" />
+          <figcaption><b>&iexcl;Vas a Ser una Gran Mam&aacute;!</b> The Spanish edition, also #1 Best Seller in its category when I took this.</figcaption>
+        </figure>
       </div>
     </div>
+    <p class="fineprint">My results, not typical ones: I&rsquo;d been publishing for over two years and had a team helping. Most videos get far fewer views: across the author videos I have numbers for, the median gets about 106. I publish under pen names, through my imprint, You Will Rock Books. Ranks change daily.</p>
+    <div class="cta-only"><a class="btn big" href="#buy" data-buy="cases"><span class="btn-in"><span class="btn-top">Get the masterclass <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM5.2 5l-.6-3H1v2h2l3.2 13h13v-2H7.8l-.4-2H19l3-8H5.2z"/></svg></span><span class="sub">One-time payment of <span data-price>$47</span></span></span></a></div>
   </div>
 </section>
 
@@ -362,7 +470,7 @@
   <div class="wrap teacher">
     <figure class="portrait">
       <img src="/assets/mc/lexi.jpg" alt="Lexi Kaz" width="960" height="1200" loading="lazy" />
-      <figcaption><b>Lexi Kaz</b><span>Author, publisher and co-founder of Sonder</span></figcaption>
+      <figcaption><b>Lexi Kaz</b><span>Author and publisher</span></figcaption>
     </figure>
     <div>
       <span class="eyebrow">Your teacher</span>
@@ -370,7 +478,7 @@
       <div class="prose" style="margin-top:18px">
         <p>Then I published nothing for a year, waiting for it to reach a hundred reviews. When I finally went looking for readers, I found them on TikTok, where almost nobody else was selling books.</p>
         <p><strong>199 of my videos did nothing before one worked</strong>, and even that one sold only a handful of books. What I learned next is the masterclass: I stopped trying to make every video myself, and by March 2025 I had 5,200 TikTok affiliates selling my books, with fewer than 1,500 followers of my own. In June 2026 that first book peaked at <strong>#152 of every book on Amazon US</strong>.</p>
-        <p>I now teach authors the same method, and co-founded Sonder so they wouldn't have to make every video by hand.</p>
+        <p>I now teach authors the same method.</p>
       </div>
       <div class="figures">
         <div><b>199</b><span>videos that flopped before one worked</span></div>
@@ -381,217 +489,144 @@
         <img src="/assets/mc/lexi-insights-crop.jpg" alt="My Instagram insights: 2.9 million views, 474,500 interactions and 11,700 new followers in 30 days" width="900" height="551" loading="lazy" />
         <figcaption>My own Instagram, 30 days: 2.9M views, 11.7K new followers. My result, not a typical one.</figcaption>
       </figure>
-      <p class="mikequote">In December 2025, <b>Michael Langdon paid for my course</b> and sold <b>$30,000 of books on TikTok Shop</b> off the back of it. He's now my co-founder at Sonder, so count his story as a disclosed fan.</p>
-      <div class="cta-inline"><a class="btn" href="#buy" data-buy="teacher"><span>Learn my method for <span data-price>$47</span></span> <span aria-hidden="true">&rarr;</span></a></div>
+      <div class="cta-only"><a class="btn big" href="#buy" data-buy="teacher"><span class="btn-in"><span class="btn-top">Get the masterclass <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM5.2 5l-.6-3H1v2h2l3.2 13h13v-2H7.8l-.4-2H19l3-8H5.2z"/></svg></span><span class="sub">One-time payment of <span data-price>$47</span></span></span></a></div>
     </div>
   </div>
 </section>
 
-<section class="sec" id="inside" data-note="inside">
+<section class="band tint" id="inside" data-note="inside">
   <div class="wrap">
-    <div class="sechead center">
-      <span class="eyebrow">Everything inside</span>
-      <h2>Six courses, 58 lessons: the way I sell my books.</h2>
-      <p class="lede">Most lessons are recorded on my screen while I do the work, so you can pause and copy every click. Watch them in any order, on your phone, tablet or computer.</p>
-    </div>
-    <div class="mods">
-      <article class="mod">
+    <h2>Here&rsquo;s everything you get when you join<br />The Book Marketing Masterclass today:</h2>
+    <div class="cards">
+      <article class="card">
         <div class="scr"><img src="/assets/mc/courses/published-to-profitable.jpg" alt="" loading="lazy" /></div><div class="base"></div>
-        <span class="tag">The method</span>
         <h3>Book Marketing Masterclass</h3>
-        <p>My daily routine for finding what's working in your niche, my viral hook scanner, and the 95/5 rule I use to remake proven videos for my books. Then the nuts and bolts: briefing creators, my tool kit, self-publishing on a $0 budget, IngramSpark, ISBNs and pack pricing.</p>
+        <p>My daily routine for finding what's working in your niche, my viral hook scanner, and the 95/5 rule. Then the nuts and bolts: briefing creators, my tool kit, self-publishing on a $0 budget, IngramSpark, ISBNs and pack pricing.</p>
         <span class="meta">12 lessons &middot; 1 hour 57 minutes</span>
       </article>
-      <article class="mod">
+      <article class="card">
         <div class="scr"><img src="/assets/mc/courses/book-to-bestseller.jpg" alt="" loading="lazy" /></div><div class="base"></div>
-        <span class="tag">TikTok Shop</span>
         <h3>TikTok Shop Bestseller Academy</h3>
-        <p>Get your book selling in TikTok Shop: SKUs, your listing, pricing and flash sales, and whether to ship copies yourself or use a printer. Then the creator machine: when to reach out, my DM routine, where I find the best creators, samples, invitations and my six-phase viral playbook.</p>
+        <p>SKUs, your listing, pricing and flash sales, and whether to ship copies yourself or use a printer. Then the creator machine: my DM routine, where I find the best creators, samples, invitations and my six-phase viral playbook.</p>
         <span class="meta">13 lessons &middot; 2 hours 16 minutes</span>
       </article>
-      <article class="mod">
+      <article class="card">
         <div class="scr"><img src="/assets/mc/courses/tiktok-tactics.jpg" alt="" loading="lazy" /></div><div class="base"></div>
-        <span class="tag">Creators and AI</span>
         <h3>Next Level TikTok Hacks</h3>
-        <p>Build an affiliate army with my 3-2-1 outreach method, structure creator deals and spot a good creator. Find videos that already sell and remake them, write scripts with AI, make AI avatar videos in HeyGen, set up 2- and 3-pack bundles, and repost every video everywhere automatically.</p>
+        <p>Build an affiliate army with my 3-2-1 outreach method, structure creator deals, remake videos that already sell, write scripts with AI, make avatar videos in HeyGen, and set up 2- and 3-pack bundles.</p>
         <span class="meta">16 lessons &middot; 2 hours 28 minutes</span>
       </article>
-      <article class="mod">
+      <article class="card">
         <div class="scr"><img src="/assets/mc/courses/ai-book-marketing.jpg" alt="" loading="lazy" /></div><div class="base"></div>
-        <span class="tag">AI videos</span>
         <h3>Leveraging AI to Market Your Books</h3>
-        <p>AI avatar videos with nobody on camera: characters made with Kling and Galaxy AI, HeyGen avatar videos, Spanish versions with HeyGen Translate, and my eight-part script framework built into a Claude script-writing app.</p>
+        <p>AI avatar videos with nobody on camera: characters made with Kling and Galaxy AI, HeyGen avatar videos, Spanish versions with HeyGen Translate, and my eight-part script framework.</p>
         <span class="meta">6 lessons &middot; 1 hour 18 minutes</span>
       </article>
-      <article class="mod">
+      <article class="card">
         <div class="scr"><img src="/assets/mc/courses/blue-ocean.jpg" alt="" loading="lazy" /></div><div class="base"></div>
-        <span class="tag">Bonus</span>
-        <h3>How to Find Blue Ocean Demand</h3>
+        <h3>Bonus: Blue Ocean Demand</h3>
         <p>For your next book: how I use BookBeam to find niches with real demand and few competitors, and the long-tail keywords that let a new book win them.</p>
         <span class="meta">2 lessons &middot; 27 minutes</span>
       </article>
-      <article class="mod">
+      <article class="card">
         <div class="scr"><img src="/assets/mc/courses/amazon-ads.jpg" alt="" loading="lazy" /></div><div class="base"></div>
-        <span class="tag">Bonus</span>
-        <h3>Amazon Ads 101</h3>
-        <p>Taught by Gerald, who runs my Amazon ads. Why ads should aim to break even while organic sales bring the profit, the book-page fixes to make before you pay for traffic, ACOS and break-even, auto and manual campaigns, and the 14-day audit that cuts the waste.</p>
+        <h3>Bonus: Amazon Ads 101</h3>
+        <p>Taught by Gerald, who runs my Amazon ads. The book-page fixes to make before you pay for traffic, ACOS and break-even, auto and manual campaigns, and the 14-day audit that cuts the waste.</p>
         <span class="meta">9 lessons &middot; 2 hours 50 minutes</span>
       </article>
     </div>
-    <div class="extras">
-      <div class="extra"><b>My viral hook scanner</b><span>Type in your niche and get the hooks that went viral in the last seven days, with a version for your book.</span></div>
-      <div class="extra"><b>The 95/5 rule, written down</b><span>The document behind my core method: what to keep from a proven video, and the one thing to change.</span></div>
-      <div class="extra"><b>My eight-part script framework</b><span>The &ldquo;Anatomy of VEBM&rdquo; document I train Claude with to write scripts.</span></div>
-    </div>
-    <div class="cta-inline center"><a class="btn" href="#buy" data-buy="inside"><span>Get all six courses for <span data-price>$47</span></span> <span aria-hidden="true">&rarr;</span></a></div>
   </div>
 </section>
 
-<section class="sec wash" data-note="stories">
+<section class="band" id="buy" data-note="offer">
   <div class="wrap">
-    <div class="sechead">
-      <span class="eyebrow">In their own words</span>
-      <h2>What happens when authors start posting.</h2>
-      <p class="lede">Messages authors sent me and my team, shared with their permission. All four make their videos with Sonder, the video tool I co-founded.</p>
+    <div class="vs">
+      <p>What it costs to get book videos made any other way:</p>
+      <div class="row"><span>One BookBub Featured Deal, one day</span><b>$199&ndash;$3,552</b></div>
+      <div class="row"><span>A freelancer, per video</span><b>about $150</b></div>
+      <div class="row"><span>A marketing agency, per month</span><b>$500&ndash;$2,500</b></div>
     </div>
-    <article class="story">
-      <div>
-        <span class="who">Christine &middot; Assertive Kindness</span>
-        <h3>From #1,101,449 to #17,080 on Amazon</h3>
-        <p>On 6 September, Christine's book was ranked #1,101,449 on Amazon. She started posting short, faceless videos about its core ideas, every day. Her top one reached 101,700 views. Then she sent me this.</p>
-      </div>
-      <figure><img src="/assets/live/christine-bsr.jpg" alt="Christine's message: Today's BSR for Assertive Kindness is #17,080. On Sept 6 it was as low as #1,101,449." loading="lazy" /><figcaption>Christine's messages to me</figcaption></figure>
-    </article>
-    <article class="story">
-      <div>
-        <span class="who">Rich &middot; Spanish edition</span>
-        <h3>One video. 45 books. Sold out.</h3>
-        <p>Rich had a box of Spanish translations and no way to sell them. One Spanish video sold all 45 copies, and he's ordering 300 more.</p>
-      </div>
-      <figure><img src="/assets/live/rich-45-copies.jpg" alt="Rich's comment: it took only one Spanish video to sell out all 45 copies I had. I'm now confident in ordering another 300." loading="lazy" /><figcaption>Rich's comment in our community</figcaption></figure>
-    </article>
-    <article class="story">
-      <div>
-        <span class="who">Lynn &middot; children's books</span>
-        <h3>10 sales in her first 5 days</h3>
-        <p>Lynn writes children's books. Five days after she started posting stick-figure videos, she posted this.</p>
-      </div>
-      <figure><img src="/assets/live/lynn-10-sales.jpg" alt="Lynn's message: I started Sonder videos 5 days ago and have made 10 sales. These stick figures are a huge hit." loading="lazy" /><figcaption>Lynn's message (name hidden by us)</figcaption></figure>
-    </article>
-    <article class="story">
-      <div>
-        <span class="who">Jared &middot; TikTok Shop</span>
-        <h3>&ldquo;It really isn't my thing.&rdquo;</h3>
-        <p>Jared had sold over 800 books on TikTok Shop, then stopped posting because, in his words, it really wasn't his thing. Now he posts every day again. His post in our community was titled &ldquo;As a lazy TikToker, I love Sonder.&rdquo;</p>
-      </div>
-      <figure><img src="/assets/live/jared-views.jpg" alt="Jared's TikTok analytics: two recent videos with 25,000 and 10,000 views." loading="lazy" /><figcaption>Jared's TikTok, June</figcaption></figure>
-    </article>
-
-    <div class="sechead" style="margin-top:clamp(34px,5vw,54px)">
-      <h3>Not a social media person? Hear it from them.</h3>
+    <div class="pb">
+      <p class="pb-was" data-launch>Price after launch: $97</p>
+      <p class="pb-now">Today&rsquo;s Price: <span data-price>$47</span></p>
+      <a class="btn big" href="#buy" data-buy="offer"><span class="btn-in"><span class="btn-top">Get the masterclass <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM5.2 5l-.6-3H1v2h2l3.2 13h13v-2H7.8l-.4-2H19l3-8H5.2z"/></svg></span><span class="sub">One-time payment of <span data-price>$47</span></span></span></a>
+      <p class="oneliner">One-time payment &middot; Lifetime access &middot; 30-day money-back guarantee</p>
     </div>
-    <div class="vids">
-      <div class="vid">
-        <button class="poster" type="button" data-video="https://sienveexppekdxoaeamd.supabase.co/storage/v1/object/public/pipeline-artifacts/marketing/testimonials/mike-sobola-captioned.mp4" aria-label="Play Mike Sobola's video, 38 seconds">
-          <img src="/assets/live/sobola-thumb.jpg" alt="" width="1000" height="720" loading="lazy" />
-        </button>
-        <div class="cap"><b>Mike Sobola</b><span>Author, How to Make Money with a Drone &middot; 38 sec</span>
-          <p>&ldquo;I'm an old guy who is still figuring out this social media thing. Sonder has helped me put it all in one place so I can make the videos, post them and keep track of what's working.&rdquo;</p></div>
-      </div>
-      <div class="vid">
-        <button class="poster" type="button" data-video="https://sienveexppekdxoaeamd.supabase.co/storage/v1/object/public/pipeline-artifacts/marketing/testimonials/nancy-dove-captioned.mp4" aria-label="Play Nancy Dove's video, 41 seconds">
-          <img src="/assets/live/nancy-thumb.jpg" alt="" width="1000" height="720" loading="lazy" />
-        </button>
-        <div class="cap"><b>Nancy Dove</b><span>Author, Understanding Borderline Personality Disorder &middot; 41 sec</span>
-          <p>Stuck in what she calls &ldquo;200-views jail&rdquo;: &ldquo;I have broken free&hellip; I am now getting organic sales.&rdquo;</p></div>
-      </div>
-    </div>
-    <p class="under">Mike and Nancy each got 10 free Sonder video credits for recording a video for us, whatever they said in it.</p>
-    <div class="cta-inline center"><a class="btn" href="#buy" data-buy="stories"><span>Start the masterclass for <span data-price>$47</span></span> <span aria-hidden="true">&rarr;</span></a></div>
   </div>
 </section>
 
-<section class="sec" data-note="fit">
+<section class="band tint why-band" data-note="bonuses">
   <div class="wrap">
-    <div class="sechead">
-      <span class="eyebrow">Before you buy</span>
-      <h2>Is this for you?</h2>
-    </div>
-    <div class="cols">
-      <div class="panel">
-        <h3>It's for you if&hellip;</h3>
-        <ul class="ticks">
-          <li>You have a book on Amazon, or one coming out, and it sells <b>far less than it should</b>.</li>
-          <li>You'd rather <b>other people, or AI, were on camera</b> than you.</li>
-          <li>You can keep <b>printed copies on hand</b> to sell through TikTok Shop, or you're happy to start with videos and Amazon ads.</li>
-          <li>You can give it <b>time most days</b>. My routine is 90 minutes; start with 30.</li>
-        </ul>
-      </div>
-      <div class="panel">
-        <h3>It's not for you if&hellip;</h3>
-        <ul class="ticks no">
-          <li>You want <b>passive income</b> or a guaranteed result. Nobody can promise you sales, and I won't.</li>
-          <li>You won't post or message anyone. I can show you exactly what to do; <b>I can't press post for you</b>.</li>
-          <li>You want a method that <b>costs nothing</b>. TikTok Shop needs printed copies and free samples for creators, and some lessons use paid tools.</li>
-          <li>You don't have a book and you're not writing one.</li>
-        </ul>
+    <h2>PLUS THESE BONUSES:</h2>
+    <div class="bonus-frame">
+      <div class="cards">
+        <article class="card">
+          <div class="scr txt">Viral hook scanner</div><div class="base"></div>
+          <h3>My Viral Hook Scanner</h3>
+          <p>Type in your niche and get the hooks that went viral in the last seven days, with a version for your book.</p>
+        </article>
+        <article class="card">
+          <div class="scr txt">The 95/5 rule</div><div class="base"></div>
+          <h3>The 95/5 Rule, Written Down</h3>
+          <p>The document behind my core method: what to keep from a proven video, and the one thing to change.</p>
+        </article>
+        <article class="card">
+          <div class="scr txt">Script framework</div><div class="base"></div>
+          <h3>My Eight-Part Script Framework</h3>
+          <p>The &ldquo;Anatomy of VEBM&rdquo; document I train Claude with to write scripts.</p>
+        </article>
       </div>
     </div>
+    <h2 style="margin-top:clamp(40px,6vw,64px)">WHY SHORT VIDEOS MAKE SENSE FOR YOUR BOOK:</h2>
+    <div class="lines">
+      <p>A FACELESS way to market: creators, AI avatars or just your hands on screen, never your face.</p>
+      <p>BUYERS, not browsers: on TikTok Shop, people buy right under the video, without leaving the app.</p>
+      <p>COMMISSION, not ad spend: creators earn a share of each copy they sell, usually 15 to 20%.</p>
+    </div>
+    <figure class="shot">
+      <img src="/assets/mc/lexi-videos-crop.jpg" alt="Three of my faceless videos on Instagram, with 103,000, 869,000 and 1.7 million views" width="900" height="537" loading="lazy" />
+      <figcaption>Three of my own faceless videos: 103K, 869K and 1.7M views. Screenshot from my Instagram. My result, not a typical one.</figcaption>
+    </figure>
+    <div class="cta-only"><a class="btn big" href="#buy" data-buy="why"><span class="btn-in"><span class="btn-top">Get the masterclass <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM5.2 5l-.6-3H1v2h2l3.2 13h13v-2H7.8l-.4-2H19l3-8H5.2z"/></svg></span><span class="sub">One-time payment of <span data-price>$47</span></span></span></a></div>
   </div>
 </section>
 
-<section class="sec on-dark" id="buy" data-note="offer">
-  <div class="wrap offer">
-    <div>
-      <span class="eyebrow">Everything you get</span>
-      <h2>The whole method, for less than one freelance video.</h2>
-      <p class="lede" style="margin-top:14px">What it costs to get book videos made any other way:</p>
-      <div class="compare" style="margin-top:14px">
-        <div class="row"><span>One BookBub Featured Deal, one day</span><b>$199&ndash;$3,552</b></div>
-        <div class="row"><span>A freelancer, per video</span><b>about $150</b></div>
-        <div class="row"><span>A marketing agency, per month</span><b>$500&ndash;$2,500</b></div>
-        <div class="row us"><span>The masterclass, once, yours to keep</span><b data-price>$47</b></div>
-      </div>
+<section class="band cream" data-note="lifting">
+  <div class="wrap">
+    <h2>LET CREATORS DO THE HEAVY LIFTING:</h2>
+    <div class="lines">
+      <p>THEY FILM AND EDIT THE VIDEOS.</p>
+      <p>THEY POST THEM TO THEIR OWN FOLLOWERS.</p>
+      <p>TIKTOK TAKES THE ORDER AND THE PAYMENT.</p>
+      <p>YOU KEEP COPIES IN STOCK (OR USE A PRINTER THAT SHIPS) AND KEEP INVITING CREATORS.</p>
     </div>
-    <div class="pricecard">
-      <span class="pc-name">The Book Marketing Masterclass</span>
-      <h3>Lifetime access, <span data-price>$47</span> once.</h3>
-      <ul class="ticks">
-        <li><b>Six courses, 58 video lessons</b>, about 11 hours, on any device</li>
-        <li><b>TikTok Shop, creators and AI avatars</b>, step by step on my screen</li>
-        <li><b>My viral hook scanner</b>, the 95/5 document and my script framework</li>
-        <li><b>Bonus: Amazon Ads 101</b>, nine lessons on Amazon ads that break even</li>
-        <li><b>The Sonder author community</b> on Skool, where authors share what's working</li>
-        <li><b>30-day money-back guarantee</b></li>
-      </ul>
-      <div class="price"><s data-launch>$97</s><b class="num" data-price>$47</b><span>one payment, no subscription<em data-launch><br />Launch price</em></span></div>
-      <a class="btn big block" href="#buy" data-buy="offer">Get instant access <span aria-hidden="true">&rarr;</span></a>
-      <p class="under">Your invite to the course arrives by email straight away. Not for you? Email us within 30 days for a full refund, no questions.</p>
+    <div class="dash">
+      <div><b>5,200</b><span>TikTok affiliates selling my books<br />March 2025</span></div>
+      <div><b>95%</b><span>of my TikTok Shop sales came from their videos<br />Early 2025</span></div>
     </div>
+    <p class="fineprint">My results, not typical ones. See the note at the foot of the page.</p>
   </div>
 </section>
 
-<section class="sec" data-note="guarantee">
-  <div class="wrap narrow">
-    <div class="guarantee">
-      <div class="seal"><span><b>30</b>day<br />guarantee</span></div>
-      <div>
-        <h3>Watch it, use it, then decide.</h3>
-        <p>If you go through the masterclass and don't think it was worth <span data-price>$47</span>, email <a href="mailto:hello@yousonder.com">hello@yousonder.com</a> within 30 days and we'll refund every cent. No forms, no questions.</p>
-      </div>
+<section class="band">
+  <div class="wrap">
+    <div class="pb">
+      <p class="pb-was" data-launch>Price after launch: $97</p>
+      <p class="pb-now">Today&rsquo;s Price: <span data-price>$47</span></p>
+      <a class="btn big" href="#buy" data-buy="again"><span class="btn-in"><span class="btn-top">Get the masterclass <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM5.2 5l-.6-3H1v2h2l3.2 13h13v-2H7.8l-.4-2H19l3-8H5.2z"/></svg></span><span class="sub">One-time payment of <span data-price>$47</span></span></span></a>
+      <p class="oneliner">One-time payment &middot; Lifetime access &middot; 30-day money-back guarantee</p>
     </div>
   </div>
 </section>
 
 <section class="sec wash" data-note="faq">
   <div class="wrap narrow">
-    <div class="sechead">
-      <span class="eyebrow">Straight answers</span>
-      <h2>Before you ask</h2>
-    </div>
+    <h2 class="faq-head">Straight answers</h2>
     <div class="faq">
       <details><summary>Is it live or recorded? When do I get it?</summary>
-        <div class="a"><p>Recorded. The lessons live in the Sonder community on Skool, and your invite arrives by email a minute after you pay. They are yours to watch as often as you like, on your phone (Skool has an app), tablet or computer.</p></div></details>
+        <div class="a"><p>Recorded. The lessons live in a private community on Skool, and your invite arrives by email a minute after you pay. They are yours to watch as often as you like, on your phone (Skool has an app), tablet or computer.</p></div></details>
+      <details><summary>Do I have to post videos myself?</summary>
+        <div class="a"><p>Not if creators do it for you: they film, edit and post on their own accounts, and that's where 95% of my TikTok Shop sales came from. Getting there is the work: listing your book, sending samples and messaging creators most days. If you'd like to post your own videos as well, the lessons show you how, with AI avatars or just your hands.</p></div></details>
       <details><summary>Do I have to show my face or use my voice?</summary>
         <div class="a"><p>No. The masterclass shows three ways round it: creators who film themselves with your book, AI avatars that do the talking, and videos of just your hands and the book. The one thing a TikTok Shop video does need is the book itself on screen.</p></div></details>
       <details><summary>What do I need?</summary>
@@ -604,9 +639,9 @@
         <div class="a"><p>It's built on non-fiction and gift books. Mine are a pregnancy guide for first-time dads, a gut-health book and a fill-in journal for mums, and the examples come from parenting, health, faith and money books. Fiction isn't covered.</p></div></details>
       <details><summary>Does anything else cost money?</summary>
         <div class="a"><p>The lessons don't. Doing what they teach can. <b>TikTok Shop</b> needs printed copies, plus free samples for creators (about $8 each with postage, in my numbers). Creators earn a commission, usually 15 to 20% of each sale, and some get a monthly retainer. <b>Some lessons use paid tools</b> such as HeyGen, Claude, FastMoss or BookBeam, and Amazon ads need an ad budget. A few tool links in the lessons are my affiliate links.</p>
-          <p>After checkout you'll see two optional extras, and you can say no to both with one click. <b>The 3-Day Book Video Challenge</b>, live with me, for $147. And <b>a free 7-day trial of Sonder</b>, the tool I co-founded, which makes the videos from your book for you. The trial needs a debit or credit card: it's $0 today, then $49 a month from day 8 unless you cancel, and Stripe places a $49 hold to check the card, released straight away.</p></div></details>
+          <p>After checkout you'll see two optional extras, and you can say no to both with one click: a live 3-day challenge with me for $147, and a free trial of a video tool.</p></div></details>
       <details><summary>Is this a get-rich-quick thing?</summary>
-        <div class="a"><p>No. It's a marketing skill, and it takes work: my first 199 videos did almost nothing. I tell everyone to expect 45 to 90 days of daily posting before anything takes off, and some books never catch on. Nobody can promise you sales, and I don't.</p></div></details>
+        <div class="a"><p>No. It's a marketing skill, and it takes work: my first 199 videos did almost nothing. I tell everyone to expect 45 to 90 days of daily work before anything takes off, and some books never catch on. Nobody can promise you sales, and I don't.</p></div></details>
       <details><summary>My book isn't out yet. Should I still buy it?</summary>
         <div class="a"><p>Yes, if it's coming. The audience is the thing most authors build last and should build first, and the Blue Ocean bonus helps you choose the niche for your next one.</p></div></details>
       <details><summary>What if it's not for me?</summary>
@@ -615,15 +650,18 @@
   </div>
 </section>
 
-<section class="sec on-dark final" data-note="final">
+<section class="band" data-note="final">
   <div class="wrap">
-    <span class="eyebrow">The Book Marketing Masterclass</span>
-    <h2>Your book deserves readers. Let's go and find them.</h2>
-    <p class="lede">Six courses, 58 lessons, and the 95/5 method I use on my own books. <span data-price>$47</span> once, with a 30-day guarantee.</p>
-    <div class="btn-stack">
-      <a class="btn big" href="#buy" data-buy="final"><span>Get instant access for <span data-price>$47</span></span> <span aria-hidden="true">&rarr;</span></a>
-      <p class="launch" data-launch><s>$97</s> <b data-price>$47</b> launch price</p>
-      <p class="under">Lifetime access &middot; <b>30-day money-back guarantee</b></p>
+    <div class="pb">
+      <p class="pb-was" data-launch>Price after launch: $97</p>
+      <p class="pb-now">Today&rsquo;s Price: <span data-price>$47</span></p>
+      <a class="btn big" href="#buy" data-buy="final"><span class="btn-in"><span class="btn-top">Get the masterclass <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM5.2 5l-.6-3H1v2h2l3.2 13h13v-2H7.8l-.4-2H19l3-8H5.2z"/></svg></span><span class="sub">One-time payment of <span data-price>$47</span></span></span></a>
+      <p class="oneliner">One-time payment &middot; Lifetime access &middot; 30-day money-back guarantee</p>
+    </div>
+    <div class="guarantee-c">
+      <div class="seal"><span><b>30</b>day<br />guarantee</span></div>
+      <h3>Watch it, use it, then decide.</h3>
+      <p>If you go through the masterclass and don't think it was worth <span data-price>$47</span>, email <a href="mailto:hello@yousonder.com">hello@yousonder.com</a> within 30 days and we'll refund every cent. No forms, no questions.</p>
     </div>
   </div>
 </section>
@@ -636,15 +674,12 @@
 <footer>
   <div class="wrap">
     <div class="foot-top">
-      <a class="mark" href="#top" aria-label="Sonder">
-        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
-        <b>Sonder<i>.</i></b></a>
       <span><a href="https://app.yousonder.com/terms">Terms</a> &nbsp;&middot;&nbsp; <a href="https://app.yousonder.com/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="mailto:hello@yousonder.com">hello@yousonder.com</a></span>
     </div>
     <div class="disc">
-      <p><b>Results disclaimer.</b> My figures on this page are my own results and are not typical: I'd been publishing for over two years, with a team helping. The authors' stories are individual results, shared with their permission, and those authors make their videos with Sonder. Results vary from author to author. Across every video posted through Sonder, the median video gets about 106 views. Sonder is owned by Michael Langdon and me. Mike Sobola and Nancy Dove each received 10 free Sonder video credits for recording a video, whatever they said. Michael Langdon is my co-founder; his TikTok Shop figure is the gross value of books sold, not profit.</p>
+      <p><b>Results disclaimer.</b> My figures on this page are my own results and are not typical: I'd been publishing for over two years, with a team helping. The messages from authors are individual results, posted in my community. Results vary from author to author. Across the author videos I have numbers for, the median video gets about 106 views.</p>
       <p>The masterclass is education about marketing. It is not a promise that you will sell books or earn money, and it is not financial, legal or tax advice. Some tool links inside the lessons are affiliate links, and I may earn a commission if you sign up. <span data-launch>Launch price: $47 for now. The regular price will be $97.</span> Refunds: email hello@yousonder.com within 30 days of buying for a full refund.</p>
-      <p>TikTok, TikTok Shop, Instagram, Facebook, YouTube, Amazon, BookBub, HeyGen and Claude are trademarks of their owners. Sonder is not affiliated with or endorsed by any of them.</p>
+      <p>This course is an independent educational resource. It is not endorsed by, affiliated with or sponsored by TikTok, Instagram, Facebook, YouTube, Amazon, BookBub, HeyGen or Claude. All product and company names are trademarks of their owners.</p>
       <p>&copy; 2026 YouSonder O&Uuml; &middot; All rights reserved.</p>
     </div>
   </div>
@@ -764,15 +799,6 @@
     if (finalBtn) new IntersectionObserver(function (es) { finalOn = es[0].isIntersecting; paint(); }).observe(finalBtn);
   }
 
-  /* Testimonial videos load only when someone presses play (as on /live). */
-  Array.prototype.forEach.call(document.querySelectorAll('[data-video]'), function (b) {
-    b.addEventListener('click', function () {
-      var v = document.createElement('video');
-      v.src = b.getAttribute('data-video'); v.controls = true; v.autoplay = true; v.playsInline = true;
-      v.setAttribute('playsinline', ''); v.setAttribute('aria-label', b.getAttribute('aria-label') || 'Video');
-      b.parentNode.replaceChild(v, b); var p = v.play(); if (p && p.catch) p.catch(function () {});
-    });
-  });
 })();
 </script>
 </body>
