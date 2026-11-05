@@ -55,18 +55,23 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito:wght@800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" />
 <link rel="icon" type="image/svg+xml" href="/assets/sonder-logo-plum-flat.svg" />
 <link rel="stylesheet" href="/masterclass/mc.css" />
 <link rel="prefetch" href="/masterclass/checkout/" />
 <style>
+/* ---------- announcement bar: Jenny's, in her red, instead of a logo and button (Abdul, 5 Nov 2026) ----------
+   It scrolls away with the page, as there is no button to keep in view. White on this red needs large bold
+   type to stay readable, so it never goes below 19px. */
+.promo{background:#ff2d52;color:#fff;text-align:center;padding:14px 0}
+.promo p{font-family:var(--display);font-weight:800;font-size:clamp(19px,2vw,20px);line-height:1.25;letter-spacing:-.01em;text-wrap:balance}
 /* ---------- hero: Jenny Hansen Lane's layout, a question and then the whole course on screen ---------- */
 .hero{background:linear-gradient(180deg,var(--wash),var(--paper));border-bottom:1px solid var(--rule);
   padding:clamp(28px,5vw,60px) 0 clamp(40px,5vw,64px);text-align:center}
-/* Set wide, as on Jenny's page (Lexi, 4 Nov 2026): two lines for the question on a computer or tablet,
-   three for the intro. "the&nbsp;videos" in the h1 keeps the break after "made". Phones are unchanged. */
-.hero h1{margin:18px auto 0;max-width:34ch}
-.hero .lede{margin:18px auto 0;max-width:60ch;text-wrap:pretty}
+/* Set wide, as on Jenny's page (Lexi, 4 Nov 2026): two lines for the question on a computer or tablet.
+   "the&nbsp;videos" in the h1 keeps the break after "made". Phones are unchanged. */
+.hero h1{margin:0 auto;max-width:34ch}
+.hero .lede{margin:18px auto 0;max-width:60ch;text-wrap:balance}
 .hero .proof{margin:clamp(30px,4vw,42px) auto 0;max-width:38ch;font-family:var(--display);font-weight:800;
   font-size:clamp(1.12rem,2.4vw,1.32rem);line-height:1.35;letter-spacing:-.015em;color:var(--ink)}
 .hero .cta-row{margin-top:22px;display:flex;flex-direction:column;align-items:center}
@@ -157,7 +162,7 @@
    background removed) and lexi-avatar.jpg (the "Taught by" pill) are the same photo. */
 .teacher{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(28px,4.5vw,60px);align-items:start}
 @media (max-width:880px){.teacher{grid-template-columns:1fr}}
-.portrait{margin:0;position:sticky;top:88px}
+.portrait{margin:0;position:sticky;top:24px}
 .portrait img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:60% 30%;
   border-radius:22px;border:3px solid var(--mint);box-shadow:10px 10px 0 0 var(--mint);background:var(--plum-2)}
 .portrait figcaption{position:absolute;left:16px;right:16px;bottom:16px;background:var(--paper);border-radius:14px;
@@ -239,22 +244,16 @@
 <script src="/visit.js" defer></script>
 </head>
 <body>
-<header class="bar">
-  <div class="wrap bar-in">
-    <a class="mark" href="#top" aria-label="Sonder">
-      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
-      <b>Sonder<i>.</i></b></a>
-    <span class="bar-note">The Book Marketing Masterclass &middot; <b data-price>$47</b></span>
-    <a class="btn sm" href="#buy" data-buy="bar"><span>Get it for <span data-price>$47</span></span></a>
-  </div>
+<header class="promo">
+  <p class="wrap">Introducing: The Book Marketing Masterclass For ONLY <span data-price>$47</span></p>
 </header>
 
 <main id="top">
 <section class="hero" data-note="hero">
   <div class="wrap">
-    <span class="kicker"><span class="pip" aria-hidden="true"></span> My masterclass for authors</span>
     <h1>What if other people made the&nbsp;videos that <span class="hl">sell your book</span>?</h1>
-    <p class="lede">Most authors think selling a book on TikTok means filming yourself every day. I sell mine through creators who film themselves with my books, AI avatars that do the talking, and videos that show nothing but my hands.</p>
+    <p class="lede"><em>Most authors think marketing a book means paying for ads.</em></p>
+    <p class="lede">But thousands of books sell every day from short videos, and those authors never film, edit or post a thing themselves.</p>
     <div class="stack" aria-hidden="true">
       <div class="dev tab l"><img src="/assets/mc/courses/book-to-bestseller.jpg" alt="" /></div>
       <div class="dev tab r"><img src="/assets/mc/courses/ai-book-marketing.jpg" alt="" /></div>
