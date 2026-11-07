@@ -180,3 +180,4 @@ Fonts: **Inter** for everything except the **Nunito 900** wordmark "Sonder".
 Ping me — I'll connect you with the original author of these files. Otherwise: drag the folder onto Vercel, do the 4 wire-up tasks above, and you're live.
 
 — Generated 2026-05-29 for the Sonder pre-launch handoff.
+
