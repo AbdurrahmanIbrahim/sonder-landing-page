@@ -239,7 +239,7 @@
       <span class="mark" aria-label="Sonder">
         <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#2D1A48" stroke-width="2"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#00795C"/></svg>
         <b>Sonder<i>.</i></b></span>
-      <span><a href="https://app.yousonder.com/terms">Terms</a> &nbsp;&middot;&nbsp; <a href="https://app.yousonder.com/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="mailto:hello@yousonder.com">hello@yousonder.com</a></span>
+      <span><a href="https://app.yousonder.com/terms">Terms</a> &nbsp;&middot;&nbsp; <a href="https://app.yousonder.com/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="mailto:hello@yousonder.io">hello@yousonder.io</a></span>
     </div>
     <div class="disc">
       <p>Jared uses Sonder and shared his post with permission. Results vary from author to author.</p>
@@ -359,8 +359,8 @@
       btn.disabled = false;
       if (r && r.ok) { inviteSay('Sent to ' + r.email + '. It can take a few minutes, and it sometimes lands in Promotions or Spam.'); return; }
       if (r && r.error === 'too_soon') { inviteSay('We sent one a few minutes ago. Give it ' + Math.max(1, Math.ceil((r.retryAfterSec || 60) / 60)) + ' more minute(s), and check Promotions and Spam.'); return; }
-      if (r && r.error === 'contact_us') { inviteSay('Email hello@yousonder.com and we will get you in by hand.'); return; }
-      inviteSay('That did not go through. Please try again, or email hello@yousonder.com.');
+      if (r && r.error === 'contact_us') { inviteSay('Email hello@yousonder.io and we will get you in by hand.'); return; }
+      inviteSay('That did not go through. Please try again, or email hello@yousonder.io.');
     });
   }
   $('resend').addEventListener('click', function () { sendInvite('', this); });
