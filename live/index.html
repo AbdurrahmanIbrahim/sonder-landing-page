@@ -6,10 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#FFFFFF" />
 <title>How authors are getting millions of views without showing their face | Sonder live</title>
-<meta name="description" content="A free live session every Wednesday at 12pm ET / 9am PT: what is working right now for authors using Sonder, and a real book turned into videos while you watch." />
+<meta name="description" content="A free live session once a month, on a Wednesday at 12pm ET / 9am PT: what is working right now for authors using Sonder, and a real book turned into videos while you watch." />
 <meta name="robots" content="noindex, nofollow" />
 <meta property="og:title" content="How authors are getting millions of views on their books without showing their face" />
-<meta property="og:description" content="Free and live every Wednesday, 12pm ET / 9am PT. Real author results, and a real book turned into videos while you watch." />
+<meta property="og:description" content="Free and live once a month, 12pm ET / 9am PT. Real author results, and a real book turned into videos while you watch." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.yousonder.com/live" />
 
@@ -353,7 +353,7 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
 <section class="hero">
   <div class="wrap hero-in">
     <div class="hero-copy">
-      <span class="kicker"><span class="pip" aria-hidden="true"></span> Free live session &middot; every Wednesday</span>
+      <span class="kicker"><span class="pip" aria-hidden="true"></span> Free live session &middot; once a month</span>
       <h1>How authors are getting millions of views on their books <span class="hl">without showing their face.</span></h1>
       <p class="lede">90 minutes, live on Zoom. Two seven-figure publishers show you what is working right now for authors using Sonder, then turn a real book into finished videos while you watch.</p>
       <p class="whenline"><span id="when-hero">Wednesday</span> <span class="sep">&middot;</span> <span id="when-hero-time">12pm ET / 9am PT</span> <span class="sep">&middot;</span> Free</p>
@@ -556,8 +556,8 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
     <div class="faq">
       <details open><summary>Is it actually free?</summary><div class="a">Yes, and there's no card. At the end there's an offer for anyone who wants it. Everything before that is yours either way.</div></details>
       <details><summary>Do I have to be on camera?</summary><div class="a">No. The videos doing the most work for our authors don't need your face or your voice. That's most of the reason this works for people who would never film themselves.</div></details>
-      <details><summary>What if I can't make Wednesday?</summary><div class="a">Your Zoom link works for the next Wednesday too, so your seat carries over. The second Wednesday of each month is our customers-only session, so there's no public session that day.</div></details>
-      <details><summary>Will there be a replay?</summary><div class="a">We run it live every week, so the best answer is to come to one. The Q&amp;A is the most useful part, and a recording never captures it.</div></details>
+      <details><summary>What if I can't make it?</summary><div class="a">We run it once a month. If you miss this one, we'll email you the date of the next one so you can come to that instead.</div></details>
+      <details><summary>Will there be a replay?</summary><div class="a">We run it live every month, so the best answer is to come to one. The Q&amp;A is the most useful part, and a recording never captures it.</div></details>
       <details><summary>Why would I give you my phone number?</summary><div class="a">It's optional. Add it and we'll text you before we go live and the moment we start: up to 4 texts per session. Reply STOP any time. Texts are for US and Canada numbers for now; everyone gets email reminders.</div></details>
       <details><summary>I haven't finished my book. Should I still come?</summary><div class="a">If you're writing one, yes: the audience is the thing most authors build last and should build first.</div></details>
     </div>
@@ -621,33 +621,37 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
   var clockNow = function(){ return (window.performance && performance.now) ? performance.now() : Date.now(); };
   var loadedAt = clockNow();
 
-  /* ===== The clock: the same rule as the server and the emails =====
-     Next Wednesday at 12pm New York time (rule below); the room opens 15
-     minutes early and a session is on air for 90 minutes. Offset-corrected
-     twice so it survives both daylight-saving switches. The server's answer
-     (/api/live-webinar/next) wins when it arrives; this is the fallback. */
-  /* THE SCHEDULE RULE. Every copy of it must match the server's
-     lib/webinarSession.ts + customerSessionSchedule.ts (and every other page
-     that carries this block: /live, /live/youre-in, /registered, /webinar1-3).
-     Public session: every Wednesday at 12pm New York time (9am Pacific).
-     Skipped: the second Wednesday of the month (day 8-14), which is the
-     customers-only session, but only from 1 Nov 2026 on. 14 Oct 2026 stays
-     public (October's customer session already ran on 8 Oct). */
-  var SKIP_FROM=20261101;
-  var WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  /* ===== The clock: the server's date (the Zoom calendar) =====
+     The room opens 15 minutes early and a session is on air for 90 minutes.
+     The server's answer (/api/live-webinar/next) is asked at load and every
+     5 minutes; the rule below only stands in until it answers. */
+  /* THE DATE COMES FROM THE SERVER (18 Nov 2026). sonder-server reads it from
+     the Zoom calendar: GET /api/live-webinar/next -> {sessionAt, liveNow,
+     endsAt, durationMinutes, registrationUrl}. Every page that shows the date
+     (/live, /live/youre-in, /registered, /webinar1-3) asks it, so a change in
+     Zoom needs no edit here. The rule below is ONLY the fallback until the
+     server answers (or if it cannot): the public session on the 2nd
+     Wednesday of each month at 12pm New York time (9am Pacific). The
+     customers-only Ask the Founders session is never shown on these pages. */
+  var SONDER_API='https://sonder-server-production.up.railway.app';
   function nyParts(d){var p={};new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour12:false,
     weekday:'short',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'})
     .formatToParts(d).forEach(function(x){p[x.type]=x.value});return p}
   function nyOffset(d){var p=nyParts(d);return Date.UTC(+p.year,+p.month-1,+p.day,(+p.hour)%24,+p.minute,+p.second)-d.getTime()}
   function fromNY(y,m,d,h,mi){var t=Date.UTC(y,m-1,d,h,mi);for(var i=0;i<2;i++){t=Date.UTC(y,m-1,d,h,mi)-nyOffset(new Date(t))}return new Date(t)}
-  function customersOnly(dt){var p=nyParts(dt),day=+p.day;return p.weekday==='Wed'&&day>=8&&day<=14&&(+p.year)*10000+(+p.month)*100+day>=SKIP_FROM}
-  function nextPublic(now){var p=nyParts(now),y=+p.year,m=+p.month,d=+p.day;
-    var k=(3-WD.indexOf(p.weekday)+7)%7;var c=fromNY(y,m,d+k,12,0);
-    if(c.getTime()<=now.getTime()){k+=7;c=fromNY(y,m,d+k,12,0)}
-    while(customersOnly(c)){k+=7;c=fromNY(y,m,d+k,12,0)}
-    return c}
+  function secondWed(y,m){var first=new Date(Date.UTC(y,m-1,1,12)).getUTCDay();return fromNY(y,m,1+((3-first+7)%7)+7,12,0)}
+  function nextPublic(now){var p=nyParts(now),y=+p.year,m=+p.month;
+    for(var i=0;i<3;i++){var mm=m+i,yy=y+Math.floor((mm-1)/12);mm=((mm-1)%12)+1;var c=secondWed(yy,mm);if(c.getTime()>now.getTime())return c}
+    return secondWed(y+1,m)}
+  /* The server's answer: cb(sessionStart, json). Silent when it cannot be reached. */
+  function fromServer(cb){try{fetch(SONDER_API+'/api/live-webinar/next',{cache:'no-store'}).then(function(r){return r.ok?r.json():null})
+    .then(function(j){if(!j||!j.sessionAt)return;var t=Date.parse(j.sessionAt);if(isFinite(t))cb(new Date(t),j)}).catch(function(){})}catch(e){}}
+  /* "WN_..." identifies the Zoom series a registration link is for. */
+  function wnCode(u){var m=/\/(WN_[A-Za-z0-9_-]+)/.exec(u||'');return m?m[1]:''}
+  var serverAt=null;
   function choose(now){
-    var c=nextPublic(new Date(now.getTime()-DURATION_MIN*60000));
+    /* The server's session while it is still on (or to come); the rule only without one. */
+    var c=serverAt&&serverAt.getTime()+DURATION_MIN*60000>now.getTime()?serverAt:nextPublic(new Date(now.getTime()-DURATION_MIN*60000));
     return {at:c,live:c.getTime()<=now.getTime()||c.getTime()-now.getTime()<=JOIN_LEAD_MIN*60000};
   }
 
@@ -692,20 +696,22 @@ footer{background:var(--wash);border-top:1px solid var(--rule);padding:40px 0 56
     var el=$('when-count'); if(!el)return;
     if(session.live){el.textContent='Live now. Sign up and go straight in.';return}
     var left=session.at.getTime()-Date.now();
-    if(left<=0){session=choose(new Date());render();return}
+    if(left<=0){session=choose(new Date());render();ask();return}
     var mins=Math.floor(left/60000),d=Math.floor(mins/1440),h=Math.floor(mins%1440/60),m=mins%60;
     el.textContent='Starts in '+(d>0?d+(d===1?' day ':' days ')+h+(h===1?' hour':' hours'):h>0?h+'h '+m+'m':m+(m===1?' minute':' minutes'));
   }
   render();
   setInterval(function(){var c=choose(new Date());if(c.at.getTime()!==session.at.getTime()||c.live!==session.live){session=c;render()}else{tick()}},30000);
 
-  /* The server has the last word on the date (same rule, one place to change it). */
-  try{
-    fetch(API+'/api/live-webinar/next',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(j){
-      if(!j||!j.sessionAt)return;var t=Date.parse(j.sessionAt);if(!isFinite(t))return;
-      if(t!==session.at.getTime()||!!j.liveNow!==session.live){session={at:new Date(t),live:!!j.liveNow};render()}
-    }).catch(function(){});
-  }catch(e){}
+  /* The server has the last word on the date (it reads the Zoom calendar), and
+     on which Zoom series a fallback registration goes to. */
+  function ask(){fromServer(function(at,j){
+    serverAt=at;
+    if(j.registrationUrl&&wnCode(j.registrationUrl)&&wnCode(j.registrationUrl)!==wnCode(ZOOM_FALLBACK))ZOOM_FALLBACK=j.registrationUrl;
+    var c=choose(new Date());
+    if(c.at.getTime()!==session.at.getTime()||c.live!==session.live){session=c;render()}
+  })}
+  ask();setInterval(ask,5*60000);
 
   /* ===== Attribution carried into the sign-up ===== */
   var attribution={};

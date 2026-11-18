@@ -308,7 +308,7 @@
       <div class="optin-step" data-step="4no">
         <div class="outcome">
           <b>Then the book is the easy part. The audience is what&rsquo;s missing.</b>
-          <p>Every video is built from a finished manuscript, so there is nothing for Sonder to read yet &mdash; we would rather say that than sell you something you cannot use. But the audience is the thing almost every author leaves until after launch, and it is exactly what we spend an hour on, live, every Wednesday.</p>
+          <p>Every video is built from a finished manuscript, so there is nothing for Sonder to read yet &mdash; we would rather say that than sell you something you cannot use. But the audience is the thing almost every author leaves until after launch, and it is exactly what we spend an hour on, live, once a month.</p>
           <a class="cta" href="#" data-webinar="no-book">
             Save my free seat &mdash; Wednesday, 12pm ET / 9am PT <span aria-hidden="true">&rarr;</span>
           </a>
@@ -569,10 +569,18 @@
 
      Fire-and-forget on purpose: if the API is down or slow, the visitor still
      moves through the funnel. A lost lead must never become a lost signup. */
-  /* Wednesday's live session. Same URL as the webinar landing pages. */
+  /* The live session. Same URL as the webinar landing pages, until the server
+     (which reads the Zoom calendar) says the next session is on another Zoom
+     series: then that series' registration page. */
   var WEBINAR_URL = 'https://us06web.zoom.us/webinar/register/WN_DoboCMnEThyqKUHBWPzEzA';
 
   var API = 'https://sonder-server-production.up.railway.app';
+  try {
+    fetch(API + '/api/live-webinar/next', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      var code = function (u) { var m = /\/(WN_[A-Za-z0-9_-]+)/.exec(u || ''); return m ? m[1] : ''; };
+      if (j && j.registrationUrl && code(j.registrationUrl) && code(j.registrationUrl) !== code(WEBINAR_URL)) WEBINAR_URL = j.registrationUrl;
+    }).catch(function () { /* the link above still registers */ });
+  } catch (e) { /* ignore */ }
   function saveLead(extra) {
     if (!state.email) return;
     var payload = { email: state.email, source: 'meta_funnel' };

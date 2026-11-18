@@ -139,26 +139,29 @@ p{margin:0}
   var $=function(id){return document.getElementById(id)};
 
   /* Same clock as /live. The .ics comes from the server; the Google link uses this date. */
-  /* THE SCHEDULE RULE. Every copy of it must match the server's
-     lib/webinarSession.ts + customerSessionSchedule.ts (and every other page
-     that carries this block: /live, /live/youre-in, /registered, /webinar1-3).
-     Public session: every Wednesday at 12pm New York time (9am Pacific).
-     Skipped: the second Wednesday of the month (day 8-14), which is the
-     customers-only session, but only from 1 Nov 2026 on. 14 Oct 2026 stays
-     public (October's customer session already ran on 8 Oct). */
-  var SKIP_FROM=20261101;
-  var WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  /* THE DATE COMES FROM THE SERVER (18 Nov 2026). sonder-server reads it from
+     the Zoom calendar: GET /api/live-webinar/next -> {sessionAt, liveNow,
+     endsAt, durationMinutes, registrationUrl}. Every page that shows the date
+     (/live, /live/youre-in, /registered, /webinar1-3) asks it, so a change in
+     Zoom needs no edit here. The rule below is ONLY the fallback until the
+     server answers (or if it cannot): the public session on the 2nd
+     Wednesday of each month at 12pm New York time (9am Pacific). The
+     customers-only Ask the Founders session is never shown on these pages. */
+  var SONDER_API='https://sonder-server-production.up.railway.app';
   function nyParts(d){var p={};new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour12:false,
     weekday:'short',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'})
     .formatToParts(d).forEach(function(x){p[x.type]=x.value});return p}
   function nyOffset(d){var p=nyParts(d);return Date.UTC(+p.year,+p.month-1,+p.day,(+p.hour)%24,+p.minute,+p.second)-d.getTime()}
   function fromNY(y,m,d,h,mi){var t=Date.UTC(y,m-1,d,h,mi);for(var i=0;i<2;i++){t=Date.UTC(y,m-1,d,h,mi)-nyOffset(new Date(t))}return new Date(t)}
-  function customersOnly(dt){var p=nyParts(dt),day=+p.day;return p.weekday==='Wed'&&day>=8&&day<=14&&(+p.year)*10000+(+p.month)*100+day>=SKIP_FROM}
-  function nextPublic(now){var p=nyParts(now),y=+p.year,m=+p.month,d=+p.day;
-    var k=(3-WD.indexOf(p.weekday)+7)%7;var c=fromNY(y,m,d+k,12,0);
-    if(c.getTime()<=now.getTime()){k+=7;c=fromNY(y,m,d+k,12,0)}
-    while(customersOnly(c)){k+=7;c=fromNY(y,m,d+k,12,0)}
-    return c}
+  function secondWed(y,m){var first=new Date(Date.UTC(y,m-1,1,12)).getUTCDay();return fromNY(y,m,1+((3-first+7)%7)+7,12,0)}
+  function nextPublic(now){var p=nyParts(now),y=+p.year,m=+p.month;
+    for(var i=0;i<3;i++){var mm=m+i,yy=y+Math.floor((mm-1)/12);mm=((mm-1)%12)+1;var c=secondWed(yy,mm);if(c.getTime()>now.getTime())return c}
+    return secondWed(y+1,m)}
+  /* The server's answer: cb(sessionStart, json). Silent when it cannot be reached. */
+  function fromServer(cb){try{fetch(SONDER_API+'/api/live-webinar/next',{cache:'no-store'}).then(function(r){return r.ok?r.json():null})
+    .then(function(j){if(!j||!j.sessionAt)return;var t=Date.parse(j.sessionAt);if(isFinite(t))cb(new Date(t),j)}).catch(function(){})}catch(e){}}
+  /* "WN_..." identifies the Zoom series a registration link is for. */
+  function wnCode(u){var m=/\/(WN_[A-Za-z0-9_-]+)/.exec(u||'');return m?m[1]:''}
   function clockIn(dt,tz){
     try{var p={};new Intl.DateTimeFormat('en-US',{timeZone:tz,hour:'numeric',minute:'2-digit',hour12:true})
       .formatToParts(dt).forEach(function(x){p[x.type]=x.value});
@@ -176,14 +179,27 @@ p{margin:0}
   if(!reg||typeof reg!=='object'||!reg.at||Date.now()-reg.at>6*3600000)reg=null;
 
   var t=reg&&reg.sessionAt?Date.parse(reg.sessionAt):NaN;
-  var at=isFinite(t)&&t+DURATION_MIN*60000>Date.now()?new Date(t):nextPublic(new Date());
+  /* The session they just registered for (from /live); else the server's next one (the rule until it answers). */
+  var fromReg=isFinite(t)&&t+DURATION_MIN*60000>Date.now();
+  var at=fromReg?new Date(t):nextPublic(new Date());
 
   if(reg&&reg.first){$('in-title').textContent='You’re in, '+reg.first+'.'}
+  function show(){
   var et=clockIn(at,'America/New_York'),pt=clockIn(at,'America/Los_Angeles');
   $('when').textContent=dayIn(at,'America/New_York',true)+' · '+et+' ET / '+pt+' PT';
   try{var tz=Intl.DateTimeFormat().resolvedOptions().timeZone,local=tz?clockIn(at,tz):'';
     if(tz&&local&&local!==et&&local!==pt){$('when-local').textContent='That’s '+dayIn(at,tz,false)+' at '+local+' where you are.';$('when-local').hidden=false}
   }catch(e){}
+
+  /* Calendar: no personal link in it (that is in Zoom's email). */
+  var end=new Date(at.getTime()+DURATION_MIN*60000);
+  var g=new URLSearchParams({action:'TEMPLATE',text:TITLE,dates:stamp(at)+'/'+stamp(end),
+    details:'Your personal Zoom link is in the email from Zoom. Join from a computer if you can.',location:'Zoom'});
+  $('cal-google').href='https://calendar.google.com/calendar/render?'+g.toString();
+  $('cal-ics').href=API+'/api/live-webinar/ics?s='+encodeURIComponent(at.toISOString());
+  }
+  show();
+  if(!fromReg)fromServer(function(s){if(s.getTime()!==at.getTime()){at=s;show()}});
 
   /* Texts: promise them only once they are really being sent. */
   var smsText={
@@ -193,12 +209,6 @@ p{margin:0}
   };
   if(reg&&smsText[reg.sms]){$('sms-line').textContent=smsText[reg.sms];$('sms-line').hidden=false}
 
-  /* Calendar: no personal link in it (that is in Zoom's email). */
-  var end=new Date(at.getTime()+DURATION_MIN*60000);
-  var g=new URLSearchParams({action:'TEMPLATE',text:TITLE,dates:stamp(at)+'/'+stamp(end),
-    details:'Your personal Zoom link is in the email from Zoom. Join from a computer if you can.',location:'Zoom'});
-  $('cal-google').href='https://calendar.google.com/calendar/render?'+g.toString();
-  $('cal-ics').href=API+'/api/live-webinar/ics?s='+encodeURIComponent(at.toISOString());
 
   /* The one ask: the trial, their email filled in, the post's own tags kept. */
   var utm=(reg&&reg.utm)||{};
