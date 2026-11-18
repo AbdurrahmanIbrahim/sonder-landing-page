@@ -238,6 +238,47 @@
         <p class="hero-sub">
           Amazon Ads, TikToks, slideshows and viral videos, generated from the book you&rsquo;ve already written.
         </p>
+        <script>
+        /* HERO A/B TEST (started 18 Nov 2026, read 18 Dec 2026). 50/50, sticky per browser.
+           A = the page as it was. B = new headline + subtitle (brand building on social media).
+           Not in the test: paid-ad visitors (fbclid / utm / gclid / ttclid) always see A, so ad
+           attribution stays clean. Preview: ?hv=a or ?hv=b (not stored, not counted).
+           Stop: set HERO_TEST_ON = false below and everyone sees A.
+           The arm is tagged on the visit beacon (utm_campaign hero_a|hero_b, see visit.js) and on
+           every /onboarding/ link (utm_content hero_a|hero_b), which the quiz stores. */
+        (function () {
+          var HERO_TEST_ON = true;
+          try {
+            var q = new URLSearchParams(location.search), arm = 'a', tag = '', force = q.get('hv');
+            if (force === 'a' || force === 'b') { arm = force; }
+            else if (HERO_TEST_ON && !(q.has('fbclid') || q.has('utm_source') || q.has('utm_campaign') || q.has('utm_medium') || q.has('gclid') || q.has('ttclid'))) {
+              var s = null;
+              try { s = localStorage.getItem('sonder_hero_ab'); } catch (e) {}
+              if (s !== 'a' && s !== 'b') {
+                s = Math.random() < 0.5 ? 'a' : 'b';
+                try { localStorage.setItem('sonder_hero_ab', s); } catch (e) {}
+              }
+              arm = s; tag = 'hero_' + s;
+            }
+            window.sonderHero = { arm: arm, tag: tag };
+            if (arm === 'b') {
+              var h = document.getElementById('hero-headline');
+              h.innerHTML = '<span class="line">The #1 tool to build</span><span class="line">your book\u2019s brand</span><span class="line">on <em>social media</em>.</span>';
+              document.querySelector('.hero-sub').textContent = 'Stop spending time and money doing it by hand. Sonder turns your book into a month of posts, on autopilot.';
+              document.title = 'Sonder \u2014 #1 tool to build your book\u2019s brand on social media';
+            }
+            if (tag) {
+              document.addEventListener('DOMContentLoaded', function () {
+                var links = document.querySelectorAll('a[href^="/onboarding/"]');
+                for (var i = 0; i < links.length; i++) {
+                  var u = links[i].getAttribute('href');
+                  links[i].setAttribute('href', u + (u.indexOf('?') < 0 ? '?' : '&') + 'utm_content=' + tag);
+                }
+              });
+            }
+          } catch (e) {}
+        })();
+        </script>
 
         <div class="hero-ctas">
           <a href="/onboarding/" class="cta cta-primary cta-primary--large">

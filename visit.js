@@ -81,7 +81,7 @@
         u: q.get('utm_source') || t.utm_source || '',
         // The ad's campaign: with it, "from an ad" means a paid click, not just
         // a Facebook link (Facebook adds fbclid to organic clicks too).
-        c: q.get('utm_campaign') || t.utm_campaign || '',
+        c: q.get('utm_campaign') || t.utm_campaign || (window.sonderHero && window.sonderHero.tag) || '',
         a: q.has('fbclid') || t.fbclid ? 1 : 0,
         v: visitorId(),
         tz: timeZone()
