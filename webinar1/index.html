@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0A0613" />
 <title>Sonder — sell more books on Amazon by spending less on ads</title>
-<meta name="description" content="Free live masterclass for authors, every Wednesday at 12pm ET / 9am PT. How two publishers sell more books on Amazon while spending less on Amazon ads." />
+<meta name="description" content="Free live masterclass for authors, once a month, on a Wednesday at 12pm ET / 9am PT. How two publishers sell more books on Amazon while spending less on Amazon ads." />
 <meta name="robots" content="noindex, nofollow" />
 <script>
   window.SONDER_META_PIXEL_ID = '1999564797365444';
@@ -352,7 +352,7 @@ footer{border-top:1px solid var(--rule);padding:44px 0 56px;font-size:13px;color
     <a class="mark" href="#top" aria-label="Sonder">
       <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke="#F5F5F7" stroke-width="1.6"/><path d="M24.5 15.2v5.6l-4.9-2.8z" fill="#7FFFD4"/></svg>
       <b>Sonder<i>.</i></b></a>
-    <div class="bar-clock"><span class="dot" aria-hidden="true"></span><span class="lbl">Next live session in</span><b id="bar-cd">Wednesdays, 12pm ET / 9am PT</b></div>
+    <div class="bar-clock"><span class="dot" aria-hidden="true"></span><span class="lbl">Next live session in</span><b id="bar-cd">Wednesday, 12pm ET / 9am PT</b></div>
     <a class="btn" href="#seat" data-cta="header">Save my seat</a>
   </div>
 </header>
@@ -384,7 +384,7 @@ footer{border-top:1px solid var(--rule);padding:44px 0 56px;font-size:13px;color
       <div class="cd" role="timer"><div><b id="cd-d">--</b><i>Days</i></div><div><b id="cd-h">--</b><i>Hrs</i></div><div><b id="cd-m">--</b><i>Min</i></div><div><b id="cd-s">--</b><i>Sec</i></div></div>
       <a class="btn" href="#" data-seat data-cta="hero">Save my free seat <span class="arw" aria-hidden="true">&rarr;</span></a>
       <p class="seat-note"></p>
-      <p class="fine">Free. No card. Runs every Wednesday &mdash; if you can't make this one, take the next.</p>
+      <p class="fine">Free. No card. Runs once a month &mdash; if you can't make this one, take the next.</p>
     </aside>
   </div>
 </section>
@@ -595,8 +595,8 @@ footer{border-top:1px solid var(--rule);padding:44px 0 56px;font-size:13px;color
       <details><summary>Is it actually free?</summary><div class="a">Free, and there's no card. There is a paid offer at the end for people who want it. Everything before that is yours whether you buy anything or not.</div></details>
       <details><summary>I haven't finished my book. Should I still come?</summary><div class="a">If you're writing one, yes &mdash; the audience is the thing most authors build last and should build first. If you have no book and no plan to write one, this genuinely isn't for you and we'd rather you spent the hour elsewhere.</div></details>
       <details><summary>Do I have to be on camera?</summary><div class="a">No. Neither of the video types doing the most work for us requires your face or your voice. That is most of the reason this is possible at all for people who would never film themselves.</div></details>
-      <details><summary>Will there be a replay?</summary><div class="a">We run it live every Wednesday, so the honest answer is: come to one. The Q&amp;A is where the useful part happens, it is different every week, and it is the half that never survives a recording.</div></details>
-      <details><summary>How long is it?</summary><div class="a">About sixty minutes, then Q&amp;A for as long as there are questions. Wednesdays at 12pm ET / 9am PT.</div></details>
+      <details><summary>Will there be a replay?</summary><div class="a">We run it live once a month, so the honest answer is: come to one. The Q&amp;A is where the useful part happens, it is different every time, and it is the half that never survives a recording.</div></details>
+      <details><summary>How long is it?</summary><div class="a">About sixty minutes, then Q&amp;A for as long as there are questions. Once a month, on a Wednesday at 12pm ET / 9am PT.</div></details>
     </div>
   </div>
 </section>
@@ -605,7 +605,7 @@ footer{border-top:1px solid var(--rule);padding:44px 0 56px;font-size:13px;color
 <section class="final">
   <div class="halo" style="width:900px;height:900px;top:-330px;left:50%;margin-left:-450px;background:radial-gradient(circle,var(--halo-3) 0%,var(--halo-2) 40%,transparent 68%);opacity:.6" aria-hidden="true"></div>
   <div class="wrap final-in">
-    <p class="eyebrow">Free · live · every Wednesday</p>
+    <p class="eyebrow">Free · live · once a month</p>
     <h2>You can keep bidding.<br>Or you can bring your own buyers.</h2>
     <p class="lede" style="text-align:center">Sixty minutes on how Amazon actually rewards outside traffic — then watch a real book become four videos in ten minutes.</p>
     <p class="when2"><span class="dot" aria-hidden="true"></span> <span id="when-date-2">Wednesday</span> · <span class="when-time-2">12pm ET / 9am PT</span></p>
@@ -640,34 +640,38 @@ footer{border-top:1px solid var(--rule);padding:44px 0 56px;font-size:13px;color
      silently pointing at nothing. */
   var REGISTRATION_URL = "https://us06web.zoom.us/webinar/register/WN_DoboCMnEThyqKUHBWPzEzA";
 
-  /* THE SCHEDULE RULE. Every copy of it must match the server's
-     lib/webinarSession.ts + customerSessionSchedule.ts (and every other page
-     that carries this block: /live, /live/youre-in, /registered, /webinar1-3).
-     Public session: every Wednesday at 12pm New York time (9am Pacific).
-     Skipped: the second Wednesday of the month (day 8-14), which is the
-     customers-only session, but only from 1 Nov 2026 on. 14 Oct 2026 stays
-     public (October's customer session already ran on 8 Oct). */
-  var SKIP_FROM=20261101;
-  var WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  function nyParts(date){var p={};new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour12:false,
+  /* THE DATE COMES FROM THE SERVER (18 Nov 2026). sonder-server reads it from
+     the Zoom calendar: GET /api/live-webinar/next -> {sessionAt, liveNow,
+     endsAt, durationMinutes, registrationUrl}. Every page that shows the date
+     (/live, /live/youre-in, /registered, /webinar1-3) asks it, so a change in
+     Zoom needs no edit here. The rule below is ONLY the fallback until the
+     server answers (or if it cannot): the public session on the 2nd
+     Wednesday of each month at 12pm New York time (9am Pacific). The
+     customers-only Ask the Founders session is never shown on these pages. */
+  var SONDER_API='https://sonder-server-production.up.railway.app';
+  function nyParts(d){var p={};new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour12:false,
     weekday:'short',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'})
-    .formatToParts(date).forEach(function(x){p[x.type]=x.value});return p}
+    .formatToParts(d).forEach(function(x){p[x.type]=x.value});return p}
   function nyOffset(d){var p=nyParts(d);return Date.UTC(+p.year,+p.month-1,+p.day,(+p.hour)%24,+p.minute,+p.second)-d.getTime()}
   function fromNY(y,m,d,h,mi){var t=Date.UTC(y,m-1,d,h,mi);for(var i=0;i<2;i++){t=Date.UTC(y,m-1,d,h,mi)-nyOffset(new Date(t))}return new Date(t)}
-  function customersOnly(dt){var p=nyParts(dt),day=+p.day;return p.weekday==='Wed'&&day>=8&&day<=14&&(+p.year)*10000+(+p.month)*100+day>=SKIP_FROM}
-  function nextSession(now){var p=nyParts(now),y=+p.year,m=+p.month,d=+p.day;
-    var k=(3-WD.indexOf(p.weekday)+7)%7;var c=fromNY(y,m,d+k,12,0);
-    if(c.getTime()<=now.getTime()){k+=7;c=fromNY(y,m,d+k,12,0)}
-    while(customersOnly(c)){k+=7;c=fromNY(y,m,d+k,12,0)}
-    return c}
+  function secondWed(y,m){var first=new Date(Date.UTC(y,m-1,1,12)).getUTCDay();return fromNY(y,m,1+((3-first+7)%7)+7,12,0)}
+  function nextSession(now){var p=nyParts(now),y=+p.year,m=+p.month;
+    for(var i=0;i<3;i++){var mm=m+i,yy=y+Math.floor((mm-1)/12);mm=((mm-1)%12)+1;var c=secondWed(yy,mm);if(c.getTime()>now.getTime())return c}
+    return secondWed(y+1,m)}
+  /* The server's answer: cb(sessionStart, json). Silent when it cannot be reached. */
+  function fromServer(cb){try{fetch(SONDER_API+'/api/live-webinar/next',{cache:'no-store'}).then(function(r){return r.ok?r.json():null})
+    .then(function(j){if(!j||!j.sessionAt)return;var t=Date.parse(j.sessionAt);if(isFinite(t))cb(new Date(t),j)}).catch(function(){})}catch(e){}}
+  /* "WN_..." identifies the Zoom series a registration link is for. */
+  function wnCode(u){var m=/\/(WN_[A-Za-z0-9_-]+)/.exec(u||'');return m?m[1]:''}
 
   var target=nextSession(new Date());
   var pad=function(n){return n<10?'0'+n:String(n)};
   var $=function(id){return document.getElementById(id)};
 
-  try{var label=new Intl.DateTimeFormat('en-GB',{timeZone:'America/New_York',weekday:'long',day:'numeric',month:'long'}).format(target);
+  function fillDate(){try{var label=new Intl.DateTimeFormat('en-GB',{timeZone:'America/New_York',weekday:'long',day:'numeric',month:'long'}).format(target);
     if($('when-date'))$('when-date').textContent=label;
-    if($('when-date-2'))$('when-date-2').textContent=label;}catch(e){}
+    if($('when-date-2'))$('when-date-2').textContent=label;}catch(e){}}
+  fillDate();
   /* Eastern and Pacific, both computed (house rule: every stated time shows ET and PT). */
   function clockIn(dt,tz){
     try{var p={};new Intl.DateTimeFormat('en-US',{timeZone:tz,hour:'numeric',minute:'2-digit',hour12:true})
@@ -680,17 +684,19 @@ footer{border-top:1px solid var(--rule);padding:44px 0 56px;font-size:13px;color
     if($('when-time'))$('when-time').textContent=txt;
     Array.prototype.forEach.call(document.querySelectorAll('.when-time-2'),function(n){n.textContent=txt})}
   try{fillTimes()}catch(e){}
+  function fillLocal(){
   try{var tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
     var mineHour=new Intl.DateTimeFormat('en-GB',{hour:'numeric',minute:'2-digit',hour12:true}).format(target);
     var mineDay=new Intl.DateTimeFormat('en-GB',{weekday:'long'}).format(target);
     var nyHour=new Intl.DateTimeFormat('en-GB',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',hour12:true}).format(target);
     var laHour=new Intl.DateTimeFormat('en-GB',{timeZone:'America/Los_Angeles',hour:'numeric',minute:'2-digit',hour12:true}).format(target);
     var el=$('when-local');
-    if(el&&tz&&tz!=='America/New_York'&&mineHour!==nyHour&&mineHour!==laHour){el.textContent='That is '+mineDay+' at '+mineHour+' where you are.'}}catch(e){}
+    if(el&&tz&&tz!=='America/New_York'&&mineHour!==nyHour&&mineHour!==laHour){el.textContent='That is '+mineDay+' at '+mineHour+' where you are.'}}catch(e){}}
+  fillLocal();
 
   function tick(){
     var left=target.getTime()-Date.now();
-    if(left<=0){target=nextSession(new Date());left=target.getTime()-Date.now();try{fillTimes()}catch(e){}}
+    if(left<=0){target=nextSession(new Date());left=target.getTime()-Date.now();try{fillDate();fillTimes();fillLocal()}catch(e){}useServer()}
     var s=Math.floor(left/1000),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),sec=s%60;
     if($('cd-d'))$('cd-d').textContent=pad(d);
     if($('cd-h'))$('cd-h').textContent=pad(h);
@@ -700,6 +706,15 @@ footer{border-top:1px solid var(--rule);padding:44px 0 56px;font-size:13px;color
     if(bar)bar.textContent=d>0?(d+'d '+pad(h)+'h '+pad(m)+'m'):(pad(h)+':'+pad(m)+':'+pad(sec));
   }
   tick();setInterval(tick,1000);
+
+  /* The server has the last word: the date from the Zoom calendar, and the
+     registration link for the series that holds it (this page's link is kept
+     while it is for the same series). */
+  function useServer(){fromServer(function(at,j){
+    if(j.registrationUrl&&wnCode(j.registrationUrl)&&wnCode(j.registrationUrl)!==wnCode(REGISTRATION_URL))REGISTRATION_URL=j.registrationUrl;
+    if(at.getTime()===target.getTime())return;
+    target=at;try{fillDate();fillTimes();fillLocal()}catch(e){}tick()})}
+  useServer();
 
   function track(n,p){if(typeof window.fbq==='function')window.fbq('track',n,p||{})}
   Array.prototype.forEach.call(document.querySelectorAll('[data-seat]'),function(btn){
